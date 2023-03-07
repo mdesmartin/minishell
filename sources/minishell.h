@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/07 11:23:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 12:57:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,11 @@
 # include <string.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+
+typedef struct s_cmd
+{
+	char			**cmd_arg;
+	struct s_cmd	*next;
+}				t_cmd;
 
 #endif
