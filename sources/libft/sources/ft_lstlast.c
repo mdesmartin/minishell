@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 16:12:05 by jmoutous          #+#    #+#             */
-/*   Updated: 2022/11/22 09:22:11 by jmoutous         ###   ########lyon.fr   */
+/*   Created: 2022/11/21 13:51:53 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/21 13:51:54 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
+	if (!lst)
+		return (0);
 	while (lst)
 	{
-		if (lst->next == NULL)
+		if (!lst->next)
 			return (lst);
 		lst = lst->next;
 	}
-	return (NULL);
+	return (lst);
 }
