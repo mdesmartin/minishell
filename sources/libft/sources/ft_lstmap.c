@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:07:35 by jmoutous          #+#    #+#             */
-/*   Updated: 2022/11/21 17:36:49 by jmoutous         ###   ########lyon.fr   */
+/*   Created: 2022/11/21 16:05:52 by mvogel            #+#    #+#             */
+/*   Updated: 2022/11/21 16:05:54 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*start;
 	t_list	*new;
+	t_list	*element;
 
 	if (!lst || !del || !f)
-		return (NULL);
-	new = NULL;
-	start = new;
+		return (0);
+	new = 0;
 	while (lst)
 	{
-		new = ft_lstnew((*f)(lst->content));
-		if (!new)
+		element = ft_lstnew(f(lst->content));
+		if (!element)
 		{
-			ft_lstclear(&start, del);
+			ft_lstclear(&new, (*del));
 			return (NULL);
 		}
-		ft_lstadd_back(&start, new);
+		ft_lstadd_back(&new, element);
 		lst = lst->next;
 	}
-	return (start);
+	return (new);
 }
