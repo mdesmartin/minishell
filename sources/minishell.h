@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/07 13:44:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/08 11:31:41 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,12 @@
 # include <string.h>
 # include <stdlib.h>
 # include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+int		parsing(t_list **cmd, char *readed);
+void	*free_tab(char **tab);
+void	free_n_exit(t_list **cmd);
+
 
 #endif

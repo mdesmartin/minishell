@@ -47,7 +47,6 @@ LST_SRC =	ft_isalpha.c			\
 			ft_lstdelone.c			\
 			ft_lstclear.c			\
 			ft_lstiter.c			\
-			ft_lstmap.c				\
 			ft_printf.c				\
 			ft_putchar.c			\
 			ft_putstr.c				\
