@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/08 14:48:23 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/08 16:57:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*ft_find_path(t_data *data, char **paths)
 	char	*tmp;
 
 	i = 0;
+(void)data;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "cat"); //cat a remplacer
