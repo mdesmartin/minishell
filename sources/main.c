@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/08 11:14:42 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/08 17:17:26 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	main(void)
 {
 	t_list	**cmd;
+	struct sigaction sign;
 	char	*input;
+
+	sign.sa_handler = get_signal;
 
 	cmd = malloc(sizeof(t_list *));
 	if (!cmd)
@@ -23,11 +26,13 @@ int	main(void)
 	*cmd = NULL;
     while (1)
     {
-        input = readline("minishell> ");
-        printf("Vous avez rentré : %s\n", input);
+		sigaction(SIGINT, &sign, NULL);
+		sigaction(SIGSEGV, &sign, NULL);
+        input = readline("[minishell]> ");
 		parsing(cmd, input);
-        free(input);
+		free_lst(cmd);
     }
 	return (0);
 }
 
+/// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
