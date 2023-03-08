@@ -1,34 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
+/*   Created: 2023/03/08 13:03:17 by jmoutous          #+#    #+#             */
 /*   Updated: 2023/03/08 14:48:24 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+void	ft_free_tab(char **tab)
 {
-	t_data		data;
-	static char	*input;
+	int	i;
 
-	input = NULL;
-	ft_data_init(&data);
-	printf("%s\n", ft_get_arg_path(&data));
-	while (1)
+	i = 0;
+	while (tab[i])
 	{
-		input = readline("minishell> ");
-		if (!input)
-			perror("readline() error");
-		printf("Vous avez rentrez : %s\n", input);
-		if (input && *input)
-			add_history(input);
-		free(input);
+		free(tab[i]);
+		i++;
 	}
-	return (0);
+	free(tab);
+}
+
+static void	ft_free_data(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	if (data->pipes != NULL)
+	{
+		while (++i < data->nb_cmd - 1)
+			free(data->pipes[i]);
+		free(data->pipes);
+	}
+}
+
+void	ft_quit(t_data *data)
+{
+	ft_free_data(data);
+}
+
+void	ft_error(t_data *data, char *s)
+{
+	ft_putstr_fd("\nError\n", 2);
+	if (s)
+		ft_putstr_fd(s, 2);
+	perror(" ");
+	ft_putstr_fd("\n", 2);
+	ft_quit(data);
+	exit (1);
 }
