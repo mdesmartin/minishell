@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 10:31:59 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 14:10:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_error(t_data *data, char *s);
 void	ft_quit(t_data *data);
 void	ft_free_tab(char **tab);
 
-void	ft_process(t_data *data);
+void	ft_process(t_data *data, t_list *cmd);
 void	ft_child(t_data *data, int **pipes, int i);
 char	*ft_get_arg_path(t_data *data);
 

@@ -6,18 +6,19 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/08 17:08:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 14:11:27 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_process(t_data *data)
+void	ft_process(t_data *data, t_list *cmd)
 {
 	int	i;
 	int	pids;
 
 	i = -1;
+	data->nb_cmd = ft_lstsize(cmd);
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = malloc(2 * sizeof(int));

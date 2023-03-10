@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 10:45:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 11:36:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	main(void)
 {
-	t_data				data;
-	static char			*input;
-	t_list				**cmd;
 	struct sigaction	sign;
+	static char			*input;
+	t_data				data;
+	t_list				**cmd;
 
 	input = NULL;
-data.nb_cmd = 3;
 	ft_data_init(&data);
 
 	sign.sa_handler = get_signal;
@@ -38,8 +37,8 @@ data.nb_cmd = 3;
 		printf("Vous avez rentrez : %s\n", input);
 		if (input && *input)
 			add_history(input);
-		ft_process(&data);
 		parsing(cmd, input);
+		ft_process(&data, *cmd);
 		free_lst(cmd);
 	}
 	return (0);
