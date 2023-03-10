@@ -1,8 +1,18 @@
 NAME = minishell
-CFLAGS = -Wall -Wextra -Werror -I . -L/usr/local/lib -I/usr/local/include -lreadline
+
+CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
 
 DIR_SRC =	sources/
-LST_SRC =	main.c parsing.c free_n_exit.c signal.c
+LST_SRC =	main.c			\
+			error.c			\
+			utils.c			\
+			process.c		\
+			child.c			\
+			get_arg_path.c	\
+			parsing.c		\
+			free_n_exit.c	\
+			signal.c
+			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
 DIR_OBJ	=	objects/
