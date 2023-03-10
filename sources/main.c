@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/08 17:17:26 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/08 17:47:14 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	main(void)
 {
 	t_list	**cmd;
-	struct sigaction sign;
+	struct sigaction sign = { 0 };
 	char	*input;
 
 	sign.sa_handler = get_signal;
+	// sign.sa_sigaction = NULL;
+	sigemptyset(&sign.sa_mask);
+	// sign.sa_flags = 0;
+
 
 	cmd = malloc(sizeof(t_list *));
 	if (!cmd)
@@ -26,7 +30,7 @@ int	main(void)
 	*cmd = NULL;
     while (1)
     {
-		sigaction(SIGINT, &sign, NULL);
+		sigaction(SIGINT, &sign, NULL);// if ( == -1) perror
 		sigaction(SIGSEGV, &sign, NULL);
         input = readline("[minishell]> ");
 		parsing(cmd, input);
