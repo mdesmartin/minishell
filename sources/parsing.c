@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/08 16:56:02 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 15:50:33 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 //premier arg cmd[0], puis sn
 
 
-void	create_chain(t_list **cmd, char **pipe)
+void	create_chain(t_list *cmd, char **pipe)
 {
-	if (*cmd == NULL)
-		*cmd = ft_lstnew((void**)pipe);
+	if (cmd == NULL)
+		cmd = ft_lstnew((void**)pipe);
 	else
 		ft_lstadd_back(cmd, ft_lstnew((void**)pipe));
 	return ;
@@ -47,7 +47,7 @@ void	divide_pipes(t_list **cmd, char *input)
 	return ;
 }
 
-// void	print_tab(t_list **cmd)
+// void	print_tab(t_list *cmd)
 // {
 // 	t_list *cp;
 // 	int	i;
@@ -70,7 +70,7 @@ void	divide_pipes(t_list **cmd, char *input)
 // 	return ;
 // }
 
-int	parsing(t_list **cmd, char *input)
+int	parsing(t_list *cmd, char *input)
 {
 	divide_pipes(cmd, input);
 	// print_tab(cmd);
