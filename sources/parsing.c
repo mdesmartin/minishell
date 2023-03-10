@@ -15,10 +15,10 @@
 //premier arg cmd[0], puis sn
 
 
-void	create_chain(t_list **cmd, char **pipe)
+void	create_chain(t_list *cmd, char **pipe)
 {
-	if (*cmd == NULL)
-		*cmd = ft_lstnew((void **)pipe);
+	if (cmd == NULL)
+		cmd = ft_lstnew((void**)pipe);
 	else
 		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
 	return ;
@@ -47,7 +47,7 @@ void	divide_pipes(t_list **cmd, char *input)
 	return ;
 }
 
-// void	print_tab(t_list **cmd)
+// void	print_tab(t_list *cmd)
 // {
 // 	t_list *cp;
 // 	int	i;

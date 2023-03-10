@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
 /*   Updated: 2023/03/10 16:52:39 by jmoutous         ###   ########lyon.fr   */
@@ -14,11 +14,12 @@
 
 int	main(int ac, char** av, char **envp)
 {
-	struct sigaction	sign = { 0 };
+	struct sigaction	sign;
 	static char			*input;
 	t_data				data;
-	t_list				**cmd;
+	t_list				*cmd;
 
+	// sign = { 0 };
 	sign.sa_handler = get_signal;
 	// sign.sa_sigaction = NULL;
 	sigemptyset(&sign.sa_mask);
@@ -26,16 +27,21 @@ int	main(int ac, char** av, char **envp)
 	(void)ac;
 	(void)av;
 	input = NULL;
+
 	ft_data_init(&data, envp);
-	ft_data_init(&data);
 	sign.sa_handler = get_signal;
 	while (1)
 	{
+		if (sigaction(SIGINT, &sign, NULL) == -1)
+			return (perror("Error in SIGINT"), -1);
 		input = readline("minishell> ");
-		sigaction(SIGINT, &sign, NULL); //if -1 perror
-		sigaction(SIGSEGV, &sign, NULL);
+			// perror("readline() error");
 		if (!input)
-			perror("readline() error");
+			if (sigaction(SIGSEGV, &sign, NULL) == -1)
+				return (perror("Error in SIGSEGV"), -1);
+		if (sigaction(SIGQUIT, &sign, NULL) == -1)
+			return (perror("Error in SIGQUIT"), -1);
+      
 		if (input && *input)
 			add_history(input);
 		parsing(&data, input);
