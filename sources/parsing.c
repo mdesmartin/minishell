@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/10 10:57:05 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 15:47:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	divide_pipes(t_list **cmd, char *input)
 // 	return ;
 // }
 
-int	parsing(t_list **cmd, char *input)
+int	parsing(t_data *data, char *input)
 {
-	divide_pipes(cmd, input);
+	divide_pipes(&data->cmd, input);
 	// print_tab(cmd);
 
 	return (0);

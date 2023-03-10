@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 14:10:31 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 16:12:46 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,13 @@
 
 static void	ft_only_child(t_data *data)
 {
-(void) data;
+	char	*path;
+
 ft_printf("Only_child!\n");
-	// if (dup2( , STDIN_FILENO) == -1) // add input
-	// {
-	// 	perror("Error while duplicating file descriptor! ");
-	// 	ft_close_fds(data);
-	// 	ft_quit(data);
-	// 	exit (1);
-	// }
 	ft_close_fds(data);
-	// execve(, data->cmd_args[i], data->envp);
-	// perror("\nError\nIn child process while executing command! ");
+	path = ft_get_arg_path(data);
+	execve(path, (char **)data->cmd->content, data->envp);
+	perror("\nError\nIn child process while executing command! ");
 	ft_quit(data);
 	exit(1);
 
