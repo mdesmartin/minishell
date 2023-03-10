@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 16:52:39 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 17:23:18 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int ac, char** av, char **envp)
 	struct sigaction	sign;
 	static char			*input;
 	t_data				data;
-	t_list				*cmd;
 
 	// sign = { 0 };
 	sign.sa_handler = get_signal;
