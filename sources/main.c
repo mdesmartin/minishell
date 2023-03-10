@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 10:45:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 11:18:55 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	main(void)
 {
-	t_data				data;
+	struct sigaction	sign = { 0 };
 	static char			*input;
+	t_data				data;
 	t_list				**cmd;
-	struct sigaction	sign;
+
+	sign.sa_handler = get_signal;
+	// sign.sa_sigaction = NULL;
+	sigemptyset(&sign.sa_mask);
+	// sign.sa_flags = 0;
 
 	input = NULL;
-data.nb_cmd = 3;
+	data.nb_cmd = 3;
 	ft_data_init(&data);
 
 	sign.sa_handler = get_signal;
@@ -31,7 +36,7 @@ data.nb_cmd = 3;
 	while (1)
 	{
 		input = readline("minishell> ");
-		sigaction(SIGINT, &sign, NULL);
+		sigaction(SIGINT, &sign, NULL); //if -1 perror
 		sigaction(SIGSEGV, &sign, NULL);
 		if (!input)
 			perror("readline() error");
