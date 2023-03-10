@@ -14,14 +14,20 @@
 
 int	main(int ac, char** av, char **envp)
 {
-	struct sigaction	sign;
+	struct sigaction	sign = { 0 };
 	static char			*input;
 	t_data				data;
+	t_list				**cmd;
 
+	sign.sa_handler = get_signal;
+	// sign.sa_sigaction = NULL;
+	sigemptyset(&sign.sa_mask);
+	// sign.sa_flags = 0;
 	(void)ac;
 	(void)av;
 	input = NULL;
 	ft_data_init(&data, envp);
+	ft_data_init(&data);
 	sign.sa_handler = get_signal;
 	while (1)
 	{
