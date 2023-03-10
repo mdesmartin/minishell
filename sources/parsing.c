@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/10 15:50:33 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 15:47:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	create_chain(t_list *cmd, char **pipe)
 	if (cmd == NULL)
 		cmd = ft_lstnew((void**)pipe);
 	else
-		ft_lstadd_back(cmd, ft_lstnew((void**)pipe));
+		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
 	return ;
 }
 
@@ -32,14 +32,14 @@ void	divide_pipes(t_list **cmd, char *input)
 
 	input_pipe = ft_split(input, '|');
 	if (!input_pipe)
-		return (ft_putstr_fd("Error\n", 2) ,free(input), exit(-1));
+		return (ft_putstr_fd("Error\n", 2), free(input), exit(-1));
 	free(input);
 	i = 0;
 	while (input_pipe[i])
 	{
 		pipe = ft_split(input_pipe[i], ' ');
 		if (!pipe)
-			return (perror("Error\n") ,free(input));
+			return (perror("Error\n"), free(input));
 		create_chain(cmd, pipe);
 		i++;
 	}
@@ -70,9 +70,9 @@ void	divide_pipes(t_list **cmd, char *input)
 // 	return ;
 // }
 
-int	parsing(t_list *cmd, char *input)
+int	parsing(t_data *data, char *input)
 {
-	divide_pipes(cmd, input);
+	divide_pipes(&data->cmd, input);
 	// print_tab(cmd);
 
 	return (0);

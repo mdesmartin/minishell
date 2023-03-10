@@ -25,12 +25,13 @@
 
 typedef struct s_data
 {
+	t_list	*cmd;
 	char	**envp;
 	int		**pipes;
 	int		nb_cmd;
 }				t_data;
 
-void	ft_data_init(t_data *data);
+void	ft_data_init(t_data *data, char **envp);
 void	ft_close_fds(t_data *data);
 void	ft_error(t_data *data, char *s);
 void	ft_quit(t_data *data);
@@ -40,7 +41,7 @@ void	ft_process(t_data *data);
 void	ft_child(t_data *data, int **pipes, int i);
 char	*ft_get_arg_path(t_data *data);
 
-int		parsing(t_list **cmd, char *readed);
+int		parsing(t_data *data, char *readed);
 void	*free_tab(char **tab);
 void	free_lst(t_list **cmd);
 void	get_signal(int signal);
