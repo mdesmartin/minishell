@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 10:36:22 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/10 10:45:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(void)
 	static char			*input;
 	t_list				**cmd;
 	struct sigaction	sign;
-	char				*input;
 
 	input = NULL;
 data.nb_cmd = 3;
@@ -31,18 +30,17 @@ data.nb_cmd = 3;
 	*cmd = NULL;
 	while (1)
 	{
+		input = readline("minishell> ");
 		sigaction(SIGINT, &sign, NULL);
 		sigaction(SIGSEGV, &sign, NULL);
-		input = readline("minishell> ");
 		if (!input)
 			perror("readline() error");
 		printf("Vous avez rentrez : %s\n", input);
 		if (input && *input)
 			add_history(input);
+		ft_process(&data);
 		parsing(cmd, input);
 		free_lst(cmd);
-		free(input);
-		ft_process(&data);
 	}
 	return (0);
 }
