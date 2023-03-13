@@ -6,13 +6,29 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 15:44:59 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 16:39:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_process(t_data *data)
+static int	ft_builtin(t_data *data)
+{
+	if (ft_strncmp(data->cmd->content[0], "cd", 3) == 0)
+	{
+		if (data->cmd->content[1] == NULL)
+		{
+			if (chdir(getenv("USER_ZDOTDIR")) == -1)
+				perror("Error while calling chdir()! ");
+		}
+		else if (chdir(data->cmd->content[1]) == -1)
+			perror("Error while calling chdir()! ");
+		return (1);
+	}
+	return (0);
+}
+
+static void	ft_process(t_data *data)
 {
 	int	i;
 	int	pids;
@@ -39,4 +55,12 @@ void	ft_process(t_data *data)
 	ft_close_fds(data);
 	while (--i >= 0)
 		wait(NULL);
+}
+
+void	ft_cmd(t_data *data)
+{
+	if (ft_builtin(data) != 0)
+		;
+	else
+		ft_process(data);
 }

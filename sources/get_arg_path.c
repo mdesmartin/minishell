@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 13:02:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 16:35:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ char	*ft_get_arg_path(t_data *data)
 	if (tmp)
 		return (tmp);
 	tmp = getenv("PATH");
+	if (!tmp)
+		perror("Error when retrieving PATH! ");
 	paths = ft_split(tmp, ':');
 	if (!paths)
-		perror("Error when spliting PATH");
+		perror("Error when spliting PATH! ");
 	i = 0;
 	while (paths[i])
 	{

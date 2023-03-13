@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 17:23:18 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 14:40:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,13 @@ int	main(int ac, char** av, char **envp)
 				return (perror("Error in SIGSEGV"), -1);
 		if (sigaction(SIGQUIT, &sign, NULL) == -1)
 			return (perror("Error in SIGQUIT"), -1);
-      
 		if (input && *input)
 			add_history(input);
 		parsing(&data, input);
-		ft_process(&data);
+		ft_cmd(&data);
 		free_lst(&data.cmd);
 	}
 	return (0);
 }
-
-
-
 
 /// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
