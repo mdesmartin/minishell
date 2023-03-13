@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 16:39:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 17:15:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	ft_builtin(t_data *data)
 			if (chdir(getenv("USER_ZDOTDIR")) == -1)
 				perror("Error while calling chdir()! ");
 		}
+		else if (data->cmd->content[2] != NULL)
+			ft_printf("cd: too many arguments\n");
 		else if (chdir(data->cmd->content[1]) == -1)
 			perror("Error while calling chdir()! ");
 		return (1);
