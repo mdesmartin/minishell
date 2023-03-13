@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 16:12:46 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 13:05:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,61 +16,70 @@ static void	ft_only_child(t_data *data)
 {
 	char	*path;
 
-ft_printf("Only_child!\n");
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
 	execve(path, (char **)data->cmd->content, data->envp);
-	perror("\nError\nIn child process while executing command! ");
+	perror("Error while executing command! ");
 	ft_quit(data);
 	exit(1);
-
 }
 
 static void	ft_first_child(t_data *data, int **pipes, int i)
 {
-(void) data;
-(void) pipes;
-(void) i;
-ft_printf("First_child!\n");
-	// if (dup2( , STDIN_FILENO) == -1 // add input
-	// 	|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
-	// {
-	// 	ft_close_fds(data);
-	// 	perror("Error while duplicating file descriptor! ");
-	// 	ft_quit(data);
-	// 	exit (1);
-	// }
+	char	*path;
+
+	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
+	{
+		ft_close_fds(data);
+		perror("Error while duplicating file descriptor! ");
+		ft_quit(data);
+		exit (1);
+	}
+	path = ft_get_arg_path(data);
+	execve(path, (char **)data->cmd->content, data->envp);
 }
 
 static void	ft_last_child(t_data *data, int **pipes, int i)
 {
-(void) data;
-(void) pipes;
-(void) i;
-ft_printf("Last_child!\n");
-	// if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
-	// {
-	// 	ft_close_fds(data);
-	// 	perror("Error while duplicating file descriptor! ");
-	// 	ft_quit(data);
-	// 	exit (1);
-	// }
+	char	*path;
+
+	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
+	{
+		ft_close_fds(data);
+		perror("Error while duplicating file descriptor! ");
+		ft_quit(data);
+		exit (1);
+	}
+	ft_close_fds(data);
+	while (i > 0)
+	{
+		data->cmd = data->cmd->next;
+		i--;
+	}
+	path = ft_get_arg_path(data);
+	execve(path, (char **)data->cmd->content, data->envp);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
 {
-(void) data;
-(void) pipes;
-(void) i;
-ft_printf("Middle_child!\n");
-	// if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
-	// 	|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
-	// {
-	// 	ft_close_fds(data);
-	// 	perror("Error while duplicating file descriptor! ");
-	// 	ft_quit(data);
-	// 	exit (1);
-	// }
+	char	*path;
+
+	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
+		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
+	{
+		ft_close_fds(data);
+		perror("Error while duplicating file descriptor! ");
+		ft_quit(data);
+		exit (1);
+	}
+	ft_close_fds(data);
+	while (i > 0)
+	{
+		data->cmd = data->cmd->next;
+		i--;
+	}
+	path = ft_get_arg_path(data);
+	execve(path, (char **)data->cmd->content, data->envp);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
@@ -83,9 +92,7 @@ void	ft_child(t_data *data, int **pipes, int i)
 		ft_last_child(data, pipes, i);
 	else
 		ft_middle_child(data, pipes, i);
-	ft_close_fds(data);
-	// execve(, data->cmd_args[i], data->envp);
-	// perror("\nError\nIn child process while executing command! ");
+	perror("Error while executing command! ");
 	ft_quit(data);
 	exit(1);
 }

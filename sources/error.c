@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:03:17 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 14:10:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 11:33:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	ft_free_data(t_data *data)
 			free(data->pipes[i]);
 		free(data->pipes);
 	}
+	free_lst(&data->cmd);
 }
 
 void	ft_quit(t_data *data)

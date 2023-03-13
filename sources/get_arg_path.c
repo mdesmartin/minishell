@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/10 16:50:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 13:02:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,29 @@ static char	*ft_find_path(t_data *data, char **paths)
 	return (tmp);
 }
 
+static char	*ft_is_path_in_cmd(t_data *data)
+{
+	char	*tmp;
+
+	if (access(data->cmd->content[0], X_OK) == 0)
+	{
+		tmp = ft_strdup(data->cmd->content[0]);
+		if (!tmp)
+			ft_error(data, "Error when retrieving cmd_path");
+		return (tmp);
+	}
+	return (NULL);
+}
+
 char	*ft_get_arg_path(t_data *data)
 {
 	int		i;
 	char	*tmp;
 	char	**paths;
 
+	tmp = ft_is_path_in_cmd(data);
+	if (tmp)
+		return (tmp);
 	tmp = getenv("PATH");
 	paths = ft_split(tmp, ':');
 	if (!paths)
@@ -54,27 +71,3 @@ char	*ft_get_arg_path(t_data *data)
 	}
 	return (ft_find_path(data, paths));
 }
-
-// static void	ft_is_path_in_cmd(t_data *data)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (i < data->nb_cmd)
-// 	{
-// 		if (data->cmd_args[i][0] == NULL)
-// 			data->cmd_path[i] = NULL;
-// 		else if (access(data->cmd_args[i][0], X_OK) == 0)
-// 		{
-// 			data->cmd_path[i] = ft_strdup(data->cmd_args[i][0]);
-// 			if (!data->cmd_path[i])
-// 				ft_error(data, "Error when retrieving cmd_path");
-// 		}
-// 		else if (data->cmd_args[i][0][0] != '.'
-// 			&& data->cmd_args[i][0][0] != '/')
-// 			ft_find_path(data, i);
-// 		else
-// 			data->cmd_path[i] = NULL;
-// 		i++;
-// 	}
-// }
