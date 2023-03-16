@@ -6,6 +6,8 @@ DIR_SRC =	sources/
 LST_SRC =	main.c			\
 			error.c			\
 			utils.c			\
+			envp.c			\
+			env_op.c		\
 			process.c		\
 			child.c			\
 			get_arg_path.c	\

@@ -6,25 +6,23 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 11:30:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 10:07:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_data_init(t_data *data, char **envp)
+void	ft_data_init(t_data *data)
 {
 	data->nb_cmd = 0;
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
-		perror("ft_calloc failed for data->pipes!\n");
+		perror("ft_calloc failed for data->pipes! ");
 	data->cmd = malloc(sizeof(t_list *));
 	if (!data->cmd)
-		perror("Error while allocating memory for data->cmd!\n");
+		perror("Error while allocating memory for data->cmd! ");
 	data->cmd = NULL;
-	if (!envp[0])
-		ft_printf("Error : Environment not found!\n");
-	data->envp = envp;
+	ft_cp_envp(data);
 }
 
 void	ft_close_fds(t_data *data)

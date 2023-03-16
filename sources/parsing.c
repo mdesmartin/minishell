@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/10 17:23:00 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 14:15:40 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	create_chain(t_list **cmd, char **pipe)
 {
 	if (*cmd == NULL)
-		*cmd = ft_lstnew((void**)pipe);
+		*cmd = ft_lstnew((void **)pipe);
 	else
 		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
 	return ;
