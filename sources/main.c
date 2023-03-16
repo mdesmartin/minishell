@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 10:34:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 13:44:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(void)
 	input = NULL;
 
 	ft_data_init(&data);
-// exit (1);
 	sign.sa_handler = get_signal;
 	while (1)
 	{

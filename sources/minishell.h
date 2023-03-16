@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 12:14:33 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 14:07:02 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 
 typedef struct s_envp
 {
-	void			*env;
+	char			*variable;
+	char			*value;
 	struct s_envp	*next;
 }				t_envp;
 
@@ -42,6 +43,7 @@ void	ft_close_fds(t_data *data);
 void	ft_error(t_data *data, char *s);
 void	ft_quit(t_data *data);
 void	ft_free_tab(char **tab);
+int		ft_is_c_in(char *str, char c);
 
 void	ft_cp_envp(t_data *data);
 void	ft_print_env(t_data *data);

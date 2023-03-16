@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 12:19:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 14:07:41 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_builtin(t_data *data)
 			ft_print_export(data);
 		else if (data->cmd->content[2] != NULL)
 			ft_printf("export: too many arguments\n");
-		else
+		else if (ft_is_c_in(data->cmd->content[1], '=') == 1)
 			ft_export(data);
 		return (1);
 	}

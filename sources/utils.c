@@ -6,11 +6,25 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 10:07:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 14:06:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_is_c_in(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_data_init(t_data *data)
 {
