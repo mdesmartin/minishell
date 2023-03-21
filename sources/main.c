@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 14:40:00 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 14:39:19 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char** av, char **envp)
 		if (input && *input)
 			add_history(input);
 		parsing(&data, input);
-		ft_cmd(&data);
+		// ft_cmd(&data);
 		free_lst(&data.cmd);
 	}
 	return (0);
