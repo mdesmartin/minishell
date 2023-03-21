@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/21 14:48:03 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/21 17:26:00 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,30 @@ int	nb_pipes(char *input)
 	return (nb_pipes);
 }
 
-char	**split_pipes(char *input)
+void	split_pipes(char ***pipe_tab, char *input)
 {
-	char	**pipe_tab;
+	int start;
 	int	i;
 	int	j;
-	int start;
-	int nb_p;
 
+	start = 0;
 	i = 0;
 	j = 0;
-	start = 0;
-	nb_p = nb_pipes(input);
-	pipe_tab = ft_calloc(nb_p + 1, sizeof(char *));//pas sur de ca, mettre malloc ? pk +1 ?
 	while (input[i] != '\0')
 	{
 		find_pipe(input, &i);
-		pipe_tab[j] = ft_substr(input, start, i - start);
+		*pipe_tab[j] = ft_substr(input, start, i - start);
 		j++;
 		i++;
 		start = i;
 	}
-	return (pipe_tab);
+}
+
+void	create_tab(char ***pipe_tab, int nb_pipe)
+{
+	pipe_tab = ft_calloc(nb_pipe + 1, sizeof(char *));//pas sur de ca, mettre malloc ? pk +1 ?
+	if (!pipe_tab)
+		return (ft_putstr_fd("error creating tab\n", 2), exit(1)); 
 }
 
 void	print_tab(char **pipe_tab)
@@ -94,10 +96,15 @@ void	print_tab(char **pipe_tab)
 
 int	parsing(t_data *data, char *input)
 {
-	(void) data;
-	char **pipe_tab;
+	char	**pipe_tab;
+	char	*inp;
+	int		nb_p;
 
-	pipe_tab = split_pipes(input);
+	(void) data;
+	inp = ft_strdup(input);
+	nb_p = nb_pipes(input);
+	create_tab(&pipe_tab, nb_p);
+	split_pipes(&pipe_tab, input);
 	print_tab(pipe_tab);
 
 	return (0);

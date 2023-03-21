@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 14:39:19 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/21 15:50:54 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char** av, char **envp)
 	sign.sa_handler = get_signal;
 	// sign.sa_sigaction = NULL;
 	sigemptyset(&sign.sa_mask);
-	// sign.sa_flags = 0;
+	sign.sa_flags = SA_SIGINFO;
 	(void)ac;
 	(void)av;
 	input = NULL;
