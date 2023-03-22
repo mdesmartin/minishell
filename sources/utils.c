@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 14:06:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 16:33:16 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,38 @@ void	ft_close_fds(t_data *data)
 		close(data->pipes[i][1]);
 		i++;
 	}
+}
+
+static int	ft_envsize(t_envp *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**ft_lst_to_tabtab(t_envp *envp)
+{
+	char	**tab;
+	int		lstlen;
+	int		i;
+
+	i = 0;
+	lstlen = ft_envsize(envp);
+	tab = malloc(lstlen + 1);
+	if (!tab)
+		perror("Error while allocating memory for char **envp!");
+	while (envp)
+	{
+		tab[i] = ft_strjoin(envp->variable, ft_strjoin("=", envp->value));
+		envp = envp->next;
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
