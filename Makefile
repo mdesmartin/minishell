@@ -6,6 +6,9 @@ DIR_SRC =	sources/
 LST_SRC =	main.c			\
 			error.c			\
 			utils.c			\
+			env/env_init.c	\
+			env/env_op.c	\
+			env/env_utils.c	\
 			process.c		\
 			child.c			\
 			get_arg_path.c	\
@@ -54,6 +57,7 @@ $(NAME_B): $(DIR_OBJ) $(OBJECTS_B)
 
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
+	@mkdir -p $(DIR_OBJ)/env
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c $(HEADERS) $(LIBRARY)
 	cc $(CFLAGS) -c $< -o $@
