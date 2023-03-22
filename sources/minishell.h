@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 17:15:12 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 15:41:26 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int		parsing(t_data *data, char *readed);
 void	*free_tab(char **tab);
 void	free_lst(t_list **cmd);
 void	get_signal(int signal);
+int		nb_pipes(char *input);
+char	**create_tab(char **pipe_tab, char *input, int nb_pipe);
 
 #endif

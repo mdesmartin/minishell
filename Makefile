@@ -11,7 +11,8 @@ LST_SRC =	main.c			\
 			get_arg_path.c	\
 			parsing.c		\
 			free_n_exit.c	\
-			signal.c
+			signal.c		\
+			create_tab.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 

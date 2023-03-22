@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/22 13:48:53 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 15:54:03 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ int	main(int ac, char** av, char **envp)
 			return (perror("Error in SIGQUIT"), -1);
 		if (input && *input)
 			add_history(input);
-		parsing(&data, input);
-		// ft_cmd(&data);
+		if (parsing(&data, input) == -1)
+		{
+			free(input);
+			ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
+		}
+		ft_cmd(&data);
 		free_lst(&data.cmd);
 	}
 	return (0);
