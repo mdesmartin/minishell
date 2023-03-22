@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 17:16:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 17:08:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 static void	ft_only_child(t_data *data)
 {
+	// char	**locenvp;
 	char	*path;
 
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp);
+	// locenvp = ft_lst_to_tabtab(data->envp);
+	execve(path, (char **)data->cmd->content, NULL);
 }
 
 static void	ft_first_child(t_data *data, int **pipes, int i)
@@ -33,7 +35,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		exit (1);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp);
+	execve(path, (char **)data->cmd->content, NULL);
 }
 
 static void	ft_last_child(t_data *data, int **pipes, int i)
@@ -54,7 +56,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		i--;
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp);
+	execve(path, (char **)data->cmd->content, NULL);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
@@ -76,7 +78,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		i--;
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp);
+	execve(path, (char **)data->cmd->content, NULL);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)

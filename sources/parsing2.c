@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/22 15:56:21 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 16:54:27 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int	parsing(t_data *data, char *input)
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
 	// print_tab(pipe_tab);
 
-	while ()
-
-	return (0);
+void	create_chain(t_list **cmd, char **pipe)
+{
+	if (*cmd == NULL)
+		*cmd = ft_lstnew((void **)pipe);
+	else
+		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
+	return ;
 }
 
 // void	create_chain(t_list **cmd, char **pipe)

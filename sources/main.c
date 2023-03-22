@@ -6,13 +6,13 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/22 15:54:03 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 16:55:05 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char** av, char **envp)
+int	main(void)
 {
 	struct sigaction	sign;
 	static char			*input;
@@ -23,9 +23,10 @@ int	main(int ac, char** av, char **envp)
 	sign.sa_flags = SA_SIGINFO;
 	(void)ac;
 	(void)av;
+	// sign.sa_flags = 0;
 	input = NULL;
 
-	ft_data_init(&data, envp);
+	ft_data_init(&data);
 	sign.sa_handler = get_signal;
 	while (1)
 	{
