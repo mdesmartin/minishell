@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/21 17:26:00 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 13:47:15 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 int find_quote(char *input, int *i, char quote)
 {
 	(*i)++;
-	while (input[*i])
+	while (input[*i] != '\0')
 	{
 		if (input[*i] == quote)
 			return (0);
 		(*i)++;
 	}
-	return (ft_putstr_fd("error findding quote\n", 2), exit(1), 1);
+	return (free(input), ft_putstr_fd("Error findding quote\n", 2), exit(1), 1);
 }
 
 int find_pipe(char *input, int *i)
@@ -52,34 +52,47 @@ int	nb_pipes(char *input)
 	j = 0;
 	nb_pipes = 1;
 	while (find_pipe(input, &j))
+	{
 		nb_pipes++;
+		j++;
+	}
 	return (nb_pipes);
 }
 
-void	split_pipes(char ***pipe_tab, char *input)
+char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 {
 	int start;
+	int	len_pipe;
 	int	i;
 	int	j;
 
 	start = 0;
+	len_pipe = 0;
 	i = 0;
 	j = 0;
-	while (input[i] != '\0')
+	while (nb_p)
 	{
 		find_pipe(input, &i);
-		*pipe_tab[j] = ft_substr(input, start, i - start);
+		len_pipe = i - start;
+		pipe_tab[j] = ft_substr(input, start, len_pipe);
+		if (!pipe_tab[j])
+			return (ft_putstr_fd("error creating tab\n", 2), NULL);
+		ft_printf("pipe[%d] : %s\n", j, pipe_tab[j]);
 		j++;
 		i++;
 		start = i;
+		nb_p--;
 	}
+	pipe_tab[j] = NULL;
+	return (pipe_tab);
 }
 
-void	create_tab(char ***pipe_tab, int nb_pipe)
+char	**create_tab(char **pipe_tab, int nb_pipe)
 {
-	pipe_tab = ft_calloc(nb_pipe + 1, sizeof(char *));//pas sur de ca, mettre malloc ? pk +1 ?
+	pipe_tab = ft_calloc(sizeof(char *), (nb_pipe + 1));
 	if (!pipe_tab)
-		return (ft_putstr_fd("error creating tab\n", 2), exit(1)); 
+		return (ft_putstr_fd("error creating tab\n", 2), NULL);
+	return (pipe_tab);
 }
 
 void	print_tab(char **pipe_tab)
@@ -97,15 +110,15 @@ void	print_tab(char **pipe_tab)
 int	parsing(t_data *data, char *input)
 {
 	char	**pipe_tab;
-	char	*inp;
 	int		nb_p;
 
 	(void) data;
-	inp = ft_strdup(input);
+	pipe_tab = NULL;
 	nb_p = nb_pipes(input);
-	create_tab(&pipe_tab, nb_p);
-	split_pipes(&pipe_tab, input);
-	print_tab(pipe_tab);
+	ft_printf("nb_pipes : %d\n", nb_p);
+	pipe_tab = create_tab(pipe_tab, nb_p);
+	split_pipes(pipe_tab, nb_p, input);
+	// print_tab(pipe_tab);
 
 	return (0);
 }

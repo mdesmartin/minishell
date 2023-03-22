@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/21 15:50:54 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 13:48:53 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int	main(int ac, char** av, char **envp)
 	static char			*input;
 	t_data				data;
 
-	// sign = { 0 };
 	sign.sa_handler = get_signal;
-	// sign.sa_sigaction = NULL;
 	sigemptyset(&sign.sa_mask);
 	sign.sa_flags = SA_SIGINFO;
 	(void)ac;
