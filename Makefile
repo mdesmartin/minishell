@@ -9,13 +9,13 @@ LST_SRC =	main.c			\
 			env/env_init.c	\
 			env/env_op.c	\
 			env/env_utils.c	\
+			parsing/parsing.c	\
+			parsing/create_tab.c \
 			process.c		\
 			child.c			\
 			get_arg_path.c	\
-			parsing.c		\
 			free_n_exit.c	\
 			signal.c		\
-			create_tab.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
@@ -59,6 +59,7 @@ $(NAME_B): $(DIR_OBJ) $(OBJECTS_B)
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
 	@mkdir -p $(DIR_OBJ)/env
+	@mkdir -p $(DIR_OBJ)/parsing
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c $(HEADERS) $(LIBRARY)
 	cc $(CFLAGS) -c $< -o $@

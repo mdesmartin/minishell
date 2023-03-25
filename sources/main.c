@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/22 16:55:05 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 13:41:31 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(void)
 	sign.sa_handler = get_signal;
 	sigemptyset(&sign.sa_mask);
 	sign.sa_flags = SA_SIGINFO;
-	(void)ac;
-	(void)av;
+	// (void)ac;
+	// (void)av;
 	// sign.sa_flags = 0;
 	input = NULL;
 
@@ -46,7 +46,7 @@ int	main(void)
 			free(input);
 			ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
 		}
-		ft_cmd(&data);
+		// ft_cmd(&data);
 		free_lst(&data.cmd);
 	}
 	return (0);
