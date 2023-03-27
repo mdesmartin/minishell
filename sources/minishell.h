@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 14:43:44 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 16:13:30 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_free_envplst(t_data *data);
 void	ft_cp_envp(t_data *data);
 void	ft_print_env(t_data *data);
 void	ft_export(t_data *data);
+void	ft_unset(t_data *data);
 void	ft_envadd_back(t_envp **lst, t_envp *new);
 t_envp	*ft_envlast(t_envp *lst);
 void	ft_print_export(t_data *data);

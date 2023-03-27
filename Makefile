@@ -3,19 +3,20 @@ NAME = minishell
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
 
 DIR_SRC =	sources/
-LST_SRC =	main.c			\
-			error.c			\
-			utils.c			\
-			env/env_init.c	\
-			env/env_op.c	\
-			env/env_utils.c	\
-			env/env_lst.c	\
-			process.c		\
-			child.c			\
-			get_arg_path.c	\
-			parsing.c		\
-			free_n_exit.c	\
-			signal.c		\
+LST_SRC =	main.c				\
+			error.c				\
+			utils.c				\
+			env/env_init.c		\
+			env/env_export.c	\
+			env/env_unset.c		\
+			env/env_utils.c		\
+			env/env_lst.c		\
+			process.c			\
+			child.c				\
+			get_arg_path.c		\
+			parsing.c			\
+			free_n_exit.c		\
+			signal.c			\
 			builtin.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
