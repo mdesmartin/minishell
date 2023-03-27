@@ -10,7 +10,7 @@ LST_SRC =	main.c			\
 			env/env_op.c	\
 			env/env_utils.c	\
 			parsing/parsing.c	\
-			parsing/create_tab.c \
+			parsing/split_pipes.c \
 			process.c		\
 			child.c			\
 			get_arg_path.c	\

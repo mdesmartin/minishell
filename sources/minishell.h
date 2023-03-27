@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/22 16:55:13 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 17:13:24 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+
+typedef struct s_pipeline
+{
+	char			**content;
+	struct s_pipeline	*next;
+}					t_pipeline;
 
 typedef struct s_envp
 {

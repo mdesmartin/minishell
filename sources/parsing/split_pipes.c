@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_tab.c                                       :+:      :+:    :+:   */
+/*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/25 13:55:15 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 17:10:29 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,39 +65,28 @@ int	nb_pipes(char *input)
 	return (nb_pipes);
 }
 
-char	**split_pipes(char **pipe_tab, int nb_p, char *input)
+int	split_pipes(t_data *data, int nb_p, char *input)
 {
-	int	start;
-	int	len_pipe;
-	int	i;
-	int	j;
+	char	**pipe;
+	int		start;
+	int		len_pipe;
+	int		i;
 
 	start = 0;
 	len_pipe = 0;
 	i = 0;
-	j = 0;
 	while (nb_p)
 	{
 		find_pipe(input, &i);
 		len_pipe = i - start;
-		pipe_tab[j] = ft_substr(input, start, len_pipe);
-		if (!pipe_tab[j])
-			return (ft_putstr_fd("error creating tab\n", 2), NULL);
-		// ft_printf("pipe[%d] : %s\n", j, pipe_tab[j]);
-		j++;
+		pipe = ft_calloc(sizeof(char *), 2);
+		pipe[0] = ft_substr(input, start, len_pipe);
+		if (!pipe)
+			return (-1);
+		create_chain(data->cmd, &pipe);
 		i++;
 		start = i;
 		nb_p--;
 	}
-	pipe_tab[j] = NULL;
-	return (pipe_tab);
-}
-
-char	**create_tab(char **pipe_tab, char *input, int nb_pipe)
-{
-	pipe_tab = ft_calloc(sizeof(char *), (nb_pipe + 1));
-	if (!pipe_tab)
-		return (ft_putstr_fd("error creating tab\n", 2), NULL);
-	pipe_tab = split_pipes(pipe_tab, nb_pipe, input);
-	return (pipe_tab);
+	return (0);
 }
