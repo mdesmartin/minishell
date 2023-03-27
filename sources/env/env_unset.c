@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by julien            #+#    #+#             */
-/*   Updated: 2023/03/27 16:49:25 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 16:54:33 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,6 @@ void	ft_unset(t_data *data)
 		ft_del_onelst(data->envp, (char *) data->cmd->content[i]);
 		i++;
 	}
+	ft_free_envptab(data);
+	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }
