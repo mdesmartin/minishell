@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:33:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 14:50:13 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_data_init(t_data *data)
 		perror("Error while allocating memory for data->cmd! ");
 	data->cmd = NULL;
 	ft_cp_envp(data);
+	data->envp_tab = NULL;
+	ft_lst_to_tabtab(data);
 }
 
 void	ft_close_fds(t_data *data)
@@ -65,23 +67,35 @@ static int	ft_envsize(t_envp *lst)
 	return (i);
 }
 
-char	**ft_lst_to_tabtab(t_envp *envp)
+void	ft_lst_to_tabtab(t_data *data)
 {
-	char	**tab;
+	t_envp	*tmp;
 	int		lstlen;
 	int		i;
 
 	i = 0;
-	lstlen = ft_envsize(envp);
-	tab = malloc(lstlen + 1);
-	if (!tab)
-		perror("Error while allocating memory for char **envp!");
-	while (envp)
+	lstlen = ft_envsize(data->envp);
+	tmp = data->envp;
+	data->envp_tab = malloc(lstlen + 1);
+	if (!data->envp_tab)
 	{
-		tab[i] = ft_strjoin(envp->variable, ft_strjoin("=", envp->value));
-		envp = envp->next;
+		perror("Error while allocating memory for char **envp!");
+		return ;
+	}
+	data->envp_tab[lstlen] = NULL;
+	while (tmp)
+	{
+		data->envp_tab[i] = ft_strjoin(tmp->variable, ft_strjoin("=", tmp->value));
+ft_printf("i = %d\ntmp->variable = %s\ntmp->value = %s\n", i, tmp->variable, tmp->value);
+ft_printf("data->envp_tab[%d] = %s\n\n", i, data->envp_tab[i]);
+		if (!data->envp_tab[i])
+		{
+			perror("Error while copying envp to char **envp_tab!");
+			ft_rfree_tab(data->envp_tab, i);
+			return ;
+		}
+		tmp = tmp->next;
 		i++;
 	}
-	tab[i] = NULL;
-	return (tab);
+ft_print_envdata(data);
 }

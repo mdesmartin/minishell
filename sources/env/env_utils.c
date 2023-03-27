@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:08:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 14:46:08 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,33 @@ void	ft_print_env(t_data *data)
 	{
 		ft_printf("%s=%s\n", tmp->variable, tmp->value);
 		tmp = tmp->next;
+	}
+}
+
+void	ft_print_tabtab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("env[%d]\t=\t%s\n", i, tab[i]);
+		i++;
+	}
+}
+
+void	ft_print_envdata(t_data *data)
+{
+	t_envp		*tmp;
+	int			i;
+
+	i = 0;
+	tmp = data->envp;
+	while (tmp)
+	{
+		ft_printf("%s=%s\n", tmp->variable, tmp->value);
+		ft_printf("data->envp_tab[%d] = %s\n\n", i, data->envp_tab[i]);
+		tmp = tmp->next;
+		i++;
 	}
 }

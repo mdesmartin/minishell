@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:07:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 14:29:42 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ft_export_add(t_data *data)
 		ft_error(data, "Malloc failed for export_add!");
 	tmp->variable = ft_strdup(buffer[0]);
 	tmp->value = ft_strdup(buffer[1]);
+	tmp->next = NULL;
 	free(buffer);
 	ft_envadd_back(&data->envp, tmp);
 }
@@ -81,4 +82,7 @@ void	ft_export(t_data *data)
 		ft_export_mod(data, var);
 	else
 		ft_export_add(data);
+// ft_print_tabtab(data->envp_tab);
+	ft_free_envptab(data);
+	ft_lst_to_tabtab(data);
 }

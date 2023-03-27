@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:21:55 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/25 14:44:25 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 {
 	t_list	*cmd;
 	t_envp	*envp;
+	char	**envp_tab;
 	int		**pipes;
 	int		nb_cmd;
 }				t_data;
@@ -43,7 +44,9 @@ void	ft_close_fds(t_data *data);
 void	ft_error(t_data *data, char *s);
 void	ft_quit(t_data *data);
 void	ft_free_tab(char **tab);
+void	ft_rfree_tab(char **tab, int i);
 int		ft_is_c_in(char *str, char c);
+void	ft_free_envptab(t_data *data);
 
 void	ft_cp_envp(t_data *data);
 void	ft_print_env(t_data *data);
@@ -51,7 +54,9 @@ void	ft_export(t_data *data);
 void	ft_envadd_back(t_envp **lst, t_envp *new);
 t_envp	*ft_envlast(t_envp *lst);
 void	ft_print_export(t_data *data);
-char	**ft_lst_to_tabtab(t_envp *envp);
+void	ft_lst_to_tabtab(t_data *data);
+void	ft_print_tabtab(char **tab);
+void	ft_print_envdata(t_data *data);
 
 void	ft_cmd(t_data *data);
 void	ft_child(t_data *data, int **pipes, int i);
