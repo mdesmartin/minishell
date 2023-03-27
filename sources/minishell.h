@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/25 14:44:25 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:43:44 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_free_tab(char **tab);
 void	ft_rfree_tab(char **tab, int i);
 int		ft_is_c_in(char *str, char c);
 void	ft_free_envptab(t_data *data);
+void	ft_free_envplst(t_data *data);
 
 void	ft_cp_envp(t_data *data);
 void	ft_print_env(t_data *data);
@@ -54,13 +55,14 @@ void	ft_export(t_data *data);
 void	ft_envadd_back(t_envp **lst, t_envp *new);
 t_envp	*ft_envlast(t_envp *lst);
 void	ft_print_export(t_data *data);
-void	ft_lst_to_tabtab(t_data *data);
+char	**ft_lst_to_tabtab(t_envp *envp);
 void	ft_print_tabtab(char **tab);
-void	ft_print_envdata(t_data *data);
+char	*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 
 void	ft_cmd(t_data *data);
 void	ft_child(t_data *data, int **pipes, int i);
 char	*ft_get_arg_path(t_data *data);
+int		ft_builtin(t_data *data);
 
 int		parsing(t_data *data, char *readed);
 void	*free_tab(char **tab);

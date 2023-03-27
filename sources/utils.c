@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/25 14:50:13 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:24:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	ft_data_init(t_data *data)
 		perror("Error while allocating memory for data->cmd! ");
 	data->cmd = NULL;
 	ft_cp_envp(data);
-	data->envp_tab = NULL;
-	ft_lst_to_tabtab(data);
+	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }
 
 void	ft_close_fds(t_data *data)
@@ -54,48 +53,31 @@ void	ft_close_fds(t_data *data)
 	}
 }
 
-static int	ft_envsize(t_envp *lst)
+char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
+{
+	char	*res;
+	char	*tmp;
+
+	if (!s1 && !s2 && !s3)
+		return (NULL);
+	tmp = ft_strjoin(s1, s2);
+	if (!tmp)
+		return (perror("Error while allocating memory for char **envp!"), NULL);
+	res = ft_strjoin(tmp, s3);
+	free(tmp);
+	if (!res)
+		return (perror("Error while allocating memory for char **envp!"), NULL);
+	return (res);
+}
+
+void	ft_print_tabtab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (lst)
+	while (tab[i])
 	{
-		lst = lst->next;
+		ft_printf("env[%d]\t=\t%s\n", i, tab[i]);
 		i++;
 	}
-	return (i);
-}
-
-void	ft_lst_to_tabtab(t_data *data)
-{
-	t_envp	*tmp;
-	int		lstlen;
-	int		i;
-
-	i = 0;
-	lstlen = ft_envsize(data->envp);
-	tmp = data->envp;
-	data->envp_tab = malloc(lstlen + 1);
-	if (!data->envp_tab)
-	{
-		perror("Error while allocating memory for char **envp!");
-		return ;
-	}
-	data->envp_tab[lstlen] = NULL;
-	while (tmp)
-	{
-		data->envp_tab[i] = ft_strjoin(tmp->variable, ft_strjoin("=", tmp->value));
-ft_printf("i = %d\ntmp->variable = %s\ntmp->value = %s\n", i, tmp->variable, tmp->value);
-ft_printf("data->envp_tab[%d] = %s\n\n", i, data->envp_tab[i]);
-		if (!data->envp_tab[i])
-		{
-			perror("Error while copying envp to char **envp_tab!");
-			ft_rfree_tab(data->envp_tab, i);
-			return ;
-		}
-		tmp = tmp->next;
-		i++;
-	}
-ft_print_envdata(data);
 }

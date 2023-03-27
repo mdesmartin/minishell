@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:03:17 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/25 14:28:53 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 14:44:20 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	ft_quit(t_data *data)
 		free(data->pipes);
 	}
 	free_lst(&data->cmd);
-	// free_lst(&data->envp);
+	ft_free_envplst(data);
+	ft_free_envptab(data);
 }
 
 void	ft_error(t_data *data, char *s)
@@ -61,19 +62,18 @@ void	ft_error(t_data *data, char *s)
 	exit (1);
 }
 
-// first data->envp_tab are weird, can't free them.
 void	ft_free_envptab(t_data *data)
 {
 	int	i;
 
 	i = 0;
-// ft_print_tabtab(data->envp_tab);
+	if (!data->envp_tab)
+		return ;
 	while (data->envp_tab[i])
 	{
-		// free(data->envp_tab[i]);
+		free(data->envp_tab[i]);
 		i++;
 	}
-free(data->envp_tab[7]);
 	free(data->envp_tab);
 	data->envp_tab = NULL;
 }

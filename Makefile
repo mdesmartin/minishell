@@ -9,12 +9,14 @@ LST_SRC =	main.c			\
 			env/env_init.c	\
 			env/env_op.c	\
 			env/env_utils.c	\
+			env/env_lst.c	\
 			process.c		\
 			child.c			\
 			get_arg_path.c	\
 			parsing.c		\
 			free_n_exit.c	\
-			signal.c
+			signal.c		\
+			builtin.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/25 14:29:42 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/27 13:51:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	ft_export(t_data *data)
 		ft_export_mod(data, var);
 	else
 		ft_export_add(data);
-// ft_print_tabtab(data->envp_tab);
 	ft_free_envptab(data);
-	ft_lst_to_tabtab(data);
+	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }
