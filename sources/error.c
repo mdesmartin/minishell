@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:03:17 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 14:44:20 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 12:59:23 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	ft_quit(t_data *data)
 		while (++i < data->nb_cmd - 1)
 			free(data->pipes[i]);
 		free(data->pipes);
+		data->pipes = NULL;
 	}
 	free_lst(&data->cmd);
+	free(data->cmd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
 }

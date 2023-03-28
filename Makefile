@@ -55,9 +55,6 @@ re: fclean
 $(NAME): $(DIR_OBJ) $(OBJECTS)
 	cc $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $(NAME)
 
-$(NAME_B): $(DIR_OBJ) $(OBJECTS_B)
-	cc $(OBJECTS_B) $(CFLAGS) $(LIBRARY) -o $(NAME_B)
-
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
 	@mkdir -p $(DIR_OBJ)/env

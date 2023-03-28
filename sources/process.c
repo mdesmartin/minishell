@@ -6,19 +6,20 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 16:02:12 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 12:51:54 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_process(t_data *data)
+static void	ft_pipe_init(t_data *data)
 {
 	int	i;
-	int	pids;
 
 	i = -1;
-	data->nb_cmd = ft_lstsize(data->cmd);
+	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
+	if (!data->pipes)
+		perror("ft_calloc failed for data->pipes! ");
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = malloc(2 * sizeof(int));
@@ -27,6 +28,27 @@ static void	ft_process(t_data *data)
 		if (pipe(data->pipes[i]) == -1)
 			ft_error(data, "Pipe failed for data->pipes[i]");
 	}
+
+}
+
+static void	ft_pipe_free(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->nb_cmd - 1)
+		free(data->pipes[i]);
+	free(data->pipes);
+	data->pipes = NULL;
+}
+
+static void	ft_process(t_data *data)
+{
+	int	i;
+	int	pids;
+
+	data->nb_cmd = ft_lstsize(data->cmd);
+	ft_pipe_init(data);
 	i = -1;
 	while (++i < data->nb_cmd)
 	{
@@ -39,6 +61,7 @@ static void	ft_process(t_data *data)
 	ft_close_fds(data);
 	while (--i >= 0)
 		wait(NULL);
+	ft_pipe_free(data);
 }
 
 void	ft_cmd(t_data *data)

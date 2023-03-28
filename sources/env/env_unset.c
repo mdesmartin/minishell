@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by julien            #+#    #+#             */
-/*   Updated: 2023/03/27 16:54:33 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 15:46:23 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_del_onelst(t_envp *envp, char *variable)
 			previous->next = current->next;
 			free(current->variable);
 			free(current->value);
+			free(current);
 			break ;
 		}
 		else

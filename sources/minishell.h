@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 16:13:30 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 15:22:48 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_print_export(t_data *data);
 char	**ft_lst_to_tabtab(t_envp *envp);
 void	ft_print_tabtab(char **tab);
 char	*ft_strjoin3(char const *s1, char const *s2, char const *s3);
+char	**ft_split_var(char *var);
 
 void	ft_cmd(t_data *data);
 void	ft_child(t_data *data, int **pipes, int i);

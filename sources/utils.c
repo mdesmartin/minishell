@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 14:24:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 14:20:40 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ int	ft_is_c_in(char *str, char c)
 void	ft_data_init(t_data *data)
 {
 	data->nb_cmd = 0;
-	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
-	if (!data->pipes)
-		perror("ft_calloc failed for data->pipes! ");
-	data->cmd = malloc(sizeof(t_list *));
-	if (!data->cmd)
-		perror("Error while allocating memory for data->cmd! ");
+	data->pipes = NULL;
 	data->cmd = NULL;
 	ft_cp_envp(data);
 	data->envp_tab = ft_lst_to_tabtab(data->envp);
