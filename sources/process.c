@@ -3,52 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:50 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 14:07:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 12:51:54 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_builtin(t_data *data)
-{
-	if (ft_strncmp(data->cmd->content[0], "cd", 3) == 0)
-	{
-		if (data->cmd->content[1] == NULL)
-		{
-			if (chdir(getenv("USER_ZDOTDIR")) == -1)
-				perror("Error while calling chdir()! ");
-		}
-		else if (data->cmd->content[2] != NULL)
-			ft_printf("cd: too many arguments\n");
-		else if (chdir(data->cmd->content[1]) == -1)
-			perror("Error while calling chdir()! ");
-		return (1);
-	}
-	if (ft_strncmp(data->cmd->content[0], "env", 4) == 0)
-		return (ft_print_env(data), 1);
-	if (ft_strncmp(data->cmd->content[0], "export", 7) == 0)
-	{
-		if (data->cmd->content[1] == NULL)
-			ft_print_export(data);
-		else if (data->cmd->content[2] != NULL)
-			ft_printf("export: too many arguments\n");
-		else if (ft_is_c_in(data->cmd->content[1], '=') == 1)
-			ft_export(data);
-		return (1);
-	}
-	return (0);
-}
-
-static void	ft_process(t_data *data)
+static void	ft_pipe_init(t_data *data)
 {
 	int	i;
-	int	pids;
 
 	i = -1;
-	data->nb_cmd = ft_lstsize(data->cmd);
+	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
+	if (!data->pipes)
+		perror("ft_calloc failed for data->pipes! ");
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = malloc(2 * sizeof(int));
@@ -57,6 +28,27 @@ static void	ft_process(t_data *data)
 		if (pipe(data->pipes[i]) == -1)
 			ft_error(data, "Pipe failed for data->pipes[i]");
 	}
+
+}
+
+static void	ft_pipe_free(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->nb_cmd - 1)
+		free(data->pipes[i]);
+	free(data->pipes);
+	data->pipes = NULL;
+}
+
+static void	ft_process(t_data *data)
+{
+	int	i;
+	int	pids;
+
+	data->nb_cmd = ft_lstsize(data->cmd);
+	ft_pipe_init(data);
 	i = -1;
 	while (++i < data->nb_cmd)
 	{
@@ -69,11 +61,12 @@ static void	ft_process(t_data *data)
 	ft_close_fds(data);
 	while (--i >= 0)
 		wait(NULL);
+	ft_pipe_free(data);
 }
 
 void	ft_cmd(t_data *data)
 {
-	if (data->nb_cmd <= 1 && ft_builtin(data) != 0)
+	if (data->nb_cmd == 0 && ft_builtin(data) != 0)
 		return ;
 	else
 		ft_process(data);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_op.c                                           :+:      :+:    :+:   */
+/*   env_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:07:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 15:29:16 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ static void	ft_export_add(t_data *data)
 	tmp = malloc(sizeof(t_envp));
 	if (!tmp)
 		perror("Error while allocating memory for envp!");
-	buffer = ft_split(data->cmd->content[1], '=');
+	buffer = ft_split_var(data->cmd->content[1]);
 	if (!buffer)
 		ft_error(data, "Malloc failed for export_add!");
-	tmp->variable = ft_strdup(buffer[0]);
-	tmp->value = ft_strdup(buffer[1]);
+	tmp->variable = buffer[0];
+	tmp->value = buffer[1];
+	tmp->next = NULL;
 	free(buffer);
 	ft_envadd_back(&data->envp, tmp);
 }
@@ -64,11 +65,12 @@ static void	ft_export_mod(t_data *data, t_envp *var)
 {
 	char	**buffer;
 
-	buffer = ft_split(data->cmd->content[1], '=');
+	buffer = ft_split_var(data->cmd->content[1]);
 	if (!buffer)
 		ft_error(data, "Malloc failed for export_mod!");
 	free(var->value);
-	var->value = ft_strdup(buffer[1]);
+	var->value = buffer[1];
+	free(buffer[0]);
 	free(buffer);
 }
 
@@ -81,4 +83,6 @@ void	ft_export(t_data *data)
 		ft_export_mod(data, var);
 	else
 		ft_export_add(data);
+	ft_free_envptab(data);
+	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }

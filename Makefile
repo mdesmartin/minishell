@@ -3,18 +3,22 @@ NAME = minishell
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
 
 DIR_SRC =	sources/
-LST_SRC =	main.c			\
-			error.c			\
-			utils.c			\
-			env/env_init.c	\
-			env/env_op.c	\
-			env/env_utils.c	\
-			process.c		\
-			child.c			\
-			get_arg_path.c	\
-			parsing.c		\
-			free_n_exit.c	\
-			signal.c		\
+
+LST_SRC =	main.c				\
+			error.c				\
+			utils.c				\
+			env/env_init.c		\
+			env/env_export.c	\
+			env/env_unset.c		\
+			env/env_utils.c		\
+			env/env_lst.c		\
+			process.c			\
+			child.c				\
+			get_arg_path.c		\
+			parsing.c			\
+			free_n_exit.c		\
+			signal.c			\
+			builtin.c     \
 			create_tab.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
@@ -52,9 +56,6 @@ re: fclean
 
 $(NAME): $(DIR_OBJ) $(OBJECTS)
 	cc $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $(NAME)
-
-$(NAME_B): $(DIR_OBJ) $(OBJECTS_B)
-	cc $(OBJECTS_B) $(CFLAGS) $(LIBRARY) -o $(NAME_B)
 
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
