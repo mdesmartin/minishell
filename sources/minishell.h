@@ -70,5 +70,7 @@ int		parsing(t_data *data, char *readed);
 void	*free_tab(char **tab);
 void	free_lst(t_list **cmd);
 void	get_signal(int signal);
+int		nb_pipes(char *input);
+char	**create_tab(char **pipe_tab, char *input, int nb_pipe);
 
 #endif

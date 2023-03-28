@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   paarsing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/14 14:15:40 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 17:04:49 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	create_chain(t_list **cmd, char **pipe)
 {
 	if (*cmd == NULL)
-		*cmd = ft_lstnew((void **)pipe);
+		*cmd = ft_lstnew((void**)pipe);
 	else
 		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
 	return ;

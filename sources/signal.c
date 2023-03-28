@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/10 16:07:03 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/16 15:09:17 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ctrl_backslash()
 
 void	get_signal(int signal)
 {
-	if (signal == SIGINT)
-		ctrl_c();
+	// if (signal == SIGINT)
+	// 	ctrl_c();
 	if (signal == SIGSEGV)
 		ctrl_d();
 	if (signal == SIGQUIT)

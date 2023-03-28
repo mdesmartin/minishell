@@ -3,6 +3,7 @@ NAME = minishell
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
 
 DIR_SRC =	sources/
+
 LST_SRC =	main.c				\
 			error.c				\
 			utils.c				\
@@ -17,7 +18,8 @@ LST_SRC =	main.c				\
 			parsing.c			\
 			free_n_exit.c		\
 			signal.c			\
-			builtin.c
+			builtin.c     \
+			create_tab.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
