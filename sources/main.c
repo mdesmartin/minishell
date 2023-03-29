@@ -6,13 +6,13 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/25 13:41:31 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 11:02:29 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+int	main()
 {
 	struct sigaction	sign;
 	static char			*input;
@@ -21,11 +21,7 @@ int	main(void)
 	sign.sa_handler = get_signal;
 	sigemptyset(&sign.sa_mask);
 	sign.sa_flags = SA_SIGINFO;
-	// (void)ac;
-	// (void)av;
-	// sign.sa_flags = 0;
 	input = NULL;
-
 	ft_data_init(&data);
 	sign.sa_handler = get_signal;
 	while (1)
@@ -47,9 +43,7 @@ int	main(void)
 			ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
 		}
 		// ft_cmd(&data);
-		free_lst(&data.cmd);
+		free_lst(&data.cmd);//tochange
 	}
 	return (0);
 }
-
-/// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell

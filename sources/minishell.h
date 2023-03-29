@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 17:13:24 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 10:53:10 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@
 # include <readline/history.h>
 # include <signal.h>
 
+// input[0] : 0 = < ; 1 = <<
+// input[1] : file or limiter
+// output[0] : 0 = > ; 1 = >>
+// output[1] : file if output[0] == 0
 typedef struct s_pipeline
 {
-	char			**content;
-	struct s_pipeline	*next;
+	char			**cmd;
+	char			**input;
+	char			**output;
 }					t_pipeline;
 
 typedef struct s_envp
@@ -69,5 +74,7 @@ void	free_lst(t_list **cmd);
 void	get_signal(int signal);
 int		nb_pipes(char *input);
 char	**create_tab(char **pipe_tab, char *input, int nb_pipe);
+
+int	split_pipes(t_data *data, int nb_p, char *input)
 
 #endif

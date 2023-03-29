@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/27 17:10:29 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 10:55:17 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	nb_pipes(char *input)
 
 int	split_pipes(t_data *data, int nb_p, char *input)
 {
-	char	**pipe;
+	t_pipeline	pipeline;
 	int		start;
 	int		len_pipe;
 	int		i;
@@ -79,11 +79,13 @@ int	split_pipes(t_data *data, int nb_p, char *input)
 	{
 		find_pipe(input, &i);
 		len_pipe = i - start;
-		pipe = ft_calloc(sizeof(char *), 2);
-		pipe[0] = ft_substr(input, start, len_pipe);
-		if (!pipe)
+		pipeline.cmd = ft_calloc(sizeof(char *), 2);
+		pipeline.input = ft_calloc(sizeof(char *), 2);
+		pipeline.output = ft_calloc(sizeof(char *), 2);
+		pipeline.cmd[0] = ft_substr(input, start, len_pipe);
+		if (!pipeline.cmd)
 			return (-1);
-		create_chain(data->cmd, &pipe);
+		create_chain(data->cmd, &pipeline);
 		i++;
 		start = i;
 		nb_p--;

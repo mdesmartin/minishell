@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:33:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 10:37:42 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ int	ft_is_c_in(char *str, char c)
 
 void	ft_data_init(t_data *data)
 {
+	// t_pipeline	pipeline;
+	// pipeline = malloc(sizeof(t_pipeline *));
+
 	data->nb_cmd = 0;
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
 		perror("ft_calloc failed for data->pipes! ");
-	data->cmd = malloc(sizeof(t_list *));
+	data->cmd = malloc(sizeof(t_pipeline *));
 	if (!data->cmd)
 		perror("Error while allocating memory for data->cmd! ");
 	data->cmd = NULL;

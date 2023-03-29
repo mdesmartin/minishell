@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/27 17:16:52 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 10:58:47 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	print_tab(char **pipe_tab);
 
-void	create_chain(t_list **cmd, char **pipe)
+void	create_chain(t_list **cmd, void *content)
 {
 	if (*cmd == NULL)
-		*cmd = ft_lstnew((void **)pipe);
+		*cmd = ft_lstnew(content);
 	else
-		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
+		ft_lstadd_back(cmd, ft_lstnew(content));
 	return ;
 }
 
@@ -35,6 +35,25 @@ int	parsing(t_data *data, char *input)
 	// dollar(data);
 	return (0);
 }
+
+// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all
+// --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // void	create_chain(t_list **cmd, char **pipe)
 // {
