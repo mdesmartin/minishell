@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/22 16:45:39 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 15:59:15 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		ft_quit(data);
 		exit (1);
 	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
+	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)data->cmd->content, data->envp_tab);
 }
@@ -52,6 +57,11 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	{
 		data->cmd = data->cmd->next;
 		i--;
+	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)data->cmd->content, data->envp_tab);
@@ -74,6 +84,11 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	{
 		data->cmd = data->cmd->next;
 		i--;
+	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)data->cmd->content, data->envp_tab);
