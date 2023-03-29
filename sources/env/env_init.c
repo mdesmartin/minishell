@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/28 15:22:52 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 11:20:44 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**ft_split_var(char *var)
 
 	i = 0;
 	res = ft_calloc(3, sizeof(char *));
+	if (!res)
+		perror("Memory allocation failed while spliting envp var!");
 	tmp = var;
 	while (tmp && *tmp != '=')
 	{
@@ -40,9 +42,9 @@ static void	ft_envp_init(t_data *data)
 
 	if (!environ[0])
 		ft_printf("Error : Environment not found! ");
-	data->envp = malloc(sizeof(t_envp));
+	data->envp = ft_calloc(1, sizeof(t_envp));
 	if (!data->envp)
-		perror("Error while allocating memory for envp!");
+		perror("Memory allocation failed while envp_init!");
 	buffer = ft_split_var(environ[0]);
 	data->envp->variable = buffer[0];
 	data->envp->value = buffer[1];
@@ -61,9 +63,9 @@ void	ft_cp_envp(t_data *data)
 	ft_envp_init(data);
 	while (environ[i])
 	{
-		tmp = malloc(sizeof(t_envp));
+		tmp = ft_calloc(1, sizeof(t_envp));
 		if (!tmp)
-			perror("Error while allocating memory for envp!");
+			perror("Memory allocation failed while envp_init!");
 		buffer = ft_split_var(environ[i]);
 		tmp->variable = buffer[0];
 		tmp->value = buffer[1];

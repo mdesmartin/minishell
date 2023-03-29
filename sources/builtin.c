@@ -6,32 +6,17 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 16:11:47 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 15:23:57 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_builtin_cd(t_data *data)
-{
-	if (data->cmd->content[1] == NULL)
-	{
-		if (chdir(getenv("USER_ZDOTDIR")) == -1)
-			perror("Error while calling chdir()! ");
-	}
-	else if (data->cmd->content[2] != NULL)
-		ft_printf("cd: too many arguments\n");
-	else if (chdir(data->cmd->content[1]) == -1)
-		perror("Error while calling chdir()! ");
-}
-
 static void	ft_builtin_export(t_data *data)
 {
 	if (data->cmd->content[1] == NULL)
 		ft_print_export(data);
-	else if (data->cmd->content[2] != NULL)
-		ft_printf("export: too many arguments\n");
-	else if (ft_is_c_in(data->cmd->content[1], '=') == 1)
+	else
 		ft_export(data);
 }
 
@@ -43,6 +28,20 @@ static void	ft_builtin_unset(t_data *data)
 		ft_unset(data);
 }
 
+static void	ft_builtin_pwd(t_data *data)
+{
+	t_envp	*tmp;
+
+	tmp = data->envp;
+	while (tmp)
+	{
+		if (ft_strncmp("PWD", tmp->variable, 4) == 0)
+			break ;
+		tmp = tmp->next;
+	}
+	ft_printf("%s\n", tmp->value);
+}
+
 int	ft_builtin(t_data *data)
 {
 	if (ft_strncmp(data->cmd->content[0], "cd", 3) == 0)
@@ -51,6 +50,8 @@ int	ft_builtin(t_data *data)
 		return (ft_quit(data), exit(0), 1);
 	if (ft_strncmp(data->cmd->content[0], "env", 4) == 0)
 		return (ft_print_env(data), 1);
+	if (ft_strncmp(data->cmd->content[0], "pwd", 4) == 0)
+		return (ft_builtin_pwd(data), 1);
 	if (ft_strncmp(data->cmd->content[0], "export", 7) == 0)
 		return (ft_builtin_export(data), 1);
 	if (ft_strncmp(data->cmd->content[0], "unset", 6) == 0)

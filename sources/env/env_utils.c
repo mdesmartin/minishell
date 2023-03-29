@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/27 14:26:08 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 11:21:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ char	**ft_lst_to_tabtab(t_envp *envp)
 	i = 0;
 	lstlen = ft_envsize(envp);
 	tmp = envp;
-	tab = malloc(sizeof(char *) * (lstlen + 1));
+	tab = ft_calloc(lstlen + 1, sizeof(char *));
 	if (!tab)
-		return (perror("Error while allocating memory for char **envp!"), NULL);
+		return (perror("Memory allocation failed for char **envp!"), NULL);
 	while (tmp)
 	{
 		tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);

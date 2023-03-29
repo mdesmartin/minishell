@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:03:17 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/28 12:59:23 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 17:28:53 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ void	ft_quit(t_data *data)
 
 void	ft_error(t_data *data, char *s)
 {
-	ft_putstr_fd("\nError\n", 2);
-	if (s)
-		ft_putstr_fd(s, 2);
+	ft_putstr_fd(s, 2);
 	perror(" ");
-	ft_putstr_fd("\n", 2);
 	ft_quit(data);
 	exit (1);
 }
