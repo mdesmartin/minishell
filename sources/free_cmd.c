@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_n_exit.c                                      :+:      :+:    :+:   */
+/*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:02:45 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/08 16:51:32 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 13:56:48 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	*free_tab(char **tab)
 	return (NULL);
 }
 
-static void	free_del(void **content)
+static void	free_del(void *content)
 {
-	free_tab((char**)content);
+	free_tab(s_convert_content(content)->command);
+	free_tab(s_convert_content(content)->input);
+	free_tab(s_convert_content(content)->output);
 	content = NULL;
 }
 

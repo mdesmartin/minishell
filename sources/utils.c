@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 10:37:42 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 12:37:31 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	ft_data_init(t_data *data)
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
 		perror("ft_calloc failed for data->pipes! ");
-	data->cmd = malloc(sizeof(t_pipeline *));
+	data->cmd = malloc(sizeof(t_list *));
 	if (!data->cmd)
 		perror("Error while allocating memory for data->cmd! ");
 	data->cmd = NULL;
-	ft_cp_envp(data);
+	// ft_cp_envp(data);
 }
 
 void	ft_close_fds(t_data *data)

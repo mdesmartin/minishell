@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/29 10:55:17 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 17:03:40 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,19 @@ int	split_pipes(t_data *data, int nb_p, char *input)
 	i = 0;
 	while (nb_p)
 	{
+		ft_printf("nb_p : %d\n", nb_p);
 		find_pipe(input, &i);
 		len_pipe = i - start;
-		pipeline.cmd = ft_calloc(sizeof(char *), 2);
+		(void) len_pipe;
+		(void) start;
+		// pipeline = malloc(sizeof(t_pipeline));
+		pipeline.command = ft_calloc(sizeof(char *), 2);
 		pipeline.input = ft_calloc(sizeof(char *), 2);
 		pipeline.output = ft_calloc(sizeof(char *), 2);
-		pipeline.cmd[0] = ft_substr(input, start, len_pipe);
-		if (!pipeline.cmd)
+		pipeline.command[0] = ft_substr(input, start, len_pipe);
+		if (!pipeline.command)
 			return (-1);
-		create_chain(data->cmd, &pipeline);
+		create_chain(&data->cmd, &pipeline);
 		i++;
 		start = i;
 		nb_p--;

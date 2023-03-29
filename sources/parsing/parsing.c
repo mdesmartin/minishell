@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/29 10:58:47 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:53:12 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	print_tab(char **pipe_tab);
 
 void	create_chain(t_list **cmd, void *content)
 {
@@ -20,6 +18,28 @@ void	create_chain(t_list **cmd, void *content)
 		*cmd = ft_lstnew(content);
 	else
 		ft_lstadd_back(cmd, ft_lstnew(content));
+	return ;
+}
+
+void	print_chain(t_data *data)
+{
+	t_list *cp;
+	// int	i;
+
+	cp = data->cmd;
+	ft_printf("the command is : ");
+	while (cp)
+	{
+		// i = 0;
+		// while (s_access_content(cp)->command[0])
+		// {
+		ft_printf("%s ", s_access_content(cp)->command[0]);
+		// i++;
+		// }
+		ft_printf("| ");
+		cp = cp->next; 
+	}
+	ft_printf("\n");
 	return ;
 }
 
@@ -31,13 +51,14 @@ int	parsing(t_data *data, char *input)
 	if (nb_p == -1)
 		return (-1);
 	// ft_printf("nb_pipes : %d\n", nb_p);
-	split_pipes(data, nb_pipes, input);
+	split_pipes(data, nb_p, input);
+	print_chain(data);
 	// dollar(data);
 	return (0);
 }
 
-// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all
-// --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
+
+// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
 
 
 
@@ -82,25 +103,3 @@ int	parsing(t_data *data, char *input)
 // 	return ;
 // }
 
-// void	print_chain(t_list *cmd)
-// {
-// 	t_list *cp;
-// 	int	i;
-
-// 	cp = cmd;
-// 	ft_putstr_fd("the command is : ", 1);
-// 	while (cp)
-// 	{
-// 		i = 0;
-// 		while (cp->content[i])
-// 		{
-// 			ft_printf("%s", cp->content[i]);
-// 			ft_putstr_fd(" ", 1);
-// 			i++;
-// 		}
-// 		ft_putstr_fd("| ", 1);
-// 		cp = cp->next;
-// 	}
-// 	ft_putstr_fd("\n", 1);
-// 	return ;
-// }

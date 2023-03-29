@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 11:02:29 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 13:34:40 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main()
 			ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
 		}
 		// ft_cmd(&data);
-		free_lst(&data.cmd);//tochange
+		free_lst(&data.cmd);
 	}
 	return (0);
 }

@@ -4,18 +4,20 @@ CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
 
 DIR_SRC =	sources/
 LST_SRC =	main.c			\
-			error.c			\
-			utils.c			\
-			env/env_init.c	\
-			env/env_op.c	\
-			env/env_utils.c	\
 			parsing/parsing.c	\
 			parsing/split_pipes.c \
+			utils.c			\
+			signal.c		\
+			s_access.c		\
+			free_cmd.c	\
+			##env/env_init.c	\
+			parsing/dollar.c \
+			error.c			\
+			get_arg_path.c	\
 			process.c		\
 			child.c			\
-			get_arg_path.c	\
-			free_n_exit.c	\
-			signal.c		\
+			env/env_op.c	\
+			env/env_utils.c	\
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
