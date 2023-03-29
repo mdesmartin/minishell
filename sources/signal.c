@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/16 15:09:17 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ctrl_d()
 {
-	ft_printf("exit\n");
+	printf("exit\n");
 	exit(0);
 }
 
 int	ctrl_c()
 {
-	// ft_printf("^C\n");
+	// printf("^C\n");
 	return (130);
 }
 

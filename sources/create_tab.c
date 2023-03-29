@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/22 15:54:38 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 		pipe_tab[j] = ft_substr(input, start, len_pipe);
 		if (!pipe_tab[j])
 			return (ft_putstr_fd("error creating tab\n", 2), NULL);
-		// ft_printf("pipe[%d] : %s\n", j, pipe_tab[j]);
+		// printf("pipe[%d] : %s\n", j, pipe_tab[j]);
 		j++;
 		i++;
 		start = i;

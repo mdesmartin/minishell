@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:39:12 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_print_export(t_data *data)
 	tmp = data->envp;
 	while (tmp)
 	{
-		ft_printf("declare -x ");
-		ft_printf("%s=", tmp->variable);
+		printf("declare -x ");
+		printf("%s=", tmp->variable);
 		if (tmp->value)
 			printf("\"%s\"\n", tmp->value);
 		else
@@ -37,7 +37,7 @@ void	ft_print_env(t_data *data)
 	while (tmp)
 	{
 		if (tmp->value)
-			ft_printf("%s=%s\n", tmp->variable, tmp->value);
+			printf("%s=%s\n", tmp->variable, tmp->value);
 		tmp = tmp->next;
 	}
 }

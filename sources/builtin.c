@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 15:23:57 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_builtin_pwd(t_data *data)
 			break ;
 		tmp = tmp->next;
 	}
-	ft_printf("%s\n", tmp->value);
+	printf("%s\n", tmp->value);
 }
 
 int	ft_builtin(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:29:16 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_print_tabtab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_printf("env[%d]\t=\t%s\n", i, tab[i]);
+		printf("env[%d]\t=\t%s\n", i, tab[i]);
 		i++;
 	}
 }

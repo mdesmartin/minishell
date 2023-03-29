@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 11:20:44 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_envp_init(t_data *data)
 	char		**buffer;
 
 	if (!environ[0])
-		ft_printf("Error : Environment not found! ");
+		printf("Error : Environment not found! ");
 	data->envp = ft_calloc(1, sizeof(t_envp));
 	if (!data->envp)
 		perror("Memory allocation failed while envp_init!");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/22 16:54:27 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parsing(t_data *data, char *input)
 	nb_p = nb_pipes(input);
 	if (nb_p == -1)
 		return (-1);
-	// ft_printf("nb_pipes : %d\n", nb_p);
+	// printf("nb_pipes : %d\n", nb_p);
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
 	// print_tab(pipe_tab);
 
@@ -56,7 +56,7 @@ void	create_chain(t_list **cmd, char **pipe)
 
 // 	while (pipe_tab[i])
 // 	{
-// 		ft_printf("%s\n", pipe_tab[i]);
+// 		printf("%s\n", pipe_tab[i]);
 // 		i++;
 // 	}
 // 	return ;
@@ -74,7 +74,7 @@ void	create_chain(t_list **cmd, char **pipe)
 // 		i = 0;
 // 		while (cp->content[i])
 // 		{
-// 			ft_printf("%s", cp->content[i]);
+// 			printf("%s", cp->content[i]);
 // 			ft_putstr_fd(" ", 1);
 // 			i++;
 // 		}
