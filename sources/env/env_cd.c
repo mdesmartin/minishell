@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by julien            #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 16:51:55 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_update_oldpwd(t_data *data)
 
 void	ft_builtin_cd(t_data *data)
 {
-	if (data->cmd->content[2] != NULL)
+	if (data->cmd->content[1] != NULL && data->cmd->content[2] != NULL)
 		printf("cd: too many arguments\n");
 	if (data->cmd->content[1] == NULL)
 	{
