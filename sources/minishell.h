@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 12:59:48 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:08:38 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_is_c_in(char *str, char c);
 void	ft_free_envptab(t_data *data);
 void	ft_free_envplst(t_data *data);
 
-void	ft_cp_envp(t_data *data);
+void	ft_check_envp(t_data *data);
 void	ft_print_env(t_data *data);
 void	ft_export(t_data *data);
 void	ft_unset(t_data *data);

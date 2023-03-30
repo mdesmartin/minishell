@@ -6,33 +6,36 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:10:43 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**ft_split_var(char *var)
+static void	ft_creat_envp(t_data *data)
 {
-	char	**res;
-	char	*tmp;
-	int		i;
+	t_envp		*tmp;
 
-	i = 0;
-	res = ft_calloc(3, sizeof(char *));
-	if (!res)
-		perror("Memory allocation failed while spliting envp var!");
-	tmp = var;
-	while (tmp && *tmp != '=')
-	{
-		tmp++;
-		i++;
-	}
-	if (*tmp == '=')
-		tmp++;
-	res[0] = ft_substr(var, 0, i);
-	res[1] = ft_strdup(tmp);
-	return (res);
+	data->envp = ft_calloc(1, sizeof(t_envp));
+	if (!data->envp)
+		perror("Memory allocation failed while envp_creat!");
+	tmp = ft_calloc(1, sizeof(t_envp));
+	if (!tmp)
+		perror("Memory allocation failed while envp_init!");
+	data->envp->variable = strdup("PWD");
+	if (!data->envp->variable)
+		perror("Memory allocation failed while envp_creat!");
+	data->envp->value = getcwd(NULL, 0);
+	if (!data->envp->value)
+		perror("Memory allocation failed while envp_creat!");
+	data->envp->next = tmp;
+	tmp->variable = strdup("SHLVL");
+	if (!tmp->variable)
+		perror("Memory allocation failed while envp_creat!");
+	tmp->value = strdup("1");
+	if (!tmp->value)
+		perror("Memory allocation failed while envp_creat!");
+	tmp->next = NULL;
 }
 
 static void	ft_envp_init(t_data *data)
@@ -40,8 +43,6 @@ static void	ft_envp_init(t_data *data)
 	extern char	**environ;
 	char		**buffer;
 
-	if (!environ[0])
-		printf("Error : Environment not found! ");
 	data->envp = ft_calloc(1, sizeof(t_envp));
 	if (!data->envp)
 		perror("Memory allocation failed while envp_init!");
@@ -52,7 +53,7 @@ static void	ft_envp_init(t_data *data)
 	free(buffer);
 }
 
-void	ft_cp_envp(t_data *data)
+static void	ft_cp_envp(t_data *data)
 {
 	extern char	**environ;
 	t_envp		*tmp;
@@ -73,5 +74,40 @@ void	ft_cp_envp(t_data *data)
 		free(buffer);
 		ft_envadd_back(&data->envp, tmp);
 		i++;
+	}
+}
+
+static void	ft_update_envp(t_data *data)
+{
+	t_envp	*tmp;
+	int		shlvl;
+
+	tmp = data->envp;
+	while (tmp)
+	{
+		if (ft_strncmp("SHLVL", tmp->variable, 6) == 0)
+		{
+			shlvl = ft_atoi(tmp->value);
+			free(tmp->value);
+			shlvl++;
+			tmp->value = ft_itoa(shlvl);
+			if (!tmp->value)
+				perror("Memory allocation failed while updating SHLVL!");
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	ft_check_envp(t_data *data)
+{
+	extern char	**environ;
+
+	if (!environ[0])
+		ft_creat_envp(data);
+	else
+	{
+		ft_cp_envp(data);
+		ft_update_envp(data);
 	}
 }

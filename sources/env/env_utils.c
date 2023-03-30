@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 11:13:46 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,27 @@ char	**ft_lst_to_tabtab(t_envp *envp)
 	}
 	tab[lstlen] = NULL;
 	return (tab);
+}
+
+char	**ft_split_var(char *var)
+{
+	char	**res;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	res = ft_calloc(3, sizeof(char *));
+	if (!res)
+		perror("Memory allocation failed while spliting envp var!");
+	tmp = var;
+	while (tmp && *tmp != '=')
+	{
+		tmp++;
+		i++;
+	}
+	if (*tmp == '=')
+		tmp++;
+	res[0] = ft_substr(var, 0, i);
+	res[1] = ft_strdup(tmp);
+	return (res);
 }
