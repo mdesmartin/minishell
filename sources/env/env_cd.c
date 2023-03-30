@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by julien            #+#    #+#             */
-/*   Updated: 2023/03/30 13:11:47 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 14:56:26 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@ static void	ft_check_oldpwd(t_data *data)
 	while (tmp)
 	{
 		if (ft_strncmp("OLDPWD", tmp->variable, 4) == 0)
+		{
+			if (!tmp->value)
+			{
+				tmp->value = getcwd(NULL, 0);
+				if (!tmp->value)
+					perror("Memory allocation failed for SHLVL's value!");
+			}
 			return ;
+		}
 		tmp = tmp->next;
 	}
 	tmp = ft_calloc(1, sizeof(t_envp));
@@ -40,11 +48,12 @@ static char	*ft_get_home(t_data *data)
 	tmp = data->envp;
 	while (tmp)
 	{
-		if (ft_strncmp("USER_ZDOTDIR", tmp->variable, 13) == 0)
-			break ;
+		if (ft_strncmp("HOME", tmp->variable, 5) == 0)
+			return (tmp->value);
 		tmp = tmp->next;
 	}
-	return (tmp->value);
+	ft_putstr_fd("cd : HOME not set!\n", 2);
+	return (NULL);
 }
 
 static void	ft_update_pwd(t_data *data)
@@ -72,7 +81,6 @@ static void	ft_update_oldpwd(t_data *data)
 
 	pwd = data->envp;
 	oldpwd = data->envp;
-	ft_check_oldpwd(data);
 	while (pwd)
 	{
 		if (ft_strncmp("PWD", pwd->variable, 4) == 0)
@@ -92,12 +100,18 @@ static void	ft_update_oldpwd(t_data *data)
 
 void	ft_builtin_cd(t_data *data)
 {
+	char	*home;
+
 	ft_check_pwd(data);
+	ft_check_oldpwd(data);
 	if (data->cmd->content[1] != NULL && data->cmd->content[2] != NULL)
 		printf("cd: too many arguments\n");
 	if (data->cmd->content[1] == NULL)
 	{
-		if (chdir(ft_get_home(data)) == -1)
+		home = ft_get_home(data);
+		if (!home)
+			return ;
+		if (chdir(home) == -1)
 			perror("Error while calling chdir()! ");
 	}
 	else if (chdir(data->cmd->content[1]) == -1)
@@ -107,3 +121,5 @@ void	ft_builtin_cd(t_data *data)
 	ft_free_envptab(data);
 	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }
+
+// apres cd seul, OLPWD disparait
