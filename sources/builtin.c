@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 10:34:52 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,29 @@ static void	ft_builtin_pwd(t_data *data)
 	printf("%s\n", tmp->value);
 }
 
+static void	ft_builtin_echo(t_data *data)
+{
+	int	i;
+
+	i = 1;
+	while (data->cmd->content[i])
+	{
+		printf("%s", (char *) data->cmd->content[i]);
+		i++;
+		if (data->cmd->content[i])
+			printf(" ");
+	}
+	printf("\n");
+}
+
 int	ft_builtin(t_data *data)
 {
 	if (ft_strncmp(data->cmd->content[0], "cd", 3) == 0)
 		return (ft_builtin_cd(data), 1);
 	if (ft_strncmp(data->cmd->content[0], "exit", 5) == 0)
 		return (ft_quit(data), exit(0), 1);
+	if (ft_strncmp(data->cmd->content[0], "echo", 5) == 0)
+		return (ft_builtin_echo(data), 1);
 	if (ft_strncmp(data->cmd->content[0], "env", 4) == 0)
 		return (ft_print_env(data), 1);
 	if (ft_strncmp(data->cmd->content[0], "pwd", 4) == 0)
