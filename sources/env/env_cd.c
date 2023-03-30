@@ -6,11 +6,32 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by julien            #+#    #+#             */
-/*   Updated: 2023/03/29 16:51:55 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 13:11:47 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	ft_check_oldpwd(t_data *data)
+{
+	t_envp	*tmp;
+
+	tmp = data->envp;
+	while (tmp)
+	{
+		if (ft_strncmp("OLDPWD", tmp->variable, 4) == 0)
+			return ;
+		tmp = tmp->next;
+	}
+	tmp = ft_calloc(1, sizeof(t_envp));
+	if (!tmp)
+		perror("Memory allocation failed while check_oldpwd!");
+	tmp->variable = strdup("OLDPWD");
+	if (!tmp->variable)
+		perror("Memory allocation failed while check_oldpwd!");
+	tmp->next = NULL;
+	ft_envadd_back(&data->envp, tmp);
+}
 
 static char	*ft_get_home(t_data *data)
 {
@@ -51,6 +72,7 @@ static void	ft_update_oldpwd(t_data *data)
 
 	pwd = data->envp;
 	oldpwd = data->envp;
+	ft_check_oldpwd(data);
 	while (pwd)
 	{
 		if (ft_strncmp("PWD", pwd->variable, 4) == 0)
@@ -63,12 +85,14 @@ static void	ft_update_oldpwd(t_data *data)
 			break ;
 		oldpwd = oldpwd->next;
 	}
-	free(oldpwd->value);
+	if (oldpwd->value)
+		free(oldpwd->value);
 	oldpwd->value = pwd->value;
 }
 
 void	ft_builtin_cd(t_data *data)
 {
+	ft_check_pwd(data);
 	if (data->cmd->content[1] != NULL && data->cmd->content[2] != NULL)
 		printf("cd: too many arguments\n");
 	if (data->cmd->content[1] == NULL)

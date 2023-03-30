@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:18:49 by julien            #+#    #+#             */
-/*   Updated: 2023/03/30 12:46:16 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 13:12:56 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	ft_creat_pwd(t_data *data)
 	ft_envadd_back(&data->envp, tmp);
 }
 
-static void	ft_check_pwd(t_data *data)
+void	ft_check_pwd(t_data *data)
 {
 	t_envp	*tmp;
 
