@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:27:05 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:36:16 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,14 @@ void	ft_export(t_data *data)
 	i = 1;
 	while (data->cmd->content[i])
 	{
-		var = ft_is_var_in_env(data, i);
-		if (var != NULL)
-			ft_export_mod(data, var, i);
-		else
-			ft_export_add(data, i);
+		if (ft_strncmp("_=", data->cmd->content[i], 2) != 0)
+		{
+			var = ft_is_var_in_env(data, i);
+			if (var != NULL)
+				ft_export_mod(data, var, i);
+			else
+				ft_export_add(data, i);
+		}
 		i++;
 	}
 	ft_free_envptab(data);

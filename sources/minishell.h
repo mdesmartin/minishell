@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 15:26:38 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:18:51 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	**ft_split_var(char *var);
 void	ft_cmd(t_data *data);
 void	ft_child(t_data *data, int **pipes, int i);
 char	*ft_get_arg_path(t_data *data);
+char	*ft_getenv(t_envp *envp, char *variable);
 int		ft_builtin(t_data *data);
 void	ft_builtin_cd(t_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 15:24:17 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:19:07 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*ft_is_path_in_cmd(t_data *data)
 	return (NULL);
 }
 
-static char	*ft_getenv(t_envp *envp, char *variable)
+char	*ft_getenv(t_envp *envp, char *variable)
 {
 	t_envp	*tmp;
 	int		n;

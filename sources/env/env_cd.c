@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by julien            #+#    #+#             */
-/*   Updated: 2023/03/30 14:56:26 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:20:07 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ void	ft_builtin_cd(t_data *data)
 		if (!home)
 			return ;
 		if (chdir(home) == -1)
+			perror("Error while calling chdir()! ");
+	}
+	else if (ft_strncmp("-", data->cmd->content[1], 2) == 0)
+	{
+		if (chdir(ft_getenv(data->envp, "OLDPWD")) == -1)
 			perror("Error while calling chdir()! ");
 	}
 	else if (chdir(data->cmd->content[1]) == -1)
