@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 12:48:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 11:09:34 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:17:23 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_data_init(t_data *data)
 	data->nb_cmd = 0;
 	data->pipes = NULL;
 	data->cmd = NULL;
-	ft_check_envp(data);
+	ft_envp(data);
 	data->envp_tab = ft_lst_to_tabtab(data->envp);
 }
 

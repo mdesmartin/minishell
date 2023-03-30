@@ -8,6 +8,7 @@ LST_SRC =	main.c				\
 			error.c				\
 			utils.c				\
 			env/env_init.c		\
+			env/env_check.c		\
 			env/env_export.c	\
 			env/env_unset.c		\
 			env/env_utils.c		\

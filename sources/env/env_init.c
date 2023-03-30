@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 12:10:43 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:18:21 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	ft_update_envp(t_data *data)
 	}
 }
 
-void	ft_check_envp(t_data *data)
+void	ft_envp(t_data *data)
 {
 	extern char	**environ;
 
@@ -108,6 +108,7 @@ void	ft_check_envp(t_data *data)
 	else
 	{
 		ft_cp_envp(data);
+		ft_check_envp(data);
 		ft_update_envp(data);
 	}
 }
