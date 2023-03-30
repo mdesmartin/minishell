@@ -6,108 +6,118 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/29 16:29:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:25:17 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 //trim a str of a str
-void	trim_from_to(t_data *data, int start, int end)
+char	*trim_from_to(char *pipe_tab, int *start, int end)
 {
-	char	**new_content;
+	char	*new_content;
 	int		new_size;
 	int		i;
 
-	new_size = ft_strlen(s_access_content(data->cmd)->command[0]) - (end - start);
-	new_content = ft_calloc(sizeof(char *), 2);
-	new_content[0] = ft_calloc(sizeof(char), new_size);
+	new_size = ft_strlen(pipe_tab) - (end - *start);
+	new_content = ft_calloc(sizeof(char), new_size);
 	i = 0;
-	while (i++ < start)
-		new_content[0][i] = s_access_content(data->cmd)->command[0][i];
-	while (s_access_content(data->cmd)->command[0][end])
-		new_content[0][i++] = s_access_content(data->cmd)->command[0][end++];
-	return ;
+	while (i++ < *start)
+		new_content[i] = pipe_tab[i];
+	while (pipe_tab[end])
+		new_content[i++] = pipe_tab[end++];
+	*start = i;
+	new_content[i] = '\0';
+	return (new_content);
 }
 
-//must find a variable en remplace it by its value if finded, if not return -1
-int	find_variable(t_data *data, int start, int end, int size)
+char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 {
-	t_envp	*cp;
-	char	**new_content;
+	char	*new_content;
 	int		new_size;
+	int		old_size = end - *start;
 	int		i;
 	int		j;
 
-	cp = data->envp;
 	new_size = 0;
-	while (cp)
-	{
-		i = 0;
-		j = 0;
-		if (!ft_strncmp(cp->variable, s_access_content(data->cmd)->command[0] - start, size))//si ils sont pareils, insert
-		{
-			new_size = ft_strlen(s_access_content(data->cmd)->command[0]) - size + ft_strlen(cp->value);
-			new_content = ft_calloc(sizeof(char *), 2);
-			new_content[0] = ft_calloc(sizeof(char), new_size + 1);
-			while (i++ < start)
-				new_content[0][i] = s_access_content(data->cmd)->command[0][i];
-			while (cp->value[j])
-				new_content[0][i++] = cp->value[j++];
-			while (s_access_content(data->cmd)->command[0][end])
-				new_content[0][i++] = s_access_content(data->cmd)->command[0][end++];
-			i++;
-			new_content[i] = '\0';
-			s_replace_command(data, new_content);//// NEED TO MODIFYYYYY /!\  /
-			return (0);
-		}
-		cp = cp->next;
-	}
-	return (-1);
+	i = 0;
+	j = 0;
+	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
+	new_content = ft_calloc(sizeof(char *), 2);
+	new_content = ft_calloc(sizeof(char), new_size + 1);
+	while (i++ < *start)
+		new_content[i] = pipe_tab[i];
+	while (value[j])
+		new_content[i++] = value[j++];
+	*start = i;
+	while (pipe_tab[end])
+		new_content[i++] = pipe_tab[end++];
+	i++;
+	new_content[i] = '\0';
+	return (new_content);
 }
 
-void	dollar_handler(t_data *data, int start)
+//must find a variable en remplace it by its value if finded, if not return -1
+char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
+{
+	t_envp	*cp_envp;
+	int		old_size = end - *start;
+
+	cp_envp = data->envp;
+	while (cp_envp)
+	{
+		if (!ft_strncmp(cp_envp->variable, pipe_tab - *start, old_size))//si ils sont pareils, insert
+			return (cp_envp->value);
+		cp_envp = cp_envp->next;
+	}
+	return (NULL);
+}
+
+char	*dollar_handler(t_data *data, char *pipe_tab, int *start)
 {
 	int	end;
 
-	end = start;
-	if (s_access_content(data->cmd)->command[0][start] == '\0' \
-	|| s_access_content(data->cmd)->command[0][start] == ' ')
-		return ;
-	// else if (data->cmd->content[0][start] == '?')
+	end = *start;
+	if (pipe_tab[*start] == '\0' || pipe_tab[*start] == ' ')
+		return (pipe_tab);
+	// else if (pipe_tab[start] == '?')
 		//remplace $ by exitcode
 	else
 	{
-		while (ft_isalpha(s_access_content(data->cmd)->command[0][end]))
+		while (ft_isalpha(pipe_tab[end]))
 			end++;
-		if (find_variable(data, start, end, end - start) == -1)
-			trim_from_to(data, start, end);//remplace $ par et ce qui suit par rien
+		if (find_variable(data, pipe_tab, start, end))
+			return (trim_by(find_variable(data, pipe_tab, start, end), pipe_tab, start, end));
+		else
+			return(trim_from_to(pipe_tab, start, end));//remplace $ par et ce qui suit par rien
 	}
-	return ;
+	return (pipe_tab);
 }
 
-void	dollar(t_data *data)
+void	dollar(t_data *data, char **pipe_tab)
 {
 	int		i;
+	int		j;
 
-	while (data->cmd)
+	j = 0;
+	while (pipe_tab[j])
 	{
 		i = 0;
-		while (s_access_content(data->cmd)->command[0][i])
+		while (pipe_tab[j][i])
 		{
-			if (s_access_content(data->cmd)->command[0][i] == '\'')
+			if (pipe_tab[j][i] == '\'')
 			{
-				while (s_access_content(data->cmd)->command[0][i] != '\'')
+				while (pipe_tab[j][i] != '\'')
 					i++;
 			}
-			else if (s_access_content(data->cmd)->command[0][i] == '$')
+			else if (pipe_tab[j][i] == '$')
 			{
 				i++;
-				dollar_handler(data, i);
+				pipe_tab[j] = dollar_handler(data, pipe_tab[j], &i); // partir sur cette idee jeudi, a free
 			}
 			i++;
 		}
-		data->cmd = data->cmd->next;
+		j++;
 	}
 	return ;
 }

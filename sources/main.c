@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 13:34:40 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:11:23 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	main()
 			return (perror("Error in SIGQUIT"), -1);
 		if (input && *input)
 			add_history(input);
+		check_input(input);
 		if (parsing(&data, input) == -1)
 		{
 			free(input);
 			ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
 		}
-		// ft_cmd(&data);
+		ft_cmd(&data);
 		free_lst(&data.cmd);
 	}
 	return (0);

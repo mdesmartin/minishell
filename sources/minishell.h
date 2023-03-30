@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 16:29:33 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 15:35:33 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ void	get_signal(int signal);
 int		nb_pipes(char *input);
 char	**create_tab(char **pipe_tab, char *input, int nb_pipe);
 
-int	split_pipes(t_data *data, int nb_p, char *input);
+char	**split_pipes(char **pipe_tab, int nb_p, char *input);
 void	create_chain(t_list **cmd, void *content);
 t_pipeline	*s_convert_content(void *content);
-t_pipeline	*s_access_content(t_list *cmd);
-void	dollar(t_data *data);
+t_pipeline	*s_read_cnt(t_list *cmd);
+void	dollar(t_data *data, char **pipe_tab);
 void	s_replace_command(t_data *data, char **new_command);
+void	*s_init(char **content, char **input, char **output);
 
 #endif

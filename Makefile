@@ -6,12 +6,12 @@ DIR_SRC =	sources/
 LST_SRC =	main.c			\
 			parsing/parsing.c	\
 			parsing/split_pipes.c \
+			parsing/dollar.c \
 			utils.c			\
 			signal.c		\
 			s_access.c		\
 			free_cmd.c	\
-			##env/env_init.c	\
-			parsing/dollar.c \
+			env/env_init.c	\
 			error.c			\
 			get_arg_path.c	\
 			process.c		\

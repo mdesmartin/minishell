@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:07:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 12:57:38 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_export_add(t_data *data)
 	tmp = malloc(sizeof(t_envp));
 	if (!tmp)
 		perror("Error while allocating memory for envp!");
-	buffer = ft_split(data->cmd->content[1], '=');
+	buffer = ft_split(s_read_cnt(data->cmd)->command[1], '=');
 	if (!buffer)
 		ft_error(data, "Malloc failed for export_add!");
 	tmp->variable = ft_strdup(buffer[0]);
@@ -49,10 +49,10 @@ static t_envp	*ft_is_var_in_env(t_data *data)
 	long unsigned int	n;
 
 	tmp = data->envp;
-	n = ft_varlen(data->cmd->content[1]);
+	n = ft_varlen(s_read_cnt(data->cmd)->command[1]);
 	while (tmp)
 	{
-		if (ft_strncmp(data->cmd->content[1], tmp->variable, n) == 0
+		if (ft_strncmp(s_read_cnt(data->cmd)->command[1], tmp->variable, n) == 0
 			&& ft_strlen(tmp->variable) == n)
 			return (tmp);
 		tmp = tmp->next;
@@ -64,7 +64,7 @@ static void	ft_export_mod(t_data *data, t_envp *var)
 {
 	char	**buffer;
 
-	buffer = ft_split(data->cmd->content[1], '=');
+	buffer = ft_split(s_read_cnt(data->cmd)->command[1], '=');
 	if (!buffer)
 		ft_error(data, "Malloc failed for export_mod!");
 	free(var->value);

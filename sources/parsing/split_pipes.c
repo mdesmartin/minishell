@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/29 17:03:40 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:17:38 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,39 @@ int	nb_pipes(char *input)
 	return (nb_pipes);
 }
 
-int	split_pipes(t_data *data, int nb_p, char *input)
+char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 {
-	t_pipeline	pipeline;
-	int		start;
-	int		len_pipe;
-	int		i;
+	int	start;
+	int	len_pipe;
+	int	i;
+	int	j;
 
 	start = 0;
 	len_pipe = 0;
 	i = 0;
+	j = 0;
 	while (nb_p)
 	{
-		ft_printf("nb_p : %d\n", nb_p);
 		find_pipe(input, &i);
 		len_pipe = i - start;
-		(void) len_pipe;
-		(void) start;
-		// pipeline = malloc(sizeof(t_pipeline));
-		pipeline.command = ft_calloc(sizeof(char *), 2);
-		pipeline.input = ft_calloc(sizeof(char *), 2);
-		pipeline.output = ft_calloc(sizeof(char *), 2);
-		pipeline.command[0] = ft_substr(input, start, len_pipe);
-		if (!pipeline.command)
-			return (-1);
-		create_chain(&data->cmd, &pipeline);
+		pipe_tab[j] = ft_substr(input, start, len_pipe);
+		if (!pipe_tab[j])
+			return (ft_putstr_fd("error creating tab\n", 2), NULL);
+		// ft_printf("pipe[%d] : %s\n", j, pipe_tab[j]);
+		j++;
 		i++;
 		start = i;
 		nb_p--;
 	}
-	return (0);
+	pipe_tab[j] = NULL;
+	return (pipe_tab);
+}
+
+char	**create_tab(char **pipe_tab, char *input, int nb_pipe)
+{
+	pipe_tab = ft_calloc(sizeof(char *), (nb_pipe + 1));
+	if (!pipe_tab)
+		return (ft_putstr_fd("error creating tab\n", 2), NULL);
+	pipe_tab = split_pipes(pipe_tab, nb_pipe, input);
+	return (pipe_tab);
 }

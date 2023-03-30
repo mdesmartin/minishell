@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/29 16:53:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 16:40:41 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,30 @@ t_pipeline	*s_convert_content(void *content)
 	return (content);
 }
 
-// EXEMPLE : data->cmd->content		-become->		s_access_content(data->cmd)->command
-t_pipeline	*s_access_content(t_list *cmd)
+// EXEMPLE : data->cmd->content	-become->		s_read_cnt(data->cmd)->command
+t_pipeline	*s_read_cnt(t_list *cmd)
 {
 	if (!cmd->content)
 		return (NULL);
 	return (cmd->content);
 }
 
-// void	s_replace_command(t_data *data, char **new_command)
-// {
-// 	t_pipeline new_pipeline;
+void	*s_init(char **command, char **input, char **output)
+{
+	t_pipeline	*pipeline;
 
-// 	new_pipeline.command = new_command;
-// 	new_pipeline.input = s_access_content(data->cmd)->input;
-// 	new_pipeline.output = s_access_content(data->cmd)->output;
-// 	data->cmd = &new_pipeline;
-// 	return ;
-// }
+	pipeline = malloc(sizeof(t_pipeline));
+	if (pipeline == NULL)
+		return (NULL);
+
+	pipeline->command = command;
+	if (!input)
+		pipeline->input = ft_calloc(2, sizeof(char*));//terminer dinit la structure puis modif dand split tab, compile, test dollar, add ><<<>> when init
+	if (!output)
+		pipeline->output = ft_calloc(2, sizeof(char*));
+	return (pipeline);		
+}
+
 
 
 // (echo)->("bonjour mehdi")->(|)->(echo)
