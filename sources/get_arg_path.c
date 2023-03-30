@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/13 16:35:10 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 15:24:17 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ static char	*ft_is_path_in_cmd(t_data *data)
 	return (NULL);
 }
 
+static char	*ft_getenv(t_envp *envp, char *variable)
+{
+	t_envp	*tmp;
+	int		n;
+
+	tmp = envp;
+	n = ft_strlen(variable) + 1;
+	while (tmp)
+	{
+		if (ft_strncmp(variable, tmp->variable, n) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
 char	*ft_get_arg_path(t_data *data)
 {
 	int		i;
@@ -55,9 +71,9 @@ char	*ft_get_arg_path(t_data *data)
 	tmp = ft_is_path_in_cmd(data);
 	if (tmp)
 		return (tmp);
-	tmp = getenv("PATH");
+	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
-		perror("Error when retrieving PATH! ");
+		return (ft_getenv(data->envp, "_"));
 	paths = ft_split(tmp, ':');
 	if (!paths)
 		perror("Error when spliting PATH! ");

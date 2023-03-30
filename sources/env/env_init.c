@@ -6,37 +6,11 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 12:18:21 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 15:26:18 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static void	ft_creat_envp(t_data *data)
-{
-	t_envp		*tmp;
-
-	data->envp = ft_calloc(1, sizeof(t_envp));
-	if (!data->envp)
-		perror("Memory allocation failed while envp_creat!");
-	tmp = ft_calloc(1, sizeof(t_envp));
-	if (!tmp)
-		perror("Memory allocation failed while envp_init!");
-	data->envp->variable = strdup("PWD");
-	if (!data->envp->variable)
-		perror("Memory allocation failed while envp_creat!");
-	data->envp->value = getcwd(NULL, 0);
-	if (!data->envp->value)
-		perror("Memory allocation failed while envp_creat!");
-	data->envp->next = tmp;
-	tmp->variable = strdup("SHLVL");
-	if (!tmp->variable)
-		perror("Memory allocation failed while envp_creat!");
-	tmp->value = strdup("1");
-	if (!tmp->value)
-		perror("Memory allocation failed while envp_creat!");
-	tmp->next = NULL;
-}
 
 static void	ft_envp_init(t_data *data)
 {

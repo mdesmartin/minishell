@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 11:13:46 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 16:54:40 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,33 @@ void	ft_print_export(t_data *data)
 	tmp = data->envp;
 	while (tmp)
 	{
-		printf("declare -x ");
-		printf("%s=", tmp->variable);
-		if (tmp->value)
-			printf("\"%s\"\n", tmp->value);
-		else
-			printf("\"\"\n");
+		if (ft_strncmp("_", tmp->variable, 2) != 0)
+		{
+			printf("declare -x ");
+			printf("%s=", tmp->variable);
+			if (tmp->value)
+				printf("\"%s\"\n", tmp->value);
+			else
+				printf("\"\"\n");
+		}
 		tmp = tmp->next;
 	}
 }
 
 void	ft_print_env(t_data *data)
 {
-	t_envp		*tmp;
+	t_envp	*tmp;
 
 	tmp = data->envp;
 	while (tmp)
 	{
 		if (tmp->value)
-			printf("%s=%s\n", tmp->variable, tmp->value);
+		{
+			printf("%s=%s", tmp->variable, tmp->value);
+			if (ft_strncmp("_", tmp->variable, 2) == 0)
+				printf("env");
+			printf("\n");
+		}
 		tmp = tmp->next;
 	}
 }
