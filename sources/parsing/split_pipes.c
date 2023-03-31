@@ -6,11 +6,11 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/30 17:17:38 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:38:49 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	find_quote(char *input, int *i, char quote)
 {

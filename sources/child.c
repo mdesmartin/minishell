@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 13:00:16 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:36:46 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	ft_only_child(t_data *data)
 {
-	// char	**locenvp;
 	char	*path;
 
 	ft_close_fds(data);
@@ -33,6 +32,11 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		perror("Error while duplicating file descriptor! ");
 		ft_quit(data);
 		exit (1);
+	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
@@ -55,6 +59,11 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		data->cmd = data->cmd->next;
 		i--;
 	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
+	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
 }
@@ -76,6 +85,11 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	{
 		data->cmd = data->cmd->next;
 		i--;
+	}
+	if (ft_builtin(data) != 0)
+	{
+		ft_quit(data);
+		exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);

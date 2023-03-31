@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/16 16:08:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 11:39:52 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_envp	*ft_envlast(t_envp *lst)
-{
-	while (lst)
-	{
-		if (lst->next == NULL)
-			return (lst);
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
-void	ft_envadd_back(t_envp **lst, t_envp *new)
-{
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-		ft_envlast(*lst)->next = new;
-	return ;
-}
 
 void	ft_print_export(t_data *data)
 {
@@ -41,20 +19,96 @@ void	ft_print_export(t_data *data)
 	tmp = data->envp;
 	while (tmp)
 	{
-		ft_printf("declare -x ");
-		ft_printf("%s=%s\n", tmp->variable, tmp->value);
+		if (ft_strncmp("_", tmp->variable, 2) != 0)
+		{
+			printf("declare -x ");
+			printf("%s=", tmp->variable);
+			if (tmp->value)
+				printf("\"%s\"\n", tmp->value);
+			else
+				printf("\"\"\n");
+		}
 		tmp = tmp->next;
 	}
 }
 
 void	ft_print_env(t_data *data)
 {
-	t_envp		*tmp;
+	t_envp	*tmp;
 
 	tmp = data->envp;
 	while (tmp)
 	{
-		ft_printf("%s=%s\n", tmp->variable, tmp->value);
+		if (tmp->value)
+		{
+			printf("%s=%s", tmp->variable, tmp->value);
+			printf("\n");
+		}
 		tmp = tmp->next;
 	}
+}
+
+static int	ft_envsize(t_envp *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**ft_lst_to_tabtab(t_envp *envp)
+{
+	t_envp	*tmp;
+	char	**tab;
+	int		lstlen;
+	int		i;
+
+	i = 0;
+	lstlen = ft_envsize(envp);
+	tmp = envp;
+	tab = ft_calloc(lstlen + 1, sizeof(char *));
+	if (!tab)
+		return (perror("Memory allocation failed for char **envp!"), NULL);
+	while (tmp)
+	{
+		tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);
+		if (!tab[i])
+		{
+			perror("Error while copying envp to char **envp_tab!");
+			ft_rfree_tab(tab, i);
+			return (NULL);
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	tab[lstlen] = NULL;
+	return (tab);
+}
+
+char	**ft_split_var(char *var)
+{
+	char	**res;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	res = ft_calloc(3, sizeof(char *));
+	if (!res)
+		perror("Memory allocation failed while spliting envp var!");
+	tmp = var;
+	while (tmp && *tmp != '=')
+	{
+		tmp++;
+		i++;
+	}
+	if (*tmp == '=')
+		tmp++;
+	res[0] = ft_substr(var, 0, i);
+	res[1] = ft_strdup(tmp);
+	return (res);
 }

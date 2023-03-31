@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 12:59:49 by mehdidesmar      ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/03/31 13:37:16 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -46,6 +47,22 @@ static char	*ft_is_path_in_cmd(t_data *data)
 	return (NULL);
 }
 
+char	*ft_getenv(t_envp *envp, char *variable)
+{
+	t_envp	*tmp;
+	int		n;
+
+	tmp = envp;
+	n = ft_strlen(variable) + 1;
+	while (tmp)
+	{
+		if (ft_strncmp(variable, tmp->variable, n) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
 char	*ft_get_arg_path(t_data *data)
 {
 	int		i;
@@ -55,7 +72,7 @@ char	*ft_get_arg_path(t_data *data)
 	tmp = ft_is_path_in_cmd(data);
 	if (tmp)
 		return (tmp);
-	tmp = getenv("PATH");
+	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
 		perror("Error when retrieving PATH! ");
 	paths = ft_split(tmp, ':');
