@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:25:51 by julien            #+#    #+#             */
-/*   Updated: 2023/03/31 11:39:42 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 15:20:31 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	ft_creat_envp(t_data *data)
 	if (!data->envp->value)
 		perror("Memory allocation failed while envp_creat!");
 	data->envp->next = NULL;
-	ft_creat_variable(data->envp, "SHLV", "1");
+	ft_creat_variable(data->envp, "SHLVL", "1");
 }
