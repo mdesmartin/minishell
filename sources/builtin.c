@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 10:34:52 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 12:54:16 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	ft_builtin_echo(t_data *data)
 	int	i;
 
 	i = 1;
+	if (ft_strncmp("-n", data->cmd->content[1], 3) == 0)
+		i++;
 	while (data->cmd->content[i])
 	{
 		printf("%s", (char *) data->cmd->content[i]);
@@ -54,7 +56,8 @@ static void	ft_builtin_echo(t_data *data)
 		if (data->cmd->content[i])
 			printf(" ");
 	}
-	printf("\n");
+	if (ft_strncmp("-n", data->cmd->content[1], 3) != 0)
+		printf("\n");
 }
 
 int	ft_builtin(t_data *data)

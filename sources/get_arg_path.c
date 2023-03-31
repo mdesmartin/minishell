@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 17:19:07 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 11:42:13 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_get_arg_path(t_data *data)
 		return (tmp);
 	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
-		return (ft_getenv(data->envp, "_"));
+		perror("Error when retrieving PATH! ");
 	paths = ft_split(tmp, ':');
 	if (!paths)
 		perror("Error when spliting PATH! ");
