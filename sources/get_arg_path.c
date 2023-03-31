@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 13:25:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 11:42:13 by julien           ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/03/31 13:37:16 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -20,7 +21,7 @@ static char	*ft_find_path(t_data *data, char **paths)
 	i = 0;
 	while (paths[i])
 	{
-		tmp = ft_strjoin(paths[i], data->cmd->content[0]);
+		tmp = ft_strjoin(paths[i], s_read_cnt(data->cmd)->command[0]);
 		if (!tmp)
 			perror("Error when adding the cmd to the path");
 		if (access(tmp, X_OK) == 0)
@@ -36,9 +37,9 @@ static char	*ft_is_path_in_cmd(t_data *data)
 {
 	char	*tmp;
 
-	if (access(data->cmd->content[0], X_OK) == 0)
+	if (access(s_read_cnt(data->cmd)->command[0], X_OK) == 0)
 	{
-		tmp = ft_strdup(data->cmd->content[0]);
+		tmp = ft_strdup(s_read_cnt(data->cmd)->command[0]);
 		if (!tmp)
 			ft_error(data, "Error when retrieving cmd_path");
 		return (tmp);

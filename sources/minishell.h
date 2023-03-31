@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 17:18:51 by julien           ###   ########lyon.fr   */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/03/31 13:37:02 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -22,6 +23,17 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+
+// input[0] : 0 = < ; 1 = <<
+// input[1] : file or limiter
+// output[0] : 0 = > ; 1 = >>
+// output[1] : file if output[0] == 0
+typedef struct s_pipeline
+{
+	char			**command;
+	char			**input;
+	char			**output;
+}					t_pipeline;
 
 typedef struct s_envp
 {
@@ -77,5 +89,13 @@ void	free_lst(t_list **cmd);
 void	get_signal(int signal);
 int		nb_pipes(char *input);
 char	**create_tab(char **pipe_tab, char *input, int nb_pipe);
+
+char	**split_pipes(char **pipe_tab, int nb_p, char *input);
+void	create_chain(t_list **cmd, void *content);
+t_pipeline	*s_convert_content(void *content);
+t_pipeline	*s_read_cnt(t_list *cmd);
+void	dollar(t_data *data, char **pipe_tab);
+void	s_replace_command(t_data *data, char **new_command);
+void	*s_init(char **content, char **input, char **output);
 
 #endif

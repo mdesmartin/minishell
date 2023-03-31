@@ -1,29 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 11:04:40 by mvogel            #+#    #+#             */
-/*   Updated: 2023/02/27 13:41:55 by mvogel           ###   ########lyon.fr   */
+/*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
+/*   Updated: 2023/03/30 17:17:03 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new;
-
-	new = NULL;
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	if (new)
-	{
-		new->content = content;
-		new->next = NULL;
-	}
-	return (new);
-}
+void	check_input(char *input);

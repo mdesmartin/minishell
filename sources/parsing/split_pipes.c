@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_tab.c                                       :+:      :+:    :+:   */
+/*   split_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:38:49 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 		pipe_tab[j] = ft_substr(input, start, len_pipe);
 		if (!pipe_tab[j])
 			return (ft_putstr_fd("error creating tab\n", 2), NULL);
-		// printf("pipe[%d] : %s\n", j, pipe_tab[j]);
+		// ft_printf("pipe[%d] : %s\n", j, pipe_tab[j]);
 		j++;
 		i++;
 		start = i;

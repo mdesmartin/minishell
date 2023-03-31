@@ -63,6 +63,7 @@ $(NAME): $(DIR_OBJ) $(OBJECTS)
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
 	@mkdir -p $(DIR_OBJ)/env
+	@mkdir -p $(DIR_OBJ)/parsing
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c $(HEADERS) $(LIBRARY)
 	cc $(CFLAGS) -c $< -o $@

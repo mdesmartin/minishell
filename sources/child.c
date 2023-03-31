@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 11:39:28 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:36:46 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	ft_only_child(t_data *data)
 
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp_tab);
+	// locenvp = ft_lst_to_tabtab(data->envp);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
 }
 
 static void	ft_first_child(t_data *data, int **pipes, int i)
@@ -38,7 +39,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp_tab);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
 }
 
 static void	ft_last_child(t_data *data, int **pipes, int i)
@@ -64,7 +65,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp_tab);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
@@ -91,7 +92,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)data->cmd->content, data->envp_tab);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
