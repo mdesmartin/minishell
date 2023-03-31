@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 17:36:16 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:47:59 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	ft_export_add(t_data *data, int i)
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
 		perror("Error while allocating memory for envp!");
-	if (ft_is_c_in(data->cmd->content[i], '=') == 1)
+	if (ft_is_c_in(s_read_cnt(data->cmd)->command[i], '=') == 1)
 	{
-		buffer = ft_split_var(data->cmd->content[i]);
+		buffer = ft_split_var(s_read_cnt(data->cmd)->command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_add!");
 		tmp->variable = buffer[0];
@@ -31,7 +31,7 @@ static void	ft_export_add(t_data *data, int i)
 	}
 	else
 	{
-		tmp->variable = ft_strdup(data->cmd->content[i]);
+		tmp->variable = ft_strdup(s_read_cnt(data->cmd)->command[i]);
 		tmp->value = NULL;
 	}
 	tmp->next = NULL;
@@ -58,10 +58,10 @@ static t_envp	*ft_is_var_in_env(t_data *data, int i)
 	long unsigned int	n;
 
 	tmp = data->envp;
-	n = ft_varlen(data->cmd->content[i]);
+	n = ft_varlen(s_read_cnt(data->cmd)->command[i]);
 	while (tmp)
 	{
-		if (ft_strncmp(data->cmd->content[i], tmp->variable, n) == 0
+		if (ft_strncmp(s_read_cnt(data->cmd)->command[i], tmp->variable, n) == 0
 			&& ft_strlen(tmp->variable) == n)
 			return (tmp);
 		tmp = tmp->next;
@@ -73,9 +73,9 @@ static void	ft_export_mod(t_data *data, t_envp *var, int i)
 {
 	char	**buffer;
 
-	if (ft_is_c_in(data->cmd->content[i], '=') == 1)
+	if (ft_is_c_in(s_read_cnt(data->cmd)->command[i], '=') == 1)
 	{
-		buffer = ft_split_var(data->cmd->content[i]);
+		buffer = ft_split_var(s_read_cnt(data->cmd)->command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_mod!");
 		free(var->value);
@@ -91,9 +91,9 @@ void	ft_export(t_data *data)
 	int		i;
 
 	i = 1;
-	while (data->cmd->content[i])
+	while (s_read_cnt(data->cmd)->command[i])
 	{
-		if (ft_strncmp("_=", data->cmd->content[i], 2) != 0)
+		if (ft_strncmp("_=", s_read_cnt(data->cmd)->command[i], 2) != 0)
 		{
 			var = ft_is_var_in_env(data, i);
 			if (var != NULL)

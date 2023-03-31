@@ -15,14 +15,16 @@ LST_SRC =	main.c				\
 			env/env_utils.c		\
 			env/env_lst.c		\
 			env/env_cd.c		\
+			parsing/parsing.c	\
+			parsing/split_pipes.c \
+			parsing/dollar.c 	\
+			parsing/free_cmd.c 	\
 			process.c			\
+			s_access.c 			\
 			child.c				\
 			get_arg_path.c		\
-			parsing.c			\
-			free_n_exit.c		\
 			signal.c			\
 			builtin.c			\
-			create_tab.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 

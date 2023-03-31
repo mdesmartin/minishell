@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 13:37:02 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 14:02:53 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ char	**split_pipes(char **pipe_tab, int nb_p, char *input);
 void	create_chain(t_list **cmd, void *content);
 t_pipeline	*s_convert_content(void *content);
 t_pipeline	*s_read_cnt(t_list *cmd);
-void	dollar(t_data *data, char **pipe_tab);
-void	s_replace_command(t_data *data, char **new_command);
 void	*s_init(char **content, char **input, char **output);
+void	dollar(t_data *data, char **pipe_tab);
+void	signal_init(struct sigaction sign);
 
 #endif

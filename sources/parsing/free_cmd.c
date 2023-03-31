@@ -6,11 +6,11 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:02:45 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/30 13:05:43 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:50:52 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	*free_tab(char **tab)
 {

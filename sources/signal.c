@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/29 16:48:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 14:07:25 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	signal_init(struct sigaction sign)
+{
+	sign.sa_handler = get_signal;
+	sigemptyset(&sign.sa_mask);
+	sign.sa_flags = SA_SIGINFO;
+	sign.sa_handler = get_signal;
+	return ;
+}
+
+		if (!input)
+			if (sigaction(SIGSEGV, &sign, NULL) == -1)
+				return (perror("Error in SIGSEGV"), -1);
+		if (sigaction(SIGINT, &sign, NULL) == -1)
+			return (perror("Error in SIGINT"), -1);
+			// perror("readline() error");
+		if (sigaction(SIGQUIT, &sign, NULL) == -1)
+			return (perror("Error in SIGQUIT"), -1);
 
 int	ctrl_d()
 {
