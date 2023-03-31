@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 14:09:05 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 14:15:48 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main()
 		input = readline("minishell> ");
 		if (input && *input)
 			add_history(input);
+		parsing(&data, input);
 		// check_input(input);
 		ft_cmd(&data);
 		free_lst(&data.cmd);

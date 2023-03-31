@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/31 14:07:25 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 14:13:41 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	signal_init(struct sigaction sign)
 	return ;
 }
 
-		if (!input)
-			if (sigaction(SIGSEGV, &sign, NULL) == -1)
-				return (perror("Error in SIGSEGV"), -1);
-		if (sigaction(SIGINT, &sign, NULL) == -1)
-			return (perror("Error in SIGINT"), -1);
-			// perror("readline() error");
-		if (sigaction(SIGQUIT, &sign, NULL) == -1)
-			return (perror("Error in SIGQUIT"), -1);
+		// if (!input)
+		// 	if (sigaction(SIGSEGV, &sign, NULL) == -1)
+		// 		return (perror("Error in SIGSEGV"), -1);
+		// if (sigaction(SIGINT, &sign, NULL) == -1)
+		// 	return (perror("Error in SIGINT"), -1);
+		// 	// perror("readline() error");
+		// if (sigaction(SIGQUIT, &sign, NULL) == -1)
+		// 	return (perror("Error in SIGQUIT"), -1);
 
 int	ctrl_d()
 {
