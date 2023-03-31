@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 13:36:46 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 15:11:51 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	ft_only_child(t_data *data)
 {
@@ -18,8 +18,7 @@ static void	ft_only_child(t_data *data)
 
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
-	// locenvp = ft_lst_to_tabtab(data->envp);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
 }
 
 static void	ft_first_child(t_data *data, int **pipes, int i)
@@ -39,7 +38,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
 }
 
 static void	ft_last_child(t_data *data, int **pipes, int i)
@@ -65,7 +64,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
@@ -92,7 +91,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		exit(0);
 	}
 	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, NULL);
+	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
