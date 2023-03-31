@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/30 16:54:40 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 11:39:52 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	ft_print_env(t_data *data)
 		if (tmp->value)
 		{
 			printf("%s=%s", tmp->variable, tmp->value);
-			if (ft_strncmp("_", tmp->variable, 2) == 0)
-				printf("env");
 			printf("\n");
 		}
 		tmp = tmp->next;
