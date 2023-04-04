@@ -6,11 +6,14 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/04 10:21:44 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 14:14:14 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+
+extern int	g_exitcode;
 
 //pipe must be freed
 
@@ -19,6 +22,7 @@ static void	ft_only_child(t_data *data)
 	char	*path;
 
 	ft_input_redirection(data);
+	// ft_output_redirection(data);
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -28,7 +32,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
 
-	ft_input_redirection(data);
+	// ft_input_redirection(data);
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data);
@@ -50,7 +54,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
 
-	// ft_output_redirection(data, pipes, i);
+	// ft_output_redirection(data);
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data);

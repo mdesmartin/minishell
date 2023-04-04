@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by julien            #+#    #+#             */
-/*   Updated: 2023/04/04 10:30:03 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 11:14:02 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,6 @@ infile = open("env.txt", O_RDONLY, 0644);
 		exit (1);
 	}
 }
-
-// static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
-// {
-// 	char	*tmp;
-// 	int		limiter_len;
-// 	int		intput_len;
-
-// 	limiter_len = ft_strlen(limiter);
-// 	while (1)
-// 	{
-// 		printf("here_doc> ");
-// 		tmp = get_next_line(STDIN_FILENO);
-// 		if (!tmp)
-// 		{
-// 			perror("Error while using here_doc");
-// 			close(here_doc_fd[1]);
-// 			ft_quit(data);
-// 			exit(1);
-// 		}
-// 		intput_len = ft_strlen(tmp);
-// 		if (ft_strncmp(tmp, limiter, limiter_len) == 0
-// 			&& intput_len - 1 == limiter_len)
-// 			break ;
-// 		if (write(here_doc_fd[1], tmp, intput_len) == -1)
-// 			perror("Error while writing in the here_doc's pipe!");
-// 		free(tmp);
-// 	}
-// 	free(tmp);
-// }
 
 static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 {
@@ -119,7 +90,6 @@ static void	ft_input_heredoc(t_data *data)
 
 void	ft_input_redirection(t_data *data)
 {
-printf("Limiteur pas prit en compte!\nModifiez le code ;)");
 	if (!(char *)s_read_cnt(data->cmd)->input[0])
 		return ;
 	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '0')
@@ -127,3 +97,32 @@ printf("Limiteur pas prit en compte!\nModifiez le code ;)");
 	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '1')
 		ft_input_heredoc(data);
 }
+
+// static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
+// {
+// 	char	*tmp;
+// 	int		limiter_len;
+// 	int		intput_len;
+
+// 	limiter_len = ft_strlen(limiter);
+// 	while (1)
+// 	{
+// 		printf("here_doc> ");
+// 		tmp = get_next_line(STDIN_FILENO);
+// 		if (!tmp)
+// 		{
+// 			perror("Error while using here_doc");
+// 			close(here_doc_fd[1]);
+// 			ft_quit(data);
+// 			exit(1);
+// 		}
+// 		intput_len = ft_strlen(tmp);
+// 		if (ft_strncmp(tmp, limiter, limiter_len) == 0
+// 			&& intput_len - 1 == limiter_len)
+// 			break ;
+// 		if (write(here_doc_fd[1], tmp, intput_len) == -1)
+// 			perror("Error while writing in the here_doc's pipe!");
+// 		free(tmp);
+// 	}
+// 	free(tmp);
+// }
