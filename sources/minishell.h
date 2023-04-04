@@ -6,13 +6,14 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 15:14:50 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/03 17:54:37 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define _GNU_SOURCE
 # include "libft/sources/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -82,6 +83,8 @@ char		*ft_get_arg_path(t_data *data);
 char		*ft_getenv(t_envp *envp, char *variable);
 int			ft_builtin(t_data *data);
 void		ft_builtin_cd(t_data *data);
+void		ft_input_redirection(t_data *data);
+void		ft_output_redirection(t_data *data, int **pipes, int i);
 
 int			parsing(t_data *data, char *readed);
 void		*free_tab(char **tab);

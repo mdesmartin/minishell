@@ -23,6 +23,8 @@ LST_SRC =	main.c					\
 			s_access.c 				\
 			process/child.c			\
 			process/get_arg_path.c	\
+			process/input.c			\
+			process/output.c		\
 			signal.c				\
 			builtin/builtin.c
 			

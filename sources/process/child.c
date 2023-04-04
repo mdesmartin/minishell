@@ -6,16 +6,19 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 15:11:51 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 10:21:44 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//pipe must be freed
+
 static void	ft_only_child(t_data *data)
 {
 	char	*path;
 
+	ft_input_redirection(data);
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -25,13 +28,15 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
 
+	ft_input_redirection(data);
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data);
-		perror("Error while duplicating file descriptor! ");
+		perror("First child : Error while duplicating file descriptor! ");
 		ft_quit(data);
 		exit (1);
 	}
+	ft_close_fds(data);
 	if (ft_builtin(data) != 0)
 	{
 		ft_quit(data);
@@ -45,10 +50,11 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
 
+	// ft_output_redirection(data, pipes, i);
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data);
-		perror("Error while duplicating file descriptor! ");
+		perror("Last child : Error while duplicating file descriptor! ");
 		ft_quit(data);
 		exit (1);
 	}
