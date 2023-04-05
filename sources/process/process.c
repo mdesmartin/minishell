@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 17:10:52 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	ft_process(t_data *data)
 {
 	int	i;
 	int	pids;
+	int	status;
 
 	ft_pipe_init(data);
 	i = -1;
@@ -60,7 +61,12 @@ static void	ft_process(t_data *data)
 	}
 	ft_close_fds(data);
 	while (--i >= 0)
-		wait(NULL);
+	{
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+			data->exit_code = WEXITSTATUS(status);
+	}
+printf("Last child exit code is %d\n", data->exit_code);
 	ft_pipe_free(data);
 }
 

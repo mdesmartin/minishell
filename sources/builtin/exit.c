@@ -6,13 +6,11 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 17:03:08 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern int	g_exitcode;
 
 static long long int	ft_atolli(const char *str)
 {
@@ -46,20 +44,14 @@ void	ft_convert_exit(char *str)
 	if (str_len > 20)
 	{
 		ft_putstr3_fd("minishell: exit:", str, ": numeric argument required\n");
-		ft_exit(2);
+		exit(2);
 	}
 	i = ft_atolli(str);
 	if ((str_len > 17 && str_len < 20 && i < 1000)
 		|| (str_len == 20 && i > -1000))
 		ft_putstr3_fd("minishell: exit:", str, ": numeric argument required\n");
 // printf("exit code = %d\n", (int) ((i + 256) % 256));
-	ft_exit((int)((i + 256) % 256));
-}
-
-void	ft_exit(int exit_code)
-{
-	g_exitcode = exit_code;
-	exit(exit_code);
+	exit((int)((i + 256) % 256));
 }
 
 int	ft_check_exitarg(char *code)
@@ -85,7 +77,7 @@ void	ft_builtin_exit(t_data *data)
 	if (!s_read_cnt(data->cmd)->command[1])
 	{
 		ft_quit(data);
-		ft_exit(0);
+		exit(0);
 	}
 	if (!s_read_cnt(data->cmd)->command[2])
 	{
@@ -93,11 +85,11 @@ void	ft_builtin_exit(t_data *data)
 		{
 			ft_putstr3_fd("minishell: exit: ",s_read_cnt(data->cmd)->command[1],
 				": numeric argument required\n");
-			ft_exit(2);
+			exit(2);
 		}
 		else
 			ft_convert_exit(s_read_cnt(data->cmd)->command[1]);
 	}
 	ft_putstr3_fd("minishell: exit:"," ", "too many arguments\n");
-	g_exitcode = 1;
+	data->exit_code = 1;
 }

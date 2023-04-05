@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:14:06 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 17:03:15 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 // output[0] : 0 = > ; 1 = >>
 // output[1] : file if output[0] == 0
 
-// int	g_exitcode;
-
 typedef struct s_pipeline
 {
 	char			**command;
@@ -52,6 +50,7 @@ typedef struct s_data
 	char	**envp_tab;
 	int		**pipes;
 	int		nb_cmd;
+	int		exit_code;
 }				t_data;
 
 void		ft_data_init(t_data *data);
@@ -98,7 +97,6 @@ void		free_lst(t_list **cmd);
 void		get_signal(int signal);
 int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
-void		ft_exit(int exit_code);
 
 char		**split_pipes(char **pipe_tab, int nb_p, char *input);
 void		create_chain(t_list **cmd, void *content);
