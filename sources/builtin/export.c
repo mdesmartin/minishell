@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 16:02:14 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 14:23:17 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_export(t_data *data)
 	i = 1;
 	while (s_read_cnt(data->cmd)->command[i])
 	{
-		if (s_read_cnt(data->cmd)->command[i][0] == '=')
+		if (ft_check_exportvar(s_read_cnt(data->cmd)->command[i]) == 1)
 		{
 			ft_putstr_fd("minishell : export: `", 2);
 			ft_putstr_fd(s_read_cnt(data->cmd)->command[i], 2);
@@ -109,6 +109,5 @@ void	ft_export(t_data *data)
 		}
 		i++;
 	}
-	ft_free_envptab(data);
-	data->envp_tab = ft_lst_to_tabtab(data->envp);
+	ft_update_envptab(data);
 }

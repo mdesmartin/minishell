@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 12:47:41 by julien            #+#    #+#             */
-/*   Updated: 2023/03/31 14:35:51 by julien           ###   ########lyon.fr   */
+/*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	ft_builtin_cd(t_data *data)
 
 	ft_check_pwd(data);
 	ft_check_oldpwd(data);
-	if (s_read_cnt(data->cmd)->command[1] != NULL && s_read_cnt(data->cmd)->command[2] != NULL)
+	if (s_read_cnt(data->cmd)->command[1] != NULL
+		&& s_read_cnt(data->cmd)->command[2] != NULL)
 		printf("cd: too many arguments\n");
 	if (s_read_cnt(data->cmd)->command[1] == NULL)
 	{
@@ -123,8 +124,7 @@ void	ft_builtin_cd(t_data *data)
 		perror("Error while calling chdir()! ");
 	ft_update_oldpwd(data);
 	ft_update_pwd(data);
-	ft_free_envptab(data);
-	data->envp_tab = ft_lst_to_tabtab(data->envp);
+	ft_update_envptab(data);
 }
 
 // apres cd seul, OLPWD disparait

@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/04 16:59:32 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,6 @@ char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
 	if (!res)
 		return (perror("Error while allocating memory for char **envp!"), NULL);
 	return (res);
-}
-
-void	ft_putstr3_fd(char *s1, char *s2, char *s3)
-{
-	ft_putstr_fd(s1, 2);
-	ft_putstr_fd(s2, 2);
-	ft_putstr_fd(s3, 2);
 }
 
 // void	ft_print_tabtab(char **tab)

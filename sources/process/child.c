@@ -6,12 +6,11 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/04 14:50:18 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 extern int	g_exitcode;
 

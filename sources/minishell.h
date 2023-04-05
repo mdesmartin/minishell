@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/04 17:02:25 by julien           ###   ########lyon.fr   */
+/*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/05 14:14:06 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -70,6 +69,7 @@ void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
 void		ft_check_envp(t_data *data);
 void		ft_check_pwd(t_data *data);
+int			ft_check_exportvar(char *variable);
 void		ft_print_env(t_data *data);
 void		ft_export(t_data *data);
 void		ft_unset(t_data *data);
@@ -80,6 +80,7 @@ char		**ft_lst_to_tabtab(t_envp *envp);
 void		ft_print_tabtab(char **tab);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char		**ft_split_var(char *var);
+void		ft_update_envptab(t_data *data);
 
 void		ft_cmd(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
