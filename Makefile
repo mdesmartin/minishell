@@ -7,12 +7,12 @@ DIR_SRC =	sources/
 LST_SRC =	main.c					\
 			error.c					\
 			utils.c					\
-			exit.c					\
 			env/env_init.c			\
 			env/env_creat.c			\
 			env/env_check.c			\
 			builtin/export.c		\
 			builtin/unset.c			\
+			builtin/exit.c			\
 			env/env_utils.c			\
 			env/env_lst.c			\
 			builtin/cd.c			\

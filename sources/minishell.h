@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/04 14:13:47 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 17:02:25 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		ft_rfree_tab(char **tab, int i);
 int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
+void		ft_putstr3_fd(char *s1, char *s2, char *s3);
 
 void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
@@ -86,6 +87,7 @@ char		*ft_get_arg_path(t_data *data);
 char		*ft_getenv(t_envp *envp, char *variable);
 int			ft_builtin(t_data *data);
 void		ft_builtin_cd(t_data *data);
+void		ft_builtin_exit(t_data *data);
 void		ft_input_redirection(t_data *data);
 void		ft_output_redirection(t_data *data);
 

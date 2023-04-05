@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 14:56:05 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 16:59:32 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,21 @@ char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
-void	ft_print_tabtab(char **tab)
+void	ft_putstr3_fd(char *s1, char *s2, char *s3)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("env[%d]\t=\t%s\n", i, tab[i]);
-		i++;
-	}
+	ft_putstr_fd(s1, 2);
+	ft_putstr_fd(s2, 2);
+	ft_putstr_fd(s3, 2);
 }
+
+// void	ft_print_tabtab(char **tab)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		printf("env[%d]\t=\t%s\n", i, tab[i]);
+// 		i++;
+// 	}
+// }

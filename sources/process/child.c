@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/04 14:14:14 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 14:50:18 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 
 extern int	g_exitcode;
-
-//pipe must be freed
 
 static void	ft_only_child(t_data *data)
 {
@@ -44,7 +42,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data) != 0)
 	{
 		ft_quit(data);
-		exit(0);
+		ft_exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -60,7 +58,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		ft_close_fds(data);
 		perror("Last child : Error while duplicating file descriptor! ");
 		ft_quit(data);
-		exit (1);
+		ft_exit(1);
 	}
 	ft_close_fds(data);
 	while (i > 0)
@@ -71,7 +69,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data) != 0)
 	{
 		ft_quit(data);
-		exit(0);
+		ft_exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -98,7 +96,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data) != 0)
 	{
 		ft_quit(data);
-		exit(0);
+		ft_exit(0);
 	}
 	path = ft_get_arg_path(data);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -116,5 +114,5 @@ void	ft_child(t_data *data, int **pipes, int i)
 		ft_middle_child(data, pipes, i);
 	perror("Error while executing command! ");
 	ft_quit(data);
-	exit(1);
+	ft_exit(1);
 }

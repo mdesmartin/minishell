@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/31 14:39:00 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 15:54:56 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_builtin(t_data *data)
 	if (ft_strncmp(s_read_cnt(data->cmd)->command[0], "cd", 3) == 0)
 		return (ft_builtin_cd(data), 1);
 	if (ft_strncmp(s_read_cnt(data->cmd)->command[0], "exit", 5) == 0)
-		return (ft_quit(data), exit(0), 1);
+		return (ft_builtin_exit(data), 1);
 	if (ft_strncmp(s_read_cnt(data->cmd)->command[0], "echo", 5) == 0)
 		return (ft_builtin_echo(data), 1);
 	if (ft_strncmp(s_read_cnt(data->cmd)->command[0], "env", 4) == 0)
