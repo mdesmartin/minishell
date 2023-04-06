@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:03:37 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 13:06:25 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	main(void)
 		if (ft_strlen(input) > 0)// input && *input)
 			add_history(input);
 		if (!input)
-			return (printf("exit\n"), g_exitcode);//free des trucs
+			return (printf("exit\n"), data.exit_code);//free des trucs
 		if (!check_input(input))
 		{
 			parsing(&data, input);
 			ft_cmd(&data);
 			free_lst(&data.cmd);
 		}
-		printf("%d\n", g_exitcode);
+		printf("%d\n", data.exit_code);
 	}
 	return (0);
 }

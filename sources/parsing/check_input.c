@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/05 16:20:49 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 13:07:51 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int basic_error(char *input)
 	// }
 	if (check_chevron(input, &i))
 	{
-		g_exitcode = 2;
+		// data.exit_code = 2; //need t_data *data
 		return (1);
 	}
 	// if (check_chevron)

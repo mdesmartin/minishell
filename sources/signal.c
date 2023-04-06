@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/04/06 12:56:07 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 13:07:02 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_handler(int signum)
 	// 	return ;
 	if (signum == SIGINT)
 	{
-		g_exitcode = 130;
+		// g_exitcode = 130;
 		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		printf("\n");
 		rl_on_new_line();
