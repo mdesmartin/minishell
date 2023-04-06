@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_unset.c                                        :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 16:12:06 by julien            #+#    #+#             */
-/*   Updated: 2023/03/31 13:48:04 by mehdidesmar      ###   ########lyon.fr   */
+/*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	ft_unset(t_data *data)
 	while (s_read_cnt(data->cmd)->command[i])
 	{
 		if (ft_strncmp("_", s_read_cnt(data->cmd)->command[i], 2) != 0)
-			ft_del_onelst(data->envp, (char *) s_read_cnt(data->cmd)->command[i]);
+			ft_del_onelst(data->envp,
+				(char *) s_read_cnt(data->cmd)->command[i]);
 		i++;
 	}
-	ft_free_envptab(data);
-	data->envp_tab = ft_lst_to_tabtab(data->envp);
+	ft_update_envptab(data);
 }

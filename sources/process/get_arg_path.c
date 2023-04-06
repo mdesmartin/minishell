@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 13:37:16 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static char	*ft_find_path(t_data *data, char **paths)
 {
