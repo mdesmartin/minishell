@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/31 13:49:44 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 14:35:00 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 
 char	**create_tab(char **pipe_tab, char *input, int nb_pipe)
 {
+	pipe_tab = NULL;
 	pipe_tab = ft_calloc(sizeof(char *), (nb_pipe + 1));
 	if (!pipe_tab)
 		return (ft_putstr_fd("error creating tab\n", 2), NULL);

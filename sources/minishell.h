@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 14:02:53 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 20:58:30 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,23 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
+# include <sys/ioctl.h>
+
+// < = 1
+// << = 2
+// > = 3
+// >> = 6
 
 // input[0] : 0 = < ; 1 = <<
 // input[1] : file or limiter
 // output[0] : 0 = > ; 1 = >>
 // output[1] : file if output[0] == 0
+
+int	g_exitcode;
+
+// int	g_parent_status = 0;
+
 typedef struct s_pipeline
 {
 	char			**command;
@@ -96,6 +108,10 @@ t_pipeline	*s_convert_content(void *content);
 t_pipeline	*s_read_cnt(t_list *cmd);
 void	*s_init(char **content, char **input, char **output);
 void	dollar(t_data *data, char **pipe_tab);
-void	signal_init(struct sigaction sign);
+void	signal_init(struct sigaction *sign);
+int		check_input(char *input);
+void 	input_signal();
+void	print_error(char *error);
+int		check_chevron(char *input, int *i);
 
 #endif
