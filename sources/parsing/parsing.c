@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/31 14:06:14 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 13:36:25 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_tab(char **pipe_tab)
 	return ;
 }
 
-/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 void	create_chain(t_list **cmd, void *content)
 {
@@ -83,12 +83,12 @@ int	parsing(t_data *data, char *input)
 	char	**pipe_tab;
 	int		nb_p;
 
-	(void) data;
-	pipe_tab = NULL;
 	nb_p = nb_pipes(input);
 	if (nb_p == -1)
-		return (-1);
+		return (-1);//quote pas fermée
+	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
+	// redirection(data, pipe_tab);
 	dollar(data, pipe_tab);
 	// print_tab(pipe_tab);
 	split_tab(&data->cmd, pipe_tab);

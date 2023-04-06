@@ -17,8 +17,10 @@ LST_SRC =	main.c				\
 			env/env_cd.c		\
 			parsing/parsing.c	\
 			parsing/split_pipes.c \
-			parsing/dollar.c 	\
+			parsing/x_dollar.c 	\
 			parsing/free_cmd.c 	\
+			parsing/check_input.c \
+			parsing/check_chevron.c \
 			process.c			\
 			s_access.c 			\
 			child.c				\

@@ -6,53 +6,55 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/03/31 14:13:41 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 12:56:07 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_init(struct sigaction sign)
+void	signal_handler(int signum)
 {
-	sign.sa_handler = get_signal;
-	sigemptyset(&sign.sa_mask);
-	sign.sa_flags = SA_SIGINFO;
-	sign.sa_handler = get_signal;
+	// if (g_parent_status == 1)
+	// 	return ;
+	if (signum == SIGINT)
+	{
+		g_exitcode = 130;
+		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void	signal_init(struct sigaction *sign)
+{
+	// sigemptyset(&sign->sa_mask);
+	sign->sa_flags = SA_RESTART;
+	sign->sa_handler = signal_handler;
+	rl_catch_signals = 0;
 	return ;
 }
 
-		// if (!input)
-		// 	if (sigaction(SIGSEGV, &sign, NULL) == -1)
-		// 		return (perror("Error in SIGSEGV"), -1);
-		// if (sigaction(SIGINT, &sign, NULL) == -1)
-		// 	return (perror("Error in SIGINT"), -1);
-		// 	// perror("readline() error");
-		// if (sigaction(SIGQUIT, &sign, NULL) == -1)
-		// 	return (perror("Error in SIGQUIT"), -1);
-
-int	ctrl_d()
+void	input_signal(struct sigaction sign)
 {
-	printf("exit\n");
-	exit(0);
+	sigaction(SIGINT, &sign, NULL);
+	sigaction(SIGQUIT, &sign, NULL);
 }
 
-int	ctrl_c()
-{
-	// printf("^C\n");
-	return (130);
-}
+// void	exec_ctrl_c()
+// {
+// 	printf("\n");
+// 	g_exitcode = 130;
+// }
+// void	exec_signal()
+// {
+// 	signal(SIGINT, exec_ctrl_c);
+// 	signal(SIGQUIT, ctrl_backslash);
+// }
 
-int	ctrl_backslash()
-{
-	return(131);
-}
-
-void	get_signal(int signal)
-{
-	// if (signal == SIGINT)
-	// 	ctrl_c();
-	if (signal == SIGSEGV)
-		ctrl_d();
-	if (signal == SIGQUIT)
-		ctrl_backslash();
-}
+// void	input_signal()
+// {
+// 	signal(SIGINT, ctrl_c);
+// 	signal(SIGQUIT, SIG_IGN);
+// }

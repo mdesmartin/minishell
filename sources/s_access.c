@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/03/30 16:40:41 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/03 15:21:47 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ t_pipeline	*s_read_cnt(t_list *cmd)
 	return (cmd->content);
 }
 
+char	**calloc_tab()
+{
+	char	**tab;
+
+	tab = ft_calloc(3, sizeof(char*));
+	tab[0] = ft_calloc(2, sizeof(char*));
+	tab[1] = ft_calloc(2, sizeof(char*));
+	return (tab);
+}
+
 void	*s_init(char **command, char **input, char **output)
 {
 	t_pipeline	*pipeline;
@@ -35,11 +45,15 @@ void	*s_init(char **command, char **input, char **output)
 	if (pipeline == NULL)
 		return (NULL);
 
-	pipeline->command = command;
+	if (!command)
+		pipeline->command = calloc_tab();// ft_calloc(2, sizeof(char*));
+	else
+		pipeline->command = command;
+
 	if (!input)
-		pipeline->input = ft_calloc(2, sizeof(char*));//terminer dinit la structure puis modif dand split tab, compile, test dollar, add ><<<>> when init
+		pipeline->input = calloc_tab();//terminer dinit la structure puis modif dand split tab, compile, test dollar, add ><<<>> when init
 	if (!output)
-		pipeline->output = ft_calloc(2, sizeof(char*));
+		pipeline->output = calloc_tab();
 	return (pipeline);		
 }
 
