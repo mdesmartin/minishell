@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:06:25 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 13:35:15 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	{
 		input_signal(sign);
 		input = readline("minishell> ");
-		if (ft_strlen(input) > 0)// input && *input)
+		if (ft_strlen(input) > 0) // input && *input)
 			add_history(input);
 		if (!input)
 			return (printf("exit\n"), data.exit_code);//free des trucs

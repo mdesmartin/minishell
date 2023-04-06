@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/06 13:07:51 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 13:32:25 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_error(char *error)
 
 // if nothing after, newline, else token ' '
 
-int basic_error(char *input)
+int	basic_error(char *input)
 {
 	int	i;
 
