@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:33:47 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 16:21:59 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static long long int	ft_atolli(const char *str)
 	return ((long long int) res * sign);
 }
 
-void	ft_convert_exit(char *str)
+static void	ft_convert_exit(t_data *data, char *str)
 {
 	long long int	i;
 	int				str_len;
@@ -44,14 +44,14 @@ void	ft_convert_exit(char *str)
 	if (str_len > 20)
 	{
 		ft_putstr3_fd("minishell: exit:", str, ": numeric argument required\n");
-		exit(2);
+		ft_quit(data, 2);
 	}
 	i = ft_atolli(str);
 	if ((str_len > 17 && str_len < 20 && i < 1000)
 		|| (str_len == 20 && i > -1000))
 		ft_putstr3_fd("minishell: exit:", str, ": numeric argument required\n");
 // printf("exit code = %d\n", (int) ((i + 256) % 256));
-	exit((int)((i + 256) % 256));
+	ft_quit(data, (int)((i + 256) % 256));
 }
 
 int	ft_check_exitarg(char *code)
@@ -75,20 +75,17 @@ int	ft_check_exitarg(char *code)
 void	ft_builtin_exit(t_data *data)
 {
 	if (!s_read_cnt(data->cmd)->command[1])
-	{
-		ft_quit(data);
-		exit(0);
-	}
+		ft_quit(data, 0);
 	if (!s_read_cnt(data->cmd)->command[2])
 	{
 		if (ft_check_exitarg(s_read_cnt(data->cmd)->command[1]) == 1)
 		{
 			ft_putstr3_fd("minishell: exit: ",s_read_cnt(data->cmd)->command[1],
 				": numeric argument required\n");
-			exit(2);
+			ft_quit(data, 2);
 		}
 		else
-			ft_convert_exit(s_read_cnt(data->cmd)->command[1]);
+			ft_convert_exit(data, s_read_cnt(data->cmd)->command[1]);
 	}
 	ft_putstr3_fd("minishell: exit:"," ", "too many arguments\n");
 	data->exit_code = 1;

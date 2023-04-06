@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:14 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 16:15:07 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_rfree_tab(char **tab, int i)
 	free(tab);
 }
 
-void	ft_quit(t_data *data)
+void	ft_quit(t_data *data, int code)
 {
 	int	i;
 
@@ -51,14 +51,14 @@ void	ft_quit(t_data *data)
 	free(data->cmd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
+	exit(code);
 }
 
 void	ft_error(t_data *data, char *s)
 {
 	ft_putstr_fd(s, 2);
 	perror(" ");
-	ft_quit(data);
-	exit (1);
+	ft_quit(data, 1);
 }
 
 void	ft_free_envptab(t_data *data)
@@ -71,6 +71,7 @@ void	ft_free_envptab(t_data *data)
 	while (data->envp_tab[i])
 	{
 		free(data->envp_tab[i]);
+		data->envp_tab[i] = NULL;
 		i++;
 	}
 	free(data->envp_tab);

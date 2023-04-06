@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:38:39 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 16:17:31 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	ft_output_file(t_data *data)
 	{
 		ft_close_fds(data);
 		perror("Error while duplicating file descriptor! ");
-		ft_quit(data);
-		exit (1);
+		ft_quit(data, 1);
 	}
 }
 
@@ -46,8 +45,7 @@ void	ft_output_appends(t_data *data)
 	{
 		ft_close_fds(data);
 		perror("Error while duplicating file descriptor! ");
-		ft_quit(data);
-		exit (1);
+		ft_quit(data, 1);
 	}
 }
 

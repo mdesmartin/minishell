@@ -7,30 +7,30 @@ DIR_SRC =	sources/
 LST_SRC =	main.c					\
 			error.c					\
 			utils.c					\
+			signal.c				\
+			s_access.c 				\
+			builtin/cd.c			\
+			builtin/unset.c			\
+			builtin/exit.c			\
+			builtin/export.c		\
+			builtin/builtin.c		\
+			builtin/builtin_utils.c	\
+			env/env_lst.c			\
 			env/env_init.c			\
 			env/env_creat.c			\
 			env/env_check.c			\
-			builtin/export.c		\
-			builtin/unset.c			\
-			builtin/exit.c			\
-			builtin/builtin_utils.c	\
 			env/env_utils.c			\
-			env/env_lst.c			\
-			builtin/cd.c			\
 			parsing/parsing.c		\
-			parsing/split_pipes.c	\
 			parsing/x_dollar.c 		\
 			parsing/free_cmd.c 		\
-			parsing/check_input.c \
+			parsing/split_pipes.c	\
+			parsing/check_input.c 	\
 			parsing/check_chevron.c \
-			process/process.c		\
-			s_access.c 				\
 			process/child.c			\
-			process/get_arg_path.c	\
 			process/input.c			\
 			process/output.c		\
-			signal.c				\
-			builtin/builtin.c
+			process/process.c		\
+			process/get_arg_path.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 

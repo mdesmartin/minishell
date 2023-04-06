@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:05:01 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 16:14:35 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ typedef struct s_data
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data);
 void		ft_error(t_data *data, char *s);
-void		ft_quit(t_data *data);
+void		ft_quit(t_data *data, int code);
 void		ft_free_tab(char **tab);
 void		ft_rfree_tab(char **tab, int i);
 int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
 void		ft_putstr3_fd(char *s1, char *s2, char *s3);
+void		ft_print_tabtab(char **tab);
 
 void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
@@ -112,9 +113,9 @@ t_pipeline	*s_read_cnt(t_list *cmd);
 void		*s_init(char **content, char **input, char **output);
 void		dollar(t_data *data, char **pipe_tab);
 void		signal_init(struct sigaction *sign);
-int		check_input(char *input);
-void 	input_signal();
-void	print_error(char *error);
-int		check_chevron(char *input, int *i);
+int			check_input(char *input);
+void 		input_signal();
+void		print_error(char *error);
+int			check_chevron(char *input, int *i);
 
 #endif

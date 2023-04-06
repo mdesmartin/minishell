@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 16:17:12 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 // input[0] : 0 = < ; 1 = <<
 // input[1] : file or limiter
-static void	ft_input_file(t_data *data)
+static void	ft_input_file(t_data *data, char *file)
 {
 	int	infile;
 
-infile = open("env.txt", O_RDONLY, 0644);
+	infile = open(file, O_RDONLY, 0644);
 	// infile = open((char *)s_read_cnt(data->cmd)->input[0], O_RDONLY, 0644);
 	if (infile == -1)
 		perror("Error when opening file1! ");
@@ -27,8 +27,7 @@ infile = open("env.txt", O_RDONLY, 0644);
 		ft_close_fds(data);
 		close(infile);
 		perror("Error while duplicating file descriptor! ");
-		ft_quit(data);
-		exit (1);
+		ft_quit(data, 1);
 	}
 }
 
@@ -88,41 +87,33 @@ static void	ft_input_heredoc(t_data *data)
 	close(here_doc_fd[0]);
 }
 
+// void	ft_input_redirection(t_data *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while ((char *)s_read_cnt(data->cmd)->command[i])
+// 	{
+// 		if ((char)s_read_cnt(data->cmd)->command[i][0] == '<'
+// 			&& (char)s_read_cnt(data->cmd)->command[i][1] != '<')
+// 		{
+// 			if ((char)s_read_cnt(data->cmd)->command[i][1])
+// 			{
+// 				ft_input_file(data, (char *)s_read_cnt(data->cmd)->command[i] + 1);
+// 			}
+// 		}
+// 		if ((char)s_read_cnt(data->cmd)->command[i][0] == '<'
+// 			&& (char)s_read_cnt(data->cmd)->command[i][1] == '<')
+// 			ft_input_heredoc(data);
+// 	}
+// }
+
 void	ft_input_redirection(t_data *data)
 {
 	if (!(char *)s_read_cnt(data->cmd)->input[0])
 		return ;
 	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '0')
-		ft_input_file(data);
+		ft_input_file(data, "test.txt");
 	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '1')
 		ft_input_heredoc(data);
 }
-
-// static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
-// {
-// 	char	*tmp;
-// 	int		limiter_len;
-// 	int		intput_len;
-
-// 	limiter_len = ft_strlen(limiter);
-// 	while (1)
-// 	{
-// 		printf("here_doc> ");
-// 		tmp = get_next_line(STDIN_FILENO);
-// 		if (!tmp)
-// 		{
-// 			perror("Error while using here_doc");
-// 			close(here_doc_fd[1]);
-// 			ft_quit(data);
-// 			exit(1);
-// 		}
-// 		intput_len = ft_strlen(tmp);
-// 		if (ft_strncmp(tmp, limiter, limiter_len) == 0
-// 			&& intput_len - 1 == limiter_len)
-// 			break ;
-// 		if (write(here_doc_fd[1], tmp, intput_len) == -1)
-// 			perror("Error while writing in the here_doc's pipe!");
-// 		free(tmp);
-// 	}
-// 	free(tmp);
-// }
