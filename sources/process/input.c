@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 16:17:12 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 13:30:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_input_file(t_data *data, char *file)
 		ft_quit(data, 1);
 	}
 }
+// remplace readline with GNL
 
 static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 {

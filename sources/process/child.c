@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 16:17:01 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 16:43:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	ft_only_child(t_data *data)
 {
 	char	*path;
 
-ft_print_tabtab((char **)s_read_cnt(data->cmd)->command);
-	ft_input_redirection(data);
+	// ft_input_redirection(data);
 	// ft_output_redirection(data);
 	ft_close_fds(data);
 	path = ft_get_arg_path(data);
@@ -45,7 +44,9 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 static void	ft_last_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
+	t_data	*tmp;
 
+	tmp = data;
 	// ft_output_redirection(data);
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
@@ -56,19 +57,21 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	ft_close_fds(data);
 	while (i > 0)
 	{
-		data->cmd = data->cmd->next;
+		tmp->cmd = tmp->cmd->next;
 		i--;
 	}
-	if (ft_builtin(data) != 0)
+	if (ft_builtin(tmp) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
+	execve(path, (char **)s_read_cnt(tmp->cmd)->command, data->envp_tab);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
+	t_data	*tmp;
 
+	tmp = data;
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
@@ -79,17 +82,18 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	ft_close_fds(data);
 	while (i > 0)
 	{
-		data->cmd = data->cmd->next;
+		tmp->cmd = tmp->cmd->next;
 		i--;
 	}
-	if (ft_builtin(data) != 0)
+	if (ft_builtin(tmp) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
+	execve(path, (char **)s_read_cnt(tmp->cmd)->command, data->envp_tab);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
 {
+	get_rediction(data, i);
 	if (data->nb_cmd == 1)
 		ft_only_child(data);
 	else if (i == 0)

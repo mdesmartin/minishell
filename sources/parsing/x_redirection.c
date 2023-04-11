@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   x_redirection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:27:28 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/04 12:43:48 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 11:37:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_arrow(char *c)
 	if (c == '<')
 		return (1);
 	else if (c == '>')
-		return (3)
+		return (3);
 	return (0);
 }
 

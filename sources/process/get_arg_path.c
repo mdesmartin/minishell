@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/06 13:35:39 by julien           ###   ########lyon.fr   */
+/*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/10 13:37:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/06 13:05:21 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 11:53:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@ void	create_chain(t_list **cmd, void *content)
 
 void	split_tab(t_list **cmd, char **pipe_tab)
 {
-	int	i = 0;
-	char **pipe;
+	int		i;
+	char	**pipe;
 	void	*adress;
 
+	i = 0;
 	pipe = NULL;
 	while (pipe_tab[i])
 	{
 		pipe = ft_split(pipe_tab[i], ' ');
-		if (!pipe) 
+		if (!pipe)
 			return (perror("Error\n"), free(pipe_tab));
 		// printf("pipe[%d] : %s\n", i, pipe[0]);
 		adress = s_init(pipe, NULL, NULL);

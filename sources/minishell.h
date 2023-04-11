@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 16:14:35 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/10 16:31:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ char		*ft_getenv(t_envp *envp, char *variable);
 int			ft_builtin(t_data *data);
 void		ft_builtin_cd(t_data *data);
 void		ft_builtin_exit(t_data *data);
+void		get_rediction(t_data *data, int i);
+void		ft_extract_outputredir(t_pipeline *pipe, char *str);
+void		ft_extract_inputredir(t_pipeline *pipe, char *str);
 void		ft_input_redirection(t_data *data);
 void		ft_output_redirection(t_data *data);
 

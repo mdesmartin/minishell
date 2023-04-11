@@ -1,6 +1,6 @@
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
+CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
 
 DIR_SRC =	sources/
 
@@ -30,7 +30,10 @@ LST_SRC =	main.c					\
 			process/input.c			\
 			process/output.c		\
 			process/process.c		\
-			process/get_arg_path.c
+			process/get_input.c		\
+			process/get_output.c	\
+			process/get_arg_path.c	\
+			process/get_redirection.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
