@@ -6,97 +6,102 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/11 11:12:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 10:56:29 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_extract_output_trunc(t_pipeline *pipe, char *str, int i, int k)
+static void	ft_free_two_line(char **tab, int i)
 {
-	int	j;
-
-	pipe->output[k] = ft_strdup("0");
-	k++;
-	str[i] = ' ';
-	while (str[i] && str[i] == ' ')
-		i++;
-	j = i;
-	while (str[j] != ' ')
-		j++;
-	pipe->output[k] = ft_substr(str, i, j - i);
-	k++;
-	while (str[i] && i != j)
+	free(tab[i]);
+	free(tab[i + 1]);
+	while (tab[i + 2])
 	{
-		str[i] = ' ';
-		i++;
+		tab[i] = tab[i + 2];
+		tab[i + 1] = tab[i + 3];
+		i += 2;
 	}
-	return (i);
+	tab[i] = NULL;
+	tab[i + 1] = NULL;
 }
 
-static int	ft_extract_output_append(t_pipeline *pipe, char *str, int i, int k)
+static void	ft_del_output(char **cmd)
 {
-	int	j;
+	int	i;
 
-	pipe->output[k] = ft_strdup("1");
-	k++;
-	str[i] = ' ';
-	str[i + 1] = ' ';
-	while (str[i] && str[i] == ' ')
-		i++;
-	j = i;
-	while (str[j] && str[j] != ' ')
-		j++;
-	pipe->output[k] = ft_substr(str, i, j - i);
-	k++;
-	while (str[i] && i != j)
+	i = 0;
+	while (cmd[i])
 	{
-		str[i] = ' ';
+		if (cmd[i][0] == '>' && ft_strlen(cmd[i]) == 1)
+		{
+			ft_free_two_line(cmd, i);
+			i = -1;
+		}
+		else if (cmd[i][0] == '>' && cmd[i][1] == '>' && ft_strlen(cmd[i]) == 2)
+		{
+			ft_free_two_line(cmd, i);
+			i = -1;
+		}
 		i++;
 	}
-	return (i);
 }
 
-static int	ft_outredic_count(char *str)
+static void	ft_extract_output(char **cmd, char **input)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (cmd[i])
+	{
+		if (cmd[i][0] == '>' && ft_strlen(cmd[i]) == 1)
+		{
+			input[j] = ft_strdup("0");
+			input[j + 1] = ft_strdup(cmd[i + 1]);
+			i++;
+			j += 2;
+		}
+		else if (cmd[i][0] == '>' && cmd[i][1] == '>' && ft_strlen(cmd[i]) == 2)
+		{
+			input[j] = ft_strdup("1");
+			input[j + 1] = ft_strdup(cmd[i + 1]);
+			i++;
+			j += 2;
+		}
+		i++;
+	}
+}
+
+static int	ft_outredic_count(char **tab)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	while (tab[i])
 	{
-		if (str[i] == '>' && str[i + 1] != '>')
+		if (tab[i][0] == '>' && ft_strlen(tab[i]) == 1)
+			count++;
+		else if (tab[i][0] == '>' && tab[i][1] == '>' && ft_strlen(tab[i]) == 2)
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-void	ft_extract_outputredir(t_pipeline *pipe, char *str)
+void	ft_extract_outputredir(t_data *data, t_pipeline *pipe)
 {
-	int	i;
-	int	k;
-
-	i = 0;
-	k = 0;
-	pipe->output = ft_calloc(ft_outredic_count(str) * 2 + 1, sizeof(char **));
+	pipe->output = ft_calloc(ft_outredic_count(pipe->command) * 2 + 1,
+			sizeof(char **));
 	if (!pipe->output)
-		perror("Error while allocating memory for extract_outputdir !");
-	while (str[i])
 	{
-		if (str[i + 1] && str[i] == '>' && str[i + 1] != '>')
-		{
-			i = ft_extract_output_trunc(pipe, str, i, k);
-			k += 2;
-		}
-		else if (str[i + 1] && str[i] == '>' && str[i + 1] == '>')
-		{
-			i = ft_extract_output_append(pipe, str, i, k);
-			k += 2;
-		}
-		if (str[i])
-			i++;
+		perror("Error while allocation memory for ft_extract_output_file !");
+		ft_quit(data, 1);
 	}
+	ft_extract_output(pipe->command, pipe->output);
+	ft_del_output(pipe->command);
 }
 

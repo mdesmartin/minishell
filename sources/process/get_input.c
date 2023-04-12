@@ -6,97 +6,102 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/11 11:12:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 17:48:30 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_extract_input_file(t_pipeline *pipe, char *str, int i, int k)
+static void	ft_free_two_line(char **tab, int i)
 {
-	int	j;
-
-	pipe->input[k] = ft_strdup("0");
-	k++;
-	str[i] = ' ';
-	while (str[i] && str[i] == ' ')
-		i++;
-	j = i;
-	while (str[j] != ' ')
-		j++;
-	pipe->input[k] = ft_substr(str, i, j - i);
-	k++;
-	while (str[i] && i != j)
+	free(tab[i]);
+	free(tab[i + 1]);
+	while (tab[i + 2])
 	{
-		str[i] = ' ';
-		i++;
+		tab[i] = tab[i + 2];
+		tab[i + 1] = tab[i + 3];
+		i += 2;
 	}
-	return (i);
+	tab[i] = NULL;
+	tab[i + 1] = NULL;
 }
 
-static int	ft_extract_input_heredoc(t_pipeline *pipe, char *str, int i, int k)
+static void	ft_del_input(char **cmd)
 {
-	int	j;
+	int	i;
 
-	pipe->input[k] = ft_strdup("1");
-	k++;
-	str[i] = ' ';
-	str[i + 1] = ' ';
-	while (str[i] && str[i] == ' ')
-		i++;
-	j = i;
-	while (str[j] && str[j] != ' ')
-		j++;
-	pipe->input[k] = ft_substr(str, i, j - i);
-	k++;
-	while (str[i] && i != j)
+	i = 0;
+	while (cmd[i])
 	{
-		str[i] = ' ';
+		if (cmd[i][0] == '<' && ft_strlen(cmd[i]) == 1)
+		{
+			ft_free_two_line(cmd, i);
+			i = -1;
+		}
+		else if (cmd[i][0] == '<' && cmd[i][1] == '<' && ft_strlen(cmd[i]) == 2)
+		{
+			ft_free_two_line(cmd, i);
+			i = -1;
+		}
 		i++;
 	}
-	return (i);
 }
 
-static int	ft_inredic_count(char *str)
+static void	ft_extract_input(char **cmd, char **input)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (cmd[i])
+	{
+		if (cmd[i][0] == '<' && ft_strlen(cmd[i]) == 1)
+		{
+			input[j] = ft_strdup("0");
+			input[j + 1] = ft_strdup(cmd[i + 1]);
+			i++;
+			j += 2;
+		}
+		else if (cmd[i][0] == '<' && cmd[i][1] == '<' && ft_strlen(cmd[i]) == 2)
+		{
+			input[j] = ft_strdup("1");
+			input[j + 1] = ft_strdup(cmd[i + 1]);
+			i++;
+			j += 2;
+		}
+		i++;
+	}
+}
+
+static int	ft_inredic_count(char **tab)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	while (tab[i])
 	{
-		if (str[i] == '<' && str[i + 1] != '<')
+		if (tab[i][0] == '<' && ft_strlen(tab[i]) == 1)
+			count++;
+		else if (tab[i][0] == '<' && tab[i][1] == '<' && ft_strlen(tab[i]) == 2)
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-void	ft_extract_inputredir(t_pipeline *pipe, char *str)
+void	ft_extract_inputredir(t_data *data, t_pipeline *pipe)
 {
-	int	i;
-	int	k;
-
-	i = 0;
-	k = 0;
-	pipe->input = ft_calloc(ft_inredic_count(str) * 2 + 1, sizeof(char **));
+	pipe->input = ft_calloc(ft_inredic_count(pipe->command) * 2 + 1,
+			sizeof(char **));
 	if (!pipe->input)
-		perror("Error while allocating memory for extract_inputdir !");
-	while (str[i])
 	{
-		if (str[i + 1] && str[i] == '<' && str[i + 1] != '<')
-		{
-			i = ft_extract_input_file(pipe, str, i, k);
-			k += 2;
-		}
-		else if (str[i + 1] && str[i] == '<' && str[i + 1] == '<')
-		{
-			i = ft_extract_input_heredoc(pipe, str, i, k);
-			k += 2;
-		}
-		if (str[i])
-			i++;
+		perror("Error while allocation memory for ft_extract_input_file !");
+		ft_quit(data, 1);
 	}
+	ft_extract_input(pipe->command, pipe->input);
+	ft_del_input(pipe->command);
 }
 
