@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:43:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		perror("First child : Error while duplicating file descriptor! ");
+		ft_perror(data, "First child: Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);
@@ -54,7 +54,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		perror("Last child : Error while duplicating file descriptor! ");
+		ft_perror(data, "Last child: Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);
@@ -82,7 +82,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		perror("Error while duplicating file descriptor! ");
+		ft_perror(data, "Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);

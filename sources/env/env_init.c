@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:09:46 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:55:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	ft_envp_init(t_data *data)
 
 	data->envp = ft_calloc(1, sizeof(t_envp));
 	if (!data->envp)
-		perror("Memory allocation failed while envp_init!");
-	buffer = ft_split_var(environ[0]);
+		ft_perror(data, "Memory allocation failed: envp_init", 12);
+	buffer = ft_split_var(data, environ[0]);
 	data->envp->variable = buffer[0];
 	data->envp->value = buffer[1];
 	data->envp->next = NULL;
@@ -40,8 +40,8 @@ static void	ft_cp_envp(t_data *data)
 	{
 		tmp = ft_calloc(1, sizeof(t_envp));
 		if (!tmp)
-			perror("Memory allocation failed while envp_init!");
-		buffer = ft_split_var(environ[i]);
+			ft_perror(data, "Memory allocation failed: envp_init", 12);
+		buffer = ft_split_var(data, environ[i]);
 		tmp->variable = buffer[0];
 		tmp->value = buffer[1];
 		tmp->next = NULL;
@@ -66,7 +66,7 @@ static void	ft_update_envp(t_data *data)
 			shlvl++;
 			tmp->value = ft_itoa(shlvl);
 			if (!tmp->value)
-				perror("Memory allocation failed while updating SHLVL!");
+				ft_perror(data, "Memory allocation failed: updating SHLVL", 12);
 			return ;
 		}
 		tmp = tmp->next;

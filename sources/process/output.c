@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 13:15:59 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_output_file(t_data *data)
 	// outfile = open((char *)s_read_cnt(data->cmd)->output[0],
 	// 		O_WRONLY | O_APPEND | O_TRUNC, 0644);
 	if (outfile == -1)
-		perror("Error when creating or accessing outfile! ");
+		ft_perror(data, "Error when creating or accessing outfile", 1);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		perror("Error while duplicating file descriptor! ");
+		ft_perror(data, "Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 }
@@ -40,11 +40,11 @@ void	ft_output_appends(t_data *data)
 	// outfile = open((char *)s_read_cnt(data->cmd)->output[0],
 	// 		O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile == -1)
-		perror("Error when creating or accessing outfile! ");
+		ft_perror(data, "Error when creating or accessing outfile", 1);
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		perror("Error while duplicating file descriptor! ");
+		ft_perror(data, "Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 }

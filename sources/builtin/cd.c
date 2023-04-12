@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:51:52 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_check_oldpwd(t_data *data)
 			{
 				tmp->value = getcwd(NULL, 0);
 				if (!tmp->value)
-					perror("Memory allocation failed for SHLVL's value!");
+					ft_perror(data, "Memory allocation failed: SHLVL's value ", 12);
 			}
 			return ;
 		}
@@ -33,10 +33,10 @@ static void	ft_check_oldpwd(t_data *data)
 	}
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
-		perror("Memory allocation failed while check_oldpwd!");
+		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
 	tmp->variable = strdup("OLDPWD");
 	if (!tmp->variable)
-		perror("Memory allocation failed while check_oldpwd!");
+		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
 	tmp->next = NULL;
 	ft_envadd_back(&data->envp, tmp);
 }
@@ -64,7 +64,7 @@ static void	ft_update_pwd(t_data *data)
 	pwd = data->envp;
 	buffer = getcwd(NULL, 0);
 	if (buffer == NULL)
-		perror("Error while calling getcwd()! ");
+		ft_perror(data, "getcwd() failed", 1);
 	while (pwd)
 	{
 		if (ft_strncmp("PWD", pwd->variable, 4) == 0)
@@ -112,15 +112,15 @@ void	ft_builtin_cd(t_data *data, char **command)
 		if (!home)
 			return ;
 		if (chdir(home) == -1)
-			perror("Error while calling chdir()! ");
+			ft_perror(data, "chdir() failed", 1);
 	}
 	else if (ft_strncmp("-", command[1], 2) == 0)
 	{
 		if (chdir(ft_getenv(data->envp, "OLDPWD")) == -1)
-			perror("Error while calling chdir()! ");
+			ft_perror(data, "chdir() failed", 1);
 	}
 	else if (chdir(command[1]) == -1)
-		perror("Error while calling chdir()! ");
+		ft_perror(data, "chdir() failed", 1);
 	ft_update_oldpwd(data);
 	ft_update_pwd(data);
 	ft_update_envptab(data);

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:46:00 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ char	*ft_get_arg_path(t_data *data, char **command)
 		return (tmp);
 	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
-		perror("Error when retrieving PATH! ");
+		ft_perror(data, "Error when retrieving PATH!", 1);
 	paths = ft_split(tmp, ':');
 	if (!paths)
-		perror("Error when spliting PATH! ");
+		ft_perror(data, "Error when spliting PATH!", 1);
 	i = 0;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		if (!tmp)
-			perror("Error when adding \'/\' to the path");
+			ft_perror(data, "Error when adding \'/\' to the path", 12);
 		free(paths[i]);
 		paths[i] = tmp;
 		i++;

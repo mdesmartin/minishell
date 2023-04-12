@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:48:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:55:25 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	ft_export_add(t_data *data, char **command, int i)
 
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
-		perror("Error while allocating memory for envp!");
+		ft_perror(data, "Memory allocation failed: envp", 12);
 	if (ft_is_c_in(command[i], '=') == 1)
 	{
-		buffer = ft_split_var(command[i]);
+		buffer = ft_split_var(data, command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_add!");
 		tmp->variable = buffer[0];
@@ -75,7 +75,7 @@ static void	ft_export_mod(t_data *data, t_envp *var, char **command, int i)
 
 	if (ft_is_c_in(command[i], '=') == 1)
 	{
-		buffer = ft_split_var(command[i]);
+		buffer = ft_split_var(data, command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_mod!");
 		free(var->value);

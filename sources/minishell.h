@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 16:38:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:55:09 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
 void		ft_error(t_data *data, char *s);
+void		ft_perror(t_data *data, char *str, int code);
 void		ft_quit(t_data *data, int code);
 void		ft_free_tab(char **tab);
 void		ft_rfree_tab(char **tab, int i);
@@ -83,10 +84,9 @@ void		ft_unset(t_data *data, char **command);
 void		ft_envadd_back(t_envp **lst, t_envp *new);
 t_envp		*ft_envlast(t_envp *lst);
 void		ft_print_export(t_data *data);
-char		**ft_lst_to_tabtab(t_envp *envp);
-void		ft_print_tabtab(char **tab);
+char		**ft_lst_to_tabtab(t_data *data, t_envp *envp);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
-char		**ft_split_var(char *var);
+char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
 
 void		ft_cmd(t_data *data);

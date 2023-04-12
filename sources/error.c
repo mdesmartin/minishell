@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 16:15:07 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:43:05 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	ft_quit(t_data *data, int code)
 	exit(code);
 }
 
-void	ft_error(t_data *data, char *s)
+void	ft_error(t_data *data, char *str)
 {
-	ft_putstr_fd(s, 2);
-	perror(" ");
+	perror(str);
 	ft_quit(data, 1);
 }
 
@@ -76,4 +75,10 @@ void	ft_free_envptab(t_data *data)
 	}
 	free(data->envp_tab);
 	data->envp_tab = NULL;
+}
+
+void	ft_perror(t_data *data, char *str, int code)
+{
+	perror(str);
+	data->exit_code = code;
 }

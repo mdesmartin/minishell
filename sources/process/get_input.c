@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/11 17:48:30 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_extract_inputredir(t_data *data, t_pipeline *pipe)
 			sizeof(char **));
 	if (!pipe->input)
 	{
-		perror("Error while allocation memory for ft_extract_input_file !");
+		ft_perror(data, "Memory allocation failed: ft_extract_input_file", 12);
 		ft_quit(data, 1);
 	}
 	ft_extract_input(pipe->command, pipe->input);

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 13:18:19 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 
 	infile = open(file, O_RDONLY, 0644);
 	if (infile == -1)
-		perror("Error when opening file1! ");
+		ft_perror(data, "Error when opening file1", 1);
 	if (last_redir == 1)
 	{
 		close(infile);
@@ -31,7 +31,7 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 	{
 		ft_close_fds(data, NULL);
 		close(infile);
-		perror("Error while duplicating file descriptor! ");
+		ft_perror(data, "Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 }
@@ -70,7 +70,7 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 			break ;
 		if (write(here_doc_fd[1], input, intput_len) == -1
 			|| write(here_doc_fd[1], "\n", 1) == -1)
-			perror("Error while writing in the here_doc's pipe!");
+			ft_perror(data, "Error while writing in the here_doc's pipe!", 1);
 		free(input);
 	}
 	free(input);
