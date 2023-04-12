@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 16:17:31 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 13:15:59 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_output_file(t_data *data)
 		perror("Error when creating or accessing outfile! ");
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data);
+		ft_close_fds(data, NULL);
 		perror("Error while duplicating file descriptor! ");
 		ft_quit(data, 1);
 	}
@@ -43,7 +43,7 @@ void	ft_output_appends(t_data *data)
 		perror("Error when creating or accessing outfile! ");
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data);
+		ft_close_fds(data, NULL);
 		perror("Error while duplicating file descriptor! ");
 		ft_quit(data, 1);
 	}

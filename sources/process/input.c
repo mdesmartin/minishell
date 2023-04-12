@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/10 13:30:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 13:18:19 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,39 @@
 
 // input[0] : 0 = < ; 1 = <<
 // input[1] : file or limiter
-static void	ft_input_file(t_data *data, char *file)
+
+static void	ft_input_file(t_data *data, char *file, int last_redir)
 {
 	int	infile;
 
 	infile = open(file, O_RDONLY, 0644);
-	// infile = open((char *)s_read_cnt(data->cmd)->input[0], O_RDONLY, 0644);
 	if (infile == -1)
 		perror("Error when opening file1! ");
+	if (last_redir == 1)
+	{
+		close(infile);
+		return ;
+	}
 	if (dup2(infile, STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data);
+		ft_close_fds(data, NULL);
 		close(infile);
 		perror("Error while duplicating file descriptor! ");
 		ft_quit(data, 1);
 	}
 }
-// remplace readline with GNL
+
+// static char	*ft_gnl_minishell(void)
+// {
+// 	printf("here_doc> ");
+// 	return (get_next_line(STDIN_FILENO));
+// }
+
+static void	ft_close_hd_fd(int *here_doc_fd)
+{
+	close(here_doc_fd[0]);
+	close(here_doc_fd[1]);
+}
 
 static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 {
@@ -41,11 +57,10 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 	limiter_len = ft_strlen(limiter);
 	while (1)
 	{
-		input = readline("here_doc> ");
+		input = readline("readline> ");
 		if (!input)
 		{
-			close(here_doc_fd[0]);
-			close(here_doc_fd[1]);
+			ft_close_hd_fd(here_doc_fd);
 			free(here_doc_fd);
 			ft_error(data, "Error while using here_doc");
 		}
@@ -61,13 +76,10 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 	free(input);
 }
 
-static void	ft_input_heredoc(t_data *data)
+static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 {
-	char	limiter[5] = "STOP";
-	// char	*limiter;
 	int		*here_doc_fd;
 
-	// limiter = (char *)s_read_cnt(data->cmd)->input[1];
 	here_doc_fd = ft_calloc(3, sizeof(int *));
 	if (!here_doc_fd)
 		ft_error(data, "Memory allocating failed for here_doc_fd");
@@ -77,44 +89,39 @@ static void	ft_input_heredoc(t_data *data)
 		ft_error(data, "Pipe failed for here_doc!");
 	}
 	ft_here_doc(data, here_doc_fd, limiter);
-	close(here_doc_fd[1]);
+	if (last_redir == 1)
+	{
+		ft_close_fds(data, here_doc_fd);
+		free(here_doc_fd);
+		return ;
+	}
 	if (dup2(here_doc_fd[0], STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data);
-		close(here_doc_fd[0]);
+		ft_close_fds(data, here_doc_fd);
 		free(here_doc_fd);
 		ft_error(data, "Error while duplicating file descriptor! ");
 	}
-	close(here_doc_fd[0]);
+	ft_close_hd_fd(here_doc_fd);
 }
-
-// void	ft_input_redirection(t_data *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while ((char *)s_read_cnt(data->cmd)->command[i])
-// 	{
-// 		if ((char)s_read_cnt(data->cmd)->command[i][0] == '<'
-// 			&& (char)s_read_cnt(data->cmd)->command[i][1] != '<')
-// 		{
-// 			if ((char)s_read_cnt(data->cmd)->command[i][1])
-// 			{
-// 				ft_input_file(data, (char *)s_read_cnt(data->cmd)->command[i] + 1);
-// 			}
-// 		}
-// 		if ((char)s_read_cnt(data->cmd)->command[i][0] == '<'
-// 			&& (char)s_read_cnt(data->cmd)->command[i][1] == '<')
-// 			ft_input_heredoc(data);
-// 	}
-// }
 
 void	ft_input_redirection(t_data *data)
 {
-	if (!(char *)s_read_cnt(data->cmd)->input[0])
-		return ;
-	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '0')
-		ft_input_file(data, "test.txt");
-	else if ((char)s_read_cnt(data->cmd)->input[0][0] == '1')
-		ft_input_heredoc(data);
+	char	**input;
+	int		last_redir;
+	int		i;
+
+	i = 0;
+	input = (char **)s_read_cnt(data->cmd)->input;
+	while (input[i] && input[i + 1])
+	{
+		if (!input[i + 2])
+			last_redir = 0;
+		else
+			last_redir = 1;
+		if (input[i][0] == '0')
+			ft_input_file(data, input[i + 1], last_redir);
+		else if (input[i][0] == '1')
+			ft_input_heredoc(data, input[i + 1], last_redir);
+		i += 2;
+	}
 }

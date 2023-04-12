@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/10 13:36:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 13:15:59 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_process(t_data *data)
 		if (pids == 0)
 			ft_child(data, data->pipes, i);
 	}
-	ft_close_fds(data);
+	ft_close_fds(data, NULL);
 	while (--i >= 0)
 	{
 		waitpid(-1, &status, 0);
