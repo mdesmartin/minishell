@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:23:17 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:48:34 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_export_add(t_data *data, int i)
+static void	ft_export_add(t_data *data, char **command, int i)
 {
 	t_envp	*tmp;
 	char	**buffer;
@@ -20,9 +20,9 @@ static void	ft_export_add(t_data *data, int i)
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
 		perror("Error while allocating memory for envp!");
-	if (ft_is_c_in(s_read_cnt(data->cmd)->command[i], '=') == 1)
+	if (ft_is_c_in(command[i], '=') == 1)
 	{
-		buffer = ft_split_var(s_read_cnt(data->cmd)->command[i]);
+		buffer = ft_split_var(command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_add!");
 		tmp->variable = buffer[0];
@@ -31,7 +31,7 @@ static void	ft_export_add(t_data *data, int i)
 	}
 	else
 	{
-		tmp->variable = ft_strdup(s_read_cnt(data->cmd)->command[i]);
+		tmp->variable = ft_strdup(command[i]);
 		tmp->value = NULL;
 	}
 	tmp->next = NULL;
@@ -52,16 +52,16 @@ static int	ft_varlen(char *var)
 	return (0);
 }
 
-static t_envp	*ft_is_var_in_env(t_data *data, int i)
+static t_envp	*ft_is_var_in_env(t_data *data, char **command, int i)
 {
 	t_envp				*tmp;
 	long unsigned int	n;
 
 	tmp = data->envp;
-	n = ft_varlen(s_read_cnt(data->cmd)->command[i]);
+	n = ft_varlen(command[i]);
 	while (tmp)
 	{
-		if (ft_strncmp(s_read_cnt(data->cmd)->command[i], tmp->variable, n) == 0
+		if (ft_strncmp(command[i], tmp->variable, n) == 0
 			&& ft_strlen(tmp->variable) == n)
 			return (tmp);
 		tmp = tmp->next;
@@ -69,13 +69,13 @@ static t_envp	*ft_is_var_in_env(t_data *data, int i)
 	return (NULL);
 }
 
-static void	ft_export_mod(t_data *data, t_envp *var, int i)
+static void	ft_export_mod(t_data *data, t_envp *var, char **command, int i)
 {
 	char	**buffer;
 
-	if (ft_is_c_in(s_read_cnt(data->cmd)->command[i], '=') == 1)
+	if (ft_is_c_in(command[i], '=') == 1)
 	{
-		buffer = ft_split_var(s_read_cnt(data->cmd)->command[i]);
+		buffer = ft_split_var(command[i]);
 		if (!buffer)
 			ft_error(data, "Memory allocation failed for export_mod!");
 		free(var->value);
@@ -85,27 +85,27 @@ static void	ft_export_mod(t_data *data, t_envp *var, int i)
 	}
 }
 
-void	ft_export(t_data *data)
+void	ft_export(t_data *data, char **command)
 {
 	t_envp	*var;
 	int		i;
 
 	i = 1;
-	while (s_read_cnt(data->cmd)->command[i])
+	while (command[i])
 	{
-		if (ft_check_exportvar(s_read_cnt(data->cmd)->command[i]) == 1)
+		if (ft_check_exportvar(command[i]) == 1)
 		{
 			ft_putstr_fd("minishell : export: `", 2);
-			ft_putstr_fd(s_read_cnt(data->cmd)->command[i], 2);
+			ft_putstr_fd(command[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 		}
-		else if (ft_strncmp("_=", s_read_cnt(data->cmd)->command[i], 2) != 0)
+		else if (ft_strncmp("_=", command[i], 2) != 0)
 		{
-			var = ft_is_var_in_env(data, i);
+			var = ft_is_var_in_env(data, command, i);
 			if (var != NULL)
-				ft_export_mod(data, var, i);
+				ft_export_mod(data, var, command, i);
 			else
-				ft_export_add(data, i);
+				ft_export_add(data, command, i);
 		}
 		i++;
 	}

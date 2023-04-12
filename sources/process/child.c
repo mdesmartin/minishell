@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 13:24:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 16:43:04 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_only_child(t_data *data)
 	ft_input_redirection(data);
 	// ft_output_redirection(data);
 	ft_close_fds(data, NULL);
-	path = ft_get_arg_path(data);
+	path = ft_get_arg_path(data, (char **)s_read_cnt(data->cmd)->command);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
 }
 
@@ -35,18 +35,21 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);
-	if (ft_builtin(data) != 0)
+	if (ft_builtin(data, (char **)s_read_cnt(data->cmd)->command) != 0)
 		ft_quit(data, 0);
-	path = ft_get_arg_path(data);
+	path = ft_get_arg_path(data, (char **)s_read_cnt(data->cmd)->command);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
+	ft_putstr3_fd((char *)s_read_cnt(data->cmd)->command[0],
+		": command", " not found\n");
+	ft_quit(data, 1);
 }
 
 static void	ft_last_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
-	t_data	*tmp;
+	t_list	*tmp;
 
-	tmp = data;
+	tmp = data->cmd;
 	// ft_output_redirection(data);
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
@@ -57,21 +60,24 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	ft_close_fds(data, NULL);
 	while (i > 0)
 	{
-		tmp->cmd = tmp->cmd->next;
+		tmp = tmp->next;
 		i--;
 	}
-	if (ft_builtin(tmp) != 0)
+	if (ft_builtin(data, (char **)s_read_cnt(tmp)->command) != 0)
 		ft_quit(data, 0);
-	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(tmp->cmd)->command, data->envp_tab);
+	path = ft_get_arg_path(data, (char **)s_read_cnt(tmp)->command);
+	execve(path, (char **)s_read_cnt(tmp)->command, data->envp_tab);
+	ft_putstr3_fd((char *)s_read_cnt(tmp)->command[0],
+		": command", " not found\n");
+	ft_quit(data, 1);
 }
 
 static void	ft_middle_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
-	t_data	*tmp;
+	t_list	*tmp;
 
-	tmp = data;
+	tmp = data->cmd;
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
@@ -82,13 +88,16 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	ft_close_fds(data, NULL);
 	while (i > 0)
 	{
-		tmp->cmd = tmp->cmd->next;
+		tmp = tmp->next;
 		i--;
 	}
-	if (ft_builtin(tmp) != 0)
+	if (ft_builtin(data, (char **)s_read_cnt(tmp)->command) != 0)
 		ft_quit(data, 0);
-	path = ft_get_arg_path(data);
-	execve(path, (char **)s_read_cnt(tmp->cmd)->command, data->envp_tab);
+	path = ft_get_arg_path(data, (char **)s_read_cnt(tmp)->command);
+	execve(path, (char **)s_read_cnt(tmp)->command, data->envp_tab);
+	ft_putstr3_fd((char *)s_read_cnt(tmp)->command[0],
+		": command", " not found\n");
+	ft_quit(data, 1);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
@@ -102,7 +111,4 @@ void	ft_child(t_data *data, int **pipes, int i)
 		ft_last_child(data, pipes, i);
 	else
 		ft_middle_child(data, pipes, i);
-	ft_putstr3_fd((char *)s_read_cnt(data->cmd)->command[0],
-		": command", " not found\n");
-	ft_quit(data, 1);
 }

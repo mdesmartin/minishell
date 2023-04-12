@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 10:58:20 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 14:36:50 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	get_rediction(t_data *data, int i)
 {
-	t_data		*tmp;
+	t_list		*tmp;
 	t_pipeline	*pipe;
 
-	tmp = data;
+	tmp = data->cmd;
 	while (i > 0)
 	{
-		tmp->cmd = tmp->cmd->next;
+		tmp = tmp->next;
 		i--;
 	}
-	pipe = s_read_cnt(tmp->cmd);
+	pipe = s_read_cnt(tmp);
 	ft_extract_inputredir(data, pipe);
 	ft_extract_outputredir(data, pipe);
 }

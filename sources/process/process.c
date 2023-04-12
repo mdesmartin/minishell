@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 13:15:59 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:23:17 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void	ft_process(t_data *data)
 void	ft_cmd(t_data *data)
 {
 	data->nb_cmd = ft_lstsize(data->cmd);
-	if (data->nb_cmd == 1 && ft_builtin(data) != 0)
+	if (data->nb_cmd == 1
+		&& ft_builtin(data, s_read_cnt(data->cmd)->command) != 0)
 		return ;
 	else
 		ft_process(data);

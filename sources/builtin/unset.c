@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:39:23 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ void	ft_del_onelst(t_envp *envp, char *variable)
 	}
 }
 
-void	ft_unset(t_data *data)
+void	ft_unset(t_data *data, char **command)
 {
 	int	i;
 
 	i = 1;
-	while (s_read_cnt(data->cmd)->command[i])
+	while (command[i])
 	{
-		if (ft_strncmp("_", s_read_cnt(data->cmd)->command[i], 2) != 0)
-			ft_del_onelst(data->envp,
-				(char *) s_read_cnt(data->cmd)->command[i]);
+		if (ft_strncmp("_", command[i], 2) != 0)
+			ft_del_onelst(data->envp, command[i]);
 		i++;
 	}
 	ft_update_envptab(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 16:09:46 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,15 @@ void	ft_envp(t_data *data)
 		ft_check_envp(data);
 		ft_update_envp(data);
 	}
+}
+
+void	ft_check_envarg(t_data *data, char **command)
+{
+	if (command[1])
+	{
+		ft_putstr3_fd("minishell: ", "env: ", ": no argument required\n");
+		// data->exit_code =
+	}
+	else
+		ft_print_env(data);
 }

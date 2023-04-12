@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 15:51:52 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,15 @@ static void	ft_update_oldpwd(t_data *data)
 	oldpwd->value = pwd->value;
 }
 
-void	ft_builtin_cd(t_data *data)
+void	ft_builtin_cd(t_data *data, char **command)
 {
 	char	*home;
 
 	ft_check_pwd(data);
 	ft_check_oldpwd(data);
-	if (s_read_cnt(data->cmd)->command[1] != NULL
-		&& s_read_cnt(data->cmd)->command[2] != NULL)
+	if (command[1] != NULL && command[2] != NULL)
 		printf("cd: too many arguments\n");
-	if (s_read_cnt(data->cmd)->command[1] == NULL)
+	if (command[1] == NULL)
 	{
 		home = ft_get_home(data);
 		if (!home)
@@ -115,12 +114,12 @@ void	ft_builtin_cd(t_data *data)
 		if (chdir(home) == -1)
 			perror("Error while calling chdir()! ");
 	}
-	else if (ft_strncmp("-", s_read_cnt(data->cmd)->command[1], 2) == 0)
+	else if (ft_strncmp("-", command[1], 2) == 0)
 	{
 		if (chdir(ft_getenv(data->envp, "OLDPWD")) == -1)
 			perror("Error while calling chdir()! ");
 	}
-	else if (chdir(s_read_cnt(data->cmd)->command[1]) == -1)
+	else if (chdir(command[1]) == -1)
 		perror("Error while calling chdir()! ");
 	ft_update_oldpwd(data);
 	ft_update_pwd(data);
