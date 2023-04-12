@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/06 13:32:25 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 00:51:21 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	check_input(char *input)
 	// {}
 	if (!(*input))
 		return (1);
-	if (basic_error(input))
-		return (1);
+	// if (basic_error(input))
+	// 	return (1);
 	return (0);
 }
 

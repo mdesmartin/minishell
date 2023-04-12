@@ -23,6 +23,7 @@ LST_SRC =	main.c					\
 			parsing/free_cmd.c 		\
 			parsing/check_input.c \
 			parsing/check_chevron.c \
+			parsing/split_cmd.c		\
 			process/process.c		\
 			s_access.c 				\
 			process/child.c			\

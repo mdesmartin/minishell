@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/06 13:05:21 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 13:01:23 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_tab(char **pipe_tab)
 
 	while (pipe_tab[i])
 	{
-		printf("tab[%d] : %s\n", i, pipe_tab[i]);
+		printf("tab[%d] : %send\n", i, pipe_tab[i]);
 		i++;
 	}
 	return ;
@@ -66,7 +66,9 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	pipe = NULL;
 	while (pipe_tab[i])
 	{
-		pipe = ft_split(pipe_tab[i], ' ');
+		pipe = create_command(pipe_tab[i]);// ft_split(pipe_tab[i], ' ');
+		print_tab(pipe);//
+		printf("\n");//
 		if (!pipe) 
 			return (perror("Error\n"), free(pipe_tab));
 		// printf("pipe[%d] : %s\n", i, pipe[0]);
@@ -83,7 +85,7 @@ int	parsing(t_data *data, char *input)
 	char	**pipe_tab;
 	int		nb_p;
 
-	nb_p = nb_pipes(input);
+	nb_p = nb_pipes(input, '|');
 	if (nb_p == -1)
 		return (-1);//quote pas fermée
 	pipe_tab = NULL;
