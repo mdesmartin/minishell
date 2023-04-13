@@ -1,7 +1,12 @@
 NAME = minishell
+DEBUG = no
 
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
-#  -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
+DFLAGS = -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
+
+ifeq ($(DEBUG), yes)
+CFLAGS += $(DFLAGS)
+endif
 
 DIR_SRC =	sources/
 
@@ -53,6 +58,9 @@ all: lib
 lib :
 	@$(MAKE) -C $(DIR_SRC)libft
 
+debug :
+	@$(MAKE) re DEBUG=yes
+
 clean:
 	@rm -rf $(DIR_OBJ)
 	@$(MAKE) -C $(DIR_SRC)libft clean
@@ -65,7 +73,7 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re lib debug
 
 #  ===========================  COMPILATION  ===========================  #
 
