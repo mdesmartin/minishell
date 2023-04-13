@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_access.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/03 15:21:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 15:33:16 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ void	*s_init(char **command, char **input, char **output)
 		pipeline->command = command;
 
 	if (!input)
-		pipeline->input = calloc_tab();//terminer dinit la structure puis modif dand split tab, compile, test dollar, add ><<<>> when init
+		pipeline->input = output;
+		// pipeline->input = calloc_tab();//terminer dinit la structure puis modif dand split tab, compile, test dollar, add ><<<>> when init
 	if (!output)
-		pipeline->output = calloc_tab();
+		pipeline->output = input;
+		// pipeline->output = calloc_tab();
 	return (pipeline);		
 }
 
