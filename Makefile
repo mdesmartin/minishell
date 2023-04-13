@@ -2,7 +2,7 @@ NAME = minishell
 DEBUG = no
 
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
-DFLAGS = -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
+DFLAGS = -g3 -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined
 
 ifeq ($(DEBUG), yes)
 CFLAGS += $(DFLAGS)
