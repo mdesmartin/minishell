@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 13:10:44 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,12 @@ static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 	ft_close_hd_fd(here_doc_fd);
 }
 
-void	ft_input_redirection(t_data *data)
+void	ft_input_redirection(t_data *data, char **input)
 {
-	char	**input;
 	int		last_redir;
 	int		i;
 
 	i = 0;
-	input = (char **)s_read_cnt(data->cmd)->input;
 	while (input[i] && input[i + 1])
 	{
 		if (!input[i + 2])

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 13:44:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	ft_only_child(t_data *data)
 {
 	char	*path;
 
-	ft_input_redirection(data);
-	// ft_output_redirection(data);
+	ft_input_redirection(data, (char **)s_read_cnt(data->cmd)->input);
+	ft_output_redirection(data, (char **)s_read_cnt(data->cmd)->output);
 	ft_close_fds(data, NULL);
 	path = ft_get_arg_path(data, (char **)s_read_cnt(data->cmd)->command);
 	execve(path, (char **)s_read_cnt(data->cmd)->command, data->envp_tab);
@@ -27,11 +27,12 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 {
 	char	*path;
 
-	ft_input_redirection(data);
+	ft_input_redirection(data, (char **)s_read_cnt(data->cmd)->input);
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data, "First child: Error while duplicating file descriptor", 1);
+		ft_perror(data,
+			"First child: Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);
@@ -50,19 +51,20 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	t_list	*tmp;
 
 	tmp = data->cmd;
-	// ft_output_redirection(data);
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data, "Last child: Error while duplicating file descriptor", 1);
+		ft_perror(data,
+			"Last child: Error while duplicating file descriptor", 1);
 		ft_quit(data, 1);
 	}
-	ft_close_fds(data, NULL);
 	while (i > 0)
 	{
 		tmp = tmp->next;
 		i--;
 	}
+	ft_output_redirection(data, (char **)s_read_cnt(tmp)->output);
+	ft_close_fds(data, NULL);
 	if (ft_builtin(data, (char **)s_read_cnt(tmp)->command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, (char **)s_read_cnt(tmp)->command);
@@ -77,7 +79,6 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	char	*path;
 	t_list	*tmp;
 
-	tmp = data->cmd;
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
@@ -86,6 +87,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		ft_quit(data, 1);
 	}
 	ft_close_fds(data, NULL);
+	tmp = data->cmd;
 	while (i > 0)
 	{
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 12:29:38 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,17 @@ static void	ft_process(t_data *data)
 		if (WIFEXITED(status))
 			data->exit_code = WEXITSTATUS(status);
 	}
-// printf("Last child exit code is %d\n", data->exit_code);
 	ft_pipe_free(data);
 }
 
 void	ft_cmd(t_data *data)
 {
+	char	**command;
+
+	command = s_read_cnt(data->cmd)->command;
 	data->nb_cmd = ft_lstsize(data->cmd);
-	if (data->nb_cmd == 1
-		&& ft_builtin(data, s_read_cnt(data->cmd)->command) != 0)
+	if (data->nb_cmd == 1 && ft_inredic_count(command) == 0
+		&& ft_outredic_count(command) == 0 && ft_builtin(data, command) != 0)
 		return ;
-	else
-		ft_process(data);
+	ft_process(data);
 }

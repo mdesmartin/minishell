@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:55:09 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 13:35:16 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ char		**ft_lst_to_tabtab(t_data *data, t_envp *envp);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
+int			ft_inredic_count(char **tab);
+int			ft_outredic_count(char **tab);
+char		**ft_redirection(t_data *data, int i);
 
 void		ft_cmd(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
@@ -100,8 +103,8 @@ void		ft_check_envarg(t_data *data, char **command);
 void		get_rediction(t_data *data, int i);
 void		ft_extract_outputredir(t_data *data, t_pipeline *pipe);
 void		ft_extract_inputredir(t_data *data, t_pipeline *pipe);
-void		ft_input_redirection(t_data *data);
-void		ft_output_redirection(t_data *data);
+void		ft_input_redirection(t_data *data, char **input);
+void		ft_output_redirection(t_data *data, char **output);
 
 int			parsing(t_data *data, char *readed);
 void		*free_tab(char **tab);

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 12:26:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	ft_extract_output(char **cmd, char **input)
 	}
 }
 
-static int	ft_outredic_count(char **tab)
+int	ft_outredic_count(char **tab)
 {
 	int	i;
 	int	count;

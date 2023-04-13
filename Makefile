@@ -1,7 +1,6 @@
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
-#  -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
+CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined -g3
 
 DIR_SRC =	sources/
 
