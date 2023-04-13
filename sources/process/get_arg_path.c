@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 15:08:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,11 @@ char	*ft_getenv(t_envp *envp, char *variable)
 	return (NULL);
 }
 
-char	*ft_get_arg_path(t_data *data, char **command)
+static void	ft_add_bslash(t_data *data, char **paths)
 {
-	int		i;
 	char	*tmp;
-	char	**paths;
+	int		i;
 
-	tmp = ft_is_path_in_cmd(data, command);
-	if (tmp)
-		return (tmp);
-	tmp = ft_getenv(data->envp, "PATH");
-	if (!tmp)
-		ft_perror(data, "Error when retrieving PATH!", 1);
-	paths = ft_split(tmp, ':');
-	if (!paths)
-		ft_perror(data, "Error when spliting PATH!", 1);
 	i = 0;
 	while (paths[i])
 	{
@@ -87,5 +77,25 @@ char	*ft_get_arg_path(t_data *data, char **command)
 		paths[i] = tmp;
 		i++;
 	}
+}
+
+char	*ft_get_arg_path(t_data *data, char **command)
+{
+	char	*tmp;
+	char	**paths;
+
+	tmp = ft_is_path_in_cmd(data, command);
+	if (tmp)
+		return (tmp);
+	tmp = ft_getenv(data->envp, "PATH");
+	if (!tmp)
+	{
+		ft_perror(data, "Error when retrieving PATH!", 1);
+		return (NULL);
+	}
+	paths = ft_split(tmp, ':');
+	if (!paths)
+		ft_perror(data, "Error when spliting PATH!", 1);
+	ft_add_bslash(data, paths);
 	return (ft_find_path(data, command, paths));
 }
