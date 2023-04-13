@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 13:10:44 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 17:05:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 	limiter_len = ft_strlen(limiter);
 	while (1)
 	{
-		input = readline("readline> ");
+		ft_putstr_fd("here_doc> ", STDIN_FILENO);
+		input = get_next_line(STDIN_FILENO);
 		if (!input)
 		{
 			ft_close_hd_fd(here_doc_fd);
@@ -106,6 +107,7 @@ static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 
 void	ft_input_redirection(t_data *data, char **input)
 {
+	char	*tmp;
 	int		last_redir;
 	int		i;
 
@@ -119,7 +121,12 @@ void	ft_input_redirection(t_data *data, char **input)
 		if (input[i][0] == '0')
 			ft_input_file(data, input[i + 1], last_redir);
 		else if (input[i][0] == '1')
+		{
+			tmp = input[i + 1];
+			input[i + 1] = ft_strjoin(input[i + 1], "\n");
+			free(tmp);
 			ft_input_heredoc(data, input[i + 1], last_redir);
+		}
 		i += 2;
 	}
 }
