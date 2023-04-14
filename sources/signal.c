@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/04/14 13:38:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 15:08:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	signal_handler(int signum)
 	{
 		if (g_exitcode != 1)
 			g_exitcode += 1;
-		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
