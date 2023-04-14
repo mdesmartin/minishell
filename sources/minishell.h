@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 12:50:22 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:05:50 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ int			parsing(t_data *data, char *readed);
 void		*free_tab(char **tab);
 void		free_lst(t_list **cmd);
 void		get_signal(int signal);
-int			nb_pipes(char *input, char separator);
+int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
 
-char		**split_pipes(char **pipe_tab, int nb_p, char *input, char separator);
+char		**split_pipes(char **pipe_tab, int nb_p, char *input);
 void		create_chain(t_list **cmd, void *content);
 t_pipeline	*s_convert_content(void *content);
 t_pipeline	*s_read_cnt(t_list *cmd);
@@ -120,9 +120,10 @@ char	**create_command(char *pipe_tab);
 int	find_separator(char *input, int *i, char separator);
 int	find_quote(char *input, int *i, char quote);
 
-
+char	**token_tab(char *pipe);
 
 void	print_tab(char **pipe_tab);
-
+char	*space_chevron(char *pipe);
+char	**split_token(char *s, char *charset);
 
 #endif
