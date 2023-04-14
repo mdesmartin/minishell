@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:55 by julien            #+#    #+#             */
-/*   Updated: 2023/04/05 14:45:23 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/12 17:52:29 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putstr3_fd(char *s1, char *s2, char *s3)
 void	ft_update_envptab(t_data *data)
 {
 	ft_free_envptab(data);
-	data->envp_tab = ft_lst_to_tabtab(data->envp);
+	data->envp_tab = ft_lst_to_tabtab(data, data->envp);
 }
 
 int	ft_check_exportvar(char *variable)

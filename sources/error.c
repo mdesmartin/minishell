@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:14 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 11:18:41 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_rfree_tab(char **tab, int i)
 	free(tab);
 }
 
-void	ft_quit(t_data *data)
+void	ft_quit(t_data *data, int code)
 {
 	int	i;
 
@@ -47,18 +47,20 @@ void	ft_quit(t_data *data)
 		free(data->pipes);
 		data->pipes = NULL;
 	}
+	if (data->here_doc_fd)
+		free(data->here_doc_fd);
 	free_lst(&data->cmd);
 	free(data->cmd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
+	rl_clear_history();
+	exit(code);
 }
 
-void	ft_error(t_data *data, char *s)
+void	ft_error(t_data *data, char *str)
 {
-	ft_putstr_fd(s, 2);
-	perror(" ");
-	ft_quit(data);
-	exit (1);
+	perror(str);
+	ft_quit(data, 1);
 }
 
 void	ft_free_envptab(t_data *data)
@@ -71,8 +73,15 @@ void	ft_free_envptab(t_data *data)
 	while (data->envp_tab[i])
 	{
 		free(data->envp_tab[i]);
+		data->envp_tab[i] = NULL;
 		i++;
 	}
 	free(data->envp_tab);
 	data->envp_tab = NULL;
+}
+
+void	ft_perror(t_data *data, char *str, int code)
+{
+	perror(str);
+	data->exit_code = code;
 }

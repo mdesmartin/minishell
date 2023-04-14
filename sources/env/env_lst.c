@@ -6,7 +6,7 @@
 /*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:15:44 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/05 14:10:10 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 15:59:52 by julien           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ void	ft_free_envplst(t_data *data)
 	{
 		free(current->value);
 		free(current->variable);
+		current->value = NULL;
+		current->variable = NULL;
 		previous = current;
 		current = current->next;
 		free(previous);
+		previous = NULL;
 	}
 	data->envp = NULL;
 }

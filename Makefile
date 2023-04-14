@@ -1,37 +1,45 @@
 NAME = minishell
+DEBUG = no
 
 CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
+DFLAGS = -g3 -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined
+
+ifeq ($(DEBUG), yes)
+CFLAGS += $(DFLAGS)
+endif
 
 DIR_SRC =	sources/
 
 LST_SRC =	main.c					\
 			error.c					\
 			utils.c					\
+			signal.c				\
+			s_access.c 				\
+			builtin/cd.c			\
+			builtin/unset.c			\
+			builtin/exit.c			\
+			builtin/export.c		\
+			builtin/builtin.c		\
+			builtin/builtin_utils.c	\
+			env/env_lst.c			\
 			env/env_init.c			\
 			env/env_creat.c			\
 			env/env_check.c			\
-			builtin/export.c		\
-			builtin/unset.c			\
-			builtin/exit.c			\
-			builtin/builtin_utils.c	\
 			env/env_utils.c			\
-			env/env_lst.c			\
-			builtin/cd.c			\
 			parsing/parsing.c		\
-			parsing/split_pipes.c	\
 			parsing/space_chevron.c	\
 			parsing/free_cmd.c 		\
-			parsing/check_input.c 	\
+			parsing/split_pipes.c	\
+			parsing/check_input.c 		\
 			parsing/check_chevron.c \
-			parsing/split_token.c 	\
-			process/process.c		\
-			s_access.c 				\
 			process/child.c			\
-			process/get_arg_path.c	\
 			process/input.c			\
 			process/output.c		\
-			signal.c				\
-			builtin/builtin.c
+			process/process.c		\
+			process/get_input.c		\
+			process/get_output.c	\
+			process/get_arg_path.c	\
+			process/get_redirection.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 
@@ -50,6 +58,9 @@ all: lib
 lib :
 	@$(MAKE) -C $(DIR_SRC)libft
 
+debug :
+	@$(MAKE) re DEBUG=yes
+
 clean:
 	@rm -rf $(DIR_OBJ)
 	@$(MAKE) -C $(DIR_SRC)libft clean
@@ -62,7 +73,7 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re lib debug
 
 #  ===========================  COMPILATION  ===========================  #
 

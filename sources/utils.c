@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/06 13:34:45 by julien           ###   ########lyon.fr   */
+/*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/14 12:33:48 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ void	ft_data_init(t_data *data)
 	data->nb_cmd = 0;
 	data->pipes = NULL;
 	data->cmd = NULL;
+	data->here_doc_fd = NULL;
+	data->exit_code = 0;
 	ft_envp(data);
-	data->envp_tab = ft_lst_to_tabtab(data->envp);
+	data->envp_tab = ft_lst_to_tabtab(data, data->envp);
 }
 
-void	ft_close_fds(t_data *data)
+void	ft_close_fds(t_data *data, int *here_doc_fd)
 {
 	int	i;
 
@@ -45,6 +47,11 @@ void	ft_close_fds(t_data *data)
 		close(data->pipes[i][0]);
 		close(data->pipes[i][1]);
 		i++;
+	}
+	if (here_doc_fd)
+	{
+		close(here_doc_fd[0]);
+		close(here_doc_fd[1]);
 	}
 }
 
@@ -67,14 +74,14 @@ char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
-// void	ft_print_tabtab(char **tab)
-// {
-// 	int	i;
+void	ft_print_tabtab(char **tab)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (tab[i])
-// 	{
-// 		printf("env[%d]\t=\t%s\n", i, tab[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (tab[i])
+	{
+		printf("tab[%d]\t=\t%s\n", i, tab[i]);
+		i++;
+	}
+}

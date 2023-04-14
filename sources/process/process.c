@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/06 13:36:29 by julien           ###   ########lyon.fr   */
+/*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
+/*   Updated: 2023/04/14 13:32:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+extern sig_atomic_t	g_exitcode;
 
 static void	ft_pipe_init(t_data *data)
 {
@@ -19,7 +21,7 @@ static void	ft_pipe_init(t_data *data)
 	i = -1;
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
-		perror("Memory allocation failed for data->pipes! ");
+		ft_perror(data, "Memory allocation failed: data->pipes", 12);
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = ft_calloc(2, sizeof(int));
@@ -58,22 +60,28 @@ static void	ft_process(t_data *data)
 		if (pids == 0)
 			ft_child(data, data->pipes, i);
 	}
-	ft_close_fds(data);
+	ft_close_fds(data, NULL);
+	g_exitcode += 2;
 	while (--i >= 0)
 	{
 		waitpid(-1, &status, 0);
 		if (WIFEXITED(status))
 			data->exit_code = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			data->exit_code = WTERMSIG(status) + 128;
 	}
-printf("Last child exit code is %d\n", data->exit_code);
+	g_exitcode -= 2;
 	ft_pipe_free(data);
 }
 
 void	ft_cmd(t_data *data)
 {
+	char	**command;
+
+	command = s_read_cnt(data->cmd)->command;
 	data->nb_cmd = ft_lstsize(data->cmd);
-	if (data->nb_cmd == 1 && ft_builtin(data) != 0)
+	if (data->nb_cmd == 1 && ft_inredic_count(command) == 0
+		&& ft_outredic_count(command) == 0 && ft_builtin(data, command) != 0)
 		return ;
-	else
-		ft_process(data);
+	ft_process(data);
 }
