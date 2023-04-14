@@ -6,11 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 17:29:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:32:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+extern sig_atomic_t	g_exitcode;
 
 static void	ft_pipe_init(t_data *data)
 {
@@ -59,12 +61,16 @@ static void	ft_process(t_data *data)
 			ft_child(data, data->pipes, i);
 	}
 	ft_close_fds(data, NULL);
+	g_exitcode += 2;
 	while (--i >= 0)
 	{
 		waitpid(-1, &status, 0);
 		if (WIFEXITED(status))
 			data->exit_code = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			data->exit_code = WTERMSIG(status) + 128;
 	}
+	g_exitcode -= 2;
 	ft_pipe_free(data);
 }
 

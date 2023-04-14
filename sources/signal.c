@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/04/06 13:07:02 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:38:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern sig_atomic_t	g_exitcode;
+
 void	signal_handler(int signum)
 {
-	// if (g_parent_status == 1)
-	// 	return ;
+	if (g_exitcode == 2 || g_exitcode == 3)
+		return ;
 	if (signum == SIGINT)
 	{
-		// g_exitcode = 130;
+		if (g_exitcode != 1)
+			g_exitcode += 1;
 		// ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		printf("\n");
 		rl_on_new_line();
