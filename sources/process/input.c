@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 17:05:22 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 11:20:33 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 		ft_quit(data, 1);
 	}
 }
-
-// static char	*ft_gnl_minishell(void)
-// {
-// 	printf("here_doc> ");
-// 	return (get_next_line(STDIN_FILENO));
-// }
 
 static void	ft_close_hd_fd(int *here_doc_fd)
 {
@@ -79,30 +73,28 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 
 static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 {
-	int		*here_doc_fd;
-
-	here_doc_fd = ft_calloc(3, sizeof(int *));
-	if (!here_doc_fd)
+	data->here_doc_fd = ft_calloc(3, sizeof(int *));
+	if (!data->here_doc_fd)
 		ft_error(data, "Memory allocating failed for here_doc_fd");
-	if (pipe(here_doc_fd) == -1)
+	if (pipe(data->here_doc_fd) == -1)
 	{	
-		free(here_doc_fd);
+		free(data->here_doc_fd);
 		ft_error(data, "Pipe failed for here_doc!");
 	}
-	ft_here_doc(data, here_doc_fd, limiter);
+	ft_here_doc(data, data->here_doc_fd, limiter);
 	if (last_redir == 1)
 	{
-		ft_close_fds(data, here_doc_fd);
-		free(here_doc_fd);
+		ft_close_fds(data, data->here_doc_fd);
+		free(data->here_doc_fd);
 		return ;
 	}
-	if (dup2(here_doc_fd[0], STDIN_FILENO) == -1)
+	if (dup2(data->here_doc_fd[0], STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data, here_doc_fd);
-		free(here_doc_fd);
+		ft_close_fds(data, data->here_doc_fd);
+		free(data->here_doc_fd);
 		ft_error(data, "Error while duplicating file descriptor! ");
 	}
-	ft_close_hd_fd(here_doc_fd);
+	ft_close_hd_fd(data->here_doc_fd);
 }
 
 void	ft_input_redirection(t_data *data, char **input)

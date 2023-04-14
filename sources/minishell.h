@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 13:35:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 11:16:16 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data
 	t_envp	*envp;
 	char	**envp_tab;
 	int		**pipes;
+	int		*here_doc_fd;
 	int		nb_cmd;
 	int		exit_code;
 }				t_data;
