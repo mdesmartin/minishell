@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/06 13:05:21 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:38:25 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@ void	print_chain(t_data *data)
 	int i = 0;
 
 	cp = data->cmd;
-	ft_printf("the command is : ");
+	ft_printf("the parsed input is : ");
 	while (cp)
 	{
 		i = 0;
 		while (s_read_cnt(cp)->command[i])
 		{
-			printf("%s-", s_read_cnt(cp)->command[i]);
+			printf("%s ", s_read_cnt(cp)->command[i]);
 			i++;
 		}
-		printf(";");
+		if (i > 1)
+			printf("| ");
 		cp = cp->next; 
 	}
 	printf("\n");
@@ -66,16 +67,14 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	pipe = NULL;
 	while (pipe_tab[i])
 	{
-		pipe = ft_split(pipe_tab[i], ' ');
-		if (!pipe) 
+		pipe = split_token(pipe_tab[i], " \t");//ft_split(pipe_tab[i], ' ');
+		if (!pipe)
 			return (perror("Error\n"), free(pipe_tab));
-		// printf("pipe[%d] : %s\n", i, pipe[0]);
 		adress = s_init(pipe, NULL, NULL);
-		// printf("adress[%d] : %p\n", i, adress);
 		create_chain(cmd, adress);//replace input and output there
 		i++;
 	}
-	free_tab(pipe_tab);
+	// free_tab(pipe_tab);
 }
 
 int	parsing(t_data *data, char *input)
@@ -88,11 +87,10 @@ int	parsing(t_data *data, char *input)
 		return (-1);//quote pas fermée
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
-	// redirection(data, pipe_tab);
-	dollar(data, pipe_tab);
 	// print_tab(pipe_tab);
+	// dollar(data, pipe_tab);
 	split_tab(&data->cmd, pipe_tab);
-	// print_chain(data);
+	print_chain(data);
 	return (0);
 }
 

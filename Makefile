@@ -19,10 +19,11 @@ LST_SRC =	main.c					\
 			builtin/cd.c			\
 			parsing/parsing.c		\
 			parsing/split_pipes.c	\
-			parsing/x_dollar.c 		\
+			parsing/space_chevron.c	\
 			parsing/free_cmd.c 		\
-			parsing/check_input.c \
+			parsing/check_input.c 	\
 			parsing/check_chevron.c \
+			parsing/split_token.c 	\
 			process/process.c		\
 			s_access.c 				\
 			process/child.c			\

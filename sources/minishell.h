@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julien <julien@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/06 13:05:01 by julien           ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:05:50 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,14 @@ int		check_input(char *input);
 void 	input_signal();
 void	print_error(char *error);
 int		check_chevron(char *input, int *i);
+char	**create_command(char *pipe_tab);
+int	find_separator(char *input, int *i, char separator);
+int	find_quote(char *input, int *i, char quote);
+
+char	**token_tab(char *pipe);
+
+void	print_tab(char **pipe_tab);
+char	*space_chevron(char *pipe);
+char	**split_token(char *s, char *charset);
 
 #endif
