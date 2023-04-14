@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:13:48 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:38:25 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@ void	print_chain(t_data *data)
 	int i = 0;
 
 	cp = data->cmd;
-	ft_printf("the command is :");
+	ft_printf("the parsed input is : ");
 	while (cp)
 	{
 		i = 0;
 		while (s_read_cnt(cp)->command[i])
 		{
-			printf("%s-", s_read_cnt(cp)->command[i]);
+			printf("%s ", s_read_cnt(cp)->command[i]);
 			i++;
 		}
-		printf(";");
+		if (i > 1)
+			printf("| ");
 		cp = cp->next; 
 	}
 	printf("\n");

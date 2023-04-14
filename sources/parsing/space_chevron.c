@@ -6,26 +6,39 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:18:16 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:33:16 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
+// void	get_chevron(char *pipe, char *new, int *i, int *j)
+// {
+// 	int twin;
+	
+// 	twin = 1;
+
+// 	(*i)++;
+// 	if (pipe[*i] && (pipe[*i] == '<' || pipe[*i] == '>'))
+// 		twin = 2;
+// 	else
+// 		(*i)--;
+// 	new[(*j)++] = ' ';
+// 	while (twin--)
+// 		new[(*j)++] = pipe[(*i)];
+// 	new[(*j)] = ' ';
+// 	return ;
+// }
+
 void	get_chevron(char *pipe, char *new, int *i, int *j)
 {
-	int twin;
-	
-	twin = 1;
-
-	(*i)++;
+	new[(*j)++] = ' ';
+	new[(*j)++] = pipe[(*i)++];
 	if (pipe[*i] && (pipe[*i] == '<' || pipe[*i] == '>'))
-		twin = 2;
+		new[(*j)++] = pipe[(*i)];
 	else
 		(*i)--;
-	new[(*j)++] = ' ';
-	while (twin--)
-		new[(*j)++] = pipe[(*i)];
 	new[(*j)] = ' ';
 	return ;
 }

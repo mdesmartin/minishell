@@ -6,13 +6,13 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:01:23 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 13:35:29 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_is_charsetd(char str, char *charset)
+static int	is_charsetd(char str, char *charset)
 {
 	while (*charset)
 	{
@@ -23,7 +23,7 @@ static int	ft_is_charsetd(char str, char *charset)
 	return (0);
 }
 
-static int	ft_wordlend(char *str, char *charset)
+static int	wordlend(char *str, char *charset)
 {
 	int		i;
 	char	c;
@@ -36,14 +36,14 @@ static int	ft_wordlend(char *str, char *charset)
 			c = str[i];
 		else if (c == str[i])
 			c = '\0';
-		if (c == '\0' && ft_is_charsetd(str[i], charset))
+		if (c == '\0' && is_charsetd(str[i], charset))
 			return (i);
 		i++;
 	}
 	return (i);
 }
 
-static int	ft_wordcountd(char *str, char *charset)
+static int	wordcountd(char *str, char *charset)
 {
 	int		a;
 	char	c;
@@ -56,10 +56,10 @@ static int	ft_wordcountd(char *str, char *charset)
 			c = *str;
 		else if (c == *str)
 			c = '\0';
-		if ((ft_is_charsetd(*str, charset) && c == '\0' && *(str + 1) != 0))
+		if ((is_charsetd(*str, charset) && c == '\0' && *(str + 1) != 0))
 		{
 			a++;
-			while (*str && ft_is_charsetd(*str, charset))
+			while (*str && is_charsetd(*str, charset))
 				str++;
 			if (!*str)
 				return (a);
@@ -72,7 +72,7 @@ static int	ft_wordcountd(char *str, char *charset)
 	return (a);
 }
 
-static char	*ft_strduppd(char *src, int j)
+static char	*strduppd(char *src, int j)
 {
 	char	*dst;
 	int		i;
@@ -99,20 +99,20 @@ char	**split_token(char *s, char *charset)
 
 	s = space_chevron(s);
 	i = -1;
-	while (*s && ft_is_charsetd(*s, charset))
+	while (*s && is_charsetd(*s, charset))
 		s++;
-	size = ft_wordcountd((char *)s, charset);
-	dest = ft_calloc((size + 1), sizeof(char *));
+	size = wordcountd((char *)s, charset);
+	dest = calloc((size + 1), sizeof(char *));
 	if (!dest)
 		return (NULL);
 	while (++i < size)
 	{
-		while (ft_is_charsetd((char)*s, charset))
+		while (is_charsetd((char)*s, charset))
 			s++;
-		j = ft_wordlend((char *)s, charset);
-		dest[i] = ft_strduppd((char *)s, j);
+		j = wordlend((char *)s, charset);
+		dest[i] = strduppd((char *)s, j);
 		if (!dest[i])
-			return (ft_free_tab(dest), NULL);
+			return (free_tab(dest), NULL);
 		s += j;
 	}
 	return (dest);
