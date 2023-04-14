@@ -27,10 +27,11 @@ LST_SRC =	main.c					\
 			env/env_check.c			\
 			env/env_utils.c			\
 			parsing/parsing.c		\
-			parsing/space_chevron.c	\
 			parsing/free_cmd.c 		\
+			parsing/check_input.c 	\
 			parsing/split_pipes.c	\
-			parsing/check_input.c 		\
+			parsing/split_token.c	\
+			parsing/space_chevron.c	\
 			parsing/check_chevron.c \
 			process/child.c			\
 			process/input.c			\

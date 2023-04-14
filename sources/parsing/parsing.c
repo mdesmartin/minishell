@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:59:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 14:05:23 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	parsing(t_data *data, char *input)
 	// print_tab(pipe_tab);
 	// dollar(data, pipe_tab);
 	split_tab(&data->cmd, pipe_tab);
-	print_chain(data);
+	// print_chain(data);
 	return (0);
 }
 
