@@ -6,11 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/14 11:20:33 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 16:28:13 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+extern sig_atomic_t	g_exitcode;
 
 // input[0] : 0 = < ; 1 = <<
 // input[1] : file or limiter
@@ -36,10 +38,11 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 	}
 }
 
-static void	ft_close_hd_fd(int *here_doc_fd)
+static void	ft_error_heredoc(t_data *data, int *here_doc_fd)
 {
 	close(here_doc_fd[0]);
 	close(here_doc_fd[1]);
+	ft_error(data, "Error while using here_doc");
 }
 
 static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
@@ -54,22 +57,23 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 		ft_putstr_fd("here_doc> ", STDIN_FILENO);
 		input = get_next_line(STDIN_FILENO);
 		if (!input)
+			ft_error_heredoc(data, here_doc_fd);
+		if (g_exitcode == 1)
 		{
-			ft_close_hd_fd(here_doc_fd);
-			free(here_doc_fd);
-			ft_error(data, "Error while using here_doc");
+			g_exitcode = 0;
+			break ;
 		}
 		intput_len = ft_strlen(input);
 		if (ft_strncmp(input, limiter, limiter_len) == 0
 			&& intput_len == limiter_len)
 			break ;
-		if (write(here_doc_fd[1], input, intput_len) == -1
-			|| write(here_doc_fd[1], "\n", 1) == -1)
+		if (write(here_doc_fd[1], input, intput_len) == -1)
 			ft_perror(data, "Error while writing in the here_doc's pipe!", 1);
 		free(input);
 	}
 	free(input);
 }
+			// || write(here_doc_fd[1], "\n", 1) == -1)
 
 static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 {
@@ -94,7 +98,8 @@ static void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 		free(data->here_doc_fd);
 		ft_error(data, "Error while duplicating file descriptor! ");
 	}
-	ft_close_hd_fd(data->here_doc_fd);
+	close(data->here_doc_fd[0]);
+	close(data->here_doc_fd[1]);
 }
 
 void	ft_input_redirection(t_data *data, char **input)
