@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_chevron.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:33:16 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/24 15:09:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	get_quote(char *pipe, char *new, int *i, int *j)
 
 char	*space_chevron(char *pipe)
 {
-	char *new;
-	int i;
-	int j;
-	
+	char	*new;
+	int		i;
+	int		j;
+
 	new = ft_calloc(ft_strlen(pipe) * 3, sizeof(char));
 	i = 0;
 	j = 0;

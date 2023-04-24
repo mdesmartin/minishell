@@ -6,11 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/24 13:53:55 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/24 15:12:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_free_tab(char **tab)
 {

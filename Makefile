@@ -11,10 +11,10 @@ endif
 DIR_SRC =	sources/
 
 LST_SRC =	main.c					\
-			error.c					\
-			utils.c					\
-			signal.c				\
-			s_access.c 				\
+			utils/error.c			\
+			utils/utils.c			\
+			utils/signal.c			\
+			utils/s_access.c 		\
 			builtin/cd.c			\
 			builtin/unset.c			\
 			builtin/exit.c			\
@@ -84,8 +84,9 @@ $(NAME): $(DIR_OBJ) $(OBJECTS)
 
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)
-	@mkdir -p $(DIR_OBJ)/builtin
 	@mkdir -p $(DIR_OBJ)/env
+	@mkdir -p $(DIR_OBJ)/utils
+	@mkdir -p $(DIR_OBJ)/builtin
 	@mkdir -p $(DIR_OBJ)/parsing
 	@mkdir -p $(DIR_OBJ)/process
 
