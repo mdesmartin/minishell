@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 14:27:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 14:54:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ static void	ft_builtin_pwd(t_data *data)
 	printf("%s\n", tmp->value);
 }
 
+static int	ft_check_echo_opt(char *command)
+{
+	int	i;
+
+	i = 2;
+	while (command[i])
+	{
+		if (command[i] != 'n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static void	ft_builtin_echo(char **command)
 {
 	int	i;
@@ -52,7 +66,8 @@ static void	ft_builtin_echo(char **command)
 		printf("\n");
 		return ;
 	}
-	if (ft_strncmp("-n", command[1], 3) == 0)
+	while (command[i] && ft_strncmp("-n", command[i], 2) == 0
+		&& ft_check_echo_opt(command[i]) == 0)
 		i++;
 	while (command[i])
 	{
@@ -61,7 +76,8 @@ static void	ft_builtin_echo(char **command)
 		if (command[i])
 			printf(" ");
 	}
-	if (ft_strncmp("-n", command[1], 3) != 0)
+	if (ft_strncmp("-n", command[1], 2) != 0
+		&& ft_check_echo_opt(command[1]) == 0)
 		printf("\n");
 }
 
