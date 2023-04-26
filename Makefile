@@ -11,6 +11,7 @@ endif
 DIR_SRC =	sources/
 
 LST_SRC =	main.c					\
+			utils/free.c			\
 			utils/error.c			\
 			utils/utils.c			\
 			utils/signal.c			\
