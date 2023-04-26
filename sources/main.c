@@ -6,19 +6,19 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 16:03:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:25:07 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-sig_atomic_t	g_exitcode = 0;
+sig_atomic_t	g_exitcode;
 // g_exitcode == 0 : nothing particular
 // g_exitcode == 1 : signal for newprompt received
 // g_exitcode == 2 : process has child
 // g_exitcode == 3 : signal for newprompt received and process has a child
 
-void	ft_check_gcode(t_data *data, sig_atomic_t g_exitcode)
+void	ft_check_gcode(t_data *data)
 {
 	if (g_exitcode == 1 || g_exitcode == 3)
 	{
@@ -38,7 +38,7 @@ int	main(void)
 	ft_data_init(&data);
 	while (1)
 	{
-		ft_check_gcode(&data, g_exitcode);
+		ft_check_gcode(&data);
 		input_signal(sign);
 		input = readline("minishell> ");
 		if (!input)

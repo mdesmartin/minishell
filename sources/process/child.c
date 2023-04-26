@@ -6,13 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 16:00:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:28:14 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-extern sig_atomic_t	g_exitcode;
 
 static void	ft_only_child(t_data *data)
 {
@@ -113,7 +111,6 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 
 void	ft_child(t_data *data, int **pipes, int i)
 {
-	g_exitcode = 0;
 	get_rediction(data, i);
 	if (data->nb_cmd == 1)
 		ft_only_child(data);
