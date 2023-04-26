@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 14:54:51 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:21:09 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ static void	ft_builtin_pwd(t_data *data)
 			break ;
 		tmp = tmp->next;
 	}
-	printf("%s\n", tmp->value);
+	if (tmp->value)
+		printf("%s", tmp->value);
+	printf("\n");
 }
 
 static int	ft_check_echo_opt(char *command)
