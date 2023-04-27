@@ -18,6 +18,7 @@ LST_SRC =	main.c					\
 			utils/s_access.c 		\
 			builtin/cd.c			\
 			builtin/unset.c			\
+			builtin/echo.c			\
 			builtin/exit.c			\
 			builtin/export.c		\
 			builtin/builtin.c		\

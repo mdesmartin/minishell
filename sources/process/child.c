@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 17:47:12 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 15:04:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	ft_only_child(t_data *data)
 	if (ft_builtin(data, command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
-printf("path = %s\ncommand = %s\n", path, command[0]);
 	execve(path, command, data->envp_tab);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
