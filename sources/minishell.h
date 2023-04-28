@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/24 14:01:51 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/25 14:29:06 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void		create_chain(t_list **cmd, void *content);
 t_pipeline	*s_convert_content(void *content);
 t_pipeline	*s_read_cnt(t_list *cmd);
 void		*s_init(char **content, char **input, char **output);
-void		dollar(t_data *data, char **pipe_tab);
+void		expand(t_data *data, char **pipe_tab);
 void		signal_init(struct sigaction *sign);
 int		check_input(char *input);
 void 	input_signal();

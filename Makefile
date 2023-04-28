@@ -26,6 +26,7 @@ LST_SRC =	main.c					\
 			env/env_creat.c			\
 			env/env_check.c			\
 			env/env_utils.c			\
+			parsing/expand.c		\
 			parsing/parsing.c		\
 			parsing/free_cmd.c 		\
 			parsing/check_input.c 	\

@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/04/24 14:25:31 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/28 17:39:57 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_whitespace_or_end(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\0')
+	if (c == ' ' || c == '\t' || c == '\0' || c == '\"')
 		return (1);
 	else
 		return (0);
@@ -26,15 +26,17 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	int		new_size;
 	int		i;
 
-	new_size = ft_strlen(pipe_tab) - (end - *start);
-	new_content = ft_calloc(sizeof(char), new_size);
 	i = 0;
-	while (i++ < *start)
+	new_size = ft_strlen(pipe_tab) - (end - *start);
+	new_content = ft_calloc(sizeof(char), new_size + 1);
+	while (i < *start - 1)
+	{
 		new_content[i] = pipe_tab[i];
+		i++;
+	}
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
-	*start = i;
-	new_content[i] = '\0';
+	*start = 0;
 	return (new_content);
 }
 
@@ -42,25 +44,25 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
 	int		new_size;
-	int		old_size = end - *start;
+	int		old_size;
 	int		i;
 	int		j;
 
-	new_size = 0;
 	i = 0;
 	j = 0;
+	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
-	new_content = ft_calloc(sizeof(char *), 2);
-	new_content = ft_calloc(sizeof(char), new_size + 2);
-	while (i++ < *start)
+	new_content = ft_calloc(sizeof(char), new_size + 1);
+	while (i < *start - 1)
+	{
 		new_content[i] = pipe_tab[i];
+		i++;
+	}
 	while (value[j])
 		new_content[i++] = value[j++];
-	*start = i;
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
-	i++;
-	new_content[i] = '\0';
+	*start = 0;
 	return (new_content);
 }
 
@@ -70,11 +72,11 @@ char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 	t_envp	*cp_envp;
 	int		old_size = end - *start;
 
+	// printf("oldsize:%d\n", old_size);
 	cp_envp = data->envp;
-	printf("start :%c end :%c\n", pipe_tab[*start], pipe_tab[(*start) + old_size - 1]);
 	while (cp_envp)
 	{
-		if (ft_strncmp(cp_envp->variable, &pipe_tab[*start], old_size) == 0)//si ils sont pareils, insert
+		if ((ft_strncmp(cp_envp->variable, &pipe_tab[*start], old_size) == 0) && ((int)ft_strlen(cp_envp->variable) == old_size))//si il-s sont pareils, insert
 			return (cp_envp->value);
 		cp_envp = cp_envp->next;
 	}
@@ -82,22 +84,22 @@ char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 }
 
 
-char	*dollar_handler(t_data *data, char *pipe_tab, int *start)
+char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 {
 	int	end;
-	int dollar;
+	int expand;
 	
-	dollar = *start;
+	expand = *start;
 	(*start)++;
 	end = *start;
-	(void) dollar;
+	(void) expand;
 	if (is_whitespace_or_end(pipe_tab[*start]))
-		return (pipe_tab);//trim le dollar avant plutot
-	// else if (pipe_tab[start] == '?')
-		//remplace $ by exitcode
+		return(trim_from_to(pipe_tab, start, end));
+	// else if (pipe_tab[*start] == '?')
+	// 	return(trim_by(ft_itoa((int)g_exitcode), pipe_tab, start, end));
 	else
 	{
-		while (!is_whitespace_or_end(pipe_tab[end]))
+		while (!is_whitespace_or_end(pipe_tab[end]))//|| pipe_tab[end] != '\"'?
 			end++;
 		if (find_variable(data, pipe_tab, start, end))
 			return (trim_by(find_variable(data, pipe_tab, start, end), pipe_tab, start, end));
@@ -107,7 +109,7 @@ char	*dollar_handler(t_data *data, char *pipe_tab, int *start)
 	return (pipe_tab);
 }
 
-void	dollar(t_data *data, char **pipe_tab)
+void	expand(t_data *data, char **pipe_tab)
 {
 	int		i;
 	int		j;
@@ -125,7 +127,7 @@ void	dollar(t_data *data, char **pipe_tab)
 					i++;
 			}
 			else if (pipe_tab[j][i] == '$')
-				pipe_tab[j] = dollar_handler(data, pipe_tab[j], &i);// à free ?
+				pipe_tab[j] = expand_handler(data, pipe_tab[j], &i);// à free ?
 			i++;
 		}
 		j++;
