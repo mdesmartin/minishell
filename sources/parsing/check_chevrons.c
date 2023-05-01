@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_chevron.c                                    :+:      :+:    :+:   */
+/*   check_chevrons.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:28:34 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/04 14:55:35 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 23:18:32 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	unexpected_chevron(char *input, int *i, char chevron)
 {
-	// printf("unexpected_chevron\n");
 	(*i)++;
 	if (input[*i] == chevron)
 	{	
@@ -75,22 +74,24 @@ int	is_chevron(char *input, int *i)
 	return (print_error("newline"), 1);
 }
 
-int	check_chevron(char *input, int *i)
+int	check_chevrons(char *input)
 {
-	// printf("chevron\n");
-	while (input[*i])
+	int i;
+
+	i = 0;
+	while (input[i])
 	{
-		if (input[*i] == '<')
+		if (input[i] == '<' && !in_quotes(input, i))
 		{
-			if (is_chevron(input, i))
+			if (is_chevron(input, &i))
 				return (1);
 		}
-		else if (input[*i] == '>')
+		else if (input[i] == '>' && !in_quotes(input, i))
 		{
-			if (is_chevron(input, i))
+			if (is_chevron(input, &i))
 				return (1);
 		}
-		(*i)++;
+		i++;
 	}
 	return (0);
 }

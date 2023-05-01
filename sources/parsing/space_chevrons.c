@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   space_chevron.c                                    :+:      :+:    :+:   */
+/*   space_chevrons.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/24 15:09:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 23:10:07 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-// void	get_chevron(char *pipe, char *new, int *i, int *j)
-// {
-// 	int twin;
-	
-// 	twin = 1;
-
-// 	(*i)++;
-// 	if (pipe[*i] && (pipe[*i] == '<' || pipe[*i] == '>'))
-// 		twin = 2;
-// 	else
-// 		(*i)--;
-// 	new[(*j)++] = ' ';
-// 	while (twin--)
-// 		new[(*j)++] = pipe[(*i)];
-// 	new[(*j)] = ' ';
-// 	return ;
-// }
-
-void	get_chevron(char *pipe, char *new, int *i, int *j)
+void	get_chevrons(char *pipe, char *new, int *i, int *j)
 {
 	new[(*j)++] = ' ';
 	new[(*j)++] = pipe[(*i)++];
@@ -57,7 +38,7 @@ void	get_quote(char *pipe, char *new, int *i, int *j)
 	return ;
 }
 
-char	*space_chevron(char *pipe)
+char	*space_chevrons(char *pipe)
 {
 	char	*new;
 	int		i;
@@ -71,7 +52,7 @@ char	*space_chevron(char *pipe)
 		if (pipe[i] == '\'' || pipe[i] == '\"')
 			get_quote(pipe, new, &i, &j);
 		if (pipe[i] == '<' || pipe[i] == '>')
-			get_chevron(pipe, new, &i, &j);
+			get_chevrons(pipe, new, &i, &j);
 		else
 			new[j] = pipe[i];
 		j++;

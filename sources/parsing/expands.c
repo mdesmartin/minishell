@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   expands.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/01 20:45:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 22:56:42 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_whitespace_or_end(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\0' || c == '\"')
-		return (1);
-	else
-		return (0);
-}
 //trim a str of a str
 char	*trim_from_to(char *pipe_tab, int *start, int end)
 {
@@ -109,26 +102,7 @@ char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 	return (pipe_tab);
 }
 
-int	in_double_quote(char *str, int index)
-{
-	int a;
-	int quote;
-
-	a = 0;
-	quote = 0;
-	while (a < index)
-	{
-		if (str[a] == '\"')
-			quote++;
-		a++;
-	}
-	if (quote % 2)
-		return (0);
-	else
-		return (1);
-}
-
-void	expand(t_data *data, char **pipe_tab)
+void	expands(t_data *data, char **pipe_tab)
 {
 	int		i;
 	int		j;
@@ -139,7 +113,7 @@ void	expand(t_data *data, char **pipe_tab)
 		i = 0;
 		while (pipe_tab[j][i])
 		{
-			if (pipe_tab[j][i] == '\'' && in_double_quote(pipe_tab[j], i))
+			if (pipe_tab[j][i] == '\'' && !in_quotes(pipe_tab[j], i))
 			{
 				i++;
 				while (pipe_tab[j][i] != '\'')

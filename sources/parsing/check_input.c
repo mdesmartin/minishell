@@ -6,11 +6,47 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/12 00:51:21 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 22:52:23 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	pipe_n_end_error(char *input, int i)
+{
+	char error;
+
+	error = input[i];
+	i++;
+	if (input[i] != '\0' && input[i] == error)
+	{
+		if (error == '|')
+			return (print_error("||"));
+		else
+			return (print_error("&&"));
+	}
+	else
+	{
+		if (error == '|')
+			return (print_error("|"));
+		else
+			return (print_error("&"));
+	}
+}
+
+//if error return 1
+int	check_pipes_n_and(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (is_whitespace(input[i]))
+		i++;
+	if ((input[i] == '|' || input[i] == '&') && !in_quotes(input, i))
+		return(pipe_n_end_error(input, i), 1);
+	return (0);
+}
+
 
 void	print_error(char *error)
 {
@@ -21,45 +57,28 @@ void	print_error(char *error)
 }
 
 // if nothing after, newline, else token ' '
-
-int	basic_error(char *input)
+int	basic_errors(char *input)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	if (!input[i] || !(*input))
-		return (1);
-	while (input[i] == '	' || input[i] == ' ')
+	while (is_whitespace(input[i]))
 		i++;
-	// if (!input[i] || input[i] == ':' || input[i] == '!')
-	// {
-	// 	if (input[i] == '!')
-	// 		g_exitcode = 1;
-	// 	else
-	// 		g_exitcode = 0;
-	// 	return (1);
-	// }
-	if (check_chevron(input, &i))
-	{
-		// data.exit_code = 2; //need t_data *data
+	if (!input || !input[i])
 		return (1);
-	}
-	// if (check_chevron)
+	if (input[i] == ':' || input[i] == '!')
+		return (1);
 	return (0);
 }
 
 int	check_input(char *input)
 {
-	// int	i;
-
-	// i = 0;
-	// while (input[i])
-	// {}
 	if (!(*input))
 		return (1);
-	// if (basic_error(input))
-	// 	return (1);
+	if (basic_errors(input) || check_chevrons(input) || check_pipes_n_and(input))
+	{
+		// data.exit_code = 2; //need t_data *data
+		return (1);
+	}
 	return (0);
 }
-
-// "" | ls~

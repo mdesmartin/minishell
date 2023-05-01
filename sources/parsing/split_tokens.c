@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_token.c                                      :+:      :+:    :+:   */
+/*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 17:55:10 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 23:09:08 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,18 @@ static char	*strduppd(char *src, int j)
 		i++;
 	}
 	dst[i] = '\0';
-	dst = trim_quote(dst);
-	printf("dst:%s\n", dst);
+	dst = trim_quotes(dst);
 	return (dst);
 }
 
-char	**split_token(char *s, char *charset)
+char	**split_tokens(char *s, char *charset)
 {
 	char		**dest;
 	int			size;
 	int			j;
 	int			i;
 
-	s = space_chevron(s);
+	s = space_chevrons(s);
 	i = -1;
 	while (*s && is_charsetd(*s, charset))
 		s++;
@@ -117,6 +116,5 @@ char	**split_token(char *s, char *charset)
 			return (free_tab(dest), NULL);
 		s += j;
 	}
-	// dest = trim_quote(dest);
 	return (dest);
 }

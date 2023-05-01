@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/14 15:08:55 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 22:54:42 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,4 @@ int	main(void)
 	return (0);
 }
 
-
-		// if (parsing(&data, input) == -1)
-		// {
-		// 	free(input);
-		// 	ft_putstr_fd("Wesh ces quoi cette quote\n", 2);
-		// }
+// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell

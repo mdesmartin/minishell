@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/28 20:57:05 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 23:11:30 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	pipe = NULL;
 	while (pipe_tab[i])
 	{
-		pipe = split_token(pipe_tab[i], " \t");//ft_split(pipe_tab[i], ' ');
+		pipe = split_tokens(pipe_tab[i], " \t");//ft_split(pipe_tab[i], ' ');
 		if (!pipe)
 			return (perror("Error\n"), free(pipe_tab));
 		adress = s_init(pipe, NULL, NULL);
@@ -77,7 +77,6 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	}
 	// free_tab(pipe_tab);
 }
-
 
 int	parsing(t_data *data, char *input)
 {
@@ -90,62 +89,8 @@ int	parsing(t_data *data, char *input)
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
 	// print_tab(pipe_tab);
-	expand(data, pipe_tab);
+	expands(data, pipe_tab);
 	split_tab(&data->cmd, pipe_tab);
 	// print_chain(data);
 	return (0);
 }
-
-
-
-
-
-// int	parsing(t_data *data, char *input)
-// {
-// 	int		nb_p;
-
-// 	nb_p = nb_pipes(input);
-// 	if (nb_p == -1)
-// 		return (-1);
-// 	// ft_printf("nb_pipes : %d\n", nb_p);
-// 	split_pipes(data, nb_p, input);
-// 	print_chain(data);
-// 	// dollar(data);
-// 	return (0);
-// }
-
-
-// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void	create_chain(t_list **cmd, char **pipe)
-// {
-// 	if (*cmd == NULL)
-// 		*cmd = ft_lstnew((void**)pipe);
-// 	else
-// 		ft_lstadd_back(cmd, ft_lstnew((void **)pipe));
-// 	return ;
-// }
-
-// dabbord checker les quotes, puis deplacer le i a la fin des quotes,
-// ensuite split au pipe le bloc
-// chaque maillon contient un pipe, chqaue str du tab est un token un pipe
-// dabbord creer un tab (pipe_tab) avec a chaque str un pipe, le traiter puis
-// ensuite a la fin split et put in chain
-
-

@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/01 18:23:24 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 23:14:28 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,34 +109,34 @@ void		ft_extract_inputredir(t_data *data, t_pipeline *pipe);
 void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
 
+//signal
+void		signal_init(struct sigaction *sign);
+void 		input_signal();
+
+//parsing
 int			parsing(t_data *data, char *readed);
-void		*free_tab(char **tab);
-void		free_lst(t_list **cmd);
-void		get_signal(int signal);
+void		expands(t_data *data, char **pipe_tab);
 int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
+char		*trim_quotes(char *dest);
+char		**split_tokens(char *s, char *charset);
 
-char		**split_pipes(char **pipe_tab, int nb_p, char *input);
-void		create_chain(t_list **cmd, void *content);
-t_pipeline	*s_convert_content(void *content);
-t_pipeline	*s_read_cnt(t_list *cmd);
+//check_input
+int			in_quotes(char *str, int index);
+int			check_input(char *input);
+void		print_error(char *error);
+int			is_whitespace(char c);
+int			check_chevrons(char *input);
+char		*space_chevrons(char *pipe);
+int			is_whitespace_or_end(char c);
+
+//free
+void		free_lst(t_list **cmd);
+void		*free_tab(char **tab);
+
+//s_access
 void		*s_init(char **content, char **input, char **output);
-void		expand(t_data *data, char **pipe_tab);
-void		signal_init(struct sigaction *sign);
-int		check_input(char *input);
-void 	input_signal();
-void	print_error(char *error);
-int		check_chevron(char *input, int *i);
-char	**create_command(char *pipe_tab);
-int	find_separator(char *input, int *i, char separator);
-int	find_quote(char *input, int *i, char quote);
-
-char	**token_tab(char *pipe);
-
-void	print_tab(char **pipe_tab);
-char	*space_chevron(char *pipe);
-char	**split_token(char *s, char *charset);
-
-char	*trim_quote(char *dest);
+t_pipeline	*s_read_cnt(t_list *cmd);
+t_pipeline	*s_convert_content(void *content);
 
 #endif
