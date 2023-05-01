@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/25 14:28:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/04/28 20:57:05 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	}
 	// free_tab(pipe_tab);
 }
+
 
 int	parsing(t_data *data, char *input)
 {

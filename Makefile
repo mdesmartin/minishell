@@ -28,6 +28,7 @@ LST_SRC =	main.c					\
 			env/env_utils.c			\
 			parsing/expand.c		\
 			parsing/parsing.c		\
+			parsing/trim_quote.c	\
 			parsing/free_cmd.c 		\
 			parsing/check_input.c 	\
 			parsing/split_pipes.c	\

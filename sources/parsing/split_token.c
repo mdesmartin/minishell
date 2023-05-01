@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/04/14 13:35:29 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 17:55:10 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static char	*strduppd(char *src, int j)
 		i++;
 	}
 	dst[i] = '\0';
+	dst = trim_quote(dst);
+	printf("dst:%s\n", dst);
 	return (dst);
 }
 
@@ -115,5 +117,6 @@ char	**split_token(char *s, char *charset)
 			return (free_tab(dest), NULL);
 		s += j;
 	}
+	// dest = trim_quote(dest);
 	return (dest);
 }

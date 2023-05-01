@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/25 14:29:06 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 18:23:24 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,7 @@ char	**token_tab(char *pipe);
 void	print_tab(char **pipe_tab);
 char	*space_chevron(char *pipe);
 char	**split_token(char *s, char *charset);
+
+char	*trim_quote(char *dest);
 
 #endif
