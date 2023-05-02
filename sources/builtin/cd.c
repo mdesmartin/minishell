@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:46:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:33:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_check_oldpwd(t_data *data)
 			{
 				tmp->value = getcwd(NULL, 0);
 				if (!tmp->value)
-					ft_perror(data, "Memory allocation failed: SHLVL's value ", 12);
+					ft_perror(data, "cd: getcwd() failed", 1);
 			}
 			return ;
 		}
@@ -64,7 +64,7 @@ static void	ft_update_pwd(t_data *data)
 	pwd = data->envp;
 	buffer = getcwd(NULL, 0);
 	if (buffer == NULL)
-		ft_perror(data, "getcwd() failed", 1);
+		ft_perror(data, "cd: getcwd() failed", 1);
 	while (pwd)
 	{
 		if (ft_strncmp("PWD", pwd->variable, 4) == 0)

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/15 17:32:29 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 15:04:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	ft_only_child(t_data *data)
 	execve(path, command, data->envp_tab);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd(command[0], ": command", " not found\n");
+	perror(command[0]);
+	// ft_putstr3_fd(command[0], ": command", " not found\n");
 	ft_quit(data, 1);
 }
 
@@ -53,7 +54,8 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 	execve(path, command, data->envp_tab);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd(command[0], ": command", " not found\n");
+	perror(command[0]);
+	// ft_putstr3_fd(command[0], ": command", " not found\n");
 	ft_quit(data, 1);
 }
 
@@ -79,7 +81,8 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	execve(path, command, data->envp_tab);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd(command[0], ": command", " not found\n");
+	perror(command[0]);
+	// ft_putstr3_fd(command[0], ": command", " not found\n");
 	ft_quit(data, 1);
 }
 
@@ -105,7 +108,8 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	execve(path, command, data->envp_tab);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd(command[0], ": command", " not found\n");
+	perror(command[0]);
+	// ft_putstr3_fd(command[0], ": command", " not found\n");
 	ft_quit(data, 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 11:05:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:57:50 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_builtin_exit(t_data *data, char **command)
 {
 	if (!command[1])
 		ft_quit(data, 0);
-	if (!command[2])
+	else if (!command[2])
 	{
 		if (ft_check_exitarg(command[1]) == 1)
 		{
@@ -84,6 +84,15 @@ void	ft_builtin_exit(t_data *data, char **command)
 		else
 			ft_convert_exit(data, command[1]);
 	}
-	ft_putstr3_fd("minishell: exit:"," ", "too many arguments\n");
-	data->exit_code = 1;
+	else
+	{
+		if (ft_check_exitarg(command[1]) == 1)
+		{
+			ft_putstr3_fd("minishell: exit: ",command[1],
+				": numeric argument required\n");
+			ft_quit(data, 2);
+		}
+		ft_putstr3_fd("minishell: exit:"," ", "too many arguments\n");
+		data->exit_code = 1;
+	}
 }

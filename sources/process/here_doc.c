@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/24 14:11:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:24:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_error_heredoc(t_data *data, int *here_doc_fd)
 
 static void	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 {
-	g_exitcode -= 1;
+	g_exitcode--;
 	close(here_doc_fd[0]);
 	close(here_doc_fd[1]);
 	if (input)
@@ -61,9 +61,7 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 {
 	if (pipe(data->here_doc_fd) == -1)
-	{	
 		ft_error(data, "Pipe failed for here_doc!");
-	}
 	ft_here_doc(data, data->here_doc_fd, limiter);
 	if (last_redir == 1)
 	{

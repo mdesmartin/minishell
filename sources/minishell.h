@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/01 23:14:28 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/02 16:05:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int			ft_builtin(t_data *data, char **command);
 void		ft_builtin_cd(t_data *data, char **command);
 void		ft_builtin_exit(t_data *data, char **command);
 void		ft_builtin_slash(t_data *data, char *directory);
+void		ft_builtin_echo(char **command);
 void		ft_check_envarg(t_data *data, char **command);
 void		get_rediction(t_data *data, int i);
 void		ft_extract_outputredir(t_data *data, t_pipeline *pipe);
