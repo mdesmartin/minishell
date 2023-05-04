@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/04 13:10:53 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/04 14:13:56 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int			check_chevrons(char *input);
 char		*space_chevrons(char *pipe);
 int			is_whitespace_or_end(char c);
 int			check_pipes_n_and(char *input);
+int			check_quotes(char *input);
 
 //free
 void		free_lst(t_list **cmd);
