@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/01 22:56:42 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/04 12:40:49 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,34 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	return (new_content);
 }
 
+char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
+{
+	char	*new_content;
+	int		new_size;
+	int		old_size;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	old_size = end - *start;
+	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
+	new_content = ft_calloc(sizeof(char), new_size + 1);
+	// protect here
+	while (i < *start - 1)
+	{
+		new_content[i] = pipe_tab[i];
+		i++;
+	}
+	while (value[j])
+		new_content[i++] = value[j++];
+	end++;
+	while (pipe_tab[end])
+		new_content[i++] = pipe_tab[end++];
+	*start = 0;
+	return (new_content);
+}
+
 char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
@@ -46,6 +74,7 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	// protect here
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];
@@ -88,8 +117,8 @@ char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 	(void) expand;
 	if (is_whitespace_or_end(pipe_tab[*start]))
 		return(trim_from_to(pipe_tab, start, end));
-	// else if (pipe_tab[*start] == '?')
-	// 	return(trim_by(ft_itoa((int)g_exitcode), pipe_tab, start, end));
+	else if (pipe_tab[*start] == '?')
+		return(trim_by_exitcode(ft_itoa((int)data->exit_code), pipe_tab, start, end));
 	else
 	{
 		while (!is_whitespace_or_end(pipe_tab[end]))//|| pipe_tab[end] != '\"'?
