@@ -6,47 +6,11 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 22:52:23 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/04 13:10:39 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	pipe_n_end_error(char *input, int i)
-{
-	char error;
-
-	error = input[i];
-	i++;
-	if (input[i] != '\0' && input[i] == error)
-	{
-		if (error == '|')
-			return (print_error("||"));
-		else
-			return (print_error("&&"));
-	}
-	else
-	{
-		if (error == '|')
-			return (print_error("|"));
-		else
-			return (print_error("&"));
-	}
-}
-
-//if error return 1
-int	check_pipes_n_and(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (is_whitespace(input[i]))
-		i++;
-	if ((input[i] == '|' || input[i] == '&') && !in_quotes(input, i))
-		return(pipe_n_end_error(input, i), 1);
-	return (0);
-}
-
 
 void	print_error(char *error)
 {
@@ -56,8 +20,8 @@ void	print_error(char *error)
 	return ;
 }
 
-// if nothing after, newline, else token ' '
-int	basic_errors(char *input)
+// if nothing after, newline, else token ' ', ++1 return
+int	input_whitespace(char *input)
 {
 	int i;
 
@@ -66,18 +30,32 @@ int	basic_errors(char *input)
 		i++;
 	if (!input || !input[i])
 		return (1);
-	if (input[i] == ':' || input[i] == '!')
+	if (input[i] == ':')
 		return (1);
 	return (0);
 }
 
-int	check_input(char *input)
+int	input_exclamation(char *input)
+{
+	int	i;
+
+	i = 0;
+	if (input[i] == '!')
+		return (2);
+	return (0);
+}
+
+int	check_input(char *input, t_data *data)
 {
 	if (!(*input))
 		return (1);
-	if (basic_errors(input) || check_chevrons(input) || check_pipes_n_and(input))
+	if (input_whitespace(input))
+		return (data->exit_code = 0, 1);
+	if (input_exclamation(input))
+		return (data->exit_code = 1, 1);
+	if (check_chevrons(input) || check_pipes_n_and(input))
 	{
-		// data.exit_code = 2; //need t_data *data
+		data->exit_code = 2;
 		return (1);
 	}
 	return (0);
