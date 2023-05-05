@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:05:28 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:30:46 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	int		exit_code;
 }				t_data;
 
+// Utils
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
 void		ft_error(t_data *data, char *s);
@@ -112,7 +113,7 @@ void		ft_output_redirection(t_data *data, char **output);
 
 //signal
 void		signal_init(struct sigaction *sign);
-void 		input_signal();
+void		input_signal();
 
 //parsing
 int			parsing(t_data *data, char *readed);
@@ -121,7 +122,6 @@ int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
 char		*trim_quotes(char *dest);
 char		**split_tokens(char *s, char *charset);
-
 
 //check_input
 int			in_quotes(char *str, int index);

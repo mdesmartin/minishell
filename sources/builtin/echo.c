@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:17:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/27 15:18:26 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:33:24 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,3 @@ void	ft_builtin_echo(char **command)
 		|| ft_check_echo_opt(command[1]) == 1)
 		printf("\n");
 }
-

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/24 13:49:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:53:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	ft_pipe_init(t_data *data)
 		if (pipe(data->pipes[i]) == -1)
 			ft_error(data, "Pipe failed for data->pipes[i]");
 	}
-
 }
 
 static void	ft_pipe_free(t_data *data)

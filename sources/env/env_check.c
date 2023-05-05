@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:18:49 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 17:32:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:35:11 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static void	ft_check_shlvl(t_data *data)
 			{
 				tmp->value = ft_strdup("0");
 				if (!tmp->value)
-					ft_perror(data, "Memory allocation failed: SHLVL's value", 12);
+					ft_perror(data,
+						"Memory allocation failed: SHLVL's value", 12);
 			}
 			return ;
 		}
