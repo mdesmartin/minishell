@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 16:16:56 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:17:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(void)
 	input = NULL;
 	signal_init(signal_handler);
 	ft_data_init(&data);
-	input_signal(sign);
 	while (1)
 	{
 		ft_check_gcode(&data);
