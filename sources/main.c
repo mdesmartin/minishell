@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:43:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:16:56 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ void	ft_check_gcode(t_data *data)
 int	main(void)
 {
 	static char			*input;
-	struct sigaction	sign;
 	t_data				data;
 
 	input = NULL;
-	signal_init(&sign);
+	signal_init(signal_handler);
 	ft_data_init(&data);
 	input_signal(sign);
 	while (1)
@@ -49,8 +48,8 @@ int	main(void)
 		{
 			parsing(&data, input);
 			ft_cmd(&data);
-			free_lst(&data.cmd);
 		}
+		free_lst(&data.cmd);
 	}
 	return (0);
 }

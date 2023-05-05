@@ -6,13 +6,13 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/04 14:51:14 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:59:51 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	error_quote(void)
+static void	error_quote(void)
 {
 	ft_putstr_fd("minishell: syntax error quote not closed\n", 2);
 }
@@ -26,9 +26,9 @@ void	print_error(char *error)
 }
 
 // if nothing after, newline, else token ' ', ++1 return
-int	check_whitespace(char *input)
+static int	check_whitespace(char *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (is_whitespace(input[i]))
@@ -40,7 +40,7 @@ int	check_whitespace(char *input)
 	return (0);
 }
 
-int	check_exclamation(char *input)
+static int	check_exclamation(char *input)
 {
 	int	i;
 

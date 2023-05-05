@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:09:24 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:02:13 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	print_chain(t_data *data)
 {
-	t_list *cp;
-	int i = 0;
+	t_list	*cp;
+	int		i;
 
+	i = 0;
 	cp = data->cmd;
-	ft_printf("the parsed input is : ");
 	while (cp)
 	{
 		i = 0;
@@ -29,7 +29,7 @@ void	print_chain(t_data *data)
 		}
 		if (i > 1)
 			printf("\n");
-		cp = cp->next; 
+		cp = cp->next;
 	}
 	printf("\n");
 	return ;
@@ -68,14 +68,14 @@ void	split_tab(t_list **cmd, char **pipe_tab)
 	pipe = NULL;
 	while (pipe_tab[i])
 	{
-		pipe = split_tokens(pipe_tab[i], " \t");//ft_split(pipe_tab[i], ' ');
+		pipe = split_tokens(pipe_tab[i], " \t");
 		if (!pipe)
 			return (perror("Error\n"), free(pipe_tab));
 		adress = s_init(pipe, NULL, NULL);
-		create_chain(cmd, adress);//replace input and output there
+		create_chain(cmd, adress);
 		i++;
 	}
-	// free_tab(pipe_tab);
+	free_tab(pipe_tab);
 }
 
 int	parsing(t_data *data, char *input)
@@ -84,13 +84,11 @@ int	parsing(t_data *data, char *input)
 	int		nb_p;
 
 	nb_p = nb_pipes(input);
-	// if (nb_p == -1)
-	// 	return (-1);//quote pas fermée
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
 	// print_tab(pipe_tab);
 	expands(data, pipe_tab);
 	split_tab(&data->cmd, pipe_tab);
-	print_chain(data);
+	// print_chain(data);
 	return (0);
 }

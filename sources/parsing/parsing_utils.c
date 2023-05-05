@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 22:33:26 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:46:12 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	is_whitespace_or_end(char c)
 
 int	in_quotes(char *str, int index)
 {
-	int i;
-	int start;
-	char quote;
+	int		i;
+	int		start;
+	char	quote;
 
 	i = 0;
 	start = 0;

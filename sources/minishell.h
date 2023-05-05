@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:30:46 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:15:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
 
 //signal
-void		signal_init(struct sigaction *sign);
-void		input_signal();
+void		signal_init(void (*handler)(int signum));
+void		signal_handler(int signum);
+void		signal_heredoc(int signum);
 
 //parsing
 int			parsing(t_data *data, char *readed);
