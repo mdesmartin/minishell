@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/04 14:13:56 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:05:28 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,10 @@ void		*free_tab(char **tab);
 void		*s_init(char **content, char **input, char **output);
 t_pipeline	*s_read_cnt(t_list *cmd);
 t_pipeline	*s_convert_content(void *content);
+
+//expands
+char		*trim_from_to(char *pipe_tab, int *start, int end);
+char		*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end);
+char		*trim_by(char *value, char *pipe_tab, int *start, int end);
 
 #endif

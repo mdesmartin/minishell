@@ -36,6 +36,7 @@ LST_SRC =	main.c					\
 			parsing/check_pipes.c	\
 			parsing/split_pipes.c	\
 			parsing/split_tokens.c	\
+			parsing/expands_utils.c	\
 			parsing/parsing_utils.c	\
 			parsing/check_chevrons.c\
 			parsing/space_chevrons.c\
