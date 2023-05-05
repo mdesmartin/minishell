@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:00:11 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:43:47 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	return (new_content);
 }
 
+	// protect here
 char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
@@ -46,7 +47,6 @@ char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
-	// protect here
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];
@@ -61,6 +61,7 @@ char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 	return (new_content);
 }
 
+	// protect here
 char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
@@ -74,7 +75,6 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
-	// protect here
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];

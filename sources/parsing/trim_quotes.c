@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 23:19:12 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:45:30 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	quotes_handler(char *dequoted, char *dest, int *i, char quote)
 {
 	int	first;
-	int second;
+	int	second;
 
 	first = *i;
 	(*i)++;
@@ -24,13 +24,14 @@ static void	quotes_handler(char *dequoted, char *dest, int *i, char quote)
 	second = *i;
 	ft_memcpy(dequoted, dest, first);
 	ft_memcpy(&dequoted[first], &dest[first + 1], second - first - 1);
-	ft_memcpy(&dequoted[second - 1], &dest[second + 1], ft_strlen(&dest[second]));
+	ft_memcpy(&dequoted[second - 1], &dest[second + 1], \
+	ft_strlen(&dest[second]));
 	return ;
 }
 
 static void	quotes_type(char *dequoted, char *dest, int *i)
 {
-	char quote;
+	char	quote;
 
 	quote = dest[*i];
 	quotes_handler(dequoted, dest, i, quote);
@@ -39,9 +40,9 @@ static void	quotes_type(char *dequoted, char *dest, int *i)
 
 char	*trim_quotes(char *dest)
 {
-	int i;
-	int flag;
-	char *dequoted;
+	int		i;
+	int		flag;
+	char	*dequoted;
 
 	i = 0;
 	flag = 0;

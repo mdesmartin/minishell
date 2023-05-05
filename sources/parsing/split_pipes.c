@@ -6,13 +6,13 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/01 23:18:50 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 15:15:37 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	find_quote(char *input, int *i, char quote)
+static int	find_quote(char *input, int *i, char quote)
 {
 	(*i)++;
 	while (input[*i] != '\0')
@@ -24,7 +24,7 @@ int	find_quote(char *input, int *i, char quote)
 	return (-1);
 }
 
-int	find_pipe(char *input, int *i)
+static int	find_pipe(char *input, int *i)
 {
 	while (input[*i] != '\0')
 	{
@@ -65,7 +65,7 @@ int	nb_pipes(char *input)
 	return (nb_pipes);
 }
 
-char	**split_pipes(char **pipe_tab, int nb_p, char *input)
+static char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 {
 	int	start;
 	int	len_pipe;
@@ -82,7 +82,7 @@ char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 		len_pipe = i - start;
 		pipe_tab[j] = ft_substr(input, start, len_pipe);
 		if (!pipe_tab[j])
-			return (ft_putstr_fd("error creating tab\n", 2), NULL);
+			return (ft_putstr_fd("error creating tab\n", 2), NULL); //check every precedent and free
 		j++;
 		i++;
 		start = i;

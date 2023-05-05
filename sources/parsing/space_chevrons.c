@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 23:10:07 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:03:46 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_chevrons(char *pipe, char *new, int *i, int *j)
 
 void	get_quote(char *pipe, char *new, int *i, int *j)
 {
-	char symbol;
+	char	symbol;
 
 	symbol = pipe[*i];
 	(*i)++;
@@ -58,6 +58,5 @@ char	*space_chevrons(char *pipe)
 		j++;
 		i++;
 	}
-	free(pipe);
 	return (new);
 }

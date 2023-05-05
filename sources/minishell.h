@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:05:28 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 15:40:22 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,9 @@ void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
 
 //signal
-void		signal_init(struct sigaction *sign);
-void 		input_signal();
+void		signal_init(void (*handler)(int signum));
+void		signal_handler(int signum);
+void		signal_heredoc(int signum);
 
 //parsing
 int			parsing(t_data *data, char *readed);
@@ -121,7 +122,6 @@ int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
 char		*trim_quotes(char *dest);
 char		**split_tokens(char *s, char *charset);
-
 
 //check_input
 int			in_quotes(char *str, int index);

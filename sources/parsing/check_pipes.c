@@ -6,15 +6,15 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 12:57:49 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 14:00:14 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pipe_n_end_error(char *input, int i)
+static void	pipe_n_end_error(char *input, int i)
 {
-	char error;
+	char	error;
 
 	error = input[i];
 	i++;
@@ -43,6 +43,6 @@ int	check_pipes_n_and(char *input)
 	while (is_whitespace(input[i]))
 		i++;
 	if ((input[i] == '|' || input[i] == '&') && !in_quotes(input, i))
-		return(pipe_n_end_error(input, i), 1);
+		return (pipe_n_end_error(input, i), 1);
 	return (0);
 }
