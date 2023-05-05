@@ -6,46 +6,46 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/04 14:42:14 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 12:59:04 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_chain(t_data *data)
-{
-	t_list *cp;
-	int i = 0;
+// void	print_chain(t_data *data)
+// {
+// 	t_list *cp;
+// 	int i = 0;
 
-	cp = data->cmd;
-	ft_printf("the parsed input is : ");
-	while (cp)
-	{
-		i = 0;
-		while (s_read_cnt(cp)->command[i])
-		{
-			printf("%s ", s_read_cnt(cp)->command[i]);
-			i++;
-		}
-		if (i > 1)
-			printf("| ");
-		cp = cp->next; 
-	}
-	printf("\n");
-	return ;
-}
+// 	cp = data->cmd;
+// 	ft_printf("the parsed input is : ");
+// 	while (cp)
+// 	{
+// 		i = 0;
+// 		while (s_read_cnt(cp)->command[i])
+// 		{
+// 			printf("%s ", s_read_cnt(cp)->command[i]);
+// 			i++;
+// 		}
+// 		if (i > 1)
+// 			printf("| ");
+// 		cp = cp->next; 
+// 	}
+// 	printf("\n");
+// 	return ;
+// }
 
-void	print_tab(char **pipe_tab)
-{
-	int i = 0;
+// void	print_tab(char **pipe_tab)
+// {
+// 	int i = 0;
 
-	while (pipe_tab[i])
-	{
-		printf("tab[%d] : %s\n", i, pipe_tab[i]);
-		i++;
-	}
-	return ;
-}
+// 	while (pipe_tab[i])
+// 	{
+// 		printf("tab[%d] : %s\n", i, pipe_tab[i]);
+// 		i++;
+// 	}
+// 	return ;
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
