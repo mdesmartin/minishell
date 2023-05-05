@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/05 15:44:03 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:07:30 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	signal_init(void (*handler)(int signum))
 {
 	struct sigaction	sign;
 
-	// sigemptyset(&sign->sa_mask);
+	sigemptyset(&sign.sa_mask);
 	sign.sa_flags = SA_RESTART;
 	sign.sa_handler = handler;
 	rl_catch_signals = 0;
