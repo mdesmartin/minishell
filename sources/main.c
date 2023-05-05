@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/02 16:06:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/04 12:47:33 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(void)
 			return (printf("exit\n"), ft_quit(&data, 1), data.exit_code);
 		if (ft_strlen(input) > 0) // input && *input)
 			add_history(input);
-		if (!check_input(input))
+		if (!check_input(input, &data))
 		{
 			parsing(&data, input);
 			ft_cmd(&data);
