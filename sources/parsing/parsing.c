@@ -6,35 +6,34 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:57:54 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:02:13 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// void	print_chain(t_data *data)
-// {
-// 	t_list	*cp;
-// 	int		i;
+void	print_chain(t_data *data)
+{
+	t_list	*cp;
+	int		i;
 
-// 	cp = data->cmd;
-// 	i = 0;
-// 	ft_printf("the parsed input is : ");
-// 	while (cp)
-// 	{
-// 		i = 0;
-// 		while (s_read_cnt(cp)->command[i])
-// 		{
-// 			printf("%s ", s_read_cnt(cp)->command[i]);
-// 			i++;
-// 		}
-// 		if (i > 1)
-// 			printf("\n");
-// 		cp = cp->next;
-// 	}
-// 	printf("\n");
-// 	return ;
-// }
+	i = 0;
+	cp = data->cmd;
+	while (cp)
+	{
+		i = 0;
+		while (s_read_cnt(cp)->command[i])
+		{
+			printf("%s ", s_read_cnt(cp)->command[i]);
+			i++;
+		}
+		if (i > 1)
+			printf("\n");
+		cp = cp->next;
+	}
+	printf("\n");
+	return ;
+}
 
 // void	print_tab(char **pipe_tab)
 // {
@@ -50,7 +49,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static void	create_chain(t_list **cmd, void *content)
+void	create_chain(t_list **cmd, void *content)
 {
 	if (*cmd == NULL)
 		*cmd = ft_lstnew(content);
@@ -59,7 +58,7 @@ static void	create_chain(t_list **cmd, void *content)
 	return ;
 }
 
-static void	split_tab(t_list **cmd, char **pipe_tab)
+void	split_tab(t_list **cmd, char **pipe_tab)
 {
 	int		i;
 	char	**pipe;
@@ -76,6 +75,7 @@ static void	split_tab(t_list **cmd, char **pipe_tab)
 		create_chain(cmd, adress);
 		i++;
 	}
+	free_tab(pipe_tab);
 }
 
 int	parsing(t_data *data, char *input)

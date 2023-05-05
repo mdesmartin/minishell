@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 23:09:08 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:04:11 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,17 @@ static char	*strduppd(char *src, int j)
 	return (dst);
 }
 
-char	**split_tokens(char *s, char *charset)
+char	**split_tokens(char *str, char *charset)
 {
 	char		**dest;
+	char		*start;
+	char		*s;
 	int			size;
 	int			j;
 	int			i;
 
-	s = space_chevrons(s);
+	s = space_chevrons(str); // protect malloc
+	start = s;
 	i = -1;
 	while (*s && is_charsetd(*s, charset))
 		s++;
@@ -116,5 +119,6 @@ char	**split_tokens(char *s, char *charset)
 			return (free_tab(dest), NULL);
 		s += j;
 	}
+	free(start);
 	return (dest);
 }

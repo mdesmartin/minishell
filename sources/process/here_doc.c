@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 16:24:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 15:40:36 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 	int		limiter_len;
 	int		intput_len;
 
+	signal_init(signal_heredoc);
 	limiter_len = ft_strlen(limiter);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/04 12:47:33 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 15:35:31 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ void	ft_check_gcode(t_data *data)
 int	main(void)
 {
 	static char			*input;
-	struct sigaction	sign;
 	t_data				data;
 
 	input = NULL;
-	signal_init(&sign);
+	signal_init(signal_handler);
 	ft_data_init(&data);
 	while (1)
 	{
 		ft_check_gcode(&data);
-		input_signal(sign);
 		input = readline("minishell> ");
 		if (!input)
 			return (printf("exit\n"), ft_quit(&data, 1), data.exit_code);
@@ -49,8 +47,8 @@ int	main(void)
 		{
 			parsing(&data, input);
 			ft_cmd(&data);
-			free_lst(&data.cmd);
 		}
+		free_lst(&data.cmd);
 	}
 	return (0);
 }
