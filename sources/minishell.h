@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:05:28 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:57:36 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
 char		*trim_quotes(char *dest);
 char		**split_tokens(char *s, char *charset);
-
 
 //check_input
 int			in_quotes(char *str, int index);

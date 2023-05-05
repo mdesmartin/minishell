@@ -6,13 +6,13 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/01 23:10:07 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 14:01:54 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_chevrons(char *pipe, char *new, int *i, int *j)
+static void	get_chevrons(char *pipe, char *new, int *i, int *j)
 {
 	new[(*j)++] = ' ';
 	new[(*j)++] = pipe[(*i)++];
@@ -24,9 +24,9 @@ void	get_chevrons(char *pipe, char *new, int *i, int *j)
 	return ;
 }
 
-void	get_quote(char *pipe, char *new, int *i, int *j)
+static void	get_quote(char *pipe, char *new, int *i, int *j)
 {
-	char symbol;
+	char	symbol;
 
 	symbol = pipe[*i];
 	(*i)++;
