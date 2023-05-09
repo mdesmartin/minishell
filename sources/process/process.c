@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:53:10 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 13:18:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	ft_wait_child(t_data *data, int i)
 			if (data->exit_code == 131)
 				printf("\b\bQuit\n");
 		}
+		else
+			data->exit_code = 0;
 	}
 	g_exitcode -= 2;
 }
