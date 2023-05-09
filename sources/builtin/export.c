@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 15:41:51 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 16:26:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,12 @@ void	ft_export(t_data *data, char **command)
 	int		i;
 
 	i = 1;
+	if (ft_check_exportopt(data, command[1]) == 1)
+		return ;
 	while (command[i])
 	{
 		if (ft_check_exportvar(command[i]) == 1)
-		{
-			ft_putstr_fd("minishell : export: `", 2);
-			ft_putstr_fd(command[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
 			data->exit_code = 1;
-		}
 		else if (ft_strncmp("_=", command[i], 2) != 0)
 		{
 			var = ft_is_var_in_env(data, command, i);
