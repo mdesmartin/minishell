@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/24 15:11:52 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:33:24 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
 		return (NULL);
 	tmp = ft_strjoin(s1, s2);
 	if (!tmp)
-		return (perror("Error while allocating memory for char **envp!"), NULL);
+		return (NULL);
 	if (!s3)
 		return (tmp);
 	res = ft_strjoin(tmp, s3);
 	free(tmp);
 	if (!res)
-		return (perror("Error while allocating memory for char **envp!"), NULL);
+		return (NULL);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/14 15:56:52 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:36:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ char	**ft_lst_to_tabtab(t_data *data, t_envp *envp)
 		tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);
 		if (!tab[i])
 		{
-			perror("Error while copying envp to char **envp_tab!");
 			ft_rfree_tab(tab, i);
-			return (NULL);
+			ft_error(data, "Memory allocation failed: char **envp!");
 		}
 		tmp = tmp->next;
 		i++;
