@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:55:25 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 15:41:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_export(t_data *data, char **command)
 			ft_putstr_fd("minishell : export: `", 2);
 			ft_putstr_fd(command[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
+			data->exit_code = 1;
 		}
 		else if (ft_strncmp("_=", command[i], 2) != 0)
 		{

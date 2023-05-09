@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:55 by julien            #+#    #+#             */
-/*   Updated: 2023/04/15 17:31:56 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 14:26:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,6 @@ int	ft_check_exportvar(char *variable)
 	return (0);
 }
 
-// static void	ft_launch_exe(t_data *data, char *directory)
-// {
-// 	int	pids;
-
-// 	pids = fork();
-// 	if (pids == -1)
-// 		ft_error(data, "Fork failed");
-// 	if (pids == 0)
-// 	{
-// 		execve(directory, &directory, data->envp_tab);
-// 		ft_putstr3_fd("minishell: ", directory, ": Is a directory\n");
-// 		ft_quit(data, 0);
-// 	}
-// 	g_exitcode += 2;
-// 	wait(NULL);
-// 	g_exitcode -= 2;
-// }
-
 void	ft_builtin_slash(t_data *data, char *directory)
 {
 	if (access(directory, F_OK) == -1)
@@ -79,6 +61,6 @@ void	ft_builtin_slash(t_data *data, char *directory)
 	else
 	{
 		ft_putstr3_fd("minishell: ", directory, ": Is a directory\n");
-		ft_quit(data, 0);
+		ft_quit(data, 126);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 16:17:08 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 14:59:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(void)
 		ft_check_gcode(&data);
 		input = readline("minishell> ");
 		if (!input)
-			return (printf("exit\n"), ft_quit(&data, 1), data.exit_code);
-		if (ft_strlen(input) > 0) // input && *input)
+			return (printf("exit\n"), ft_quit(&data, data.exit_code), 0);
+		if (ft_strlen(input) > 0)
 			add_history(input);
 		if (!check_input(input, &data))
 		{
