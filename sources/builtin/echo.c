@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:17:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/27 15:18:26 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 13:22:41 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_check_echo_opt(char *command)
 	return (0);
 }
 
-void	ft_builtin_echo(char **command)
+void	ft_builtin_echo(t_data *data, char **command)
 {
 	int	i;
 
@@ -49,5 +49,5 @@ void	ft_builtin_echo(char **command)
 	if (ft_strncmp("-n", command[1], 2) != 0
 		|| ft_check_echo_opt(command[1]) == 1)
 		printf("\n");
+	data->exit_code = 0;
 }
-

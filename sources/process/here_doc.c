@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 15:40:36 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 16:11:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 extern sig_atomic_t	g_exitcode;
-
 
 static void	ft_error_heredoc(t_data *data, int *here_doc_fd)
 {
@@ -77,4 +76,3 @@ void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 	close(data->here_doc_fd[0]);
 	close(data->here_doc_fd[1]);
 }
-

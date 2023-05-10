@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 15:39:23 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:23:31 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_unset(t_data *data, char **command)
 	int	i;
 
 	i = 1;
+	data->exit_code = 0;
 	while (command[i])
 	{
 		if (ft_strncmp("_", command[i], 2) != 0)

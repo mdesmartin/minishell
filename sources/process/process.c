@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:02 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 13:18:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	ft_pipe_init(t_data *data)
 		if (pipe(data->pipes[i]) == -1)
 			ft_error(data, "Pipe failed for data->pipes[i]");
 	}
-
 }
 
 static void	ft_pipe_free(t_data *data)
@@ -60,6 +59,8 @@ static void	ft_wait_child(t_data *data, int i)
 			if (data->exit_code == 131)
 				printf("\b\bQuit\n");
 		}
+		else
+			data->exit_code = 0;
 	}
 	g_exitcode -= 2;
 }

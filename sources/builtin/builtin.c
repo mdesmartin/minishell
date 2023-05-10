@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/27 15:18:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 13:22:19 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_builtin(t_data *data, char **command)
 	if (ft_strncmp(command[0], "exit", 5) == 0)
 		return (ft_builtin_exit(data, command), 1);
 	if (ft_strncmp(command[0], "echo", 5) == 0)
-		return (ft_builtin_echo(command), 1);
+		return (ft_builtin_echo(data, command), 1);
 	if (ft_strncmp(command[0], "env", 4) == 0)
 		return (ft_check_envarg(data, command), 1);
 	if (ft_strncmp(command[0], "pwd", 4) == 0)

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/12 17:55:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:44:54 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,11 @@ void	ft_envp(t_data *data)
 
 void	ft_check_envarg(t_data *data, char **command)
 {
+	data->exit_code = 0;
 	if (command[1])
 	{
 		ft_putstr3_fd("minishell: ", "env: ", ": no argument required\n");
-		// data->exit_code =
+		data->exit_code = 127;
 	}
 	else
 		ft_print_env(data);

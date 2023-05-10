@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 14:11:22 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:17:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	int		exit_code;
 }				t_data;
 
+// Utils
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
 void		ft_error(t_data *data, char *s);
@@ -78,7 +79,9 @@ void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
 void		ft_check_envp(t_data *data);
 void		ft_check_pwd(t_data *data);
+void		ft_check_oldpwd(t_data *data);
 int			ft_check_exportvar(char *variable);
+int			ft_check_exportopt(t_data *data, char *command1);
 void		ft_print_env(t_data *data);
 void		ft_export(t_data *data, char **command);
 void		ft_unset(t_data *data, char **command);
@@ -102,7 +105,7 @@ int			ft_builtin(t_data *data, char **command);
 void		ft_builtin_cd(t_data *data, char **command);
 void		ft_builtin_exit(t_data *data, char **command);
 void		ft_builtin_slash(t_data *data, char *directory);
-void		ft_builtin_echo(char **command);
+void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 void		get_rediction(t_data *data, int i);
 void		ft_extract_outputredir(t_data *data, t_pipeline *pipe);
