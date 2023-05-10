@@ -6,40 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 17:33:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 17:17:20 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static void	ft_check_oldpwd(t_data *data)
-{
-	t_envp	*tmp;
-
-	tmp = data->envp;
-	while (tmp)
-	{
-		if (ft_strncmp("OLDPWD", tmp->variable, 4) == 0)
-		{
-			if (!tmp->value)
-			{
-				tmp->value = getcwd(NULL, 0);
-				if (!tmp->value)
-					ft_perror(data, "cd: getcwd() failed", 1);
-			}
-			return ;
-		}
-		tmp = tmp->next;
-	}
-	tmp = ft_calloc(1, sizeof(t_envp));
-	if (!tmp)
-		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
-	tmp->variable = strdup("OLDPWD");
-	if (!tmp->variable)
-		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
-	tmp->next = NULL;
-	ft_envadd_back(&data->envp, tmp);
-}
 
 static char	*ft_get_home(t_data *data)
 {
@@ -53,6 +24,7 @@ static char	*ft_get_home(t_data *data)
 		tmp = tmp->next;
 	}
 	ft_putstr_fd("cd : HOME not set!\n", 2);
+	data->exit_code = 1;
 	return (NULL);
 }
 
@@ -98,14 +70,26 @@ static void	ft_update_oldpwd(t_data *data)
 	oldpwd->value = pwd->value;
 }
 
+static void	ft_check_cd(t_data *data, char **command)
+{
+	data->exit_code = 0;
+	ft_check_pwd(data);
+	ft_check_oldpwd(data);
+	if (command[1] != NULL && command[2] != NULL)
+	{
+		data->exit_code = 1;
+		printf("cd: too many arguments\n");
+	}
+
+}
+
 void	ft_builtin_cd(t_data *data, char **command)
 {
 	char	*home;
 
-	ft_check_pwd(data);
-	ft_check_oldpwd(data);
-	if (command[1] != NULL && command[2] != NULL)
-		printf("cd: too many arguments\n");
+	ft_check_cd(data, command);
+	if (data->exit_code != 0)
+		return ;
 	if (command[1] == NULL)
 	{
 		home = ft_get_home(data);
@@ -125,5 +109,3 @@ void	ft_builtin_cd(t_data *data, char **command)
 	ft_update_pwd(data);
 	ft_update_envptab(data);
 }
-
-// apres cd seul, OLPWD disparait

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:55 by julien            #+#    #+#             */
-/*   Updated: 2023/04/15 17:31:56 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 16:23:04 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ void	ft_update_envptab(t_data *data)
 	data->envp_tab = ft_lst_to_tabtab(data, data->envp);
 }
 
+int	ft_check_exportopt(t_data *data, char *command1)
+{
+	if (ft_strncmp("-", command1, 1) == 0)
+	{
+		ft_putstr_fd("minishell : export: `", 2);
+		ft_putchar_fd(command1[0], 2);
+		ft_putchar_fd(command1[1], 2);
+		ft_putstr_fd("': options are not supported\n", 2);
+		data->exit_code = 1;
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_check_exportvar(char *variable)
 {
 	int	i;
@@ -34,33 +48,25 @@ int	ft_check_exportvar(char *variable)
 	i = 1;
 	if (variable[0] == '='
 		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
+	{
+		ft_putstr_fd("minishell : export: `", 2);
+		ft_putstr_fd(variable, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
+	}
 	while (variable[i] && variable[i] != '=')
 	{
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
+		{
+			ft_putstr_fd("minishell : export: `", 2);
+			ft_putstr_fd(variable, 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
 }
-
-// static void	ft_launch_exe(t_data *data, char *directory)
-// {
-// 	int	pids;
-
-// 	pids = fork();
-// 	if (pids == -1)
-// 		ft_error(data, "Fork failed");
-// 	if (pids == 0)
-// 	{
-// 		execve(directory, &directory, data->envp_tab);
-// 		ft_putstr3_fd("minishell: ", directory, ": Is a directory\n");
-// 		ft_quit(data, 0);
-// 	}
-// 	g_exitcode += 2;
-// 	wait(NULL);
-// 	g_exitcode -= 2;
-// }
 
 void	ft_builtin_slash(t_data *data, char *directory)
 {
@@ -79,6 +85,8 @@ void	ft_builtin_slash(t_data *data, char *directory)
 	else
 	{
 		ft_putstr3_fd("minishell: ", directory, ": Is a directory\n");
-		ft_quit(data, 0);
+		ft_quit(data, 126);
 	}
 }
+
+

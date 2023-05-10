@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 15:35:31 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 14:59:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(void)
 		ft_check_gcode(&data);
 		input = readline("minishell> ");
 		if (!input)
-			return (printf("exit\n"), ft_quit(&data, 1), data.exit_code);
-		if (ft_strlen(input) > 0) // input && *input)
+			return (printf("exit\n"), ft_quit(&data, data.exit_code), 0);
+		if (ft_strlen(input) > 0)
 			add_history(input);
 		if (!check_input(input, &data))
 		{
@@ -52,5 +52,3 @@ int	main(void)
 	}
 	return (0);
 }
-
-// valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./minishell

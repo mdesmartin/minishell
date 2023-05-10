@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 16:47:09 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/05 13:54:16 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,3 @@ void	ft_extract_inputredir(t_data *data, t_pipeline *pipe)
 	ft_extract_input(pipe->command, pipe->input);
 	ft_del_input(pipe->command);
 }
-
