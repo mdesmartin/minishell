@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/05 14:00:39 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/10 15:48:30 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 	return (NULL);
 }
 
-static char	*expand_handler(t_data *data, char *pipe_tab, int *start)
+char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 {
 	int	end;
 	int	expand;
@@ -44,9 +44,11 @@ static char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 	else if (pipe_tab[*start] == '?')
 		return (trim_by_exitcode(ft_itoa((int)data->exit_code), \
 		pipe_tab, start, end));
+	else if (ft_isdigit(pipe_tab[*start])) 
+		return (trim_from_to(pipe_tab, start, end + 1));
 	else
 	{
-		while (!is_whitespace_or_end(pipe_tab[end])) //|| pipe_tab[end] != '\"'?
+		while (ft_isalpha(pipe_tab[end]) || pipe_tab[end] == '_') // !is_whitespace_or_end(pipe_tab[end])) //|| pipe_tab[end] != '\"'?
 			end++;
 		if (find_variable(data, pipe_tab, start, end))
 			return (trim_by(find_variable(data, pipe_tab, start, end), \
@@ -57,28 +59,38 @@ static char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 	return (pipe_tab);
 }
 
+char*	expand_by_line(t_data *data, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'' && !in_quotes(line, i))
+		{
+			i++;
+			while (line[i] != '\'')
+				i++;
+		}
+		else if (line[i] == '$')
+			line = expand_handler(data, line, &i); // à free ?
+		i++;
+	}
+	return (line);
+}
+
 void	expands(t_data *data, char **pipe_tab)
 {
-	int		i;
-	int		j;
+	int	j;
 
 	j = 0;
 	while (pipe_tab[j])
 	{
-		i = 0;
-		while (pipe_tab[j][i])
-		{
-			if (pipe_tab[j][i] == '\'' && !in_quotes(pipe_tab[j], i))
-			{
-				i++;
-				while (pipe_tab[j][i] != '\'')
-					i++;
-			}
-			else if (pipe_tab[j][i] == '$')
-				pipe_tab[j] = expand_handler(data, pipe_tab[j], &i); // à free ?
-			i++;
-		}
+		pipe_tab[j] = expand_by_line(data, pipe_tab[j]);
 		j++;
 	}
 	return ;
 }
+
+//expand
+// if echo before print $

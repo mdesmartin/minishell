@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 16:02:13 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 16:24:27 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void	print_chain(t_data *data)
 	return ;
 }
 
-// void	print_tab(char **pipe_tab)
-// {
-// 	int i = 0;
+void	print_tab(char **pipe_tab)
+{
+	int i = 0;
 
-// 	while (pipe_tab[i])
-// 	{
-// 		printf("tab[%d] : %s\n", i, pipe_tab[i]);
-// 		i++;
-// 	}
-// 	return ;
-// }
+	while (pipe_tab[i])
+	{
+		printf("tab[%d] : %s\n", i, pipe_tab[i]);
+		i++;
+	}
+	return ;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -86,9 +86,10 @@ int	parsing(t_data *data, char *input)
 	nb_p = nb_pipes(input);
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
-	// print_tab(pipe_tab);
 	expands(data, pipe_tab);
-	split_tab(&data->cmd, pipe_tab);
+	// print_tab(pipe_tab);
+	if (pipe_tab[0][0] != '\0')
+		return(split_tab(&data->cmd, pipe_tab), 0);
 	// print_chain(data);
-	return (0);
+	return (1);
 }

@@ -45,8 +45,8 @@ int	main(void)
 			add_history(input);
 		if (!check_input(input, &data))
 		{
-			parsing(&data, input);
-			ft_cmd(&data);
+			if (!parsing(&data, input))
+				ft_cmd(&data);
 		}
 		free_lst(&data.cmd);
 	}
