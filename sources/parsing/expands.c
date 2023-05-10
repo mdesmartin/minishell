@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/10 15:48:30 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/10 18:09:23 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ static char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 	return (NULL);
 }
 
+char	*whitespace_handler(char *pipe_tab, int *start, int end)
+{
+	if (ft_strncmp("echo", pipe_tab, 5))
+		return (pipe_tab);
+	else
+		return (trim_from_to(pipe_tab, start, end));
+}
+
 char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 {
 	int	end;
@@ -39,16 +47,15 @@ char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 	(*start)++;
 	end = *start;
 	(void) expand;
-	if (is_whitespace_or_end(pipe_tab[*start]))
-		return (trim_from_to(pipe_tab, start, end));
+	if (is_whitespace_or_end(pipe_tab[*start])) //rajouter ici, check if echo in pipe and if just trim $
+		return (whitespace_handler(pipe_tab, start, end));
 	else if (pipe_tab[*start] == '?')
-		return (trim_by_exitcode(ft_itoa((int)data->exit_code), \
-		pipe_tab, start, end));
+		return (trim_by_exitcode(ft_itoa((int)data->exit_code), pipe_tab, start, end));
 	else if (ft_isdigit(pipe_tab[*start])) 
 		return (trim_from_to(pipe_tab, start, end + 1));
 	else
 	{
-		while (ft_isalpha(pipe_tab[end]) || pipe_tab[end] == '_') // !is_whitespace_or_end(pipe_tab[end])) //|| pipe_tab[end] != '\"'?
+		while (ft_isalnum(pipe_tab[end]) || pipe_tab[end] == '_') // !is_whitespace_or_end(pipe_tab[end])) //|| pipe_tab[end] != '\"'?
 			end++;
 		if (find_variable(data, pipe_tab, start, end))
 			return (trim_by(find_variable(data, pipe_tab, start, end), \
