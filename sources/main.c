@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 15:35:31 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/09 16:47:59 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(void)
 			add_history(input);
 		if (!check_input(input, &data))
 		{
-			parsing(&data, input);
-			ft_cmd(&data);
+			if (!parsing(&data, input))
+				ft_cmd(&data);
 		}
 		free_lst(&data.cmd);
 	}
