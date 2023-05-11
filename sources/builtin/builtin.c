@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 13:22:19 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 17:11:53 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_builtin_pwd(t_data *data)
 {
 	t_envp	*tmp;
 
+	ft_check_pwd(data);
 	tmp = data->envp;
 	while (tmp)
 	{
