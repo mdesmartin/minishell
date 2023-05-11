@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:44:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 16:51:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_check_exportvar(char *variable)
 		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
 	{
 		ft_putstr3_fd("minishell : export: `", variable,
-			"': not a valid identifier\n");
+			"': not a valid identifier\n", 2);
 		return (1);
 	}
 	while (variable[i] && variable[i] != '=')
@@ -43,7 +43,7 @@ int	ft_check_exportvar(char *variable)
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
 			ft_putstr3_fd("minishell : export: `", variable,
-				"': not a valid identifier\n");
+				"': not a valid identifier\n", 2);
 			return (1);
 		}
 		i++;
@@ -60,7 +60,7 @@ int	ft_check_unsetvar(char *variable)
 		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
 	{
 		ft_putstr3_fd("minishell : unset: `", variable,
-			"': not a valid identifier\n");
+			"': not a valid identifier\n", 2);
 		return (1);
 	}
 	while (variable[i] && variable[i] != '=')
@@ -68,7 +68,7 @@ int	ft_check_unsetvar(char *variable)
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
 			ft_putstr3_fd("minishell : unset: `", variable,
-				"': not a valid identifier\n");
+				"': not a valid identifier\n", 2);
 			return (1);
 		}
 		i++;

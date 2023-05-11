@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 17:33:24 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 16:57:32 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ void	ft_data_init(t_data *data)
 	data->exit_code = 0;
 	ft_envp(data);
 	data->envp_tab = ft_lst_to_tabtab(data, data->envp);
-}
-
-void	ft_close_fds(t_data *data, int *here_doc_fd)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_cmd - 1)
-	{
-		close(data->pipes[i][0]);
-		close(data->pipes[i][1]);
-		i++;
-	}
-	if (here_doc_fd)
-	{
-		close(here_doc_fd[0]);
-		close(here_doc_fd[1]);
-	}
 }
 
 char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
@@ -83,4 +65,11 @@ void	ft_print_tabtab(char **tab)
 		printf("tab[%d]\t=\t%s\n", i, tab[i]);
 		i++;
 	}
+}
+
+void	ft_putstr3_fd(char *s1, char *s2, char *s3, int code)
+{
+	ft_putstr_fd(s1, code);
+	ft_putstr_fd(s2, code);
+	ft_putstr_fd(s3, code);
 }

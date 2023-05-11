@@ -50,6 +50,7 @@ LST_SRC =	main.c							\
 			process/get_input.c				\
 			process/get_output.c			\
 			process/get_arg_path.c			\
+			process/process_utils.c			\
 			process/get_redirection.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
