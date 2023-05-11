@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 17:24:58 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 17:53:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,15 @@ int	ft_check_exportvar(char *variable)
 int	ft_check_unsetvar(char *variable)
 {
 	int	i;
-	int	end;
 
-	i = 1;
-	end = ft_strlen(variable) - 1;
-	if (variable[0] == '=' || variable[end] == '='
-		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
+	i = 0;
+	if (!variable[i])
 	{
 		ft_putstr3_fd("minishell : unset: `", variable,
 			"': not a valid identifier\n", 2);
 		return (1);
 	}
-	while (variable[i] && variable[i] != '=')
+	while (variable[i])
 	{
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
