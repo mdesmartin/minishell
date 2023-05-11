@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 17:51:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 16:22:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ char	*ft_get_arg_path(t_data *data, char **command)
 	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
 	{
-		ft_perror(data, "Error when retrieving PATH!", 1);
-		return (NULL);
+		ft_putstr_fd("minishell: ", 2);
+		perror(command[0]);
+		ft_quit(data, 127);
 	}
 	paths = ft_split(tmp, ':');
 	if (!paths)
