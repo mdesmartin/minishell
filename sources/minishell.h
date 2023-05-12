@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:48:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 17:53:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		ft_rfree_tab(char **tab, int i);
 int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
-void		ft_putstr3_fd(char *s1, char *s2, char *s3, int code);
+void		ft_putstr3_fd(char *s1, char *s2, char *s3, int fd);
 void		ft_print_tabtab(char **tab);
 
 void		ft_envp(t_data *data);
@@ -104,6 +104,9 @@ char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
 int			ft_builtin(t_data *data, char **command);
 void		ft_builtin_cd(t_data *data, char **command);
+void		ft_cd_home(t_data *data);
+void		ft_cd_back(t_data *data);
+void		ft_cd_opt(t_data *data, char *command1);
 void		ft_builtin_exit(t_data *data, char **command);
 void		ft_builtin_slash(t_data *data, char *directory);
 void		ft_builtin_echo(t_data *data, char **command);

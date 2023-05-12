@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 17:53:10 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 17:31:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	ft_check_exportopt(t_data *data, char *command1)
 {
 	if (ft_strncmp("-", command1, 1) == 0)
 	{
-		ft_putstr_fd("minishell : export: `", 2);
+		ft_putstr_fd("minishell : export: ", 2);
 		ft_putchar_fd(command1[0], 2);
 		ft_putchar_fd(command1[1], 2);
-		ft_putstr_fd("': options are not supported\n", 2);
+		ft_putstr_fd(": options are not supported\n", 2);
 		data->exit_code = 1;
 		return (1);
 	}

@@ -6,27 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 13:52:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 17:53:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static char	*ft_get_home(t_data *data)
-{
-	t_envp	*tmp;
-
-	tmp = data->envp;
-	while (tmp)
-	{
-		if (ft_strncmp("HOME", tmp->variable, 5) == 0)
-			return (tmp->value);
-		tmp = tmp->next;
-	}
-	ft_putstr_fd("cd : HOME not set!\n", 2);
-	data->exit_code = 1;
-	return (NULL);
-}
 
 static void	ft_update_pwd(t_data *data)
 {
@@ -78,32 +62,27 @@ static void	ft_check_cd(t_data *data, char **command)
 	if (command[1] != NULL && command[2] != NULL)
 	{
 		data->exit_code = 1;
-		printf("cd: too many arguments\n");
+		printf("minishell: cd: too many arguments\n");
 	}
 }
 
 void	ft_builtin_cd(t_data *data, char **command)
 {
-	char	*home;
-
 	ft_check_cd(data, command);
 	if (data->exit_code != 0)
 		return ;
-	if (command[1] == NULL)
-	{
-		home = ft_get_home(data);
-		if (!home)
-			return ;
-		if (chdir(home) == -1)
-			ft_perror(data, "chdir() failed", 1);
-	}
+	if (command[1] == NULL || ft_strncmp("~", command[1], 2) == 0)
+		ft_cd_home(data);
 	else if (ft_strncmp("-", command[1], 2) == 0)
-	{
-		if (chdir(ft_getenv(data->envp, "OLDPWD")) == -1)
-			ft_perror(data, "chdir() failed", 1);
-	}
+		ft_cd_back(data);
+	else if (command[1][0] == '-' && command[1][1])
+		ft_cd_opt(data, command[1]);
 	else if (chdir(command[1]) == -1)
-		ft_perror(data, "chdir() failed", 1);
+	{
+		ft_putstr3_fd("minishell: cd: ", command[1], ": ", 2);
+		perror(NULL);
+		data->exit_code = 1;
+	}
 	ft_update_oldpwd(data);
 	ft_update_pwd(data);
 	ft_update_envptab(data);
