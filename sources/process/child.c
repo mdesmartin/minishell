@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 13:30:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 14:17:59 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ static void	ft_only_child(t_data *data)
 	if (ft_builtin(data, command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
-	execve(path, command, data->envp_tab);
 	if (path)
+	{
+		execve(path, command, data->envp_tab);
 		free(path);
+	}
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
 	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
@@ -52,7 +54,10 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data, command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
-	execve(path, command, data->envp_tab);
+	if (path)
+		execve(path, command, data->envp_tab);
+	if (path)
+		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
 	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
@@ -78,7 +83,10 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data, command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
-	execve(path, command, data->envp_tab);
+	if (path)
+		execve(path, command, data->envp_tab);
+	if (path)
+		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
 	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
@@ -104,7 +112,10 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 	if (ft_builtin(data, command) != 0)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
-	execve(path, command, data->envp_tab);
+	if (path)
+		execve(path, command, data->envp_tab);
+	if (path)
+		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
 	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
