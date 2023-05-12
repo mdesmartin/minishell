@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:28:34 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:58:45 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:18:02 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static int	is_chevron(char *input, int *i)
 			if (unexpected_chevron(input, i, '<'))
 				return (1);
 		}
-		(*i)++;
+		if (input[*i])
+			(*i)++;
 	}
 	return (print_error("newline"), 1);
 }

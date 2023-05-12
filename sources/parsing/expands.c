@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/10 18:09:23 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:39:32 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ char*	expand_by_line(t_data *data, char *line)
 		}
 		else if (line[i] == '$')
 			line = expand_handler(data, line, &i); // à free ?
-		i++;
+		if (line[i])
+			i++;	
 	}
 	return (line);
 }
