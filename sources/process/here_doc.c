@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 16:11:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/11 11:10:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ static void	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 	ft_quit(data, 2);
 }
 
+static char	*ft_here_doc_expand(t_data *data, char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '$')
+			input = expand_handler(data, input, &i);
+		i++;
+	}
+	return (input);
+}
+
 static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 {
 	char	*input;
@@ -51,6 +65,8 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 		if (ft_strncmp(input, limiter, limiter_len) == 0
 			&& intput_len == limiter_len + 1 && input[limiter_len] == '\n')
 			break ;
+		input = ft_here_doc_expand(data, input);
+		intput_len = ft_strlen(input);
 		if (write(here_doc_fd[1], input, intput_len) == -1)
 			ft_perror(data, "Error while writing in the here_doc's pipe!", 1);
 		free(input);

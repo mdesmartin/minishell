@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/26 17:51:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:43:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	*ft_find_path(t_data *data, char **command, char **paths)
 		if (access(tmp, X_OK) == 0)
 			break ;
 		free(tmp);
+		tmp = NULL;
 		i++;
 	}
 	ft_free_tab(paths);
@@ -42,22 +43,6 @@ static char	*ft_is_path_in_cmd(t_data *data, char **command)
 		if (!tmp)
 			ft_error(data, "Error when retrieving cmd_path");
 		return (tmp);
-	}
-	return (NULL);
-}
-
-char	*ft_getenv(t_envp *envp, char *variable)
-{
-	t_envp	*tmp;
-	int		n;
-
-	tmp = envp;
-	n = ft_strlen(variable) + 1;
-	while (tmp)
-	{
-		if (ft_strncmp(variable, tmp->variable, n) == 0)
-			return (tmp->value);
-		tmp = tmp->next;
 	}
 	return (NULL);
 }
@@ -90,8 +75,9 @@ char	*ft_get_arg_path(t_data *data, char **command)
 	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
 	{
-		ft_perror(data, "Error when retrieving PATH!", 1);
-		return (NULL);
+		ft_putstr_fd("minishell: ", 2);
+		perror(command[0]);
+		ft_quit(data, 127);
 	}
 	paths = ft_split(tmp, ':');
 	if (!paths)
