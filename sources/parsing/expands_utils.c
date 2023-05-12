@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:43:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 14:37:50 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
 	*start = 0;
+	free(pipe_tab);
 	return (new_content);
 }
 
@@ -58,6 +59,8 @@ char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
 	*start = 0;
+	free(value);
+	free(pipe_tab);
 	return (new_content);
 }
 
@@ -85,5 +88,6 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
 	*start = 0;
+	free(pipe_tab);
 	return (new_content);
 }
