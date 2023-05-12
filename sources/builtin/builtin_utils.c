@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:21:55 by julien            #+#    #+#             */
-/*   Updated: 2023/05/11 16:57:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:51:25 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ void	ft_builtin_slash(t_data *data, char *directory)
 		ft_quit(data, 126);
 	}
 }
-
-

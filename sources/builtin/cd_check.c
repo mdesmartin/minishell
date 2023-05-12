@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:15:37 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 17:17:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:52:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,3 @@ void	ft_check_oldpwd(t_data *data)
 	tmp->next = NULL;
 	ft_envadd_back(&data->envp, tmp);
 }
-
