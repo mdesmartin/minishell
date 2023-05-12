@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:59:39 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:43:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	*ft_find_path(t_data *data, char **command, char **paths)
 		if (access(tmp, X_OK) == 0)
 			break ;
 		free(tmp);
+		tmp = NULL;
 		i++;
 	}
 	ft_free_tab(paths);

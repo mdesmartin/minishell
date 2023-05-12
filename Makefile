@@ -1,7 +1,7 @@
 NAME = minishell
 DEBUG = no
 
-CFLAGS = -Wall -Wextra -Werror -L/usr/local/lib -I/usr/local/include -lreadline
+CFLAGS = -Wall -Wextra -Werror -I/usr/local/include -L/usr/local/lib -lreadline
 DFLAGS = -g3 -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined
 
 ifeq ($(DEBUG), yes)
