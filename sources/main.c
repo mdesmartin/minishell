@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 14:59:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 14:41:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ sig_atomic_t	g_exitcode;
 // g_exitcode == 2 : process has child
 // g_exitcode == 3 : signal for newprompt received and process has a child
 
-void	ft_check_gcode(t_data *data)
+static void	ft_check_gcode(t_data *data)
 {
 	if (g_exitcode == 1 || g_exitcode == 3)
 	{

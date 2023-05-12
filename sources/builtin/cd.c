@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 17:17:20 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/12 13:52:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	ft_check_cd(t_data *data, char **command)
 		data->exit_code = 1;
 		printf("cd: too many arguments\n");
 	}
-
 }
 
 void	ft_builtin_cd(t_data *data, char **command)
