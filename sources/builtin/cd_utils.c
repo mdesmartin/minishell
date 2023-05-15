@@ -6,31 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:00:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 10:56:05 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 11:15:56 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// static char	*ft_get_home(t_data *data)
-// {
-// 	t_envp	*tmp;
-
-// 	tmp = data->envp;
-// 	while (tmp)
-// 	{
-// 		if (ft_strncmp("HOME", tmp->variable, 5) == 0)
-// 			break ;
-// 		tmp = tmp->next;
-// 	}
-// 	if (tmp && !tmp->value)
-// 	{
-// 		ft_putstr_fd("minishell: cd : HOME not set!\n", 2);
-// 		data->exit_code = 1;
-// 		return (tmp->value);
-// 	}
-// 	return (NULL);
-// }
 
 void	ft_cd_home(t_data *data)
 {
@@ -45,7 +25,7 @@ void	ft_cd_home(t_data *data)
 	}
 	if (!tmp || (tmp && !tmp->value))
 	{
-		ft_putstr_fd("minishell: cd : HOME not set!\n", 2);
+		ft_putstr_fd("minishell: cd : HOME not set\n", 2);
 		data->exit_code = 1;
 		return ;
 	}
