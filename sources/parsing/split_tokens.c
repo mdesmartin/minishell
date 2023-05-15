@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 16:04:11 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:25:55 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,38 +87,32 @@ static char	*strduppd(char *src, int j)
 		i++;
 	}
 	dst[i] = '\0';
-	dst = trim_quotes(dst);
 	return (dst);
 }
 
 char	**split_tokens(char *str, char *charset)
 {
 	char		**dest;
-	char		*start;
-	char		*s;
 	int			size;
 	int			j;
 	int			i;
 
-	s = space_chevrons(str); // protect malloc
-	start = s;
 	i = -1;
-	while (*s && is_charsetd(*s, charset))
-		s++;
-	size = wordcountd((char *)s, charset);
+	while (*str && is_charsetd(*str, charset))
+		str++;
+	size = wordcountd((char *)str, charset);
 	dest = calloc((size + 1), sizeof(char *));
 	if (!dest)
 		return (NULL);
 	while (++i < size)
 	{
-		while (is_charsetd((char)*s, charset))
-			s++;
-		j = wordlend((char *)s, charset);
-		dest[i] = strduppd((char *)s, j);
+		while (is_charsetd((char)*str, charset))
+			str++;
+		j = wordlend((char *)str, charset);
+		dest[i] = strduppd((char *)str, j);
 		if (!dest[i])
 			return (free_tab(dest), NULL);
-		s += j;
+		str += j;
 	}
-	free(start);
 	return (dest);
 }

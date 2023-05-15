@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/09 16:24:27 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:58:37 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ void	print_tab(char **pipe_tab)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+char	**parsing_token(char *pipe)
+{
+	char	**token_tab;
+
+	token_tab = NULL;
+	token_tab = split_tokens(pipe, " \t");
+	// token_tab = parsingredirectionsJulien;
+	token_tab = trim_quotes(token_tab);
+	return (token_tab);
+}
+
 void	create_chain(t_list **cmd, void *content)
 {
 	if (*cmd == NULL)
@@ -61,17 +72,17 @@ void	create_chain(t_list **cmd, void *content)
 void	split_tab(t_list **cmd, char **pipe_tab)
 {
 	int		i;
-	char	**pipe;
+	char	**token_tab;
 	void	*adress;
 
 	i = 0;
-	pipe = NULL;
+	token_tab = NULL;
 	while (pipe_tab[i])
 	{
-		pipe = split_tokens(pipe_tab[i], " \t");
-		if (!pipe)
+		token_tab = parsing_token(pipe_tab[i]);
+		if (!token_tab)
 			return (perror("Error\n"), free(pipe_tab));
-		adress = s_init(pipe, NULL, NULL);
+		adress = s_init(token_tab, NULL, NULL);
 		create_chain(cmd, adress);
 		i++;
 	}
@@ -89,7 +100,11 @@ int	parsing(t_data *data, char *input)
 	expands(data, pipe_tab);
 	// print_tab(pipe_tab);
 	if (pipe_tab[0][0] != '\0')
-		return(split_tab(&data->cmd, pipe_tab), 0);
+	{
+		space_chevron(pipe_tab);
+		split_tab(&data->cmd, pipe_tab);
+		return (0);
+	}
 	// print_chain(data);
 	return (1);
 }
