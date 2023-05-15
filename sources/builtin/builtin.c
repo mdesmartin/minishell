@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:12:46 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:36:14 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,20 @@ static void	ft_builtin_unset(t_data *data, char **command)
 		ft_unset(data, command);
 }
 
-static void	ft_builtin_pwd(t_data *data)
+static void	ft_builtin_pwd(t_data *data, char **command)
 {
 	t_envp	*tmp;
 
+	data->exit_code = 0;
+	if (command[1] && ft_strncmp("-", command[1], 1) == 0)
+	{
+		ft_putstr_fd("minishell : pwd: ", 2);
+		ft_putchar_fd(command[1][0], 2);
+		ft_putchar_fd(command[1][1], 2);
+		ft_putstr_fd(": invalid option\n", 2);
+		data->exit_code = 2;
+		return ;
+	}
 	ft_check_pwd(data);
 	tmp = data->envp;
 	while (tmp)
@@ -57,7 +67,7 @@ int	ft_builtin(t_data *data, char **command)
 	if (ft_strncmp(command[0], "env", 4) == 0)
 		return (ft_check_envarg(data, command), 1);
 	if (ft_strncmp(command[0], "pwd", 4) == 0)
-		return (ft_builtin_pwd(data), 1);
+		return (ft_builtin_pwd(data, command), 1);
 	if (ft_strncmp(command[0], "export", 7) == 0)
 		return (ft_builtin_export(data, command), 1);
 	if (ft_strncmp(command[0], "unset", 6) == 0)
