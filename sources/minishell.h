@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 17:53:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:10:04 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void		ft_cd_back(t_data *data);
 void		ft_cd_opt(t_data *data, char *command1);
 void		ft_builtin_exit(t_data *data, char **command);
 void		ft_builtin_slash(t_data *data, char *directory);
+int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 void		get_rediction(t_data *data, int i);
