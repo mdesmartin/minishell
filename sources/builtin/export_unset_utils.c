@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 17:31:10 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:19:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	ft_check_exportopt(t_data *data, char *command1)
 {
 	if (ft_strncmp("-", command1, 1) == 0)
 	{
-		ft_putstr_fd("minishell : export: ", 2);
-		ft_putchar_fd(command1[0], 2);
-		ft_putchar_fd(command1[1], 2);
-		ft_putstr_fd(": options are not supported\n", 2);
+		ft_dprintf(2, "minishell : export: %c%c: options are not supported\n",
+			command1[0], command1[1]);
 		data->exit_code = 1;
 		return (1);
 	}
@@ -34,16 +32,16 @@ int	ft_check_exportvar(char *variable)
 	if (variable[0] == '='
 		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
 	{
-		ft_putstr3_fd("minishell : export: `", variable,
-			"': not a valid identifier\n", 2);
+		ft_dprintf(2, "minishell : export: `%s': not a valid identifier\n",
+			variable);
 		return (1);
 	}
 	while (variable[i] && variable[i] != '=')
 	{
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
-			ft_putstr3_fd("minishell : export: `", variable,
-				"': not a valid identifier\n", 2);
+			ft_dprintf(2, "minishell : export: `%s': not a valid identifier\n",
+				variable);
 			return (1);
 		}
 		i++;
@@ -58,16 +56,16 @@ int	ft_check_unsetvar(char *variable)
 	i = 0;
 	if (!variable[i])
 	{
-		ft_putstr3_fd("minishell : unset: `", variable,
-			"': not a valid identifier\n", 2);
+		ft_dprintf(2, "minishell : unset: `%s': not a valid identifier\n",
+			variable);
 		return (1);
 	}
 	while (variable[i])
 	{
 		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
-			ft_putstr3_fd("minishell : unset: `", variable,
-				"': not a valid identifier\n", 2);
+			ft_dprintf(2, "minishell : unset: `%s': not a valid identifier\n",
+				variable);
 			return (1);
 		}
 		i++;

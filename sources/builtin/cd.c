@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 17:53:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:50:04 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_builtin_cd(t_data *data, char **command)
 		ft_cd_opt(data, command[1]);
 	else if (chdir(command[1]) == -1)
 	{
-		ft_putstr3_fd("minishell: cd: ", command[1], ": ", 2);
+		ft_dprintf(2, "minishell: cd: %s: ", command[1]);
 		perror(NULL);
 		data->exit_code = 1;
 	}

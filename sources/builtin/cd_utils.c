@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:00:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 11:15:56 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:50:41 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	ft_cd_back(t_data *data)
 }
 
 void	ft_cd_opt(t_data *data, char *command1)
-{
-	ft_putstr_fd("minishell: cd: ", 2);
-	ft_putchar_fd(command1[0], 2);
-	ft_putchar_fd(command1[1], 2);
-	ft_putstr_fd(": options are not supported\n", 2);
+{	
+	ft_dprintf(2, "minishell: cd: %c%c: options are not supported\n",
+		command1[0], command1[1]);
 	data->exit_code = 2;
 }

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 17:12:24 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:22:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,4 @@ void	ft_print_tabtab(char **tab)
 		printf("tab[%d]\t=\t%s\n", i, tab[i]);
 		i++;
 	}
-}
-
-void	ft_putstr3_fd(char *s1, char *s2, char *s3, int fd)
-{
-	ft_putstr_fd(s1, fd);
-	ft_putstr_fd(s2, fd);
-	ft_putstr_fd(s3, fd);
 }

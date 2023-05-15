@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 14:54:11 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:22:34 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_only_child(t_data *data)
 	}
 	if (ft_is_directory(command[0]) == 1)
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
+	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
 	ft_quit(data, 127);
 }
 
@@ -60,7 +60,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
+	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
 	ft_quit(data, 127);
 }
 
@@ -89,7 +89,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
+	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
 	ft_quit(data, 127);
 }
 
@@ -118,7 +118,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		free(path);
 	if (command[0][0] == '/')
 		ft_builtin_slash(data, command[0]);
-	ft_putstr3_fd("minishell: ", command[0], ": command not found\n", 2);
+	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
 	ft_quit(data, 127);
 }
 
