@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:48:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/03/29 10:51:26 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:08:14 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
@@ -80,10 +80,13 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 int		ft_printf(const char *str, ...);
+int		ft_dprintf(int fd, const char *str, ...);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		ft_putnbr_base(long long nbr, char *base);
+int		ft_putnbr_base_fd(long long nbr, char *base, int fd);
 int		ft_print_address(unsigned long long arg);
+int		ft_dprint_address(unsigned long long arg, int fd);
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_g(char *dst, char *src);

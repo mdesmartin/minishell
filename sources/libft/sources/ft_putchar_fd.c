@@ -6,14 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:56:34 by jmoutous          #+#    #+#             */
-/*   Updated: 2022/11/15 15:32:27 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:44:54 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
-	return ;
+	return (write(fd, &c, 1));
 }

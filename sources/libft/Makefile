@@ -48,10 +48,13 @@ LST_SRC =	ft_isalpha.c			\
 			ft_lstclear.c			\
 			ft_lstiter.c			\
 			ft_printf.c				\
+			ft_dprintf.c			\
 			ft_putchar.c			\
 			ft_putstr.c				\
 			ft_putnbr_base.c		\
+			ft_putnbr_base_fd.c		\
 			ft_print_address.c		\
+			ft_dprint_address.c		\
 			get_next_line.c			\
 			get_next_line_utils.c
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
