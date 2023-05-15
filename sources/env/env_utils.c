@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 17:36:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:20:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ char	**ft_lst_to_tabtab(t_data *data, t_envp *envp)
 	tmp = envp;
 	tab = ft_calloc(lstlen + 1, sizeof(char *));
 	if (!tab)
-		ft_error(data, "Memory allocation failed: char **envp!");
+		ft_error(data, "Memory allocation failed: char **envp!", 12);
 	while (tmp)
 	{
 		tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);
 		if (!tab[i])
 		{
 			ft_rfree_tab(tab, i);
-			ft_error(data, "Memory allocation failed: char **envp!");
+			ft_error(data, "Memory allocation failed: char **envp!", 12);
 		}
 		tmp = tmp->next;
 		i++;

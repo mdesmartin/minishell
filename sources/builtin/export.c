@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 16:54:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:25:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	ft_export_add(t_data *data, char **command, int i)
 
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
-		ft_perror(data, "Memory allocation failed: envp", 12);
+		ft_error(data, "Memory allocation failed: envp", 12);
 	if (ft_is_c_in(command[i], '=') == 1)
 	{
 		buffer = ft_split_var(data, command[i]);
 		if (!buffer)
-			ft_error(data, "Memory allocation failed for export_add!");
+			ft_error(data, "Memory allocation failed for export_add!", 12);
 		tmp->variable = buffer[0];
 		tmp->value = buffer[1];
 		free(buffer);
@@ -77,7 +77,7 @@ static void	ft_export_mod(t_data *data, t_envp *var, char **command, int i)
 	{
 		buffer = ft_split_var(data, command[i]);
 		if (!buffer)
-			ft_error(data, "Memory allocation failed for export_mod!");
+			ft_error(data, "Memory allocation failed for export_mod!", 12);
 		free(var->value);
 		var->value = buffer[1];
 		free(buffer[0]);
@@ -91,7 +91,6 @@ void	ft_export(t_data *data, char **command)
 	int		i;
 
 	i = 1;
-	data->exit_code = 0;
 	if (ft_check_exportopt(data, command[1]) == 1)
 		return ;
 	while (command[i])

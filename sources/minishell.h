@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:24:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:22:48 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 // Utils
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
-void		ft_error(t_data *data, char *s);
+void		ft_error(t_data *data, char *s, int code);
 void		ft_perror(t_data *data, char *str, int code);
 void		ft_quit(t_data *data, int code);
 void		ft_free_tab(char **tab);
@@ -72,7 +72,6 @@ void		ft_rfree_tab(char **tab, int i);
 int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
-void		ft_putstr3_fd(char *s1, char *s2, char *s3, int code);
 void		ft_print_tabtab(char **tab);
 
 void		ft_envp(t_data *data);
@@ -104,8 +103,12 @@ char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
 int			ft_builtin(t_data *data, char **command);
 void		ft_builtin_cd(t_data *data, char **command);
+void		ft_cd_home(t_data *data);
+void		ft_cd_back(t_data *data);
+void		ft_cd_opt(t_data *data, char *command1);
 void		ft_builtin_exit(t_data *data, char **command);
 void		ft_builtin_slash(t_data *data, char *directory);
+int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 void		get_rediction(t_data *data, int i);

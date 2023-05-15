@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 17:44:40 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:35:32 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	ft_unset(t_data *data, char **command)
 	data->exit_code = 0;
 	if (ft_strncmp("-", command[1], 1) == 0)
 	{
-		ft_putstr_fd("minishell : unset: `", 2);
-		ft_putchar_fd(command[1][0], 2);
-		ft_putchar_fd(command[1][1], 2);
-		ft_putstr_fd("': options are not supported\n", 2);
+		ft_dprintf(2, "minishell : unset: %c%c : invalid option\n",
+			command[1][0], command[1][1]);
 		data->exit_code = 1;
 		return ;
 	}

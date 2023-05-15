@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 11:10:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:21:55 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_error_heredoc(t_data *data, int *here_doc_fd)
 {
 	close(here_doc_fd[0]);
 	close(here_doc_fd[1]);
-	ft_error(data, "Error while using here_doc");
+	ft_error(data, "Error while using here_doc", 1);
 }
 
 static void	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
@@ -77,7 +77,7 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 {
 	if (pipe(data->here_doc_fd) == -1)
-		ft_error(data, "Pipe failed for here_doc!");
+		ft_error(data, "Pipe failed for here_doc!", 1);
 	ft_here_doc(data, data->here_doc_fd, limiter);
 	if (last_redir == 1)
 	{
@@ -87,7 +87,7 @@ void	ft_input_heredoc(t_data *data, char *limiter, int last_redir)
 	if (dup2(data->here_doc_fd[0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data, data->here_doc_fd);
-		ft_error(data, "Error while duplicating file descriptor! ");
+		ft_error(data, "Error while duplicating file descriptor! ", 1);
 	}
 	close(data->here_doc_fd[0]);
 	close(data->here_doc_fd[1]);
