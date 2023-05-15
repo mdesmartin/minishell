@@ -6,13 +6,33 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:00:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 17:54:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 10:56:05 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*ft_get_home(t_data *data)
+// static char	*ft_get_home(t_data *data)
+// {
+// 	t_envp	*tmp;
+
+// 	tmp = data->envp;
+// 	while (tmp)
+// 	{
+// 		if (ft_strncmp("HOME", tmp->variable, 5) == 0)
+// 			break ;
+// 		tmp = tmp->next;
+// 	}
+// 	if (tmp && !tmp->value)
+// 	{
+// 		ft_putstr_fd("minishell: cd : HOME not set!\n", 2);
+// 		data->exit_code = 1;
+// 		return (tmp->value);
+// 	}
+// 	return (NULL);
+// }
+
+void	ft_cd_home(t_data *data)
 {
 	t_envp	*tmp;
 
@@ -20,22 +40,18 @@ static char	*ft_get_home(t_data *data)
 	while (tmp)
 	{
 		if (ft_strncmp("HOME", tmp->variable, 5) == 0)
-			return (tmp->value);
+			break ;
 		tmp = tmp->next;
 	}
-	ft_putstr_fd("minishell: cd : HOME not set!\n", 2);
-	data->exit_code = 1;
-	return (NULL);
-}
-
-void	ft_cd_home(t_data *data)
-{
-	char	*home;
-
-	home = ft_get_home(data);
-	if (!home)
+	if (!tmp || (tmp && !tmp->value))
+	{
+		ft_putstr_fd("minishell: cd : HOME not set!\n", 2);
+		data->exit_code = 1;
 		return ;
-	if (chdir(home) == -1)
+	}
+	else if (tmp->value[0] == '\0')
+		return ;
+	if (chdir(tmp->value) == -1)
 		ft_perror(data, "minishell: cd", 1);
 }
 
