@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:48:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:24:55 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,9 @@ int			parsing(t_data *data, char *readed);
 void		expands(t_data *data, char **pipe_tab);
 int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
-char		*trim_quotes(char *dest);
 char		**split_tokens(char *s, char *charset);
+char		**space_chevron(char **pipe_tab);
+char		**trim_quotes(char **pipe_tab);
 
 //check_input
 int			in_quotes(char *str, int index);
@@ -133,7 +134,6 @@ int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			is_whitespace(char c);
 int			check_chevrons(char *input);
-char		*space_chevrons(char *pipe);
 int			is_whitespace_or_end(char c);
 int			check_pipes_n_and(char *input);
 int			check_quotes(char *input);

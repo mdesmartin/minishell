@@ -6,58 +6,60 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:45:30 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 16:30:55 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	quotes_handler(char *dequoted, char *dest, int *i, char quote)
+int	flag_handler(int flag, char quote)
 {
-	int	first;
-	int	second;
+	int double_quote = 0;
 
-	first = *i;
-	(*i)++;
-	while (dest[*i] != quote)
-		(*i)++;
-	second = *i;
-	ft_memcpy(dequoted, dest, first);
-	ft_memcpy(&dequoted[first], &dest[first + 1], second - first - 1);
-	ft_memcpy(&dequoted[second - 1], &dest[second + 1], \
-	ft_strlen(&dest[second]));
-	return ;
+	if (quote == '\"')
+		double_quote = 1;
+	if (flag == (2 + double_quote))
+		flag = 6;
+	else
+		flag = (2 + double_quote);
+	return (flag);
 }
 
-static void	quotes_type(char *dequoted, char *dest, int *i)
+char	*quote_handler(char *token)
 {
-	char	quote;
+	int i = 0;
+	int j = 0;
+	int flag = 6;
 
-	quote = dest[*i];
-	quotes_handler(dequoted, dest, i, quote);
-	return ;
-}
-
-char	*trim_quotes(char *dest)
-{
-	int		i;
-	int		flag;
-	char	*dequoted;
-
-	i = 0;
-	flag = 0;
-	dequoted = ft_calloc(ft_strlen(dest), sizeof(char));
-	while (dest[i])
+	while (token[i])
 	{
-		if (dest[i] == '\'' || dest[i] == '\"')
+		if (token[i] == '\'' && flag % 2 == 0)
+			flag = flag_handler(flag, token[i]);
+		else if (token[i] == '\"' && flag % 3 == 0)
+			flag = flag_handler(flag, token[i]);
+		else
 		{
-			quotes_type(dequoted, dest, &i);
-			flag = 1;
+			token[j] = token[i];
+			j++;
 		}
 		i++;
 	}
-	if (flag == 1)
-		return (free(dest), dequoted);
-	else
-		return (free (dequoted), dest);
+	while (token[j])
+	{
+		token[j] = '\0';
+		j++;
+	}
+	return (token);
+}
+
+char	**trim_quotes(char **token_tab)
+{
+	int i = 0;
+
+	while (token_tab[i])
+	{
+		token_tab[i] = quote_handler(token_tab[i]);
+		i++;
+	}
+	return (token_tab);
 }
