@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 17:11:53 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:12:46 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	ft_builtin_export(t_data *data, char **command)
 {
+	data->exit_code = 0;
 	if (command[1] == NULL)
 		ft_print_export(data);
 	else

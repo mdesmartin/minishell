@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 14:48:32 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:16:28 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	ft_quit(t_data *data, int code)
 	exit(code);
 }
 
-void	ft_error(t_data *data, char *str)
+void	ft_error(t_data *data, char *str, int code)
 {
 	perror(str);
-	ft_quit(data, 1);
+	ft_quit(data, code);
 }
 
 void	ft_perror(t_data *data, char *str, int code)

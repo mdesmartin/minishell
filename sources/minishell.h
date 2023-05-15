@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:10:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:16:55 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_data
 // Utils
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
-void		ft_error(t_data *data, char *s);
+void		ft_error(t_data *data, char *s, int code);
 void		ft_perror(t_data *data, char *str, int code);
 void		ft_quit(t_data *data, int code);
 void		ft_free_tab(char **tab);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 13:18:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:22:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ft_pipe_init(t_data *data)
 	{
 		data->pipes[i] = ft_calloc(2, sizeof(int));
 		if (!data->pipes[i])
-			ft_error(data, "Memory allocation failed for data->pipes[i]");
+			ft_error(data, "Memory allocation failed for data->pipes[i]", 1);
 		if (pipe(data->pipes[i]) == -1)
-			ft_error(data, "Pipe failed for data->pipes[i]");
+			ft_error(data, "Pipe failed for data->pipes[i]", 1);
 	}
 }
 
@@ -76,7 +76,7 @@ static void	ft_process(t_data *data)
 	{
 		pids = fork();
 		if (pids == -1)
-			ft_error(data, "Fork failed");
+			ft_error(data, "Fork failed", 1);
 		if (pids == 0)
 			ft_child(data, data->pipes, i);
 	}

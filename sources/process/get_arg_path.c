@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/12 13:43:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 15:20:58 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_find_path(t_data *data, char **command, char **paths)
 	{
 		tmp = ft_strjoin(paths[i], command[0]);
 		if (!tmp)
-			ft_error(data, "Error when adding the cmd to the path");
+			ft_error(data, "Error when adding the cmd to the path", 12);
 		if (access(tmp, X_OK) == 0)
 			break ;
 		free(tmp);
@@ -41,7 +41,7 @@ static char	*ft_is_path_in_cmd(t_data *data, char **command)
 	{
 		tmp = ft_strdup(command[0]);
 		if (!tmp)
-			ft_error(data, "Error when retrieving cmd_path");
+			ft_error(data, "Error when retrieving cmd_path", 12);
 		return (tmp);
 	}
 	return (NULL);
@@ -57,7 +57,7 @@ static void	ft_add_bslash(t_data *data, char **paths)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		if (!tmp)
-			ft_perror(data, "Error when adding \'/\' to the path", 12);
+			ft_error(data, "Error when adding \'/\' to the path", 12);
 		free(paths[i]);
 		paths[i] = tmp;
 		i++;
