@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:51:08 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:20:45 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	ft_update_envp(t_data *data)
 			shlvl++;
 			tmp->value = ft_itoa(shlvl);
 			if (!tmp->value)
-				ft_perror(data, "Memory allocation failed: updating SHLVL", 12);
+				ft_error(data, "Memory allocation failed: updating SHLVL", 12);
 			return ;
 		}
 		tmp = tmp->next;
@@ -92,7 +92,7 @@ void	ft_check_envarg(t_data *data, char **command)
 	data->exit_code = 0;
 	if (command[1])
 	{
-		ft_putstr3_fd("minishell: ", "env: ", ": no argument required\n", 2);
+		ft_dprintf(2, "minishell: env: no argument required\n");
 		data->exit_code = 127;
 	}
 	else
