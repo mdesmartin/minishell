@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/05 13:54:16 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:31:56 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,11 @@ int	ft_inredic_count(char **tab)
 	return (count);
 }
 
-void	ft_extract_inputredir(t_data *data, t_pipeline *pipe)
+void	ft_extract_inputredir(t_data *data, char **cmd, char **input)
 {
-	pipe->input = ft_calloc(ft_inredic_count(pipe->command) * 2 + 1,
-			sizeof(char **));
-	if (!pipe->input)
-	{
-		ft_perror(data, "Memory allocation failed: ft_extract_input_file", 12);
-		ft_quit(data, 1);
-	}
-	ft_extract_input(pipe->command, pipe->input);
-	ft_del_input(pipe->command);
+	input = ft_calloc(ft_inredic_count(cmd) * 2 + 1, sizeof(char **));
+	if (!input)
+		ft_error(data, "Memory allocation failed: ft_extract_input_file", 12);
+	ft_extract_input(cmd, input);
+	ft_del_input(cmd);
 }

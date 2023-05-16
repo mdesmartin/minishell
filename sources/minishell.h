@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 13:32:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:34:50 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
-void		get_redirection(t_data *data);
-void		ft_extract_outputredir(t_data *data, t_pipeline *pipe);
-void		ft_extract_inputredir(t_data *data, t_pipeline *pipe);
+void		get_redirection(t_data *data, char **cmd, char **in, char **out);
+void		ft_extract_outputredir(t_data *data, char **cmd, char **output);
+void		ft_extract_inputredir(t_data *data, char **cmd, char **input);
 void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
 
