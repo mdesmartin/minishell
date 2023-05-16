@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 14:29:38 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:38:38 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		ft_rfree_tab(char **tab, int i);
 int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
-void		ft_print_tabtab(char **tab);
+void		ft_print_tabtab(char **tab, char *name);
 
 void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
@@ -111,9 +111,8 @@ void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
-void		get_redirection(t_data *data);
-void		ft_extract_outputredir(t_data *data, t_pipeline *pipe);
-void		ft_extract_inputredir(t_data *data, t_pipeline *pipe);
+char		**ft_extract_outputredir(t_data *data, char **cmd);
+char		**ft_extract_inputredir(t_data *data, char **cmd);
 void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
 

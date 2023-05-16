@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 17:07:25 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:38:13 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,13 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 
 	i = 0;
 	token_tab = NULL;
-	input = NULL;//
-	output = NULL;//
 	while (pipe_tab[i])
 	{
 		token_tab = split_tokens(pipe_tab[i], " \t");
 		if (!token_tab)
 			return (free(pipe_tab), ft_quit(data, 12));//checlprotect
-		// input = ft_extract_inputredir(data, token_tab);
-		// output = ft_extract_outputredir(data, token_tab);
+		input = ft_extract_inputredir(data, token_tab);
+		output = ft_extract_outputredir(data, token_tab);
 		trim_quotes(token_tab);
 		adress = s_init(token_tab, input, output);
 		if (!adress)
