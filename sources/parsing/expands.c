@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/15 18:02:20 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:36:17 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ char	*whitespace_handler(char *pipe_tab, int *start, int end)
 char	*expand_handler(t_data *data, char *pipe_tab, int *start)
 {
 	int	end;
-	int	expand;
 
-	expand = *start;
 	(*start)++;
 	end = *start;
-	(void) expand;
 	if (is_whitespace_or_end(pipe_tab[*start], pipe_tab, *start)) //rajouter ici, check if echo in pipe and if just trim $
 		return (whitespace_handler(pipe_tab, start, end));
 	else if (pipe_tab[*start] == '?')
