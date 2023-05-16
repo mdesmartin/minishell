@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:28:34 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/12 13:18:02 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 17:05:34 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	is_chevron(char *input, int *i)
 			(*i)++;
 		while (input[*i] == ' ')
 			(*i)++;
-		if (ft_isalnum(input[*i])) // != '\0' && (input[*i] != '>' || input[*i] != '<'))//check ce quil y a apres space
+		if (input[*i] != '|' && (input[*i] >= 33 && input[*i] <= 126))
 			return (0);
 		else if (is_pipe(input, i))
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/15 16:39:27 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:41:47 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*chevrons_handler(char *pipe)
 	int		j;
 
 	new = ft_calloc(ft_strlen(pipe) * 3, sizeof(char));
+	if (!new)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (pipe[i])
@@ -70,6 +72,8 @@ char	**space_chevron(char **pipe_tab)
 	while (pipe_tab[i])
 	{
 		pipe_tab[i] = chevrons_handler(pipe_tab[i]);
+		if (!pipe_tab[i])
+			return (free_tab(pipe_tab), NULL);
 		i++;
 	}
 	return (pipe_tab);
