@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:22:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 13:33:24 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	ft_cmd(t_data *data)
 	if (data->nb_cmd == 1 && ft_inredic_count(command) == 0
 		&& ft_outredic_count(command) == 0 && ft_builtin(data, command) != 0)
 		return ;
+	get_redirection(data);
 	ft_process(data);
 }
