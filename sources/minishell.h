@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:24:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/15 17:57:35 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			is_whitespace(char c);
 int			check_chevrons(char *input);
-int			is_whitespace_or_end(char c);
+int			is_whitespace_or_end(char c, char *str, int i);
 int			check_pipes_n_and(char *input);
 int			check_quotes(char *input);
 

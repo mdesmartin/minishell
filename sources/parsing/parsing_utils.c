@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:46:12 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 13:08:18 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,19 @@ int	is_whitespace(char c)
 		return (0);
 }
 
-int	is_whitespace_or_end(char c)
+int	is_whitespace_or_end(char c, char *str, int i)
 {
-	if (c == ' ' || c == '\t' || c == '\0' || c == '\"')
+	int	a;
+
+	a = 2;
+	while (i != 0 && str[i] && a)//fait planter qusnd $HOME
+	{
+		i--;
+		a--;
+	}
+	if (!a && (c == '\"' && str[i] == '\"'))
+		return (1);
+	else if (c == ' ' || c == '\t' || c == '\0')
 		return (1);
 	else
 		return (0);
