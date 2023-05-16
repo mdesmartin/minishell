@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 13:08:18 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:30:53 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_whitespace_or_end(char c, char *str, int i)
 	int	a;
 
 	a = 2;
-	while (i != 0 && str[i] && a)//fait planter qusnd $HOME
+	while (i != 0 && str[i] && a)
 	{
 		i--;
 		a--;

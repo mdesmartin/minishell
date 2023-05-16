@@ -12,40 +12,40 @@
 
 #include "../minishell.h"
 
-void	print_chain(t_data *data)
-{
-	t_list	*cp;
-	int		i;
+// void	print_chain(t_data *data)
+// {
+// 	t_list	*cp;
+// 	int		i;
 
-	i = 0;
-	cp = data->cmd;
-	while (cp)
-	{
-		i = 0;
-		while (s_read_cnt(cp)->command[i])
-		{
-			printf("%s ", s_read_cnt(cp)->command[i]);
-			i++;
-		}
-		if (i > 1)
-			printf("\n");
-		cp = cp->next;
-	}
-	printf("\n");
-	return ;
-}
+// 	i = 0;
+// 	cp = data->cmd;
+// 	while (cp)
+// 	{
+// 		i = 0;
+// 		while (s_read_cnt(cp)->command[i])
+// 		{
+// 			printf("%s ", s_read_cnt(cp)->command[i]);
+// 			i++;
+// 		}
+// 		if (i > 1)
+// 			printf("\n");
+// 		cp = cp->next;
+// 	}
+// 	printf("\n");
+// 	return ;
+// }
 
-void	print_tab(char **pipe_tab)
-{
-	int i = 0;
+// void	print_tab(char **pipe_tab)
+// {
+// 	int i = 0;
 
-	while (pipe_tab[i])
-	{
-		printf("tab[%d] : %s\n", i, pipe_tab[i]);
-		i++;
-	}
-	return ;
-}
+// 	while (pipe_tab[i])
+// 	{
+// 		printf("tab[%d] : %s\n", i, pipe_tab[i]);
+// 		i++;
+// 	}
+// 	return ;
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -72,7 +72,7 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 	{
 		token_tab = split_tokens(pipe_tab[i], " \t");
 		if (!token_tab)
-			return (free(pipe_tab), ft_quit(data, 12));
+			return (free(pipe_tab), ft_quit(data, 12));//checlprotect
 		input = ft_extract_inputredir(data, token_tab);
 		output = ft_extract_outputredir(data, token_tab);
 		trim_quotes(token_tab);
@@ -93,11 +93,15 @@ int	parsing(t_data *data, char *input)
 	nb_p = nb_pipes(input);
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
+	if (!pipe_tab)
+		return (1);
 	expands(data, pipe_tab);
 	// print_tab(pipe_tab);
 	if (pipe_tab[0][0] != '\0')
 	{
 		space_chevron(pipe_tab);
+		// if (!space_chevron)
+		// 	return (1);
 		split_tab(data, &data->cmd, pipe_tab);
 		return (0);
 	}

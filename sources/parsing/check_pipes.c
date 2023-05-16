@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/09 17:17:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:30:32 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	nothing_after(char *input, int i)
 	return (1);
 }
 
-//if error return 1
 int	check_pipes_n_and(char *input)
 {
 	int	i;

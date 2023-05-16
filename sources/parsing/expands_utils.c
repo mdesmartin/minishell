@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/12 14:37:50 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:53:40 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 	}
 	while (value[j])
 		new_content[i++] = value[j++];
+	*start = i - 1;
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
-	*start = 0;
 	free(pipe_tab);
 	return (new_content);
 }

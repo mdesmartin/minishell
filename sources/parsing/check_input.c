@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 13:59:51 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:28:04 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	print_error(char *error)
 	return ;
 }
 
-// if nothing after, newline, else token ' ', ++1 return
 static int	check_whitespace(char *input)
 {
 	int	i;
