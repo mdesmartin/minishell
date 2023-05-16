@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 14:15:58 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 16:17:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(void)
 	while (1)
 	{
 		ft_check_gcode(&data);
-		printf("%d ", data.exit_code);
+printf("%d ", data.exit_code);
 		input = readline("minishell> ");
 		if (!input)
 			return (printf("exit\n"), ft_quit(&data, data.exit_code), 0);
