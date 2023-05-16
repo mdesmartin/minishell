@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 14:34:50 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:43:12 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
 char		**split_tokens(char *s, char *charset);
 char		**space_chevron(char **pipe_tab);
-char		**trim_quotes(char **pipe_tab);
+void		trim_quotes(char **pipe_tab);
 
 //check_input
 int			in_quotes(char *str, int index);

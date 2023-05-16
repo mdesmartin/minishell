@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/15 16:30:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:19:40 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	flag_handler(int flag, char quote)
 	return (flag);
 }
 
-char	*quote_handler(char *token)
+void	quote_handler(char *token)
 {
 	int i = 0;
 	int j = 0;
@@ -49,17 +49,17 @@ char	*quote_handler(char *token)
 		token[j] = '\0';
 		j++;
 	}
-	return (token);
+	return ;
 }
 
-char	**trim_quotes(char **token_tab)
+void	trim_quotes(char **token_tab)
 {
 	int i = 0;
 
 	while (token_tab[i])
 	{
-		token_tab[i] = quote_handler(token_tab[i]);
+		quote_handler(token_tab[i]);
 		i++;
 	}
-	return (token_tab);
+	return ;
 }
