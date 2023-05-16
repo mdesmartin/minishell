@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 17:22:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 12:45:52 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 
 void	ft_child(t_data *data, int **pipes, int i)
 {
-	get_rediction(data, i);
+	get_redirection(data, i);
 	if (data->nb_cmd == 1)
 		ft_only_child(data);
 	else if (i == 0)

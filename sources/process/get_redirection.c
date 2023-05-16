@@ -6,13 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/04/13 13:38:14 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 13:03:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_rediction(t_data *data, int i)
+void	get_redirection(t_data *data, int i)
 {
 	t_list		*tmp;
 	t_pipeline	*pipe;
@@ -31,6 +31,8 @@ void	get_rediction(t_data *data, int i)
 char	**ft_redirection(t_data *data, int i)
 {
 	t_list	*tmp;
+	char	**input;
+	char	**output;
 
 	tmp = data->cmd;
 	while (i > 0)
@@ -38,9 +40,9 @@ char	**ft_redirection(t_data *data, int i)
 		tmp = tmp->next;
 		i--;
 	}
-	ft_input_redirection(data, (char **)s_read_cnt(tmp)->input);
-	ft_output_redirection(data, (char **)s_read_cnt(tmp)->output);
+	input = (char **)s_read_cnt(tmp)->input;
+	output = (char **)s_read_cnt(tmp)->output;
+	ft_input_redirection(data, input);
+	ft_output_redirection(data, output);
 	return ((char **)s_read_cnt(tmp)->command);
 }
-
-// cat valgrind_ignore_leaks.txt < aaaa > bbbbb << cccc >> ddddd
