@@ -137,7 +137,7 @@ int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			is_whitespace(char c);
 int			check_chevrons(char *input);
-int			is_whitespace_or_end(char c);
+int			is_whitespace_or_end(char c, char *str, int i);
 int			check_pipes_n_and(char *input);
 int			check_quotes(char *input);
 
