@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:17:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 13:46:56 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 13:50:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_builtin_echo(t_data *data, char **command)
 	int	i;
 
 	i = 1;
+	data->exit_code = 0;
 	if (!command[1])
 	{
 		printf("\n");
@@ -49,5 +50,4 @@ void	ft_builtin_echo(t_data *data, char **command)
 	if (ft_strncmp("-n", command[1], 2) != 0
 		|| ft_check_echo_opt(command[1]) == 1)
 		printf("\n");
-	data->exit_code = 0;
 }
