@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 14:29:59 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 14:48:29 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 		token_tab = split_tokens(pipe_tab[i], " \t");
 		if (!token_tab)
 			return (free(pipe_tab), ft_quit(data, 12));
-		// getciunputoutput(token_tab, input, ouput);
+		// get_redirection(data, token_tab, input, output);
 		trim_quotes(token_tab);
 		adress = s_init(token_tab, input, output);
 		if (!adress)
