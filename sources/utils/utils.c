@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 17:22:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/16 15:11:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,19 @@ char	*ft_strjoin3(char const *s1, char const *s2, char const *s3)
 	return (res);
 }
 
-void	ft_print_tabtab(char **tab)
+void	ft_print_tabtab(char **tab, char *name)
 {
 	int	i;
 
 	i = 0;
+	if (!tab)
+	{
+		printf("%s do not exist\n", name);
+		return ;
+	}
 	while (tab[i])
 	{
-		printf("tab[%d]\t=\t%s\n", i, tab[i]);
+		printf("%s[%d]\t=\t%s\n", name, i, tab[i]);
 		i++;
 	}
 }
