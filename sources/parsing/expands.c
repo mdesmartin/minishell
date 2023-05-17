@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/16 15:21:42 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 15:20:10 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ char*	expand_by_line(t_data *data, char *line)
 				i++;
 		}
 		else if (line[i] == '$')
+		{
 			line = expand_handler(data, line, &i);
+			if (!line)
+				return (NULL);
+		}
 		if (line[i])
 			i++;	
 	}
@@ -92,6 +96,8 @@ void	expands(t_data *data, char **pipe_tab)
 	while (pipe_tab[j])
 	{
 		pipe_tab[j] = expand_by_line(data, pipe_tab[j]);
+		if (!pipe_tab)
+			return (free_tab(pipe_tab), ft_quit(data, 12));
 		j++;
 	}
 	return ;

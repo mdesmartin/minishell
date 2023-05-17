@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 14:53:40 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 15:10:46 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	i = 0;
 	new_size = ft_strlen(pipe_tab) - (end - *start);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	if (!new_content)
+		return (NULL);
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];
@@ -34,7 +36,6 @@ char	*trim_from_to(char *pipe_tab, int *start, int end)
 	return (new_content);
 }
 
-	// protect here
 char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
@@ -48,6 +49,8 @@ char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	if (!new_content)
+		return (NULL);
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];
@@ -59,12 +62,9 @@ char	*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end)
 	while (pipe_tab[end])
 		new_content[i++] = pipe_tab[end++];
 	*start = 0;
-	free(value);
-	free(pipe_tab);
-	return (new_content);
+	return (free(value), free(pipe_tab), new_content);
 }
 
-	// protect here
 char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
@@ -78,6 +78,8 @@ char	*trim_by(char *value, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipe_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	if (!new_content)
+		return (NULL);
 	while (i < *start - 1)
 	{
 		new_content[i] = pipe_tab[i];

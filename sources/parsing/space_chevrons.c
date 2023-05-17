@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 15:41:47 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 15:23:39 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*chevrons_handler(char *pipe)
 	return (new);
 }
 
-char	**space_chevron(char **pipe_tab)
+void	space_chevron(t_data *data, char **pipe_tab)
 {
 	int	i = 0;
 
@@ -73,9 +73,9 @@ char	**space_chevron(char **pipe_tab)
 	{
 		pipe_tab[i] = chevrons_handler(pipe_tab[i]);
 		if (!pipe_tab[i])
-			return (free_tab(pipe_tab), NULL);
+			return (free_tab(pipe_tab), ft_quit(data, 12));
 		i++;
 	}
-	return (pipe_tab);
+	return ;
 }
 

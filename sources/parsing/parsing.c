@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 15:38:13 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:12:19 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,23 @@ void	create_chain(t_list **cmd, void *content)
 
 void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 {
-	int		i;
 	char	**token_tab;
-	void	*adress;
 	char	**input;
 	char	**output;
+	void	*adress;
+	int		i;
 
 	i = 0;
-	token_tab = NULL;
 	while (pipe_tab[i])
 	{
-		token_tab = split_tokens(pipe_tab[i], " \t");
-		if (!token_tab)
-			return (free(pipe_tab), ft_quit(data, 12));//checlprotect
-		input = ft_extract_inputredir(data, token_tab);
-		output = ft_extract_outputredir(data, token_tab);
+		token_tab = split_tokens(data, pipe_tab, pipe_tab[i], " \t");
 		trim_quotes(token_tab);
+		input = ft_extract_inputredir(data, token_tab, pipe_tab);
+		output = ft_extract_outputredir(data, token_tab, pipe_tab, input);
 		adress = s_init(token_tab, input, output);
 		if (!adress)
-			return (free(pipe_tab), ft_quit(data, 12));
+			return (free_tab(pipe_tab), free_tab(token_tab), free_tab(input)\
+			, free_tab(output), ft_quit(data, 12));
 		create_chain(cmd, adress);
 		i++;
 	}
@@ -94,14 +92,12 @@ int	parsing(t_data *data, char *input)
 	pipe_tab = NULL;
 	pipe_tab = create_tab(pipe_tab, input, nb_p);
 	if (!pipe_tab)
-		return (1);
+		return (ft_quit(data, 12), 1);
 	expands(data, pipe_tab);
 	// print_tab(pipe_tab);
 	if (pipe_tab[0][0] != '\0')
 	{
-		space_chevron(pipe_tab);
-		// if (!space_chevron)
-		// 	return (1);
+		space_chevron(data, pipe_tab);
 		split_tab(data, &data->cmd, pipe_tab);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 14:29:31 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:12:33 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ void	*s_init(char **command, char **input, char **output)
 		pipeline->command = calloc_tab();
 	else
 		pipeline->command = command;
-	pipeline->input = input;
-	pipeline->output = output;
+	if (!input)
+		pipeline->input = calloc_tab();
+	else
+		pipeline->input = input;
+	if (!output)
+		pipeline->output = calloc_tab();
+	else
+		pipeline->output = output;
 	return (pipeline);
 }
