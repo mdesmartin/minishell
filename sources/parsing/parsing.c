@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 16:12:19 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:32:17 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 	while (pipe_tab[i])
 	{
 		token_tab = split_tokens(data, pipe_tab, pipe_tab[i], " \t");
-		trim_quotes(token_tab);
+		token_parsing(token_tab);
 		input = ft_extract_inputredir(data, token_tab, pipe_tab);
 		output = ft_extract_outputredir(data, token_tab, pipe_tab, input);
 		adress = s_init(token_tab, input, output);
