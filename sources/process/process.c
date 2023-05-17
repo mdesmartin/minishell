@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 14:57:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 11:35:49 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	ft_wait_child(t_data *data, int i)
 			data->exit_code = WTERMSIG(status) + 128;
 			if (data->exit_code == 131)
 				printf("\b\bQuit\n");
+			if (data->exit_code == 141)
+				data->exit_code = 0;
 		}
 		else
 			data->exit_code = 0;
