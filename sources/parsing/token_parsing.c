@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trim_quotes.c                                      :+:      :+:    :+:   */
+/*   token_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 14:19:40 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:37:48 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	flag_handler(int flag, char quote)
 	return (flag);
 }
 
-void	quote_handler(char *token)
+void	trim_quote(char *token)
 {
 	int i = 0;
 	int j = 0;
@@ -52,13 +52,29 @@ void	quote_handler(char *token)
 	return ;
 }
 
-void	trim_quotes(char **token_tab)
+void	convert_redirection(char *token)
+{
+	int	i;
+
+	i = 0;
+	while (token[i])
+	{
+		if (token[i] == '<' && !in_quotes(token, i))
+			token[i] = -60;
+		else if (token[i] == '>' && !in_quotes(token, i))
+			token[i] = -62;
+		i++;
+	}
+}
+
+void	token_parsing(char **token_tab)
 {
 	int i = 0;
 
 	while (token_tab[i])
 	{
-		quote_handler(token_tab[i]);
+		convert_redirection(token_tab[i]);
+		trim_quote(token_tab[i]);
 		i++;
 	}
 	return ;

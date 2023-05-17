@@ -34,11 +34,11 @@ LST_SRC =	main.c							\
 			parsing/expands.c				\
 			parsing/parsing.c				\
 			parsing/free_cmd.c 				\
-			parsing/trim_quotes.c			\
 			parsing/check_input.c 			\
 			parsing/check_pipes.c			\
 			parsing/split_pipes.c			\
 			parsing/split_tokens.c			\
+			parsing/token_parsing.c			\
 			parsing/expands_utils.c			\
 			parsing/parsing_utils.c			\
 			parsing/check_chevrons.c		\
