@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 16:24:36 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:08:19 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_envp_init(t_data *data)
 
 	data->envp = ft_calloc(1, sizeof(t_envp));
 	if (!data->envp)
-		ft_perror(data, "Memory allocation failed: envp_init", 12);
+		ft_error(data, "Memory allocation failed: envp_init", 12);
 	buffer = ft_split_var(data, environ[0]);
 	data->envp->variable = buffer[0];
 	data->envp->value = buffer[1];
@@ -40,7 +40,7 @@ static void	ft_cp_envp(t_data *data)
 	{
 		tmp = ft_calloc(1, sizeof(t_envp));
 		if (!tmp)
-			ft_perror(data, "Memory allocation failed: envp_init", 12);
+			ft_error(data, "Memory allocation failed: envp_init", 12);
 		buffer = ft_split_var(data, environ[i]);
 		tmp->variable = buffer[0];
 		tmp->value = buffer[1];

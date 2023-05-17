@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:01:07 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:10:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_pipe_init(t_data *data)
 	i = -1;
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
-		ft_perror(data, "Memory allocation failed: data->pipes", 12);
+		ft_error(data, "Memory allocation failed: data->pipes", 12);
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = ft_calloc(2, sizeof(int));

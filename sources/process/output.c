@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 15:31:52 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:09:53 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	ft_output_file(t_data *data, char *file, int last_redir)
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data, "Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 }
 
@@ -50,8 +49,7 @@ static void	ft_output_appends(t_data *data, char *file, int last_redir)
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data, "Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 }
 

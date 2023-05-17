@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 15:31:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:09:20 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 	{
 		ft_close_fds(data, NULL);
 		close(infile);
-		ft_perror(data, "Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 }
 
