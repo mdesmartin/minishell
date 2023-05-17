@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_output.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:04:18 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:49:17 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	ft_del_output(char **cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i][0] == '>' && ft_strlen(cmd[i]) == 1)
+		if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
 		{
 			ft_free_two_line(cmd, i);
 			i = -1;
 		}
-		else if (cmd[i][0] == '>' && cmd[i][1] == '>' && ft_strlen(cmd[i]) == 2)
+		else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
 		{
 			ft_free_two_line(cmd, i);
 			i = -1;
@@ -56,14 +56,14 @@ static void	ft_extract_output(char **cmd, char **input)
 	j = 0;
 	while (cmd[i])
 	{
-		if (cmd[i][0] == '>' && ft_strlen(cmd[i]) == 1)
+		if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
 		{
 			input[j] = ft_strdup("0");
 			input[j + 1] = ft_strdup(cmd[i + 1]);
 			i++;
 			j += 2;
 		}
-		else if (cmd[i][0] == '>' && cmd[i][1] == '>' && ft_strlen(cmd[i]) == 2)
+		else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
 		{
 			input[j] = ft_strdup("1");
 			input[j + 1] = ft_strdup(cmd[i + 1]);
@@ -83,9 +83,9 @@ int	ft_outredic_count(char **tab)
 	count = 0;
 	while (tab[i])
 	{
-		if (tab[i][0] == '>' && ft_strlen(tab[i]) == 1)
+		if (tab[i][0] == -62 && ft_strlen(tab[i]) == 1)
 			count++;
-		else if (tab[i][0] == '>' && tab[i][1] == '>' && ft_strlen(tab[i]) == 2)
+		else if (tab[i][0] == -62 && tab[i][1] == -62 && ft_strlen(tab[i]) == 2)
 			count++;
 		i++;
 	}
