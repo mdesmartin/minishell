@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:42 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 15:11:22 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 13:30:12 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	ft_print_tabtab(char **tab, char *name)
 		printf("%s do not exist\n", name);
 		return ;
 	}
+	if (!tab[i])
+		printf("%s is an empty tab\n", name);
 	while (tab[i])
 	{
 		printf("%s[%d]\t=\t%s\n", name, i, tab[i]);

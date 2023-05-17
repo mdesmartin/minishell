@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:20:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:08:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	**ft_split_var(t_data *data, char *var)
 	i = 0;
 	res = ft_calloc(3, sizeof(char *));
 	if (!res)
-		ft_perror(data, "Memory allocation failed: spliting envp var", 12);
+		ft_error(data, "Memory allocation failed: spliting envp var", 12);
 	tmp = var;
 	while (tmp && *tmp != '=')
 	{

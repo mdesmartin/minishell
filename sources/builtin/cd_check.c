@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:15:37 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:29:02 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:08:26 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	ft_check_oldpwd(t_data *data)
 	}
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
-		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
+		ft_error(data, "Memory allocation failed: check_oldpwd", 12);
 	tmp->variable = strdup("OLDPWD");
 	if (!tmp->variable)
-		ft_perror(data, "Memory allocation failed: check_oldpwd", 12);
+		ft_error(data, "Memory allocation failed: check_oldpwd", 12);
 	tmp->next = NULL;
 	ft_envadd_back(&data->envp, tmp);
 }

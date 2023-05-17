@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:18:49 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/09 17:16:02 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:08:20 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	ft_creat_shlvl(t_data *data)
 
 	tmp = ft_calloc(1, sizeof(t_envp));
 	if (!tmp)
-		ft_perror(data, "Memory allocation failed: creat_shlvl", 12);
+		ft_error(data, "Memory allocation failed: creat_shlvl", 12);
 	tmp->variable = strdup("SHLVL");
 	if (!tmp->variable)
-		ft_perror(data, "Memory allocation failed: creat_shlvl", 12);
+		ft_error(data, "Memory allocation failed: creat_shlvl", 12);
 	tmp->value = strdup("0");
 	if (!tmp->value)
-		ft_perror(data, "Memory allocation failed: creat_shlvl", 12);
+		ft_error(data, "Memory allocation failed: creat_shlvl", 12);
 	tmp->next = NULL;
 	ft_envadd_back(&data->envp, tmp);
 }
@@ -42,7 +42,7 @@ static void	ft_check_shlvl(t_data *data)
 			{
 				tmp->value = ft_strdup("0");
 				if (!tmp->value)
-					ft_perror(data,
+					ft_error(data,
 						"Memory allocation failed: SHLVL's value", 12);
 			}
 			return ;

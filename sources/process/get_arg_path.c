@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:20:58 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 15:53:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_get_arg_path(t_data *data, char **command)
 	}
 	paths = ft_split(tmp, ':');
 	if (!paths)
-		ft_perror(data, "Error when spliting PATH!", 1);
+		ft_error(data, "Error when spliting PATH!", 12);
 	ft_add_bslash(data, paths);
 	return (ft_find_path(data, command, paths));
 }

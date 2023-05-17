@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 14:57:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:10:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_pipe_init(t_data *data)
 	i = -1;
 	data->pipes = ft_calloc((data->nb_cmd + 1), sizeof(int *));
 	if (!data->pipes)
-		ft_perror(data, "Memory allocation failed: data->pipes", 12);
+		ft_error(data, "Memory allocation failed: data->pipes", 12);
 	while (++i < data->nb_cmd - 1)
 	{
 		data->pipes[i] = ft_calloc(2, sizeof(int));
@@ -43,25 +43,26 @@ static void	ft_pipe_free(t_data *data)
 	data->pipes = NULL;
 }
 
-static void	ft_wait_child(t_data *data, int i)
+static void	ft_wait_child(t_data *data, int pid, int i)
 {
 	int	status;
 
 	g_exitcode += 2;
-	while (--i >= 0)
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		data->exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			data->exit_code = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			data->exit_code = WTERMSIG(status) + 128;
-			if (data->exit_code == 131)
-				printf("\b\bQuit\n");
-		}
-		else
+		data->exit_code = WTERMSIG(status) + 128;
+		if (data->exit_code == 131)
+			printf("\b\bQuit\n");
+		if (data->exit_code == 141)
 			data->exit_code = 0;
 	}
+	else
+		data->exit_code = 0;
+	while (--i >= 1)
+		wait(NULL);
 	g_exitcode -= 2;
 }
 
@@ -81,18 +82,22 @@ static void	ft_process(t_data *data)
 			ft_child(data, data->pipes, i);
 	}
 	ft_close_fds(data, NULL);
-	ft_wait_child(data, i);
+	ft_wait_child(data, pids, i);
 	ft_pipe_free(data);
 }
 
 void	ft_cmd(t_data *data)
 {
 	char	**command;
+	char	**input;
+	char	**output;
 
 	command = s_read_cnt(data->cmd)->command;
+	input = (char **)s_read_cnt(data->cmd)->input;
+	output = (char **)s_read_cnt(data->cmd)->output;
 	data->nb_cmd = ft_lstsize(data->cmd);
-	if (data->nb_cmd == 1 && ft_inredic_count(command) == 0
-		&& ft_outredic_count(command) == 0 && ft_builtin(data, command) != 0)
+	if (data->nb_cmd == 1 && !input[0] && !output[0]
+		&& ft_builtin(data, command) != 0)
 		return ;
 	ft_process(data);
 }

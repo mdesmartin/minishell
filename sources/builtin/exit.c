@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 16:57:11 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 14:12:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ static void	ft_convert_exit(t_data *data, char *str)
 	i = ft_atolli(str);
 	if ((str_len > 17 && str_len < 20 && i < 1000)
 		|| (str_len == 20 && i > -1000))
+	{
 		ft_dprintf(2, "minishell: exit: %s: numeric argument required\n", str);
+		ft_quit(data, 2);
+	}
 	ft_quit(data, (int)((i + 256) % 256));
 }
 
-int	ft_check_exitarg(char *code)
+static int	ft_check_exitarg(char *code)
 {
 	int	i;
 
@@ -71,6 +74,7 @@ int	ft_check_exitarg(char *code)
 
 void	ft_builtin_exit(t_data *data, char **command)
 {
+	printf("exit\n");
 	if (!command[1])
 		ft_quit(data, 0);
 	else if (!command[2])
