@@ -6,7 +6,7 @@
 /*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:02:45 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/05 14:01:00 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 14:23:16 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*free_tab(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	while (tab[i] != NULL)
 	{
 		free(tab[i]);

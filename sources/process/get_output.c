@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_output.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 15:26:48 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:04:18 by mehdidesmar      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,18 @@ int	ft_outredic_count(char **tab)
 	return (count);
 }
 
-char	**ft_extract_outputredir(t_data *data, char **cmd)
+char	**ft_extract_outputredir(t_data *data, char **cmd, char **pipe_tab, char **input)
 {
 	char	**output;
 
 	output = ft_calloc(ft_outredic_count(cmd) * 2 + 1, sizeof(char **));
 	if (!output)
+	{
+		free_tab(input);
+		free_tab(cmd);
+		free_tab(pipe_tab);
 		ft_error(data, "Memory allocation failed: ft_extract_output_file", 12);
+	}
 	ft_extract_output(cmd, output);
 	ft_del_output(cmd);
 	return (output);
