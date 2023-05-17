@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 13:37:13 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 16:01:07 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,26 @@ static void	ft_pipe_free(t_data *data)
 	data->pipes = NULL;
 }
 
-static void	ft_wait_child(t_data *data, int i)
+static void	ft_wait_child(t_data *data, int pid, int i)
 {
 	int	status;
 
 	g_exitcode += 2;
-	while (--i >= 0)
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		data->exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			data->exit_code = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			data->exit_code = WTERMSIG(status) + 128;
-			if (data->exit_code == 131)
-				printf("\b\bQuit\n");
-			if (data->exit_code == 141)
-				data->exit_code = 0;
-		}
-		else
+		data->exit_code = WTERMSIG(status) + 128;
+		if (data->exit_code == 131)
+			printf("\b\bQuit\n");
+		if (data->exit_code == 141)
 			data->exit_code = 0;
 	}
+	else
+		data->exit_code = 0;
+	while (--i >= 1)
+		wait(NULL);
 	g_exitcode -= 2;
 }
 
@@ -83,7 +82,7 @@ static void	ft_process(t_data *data)
 			ft_child(data, data->pipes, i);
 	}
 	ft_close_fds(data, NULL);
-	ft_wait_child(data, i);
+	ft_wait_child(data, pids, i);
 	ft_pipe_free(data);
 }
 

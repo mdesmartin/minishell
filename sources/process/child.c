@@ -6,13 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/16 16:29:56 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 15:58:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_only_child(t_data *data)
+static char	*ft_only_child(t_data *data)
 {
 	char	**command;
 	char	*path;
@@ -31,11 +31,10 @@ static void	ft_only_child(t_data *data)
 	}
 	if (ft_is_directory(command[0]) == 1)
 		ft_builtin_slash(data, command[0]);
-	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
-	ft_quit(data, 127);
+	return (command[0]);
 }
 
-static void	ft_first_child(t_data *data, int **pipes, int i)
+static char	*ft_first_child(t_data *data, int **pipes, int i)
 {
 	char	**command;
 	char	*path;
@@ -43,9 +42,7 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data,
-			"First child: Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
@@ -55,16 +52,16 @@ static void	ft_first_child(t_data *data, int **pipes, int i)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
 	if (path)
+	{
 		execve(path, command, data->envp_tab);
-	if (path)
 		free(path);
+	}
 	if (ft_is_directory(command[0]) == 1)
 		ft_builtin_slash(data, command[0]);
-	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
-	ft_quit(data, 127);
+	return (command[0]);
 }
 
-static void	ft_last_child(t_data *data, int **pipes, int i)
+static char	*ft_last_child(t_data *data, int **pipes, int i)
 {
 	char	**command;
 	char	*path;
@@ -72,9 +69,7 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data,
-			"Last child: Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
@@ -84,16 +79,16 @@ static void	ft_last_child(t_data *data, int **pipes, int i)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
 	if (path)
+	{
 		execve(path, command, data->envp_tab);
-	if (path)
 		free(path);
+	}
 	if (ft_is_directory(command[0]) == 1)
 		ft_builtin_slash(data, command[0]);
-	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
-	ft_quit(data, 127);
+	return (command[0]);
 }
 
-static void	ft_middle_child(t_data *data, int **pipes, int i)
+static char	*ft_middle_child(t_data *data, int **pipes, int i)
 {
 	char	**command;
 	char	*path;
@@ -102,8 +97,7 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		ft_perror(data, "Error while duplicating file descriptor", 1);
-		ft_quit(data, 1);
+		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
@@ -113,23 +107,29 @@ static void	ft_middle_child(t_data *data, int **pipes, int i)
 		ft_quit(data, 0);
 	path = ft_get_arg_path(data, command);
 	if (path)
+	{
 		execve(path, command, data->envp_tab);
-	if (path)
 		free(path);
+	}
 	if (ft_is_directory(command[0]) == 1)
 		ft_builtin_slash(data, command[0]);
-	ft_dprintf(2, "minishell: %s: command not found\n", command[0]);
-	ft_quit(data, 127);
+	return (command[0]);
 }
 
 void	ft_child(t_data *data, int **pipes, int i)
 {
+	char	*command;
+
 	if (data->nb_cmd == 1)
-		ft_only_child(data);
+		command = ft_only_child(data);
 	else if (i == 0)
-		ft_first_child(data, pipes, i);
+		command = ft_first_child(data, pipes, i);
 	else if (i == data->nb_cmd - 1)
-		ft_last_child(data, pipes, i);
+		command = ft_last_child(data, pipes, i);
 	else
-		ft_middle_child(data, pipes, i);
+		command = ft_middle_child(data, pipes, i);
+	if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
+		ft_error(data, "Error while duplicating file descriptor", 1);
+	printf("minishell: %s: command not found\n", command);
+	ft_quit(data, 127);
 }

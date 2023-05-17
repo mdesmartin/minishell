@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 11:16:00 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/17 14:12:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_convert_exit(t_data *data, char *str)
 	ft_quit(data, (int)((i + 256) % 256));
 }
 
-int	ft_check_exitarg(char *code)
+static int	ft_check_exitarg(char *code)
 {
 	int	i;
 
