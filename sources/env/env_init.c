@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 13:59:29 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 16:22:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,20 @@ void	ft_check_envarg(t_data *data, char **command)
 	int	i;
 
 	data->exit_code = 0;
+	if (command[1][0] == '-')
+	{
+		ft_dprintf(2, "minishell: env: %c%c: options are not supported\n",
+			command[1][0], command[1][1]);
+		data->exit_code = 2;
+		return ;
+	}
 	i = 1;
 	while (command[i])
 	{
 		if (ft_strncmp(command[i], "env", 4) != 0)
 		{
 			ft_dprintf(2, "minishell: env: no argument required\n");
-			data->exit_code = 127;
+			data->exit_code = 2;
 			return ;
 		}
 		i++;
