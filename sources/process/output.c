@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:09:53 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 10:56:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	ft_output_redirection(t_data *data, char **output)
 			last_redir = 0;
 		else
 			last_redir = 1;
-		if (output[0][0] == '0')
+		if (output[i][0] == '0')
 			ft_output_file(data, output[i + 1], last_redir);
-		else if (output[0][0] == '1')
+		else if (output[i][0] == '1')
 			ft_output_appends(data, output[i + 1], last_redir);
 		i += 2;
 	}
