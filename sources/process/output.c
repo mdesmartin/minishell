@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 10:56:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 17:40:49 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@
 
 static void	ft_output_file(t_data *data, char *file, int last_redir)
 {
-	int	outfile;
+	char	*msg;
+	int		outfile;
 
 	outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile == -1)
-		ft_perror(data, "Error when creating or accessing outfile", 1);
+	{
+		msg = ft_strjoin("minishell: ", file);
+		if (!msg)
+			ft_error(data, "Error when creating error message", 12);
+		perror(msg);
+		ft_quit(data, 1);
+	}
 	if (last_redir == 1)
 	{
 		close(outfile);
@@ -36,11 +43,18 @@ static void	ft_output_file(t_data *data, char *file, int last_redir)
 
 static void	ft_output_appends(t_data *data, char *file, int last_redir)
 {
-	int	outfile;
+	char	*msg;
+	int		outfile;
 
 	outfile = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (outfile == -1)
-		ft_perror(data, "Error when creating or accessing outfile", 1);
+	{
+		msg = ft_strjoin("minishell: ", file);
+		if (!msg)
+			ft_error(data, "Error when creating error message", 12);
+		perror(msg);
+		ft_quit(data, 1);
+	}
 	if (last_redir == 1)
 	{
 		close(outfile);

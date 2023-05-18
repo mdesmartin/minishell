@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:09:20 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 17:40:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@ extern sig_atomic_t	g_exitcode;
 
 static void	ft_input_file(t_data *data, char *file, int last_redir)
 {
-	int	infile;
+	char	*msg;
+	int		infile;
 
 	infile = open(file, O_RDONLY, 0644);
 	if (infile == -1)
-		ft_perror(data, "Error when opening file1", 1);
+	{
+		msg = ft_strjoin("minishell: ", file);
+		if (!msg)
+			ft_error(data, "Error when creating error message", 12);
+		perror(msg);
+		ft_quit(data, 1);
+	}
 	if (last_redir == 1)
 	{
 		close(infile);
