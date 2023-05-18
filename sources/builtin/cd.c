@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 16:50:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 12:50:49 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	ft_check_cd(t_data *data, char **command)
 	if (command[1] != NULL && command[2] != NULL)
 	{
 		data->exit_code = 1;
-		printf("minishell: cd: too many arguments\n");
+		ft_dprintf(2, "minishell: cd: too many arguments\n");
 	}
 }
 

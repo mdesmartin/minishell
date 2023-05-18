@@ -6,13 +6,14 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:31 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 14:42:15 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 12:46:52 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 sig_atomic_t	g_exitcode;
+
 // g_exitcode == 0 : nothing particular
 // g_exitcode == 1 : signal for newprompt received
 // g_exitcode == 2 : process has child
@@ -29,8 +30,8 @@ static void	ft_check_gcode(t_data *data)
 
 int	main(void)
 {
-	static char			*input;
-	t_data				data;
+	static char	*input;
+	t_data		data;
 
 	input = NULL;
 	signal_init(signal_handler);
