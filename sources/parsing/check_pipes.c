@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/18 13:08:10 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 14:15:39 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ int	nothing_after(char *input, int i)
 	return (1);
 }
 
+int	double_pipe(char *input, int i)
+{
+	i++;
+	if (input[i] && input[i] == '|')
+		return (1);
+	else
+		return (0);
+}
+
 int	check_pipes_n_and(char *input)
 {
 	int	i;
@@ -60,6 +69,9 @@ int	check_pipes_n_and(char *input)
 		if ((input[i] == '|' || input[i] == '&') \
 		&& !in_quotes(input, i) && nothing_after(input, i))
 			return (pipe_n_end_error(input, i), 1);
+		else if (input[i] == '|' && !in_quotes(input, i) \
+		&& (nothing_after(input, i) || double_pipe(input, i)))
+			return (pipe_n_end_error(input, i + 1), 1);
 		i++;
 	}
 	return (0);
