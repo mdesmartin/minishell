@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 17:19:18 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 14:09:12 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_check_exportopt(t_data *data, char *command1)
 	{
 		ft_dprintf(2, "minishell : export: %c%c: options are not supported\n",
 			command1[0], command1[1]);
-		data->exit_code = 1;
+		data->exit_code = 2;
 		return (1);
 	}
 	return (0);
