@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:31:58 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:24:04 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
-char		**ft_extract_outputredir(t_data *data, char **cmd, char **pipe_tab, char **input);
+char		**ft_extract_outputredir(t_data *data, char **cmd, \
+			char **pipe_tab, char **input);
 char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipe_tab);
 void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
@@ -126,7 +127,8 @@ int			parsing(t_data *data, char *readed);
 void		expands(t_data *data, char **pipe_tab);
 int			nb_pipes(char *input);
 char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
-char		**split_tokens(t_data *data, char **pipe_tab, char *str, char *charset);
+char		**split_tokens(t_data *data, char **pipe_tab, char *str, \
+			char *charset);
 void		space_chevron(t_data *data, char **pipe_tab);
 void		token_parsing(char **token_tab);
 

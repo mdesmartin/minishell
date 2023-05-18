@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 16:32:17 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:23:28 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 		output = ft_extract_outputredir(data, token_tab, pipe_tab, input);
 		adress = s_init(token_tab, input, output);
 		if (!adress)
-			return (free_tab(pipe_tab), free_tab(token_tab), free_tab(input)\
+			return (free_tab(pipe_tab), free_tab(token_tab), free_tab(input) \
 			, free_tab(output), ft_quit(data, 12));
 		create_chain(cmd, adress);
 		i++;

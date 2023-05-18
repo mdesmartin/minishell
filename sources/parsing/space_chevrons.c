@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_chevrons.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 15:23:39 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:12:13 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ char	*chevrons_handler(char *pipe)
 
 void	space_chevron(t_data *data, char **pipe_tab)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (pipe_tab[i])
 	{
 		pipe_tab[i] = chevrons_handler(pipe_tab[i]);
@@ -78,4 +79,3 @@ void	space_chevron(t_data *data, char **pipe_tab)
 	}
 	return ;
 }
-
