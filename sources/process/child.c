@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 12:57:53 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 15:24:39 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*ft_only_child(t_data *data)
 	command = ft_redirection(data, 0);
 	ft_close_fds(data, NULL);
 	if (!command[0])
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	path = ft_get_arg_path(data, command);
 	if (path)
 	{
@@ -47,9 +47,9 @@ static char	*ft_first_child(t_data *data, int **pipes, int i)
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
 	if (!command[0])
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	path = ft_get_arg_path(data, command);
 	if (path)
 	{
@@ -74,9 +74,9 @@ static char	*ft_last_child(t_data *data, int **pipes, int i)
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
 	if (!command[0])
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	path = ft_get_arg_path(data, command);
 	if (path)
 	{
@@ -102,9 +102,9 @@ static char	*ft_middle_child(t_data *data, int **pipes, int i)
 	command = ft_redirection(data, i);
 	ft_close_fds(data, NULL);
 	if (!command[0])
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
-		ft_quit(data, 0);
+		ft_quit(data, data->exit_code);
 	path = ft_get_arg_path(data, command);
 	if (path)
 	{
