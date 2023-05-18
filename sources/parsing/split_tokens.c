@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 15:45:55 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:12:32 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ char	**split_tokens(t_data *data, char **pipe_tab, char *str, char *charset)
 		j = wordlend((char *)str, charset);
 		dest[i] = strduppd((char *)str, j);
 		if (!dest[i])
-			return (free_tab(dest), free_tab(pipe_tab), ft_quit(data, 12), NULL);
+			return (free_tab(dest), free_tab(pipe_tab), \
+			ft_quit(data, 12), NULL);
 		str += j;
 	}
 	return (dest);

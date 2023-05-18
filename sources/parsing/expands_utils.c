@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expands_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 15:10:46 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:09:00 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//trim a str of a str
 char	*trim_from_to(char *pipe_tab, int *start, int end)
 {
 	char	*new_content;
