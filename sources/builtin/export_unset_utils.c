@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 14:09:12 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 14:34:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	ft_check_exportvar(char *variable)
 	int	i;
 
 	i = 1;
-	if (variable[0] == '='
-		|| (ft_isalpha(variable[0]) == 0 && variable[0] != '_'))
+	if (ft_isalpha(variable[0]) == 0 && variable[0] != '_')
 	{
 		ft_dprintf(2, "minishell : export: `%s': not a valid identifier\n",
 			variable);
@@ -53,8 +52,8 @@ int	ft_check_unsetvar(char *variable)
 {
 	int	i;
 
-	i = 0;
-	if (!variable[i])
+	i = 1;
+	if (ft_isalpha(variable[0]) == 0 && variable[0] != '_')
 	{
 		ft_dprintf(2, "minishell : unset: `%s': not a valid identifier\n",
 			variable);
