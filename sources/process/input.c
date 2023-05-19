@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:06:52 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 17:40:51 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 12:24:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	ft_input_file(t_data *data, char *file, int last_redir)
 		if (!msg)
 			ft_error(data, "Error when creating error message", 12);
 		perror(msg);
+		free(msg);
 		ft_quit(data, 1);
 	}
 	if (last_redir == 1)
