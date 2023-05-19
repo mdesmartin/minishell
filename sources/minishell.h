@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 13:24:04 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 13:21:18 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,16 @@ void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
+
+//redirection
 char		**ft_extract_outputredir(t_data *data, char **cmd, \
 			char **pipe_tab, char **input);
 char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipe_tab);
 void		ft_input_redirection(t_data *data, char **input);
 void		ft_output_redirection(t_data *data, char **output);
+void		ft_free_two_line(char **tab, int i);
+void		ft_del_input(char **cmd);
+void		ft_del_output(char **cmd);
 
 //signal
 void		signal_init(void (*handler)(int signum));
