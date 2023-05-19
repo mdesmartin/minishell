@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:48:52 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 13:05:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ static void	ft_free_two_line(char **tab, int i)
 	{
 		tab[i] = tab[i + 2];
 		if (tab[i + 3])
-		{
 			tab[i + 1] = tab[i + 3];
-			i += 2;
-		}
 		else
-			i++;
+		{
+			tab[i + 1] = NULL;
+			return ;
+		}
+		i += 2;
 	}
 	tab[i] = NULL;
 	tab[i + 1] = NULL;

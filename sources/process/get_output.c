@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 16:18:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:49:17 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 13:06:31 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ static void	ft_free_two_line(char **tab, int i)
 	while (tab[i + 2])
 	{
 		tab[i] = tab[i + 2];
-		tab[i + 1] = tab[i + 3];
+		if (tab[i + 3])
+			tab[i + 1] = tab[i + 3];
+		else
+		{
+			tab[i + 1] = NULL;
+			return ;
+		}
 		i += 2;
 	}
 	tab[i] = NULL;
@@ -47,7 +53,7 @@ static void	ft_del_output(char **cmd)
 	}
 }
 
-static void	ft_extract_output(char **cmd, char **input)
+static void	ft_extract_output(char **cmd, char **output)
 {
 	int	i;
 	int	j;
@@ -58,15 +64,15 @@ static void	ft_extract_output(char **cmd, char **input)
 	{
 		if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
 		{
-			input[j] = ft_strdup("0");
-			input[j + 1] = ft_strdup(cmd[i + 1]);
+			output[j] = ft_strdup("0");
+			output[j + 1] = ft_strdup(cmd[i + 1]);
 			i++;
 			j += 2;
 		}
 		else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
 		{
-			input[j] = ft_strdup("1");
-			input[j + 1] = ft_strdup(cmd[i + 1]);
+			output[j] = ft_strdup("1");
+			output[j + 1] = ft_strdup(cmd[i + 1]);
 			i++;
 			j += 2;
 		}
@@ -92,7 +98,8 @@ int	ft_outredic_count(char **tab)
 	return (count);
 }
 
-char	**ft_extract_outputredir(t_data *data, char **cmd, char **pipe_tab, char **input)
+char	**ft_extract_outputredir(t_data *data, char **cmd,
+	char **pipe_tab, char **input)
 {
 	char	**output;
 
