@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/19 13:55:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/22 12:42:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 char	**ft_redirection(t_data *data, int i)
 {
 	t_list	*tmp;
-	char	**input;
-	char	**output;
+	char	**redirections;
 
 	tmp = data->cmd;
 	while (i > 0)
@@ -24,10 +23,8 @@ char	**ft_redirection(t_data *data, int i)
 		tmp = tmp->next;
 		i--;
 	}
-	input = (char **)s_read_cnt(tmp)->input;
-	output = (char **)s_read_cnt(tmp)->output;
-	ft_input_redirection(data, input);
-	ft_output_redirection(data, output);
+	redirections = (char **)s_read_cnt(tmp)->redirections;
+	ft_apply_redirection(data, redirections);
 	return ((char **)s_read_cnt(tmp)->command);
 }
 
@@ -51,42 +48,39 @@ void	ft_free_two_line(char **tab, int i)
 	tab[i + 1] = NULL;
 }
 
-void	ft_del_input(char **cmd)
+static void	ft_del_input(char **cmd, int i)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
-		{
-			ft_free_two_line(cmd, i);
-			i = -1;
-		}
-		else if (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2)
-		{
-			ft_free_two_line(cmd, i);
-			i = -1;
-		}
-		i++;
-	}
+	if (cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
+		ft_free_two_line(cmd, i);
+	else if (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2)
+		ft_free_two_line(cmd, i);
 }
 
-void	ft_del_output(char **cmd)
+static void	ft_del_output(char **cmd, int i)
+{
+	if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
+		ft_free_two_line(cmd, i);
+	else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
+		ft_free_two_line(cmd, i);
+}
+
+void	ft_del_redirections(char **cmd)
 {
 	int	i;
 
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
+		if ((cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
+			|| (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2))
 		{
-			ft_free_two_line(cmd, i);
+			ft_del_input(cmd, i);
 			i = -1;
 		}
-		else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
+		else if ((cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
+			|| (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2))
 		{
-			ft_free_two_line(cmd, i);
+			ft_del_output(cmd, i);
 			i = -1;
 		}
 		i++;

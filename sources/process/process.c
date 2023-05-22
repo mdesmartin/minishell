@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:10:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 15:46:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,12 @@ static void	ft_process(t_data *data)
 void	ft_cmd(t_data *data)
 {
 	char	**command;
-	char	**input;
-	char	**output;
+	char	**redirections;
 
 	command = s_read_cnt(data->cmd)->command;
-	input = (char **)s_read_cnt(data->cmd)->input;
-	output = (char **)s_read_cnt(data->cmd)->output;
+	redirections = (char **)s_read_cnt(data->cmd)->redirections;
 	data->nb_cmd = ft_lstsize(data->cmd);
-	if (data->nb_cmd == 1 && !input[0] && !output[0]
-		&& ft_builtin(data, command) != 0)
+	if (data->nb_cmd == 1 && !redirections[0] && ft_builtin(data, command) != 0)
 		return ;
 	ft_process(data);
 }
