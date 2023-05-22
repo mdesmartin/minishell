@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/18 13:23:28 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/22 12:47:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	create_chain(t_list **cmd, void *content)
 void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 {
 	char	**token_tab;
-	char	**input;
-	char	**output;
+	char	**redirections;
 	void	*adress;
 	int		i;
 
@@ -71,12 +70,11 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 	{
 		token_tab = split_tokens(data, pipe_tab, pipe_tab[i], " \t");
 		token_parsing(token_tab);
-		input = ft_extract_inputredir(data, token_tab, pipe_tab);
-		output = ft_extract_outputredir(data, token_tab, pipe_tab, input);
-		adress = s_init(token_tab, input, output);
+		redirections = ft_extract_redirections(data, token_tab, pipe_tab);
+		adress = s_init(token_tab, redirections);
 		if (!adress)
-			return (free_tab(pipe_tab), free_tab(token_tab), free_tab(input) \
-			, free_tab(output), ft_quit(data, 12));
+			return (free_tab(pipe_tab), free_tab(token_tab),
+				free_tab(redirections), ft_quit(data, 12));
 		create_chain(cmd, adress);
 		i++;
 	}

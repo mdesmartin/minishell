@@ -44,15 +44,13 @@ LST_SRC =	main.c							\
 			parsing/check_chevrons.c		\
 			parsing/space_chevrons.c		\
 			process/child.c					\
-			process/input.c					\
-			process/output.c				\
 			process/process.c				\
 			process/here_doc.c				\
-			process/get_input.c				\
-			process/get_output.c			\
+			process/redirection.c			\
 			process/get_arg_path.c			\
 			process/process_utils.c			\
-			process/get_redirection.c
+			process/get_redirection.c		\
+			process/get_redirection_utils.c
 			
 SOURCES	=	$(addprefix $(DIR_SRC), $(LST_SRC))
 

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 15:24:39 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 17:21:10 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ void	ft_child(t_data *data, int **pipes, int i)
 		command = ft_middle_child(data, pipes, i);
 	if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
 		ft_error(data, "Error while duplicating file descriptor", 1);
-	ft_dprintf(2, "minishell: %s: command not found\n", command);
+	printf("minishell: %s: command not found\n", command);
 	ft_quit(data, 127);
 }

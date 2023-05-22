@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 13:24:04 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/22 14:00:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@
 typedef struct s_pipeline
 {
 	char			**command;
-	char			**input;
-	char			**output;
+	char			**redirections;
 }					t_pipeline;
 
 typedef struct s_envp
@@ -94,7 +93,7 @@ char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
 int			ft_inredic_count(char **tab);
 int			ft_outredic_count(char **tab);
-void		ft_input_heredoc(t_data *data, char *limiter, int last_redir);
+void		ft_input_heredoc(t_data *data, char *limiter, int *nb_input);
 char		**ft_redirection(t_data *data, int i);
 
 void		ft_cmd(t_data *data);
@@ -111,11 +110,16 @@ void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
+
+//redirection
 char		**ft_extract_outputredir(t_data *data, char **cmd, \
 			char **pipe_tab, char **input);
 char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipe_tab);
-void		ft_input_redirection(t_data *data, char **input);
-void		ft_output_redirection(t_data *data, char **output);
+char		**ft_extract_redirections(t_data *data,
+				char **cmd, char **pipe_tab);
+void		ft_apply_redirection(t_data *data, char **redirections);
+void		ft_free_two_line(char **tab, int i);
+void		ft_del_redirections(char **cmd);
 
 //signal
 void		signal_init(void (*handler)(int signum));
@@ -147,7 +151,7 @@ void		free_lst(t_list **cmd);
 void		*free_tab(char **tab);
 
 //s_access
-void		*s_init(char **content, char **input, char **output);
+void		*s_init(char **content, char **redirections);
 t_pipeline	*s_read_cnt(t_list *cmd);
 t_pipeline	*s_convert_content(void *content);
 
