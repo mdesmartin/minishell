@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 13:44:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 16:04:47 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 extern sig_atomic_t	g_exitcode;
 
-static void	ft_error_heredoc(t_data *data, int *here_doc_fd)
+static void	ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter)
 {
+	ft_putstr_fd("minishell: warning: here-document limiter wanted `", 2);
+	ft_putstr_fd(limiter, 2);
+	ft_putstr_fd("'\n", 2);
 	close(here_doc_fd[0]);
 	close(here_doc_fd[1]);
 	ft_quit(data, 1);
 }
 //message when ctrl+d in stead of ctrl+c
 
-static void	ft_stop_heredoc(t_data *data, int *here_doc_fd,
-	char *input, char *limiter)
+static void	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 {
 	g_exitcode--;
-	ft_putstr_fd("minishell: warning: here-document limiter wanted `", 2);
-	ft_putstr_fd(limiter, 2);
-	ft_putstr_fd("')", 2);
 	close(here_doc_fd[0]);
 	close(here_doc_fd[1]);
 	if (input)
@@ -64,9 +63,9 @@ static void	ft_here_doc(t_data *data, int *here_doc_fd, char *limiter)
 	{
 		input = readline("here_doc> ");
 		if (!input)
-			ft_error_heredoc(data, here_doc_fd);
+			ft_error_heredoc(data, here_doc_fd, limiter);
 		if (g_exitcode == 1 || g_exitcode == 3)
-			ft_stop_heredoc(data, here_doc_fd, input, limiter);
+			ft_stop_heredoc(data, here_doc_fd, input);
 		intput_len = ft_strlen(input);
 		if (ft_strncmp(input, limiter, limiter_len) == 0
 			&& intput_len == limiter_len)
