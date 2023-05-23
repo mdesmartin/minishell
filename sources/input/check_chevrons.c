@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:28:34 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 09:19:42 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:38:08 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	check_chevrons(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if ((input[i] == '<' || input[i] == '>') && !in_quotes(input, i)
+		if ((input[i] == '<' || input[i] == '>') && !is_in_quotes(input, i)
 			&& token_after(input, i, input[i]))
 			return (token_error(input, i, input[i]));
-		else if ((input[i] == '<' || input[i] == '>') && !in_quotes(input, i)
+		else if ((input[i] == '<' || input[i] == '>') && !is_in_quotes(input, i)
 			&& nothing_after(input, i, input[i]))
 			return (print_error("newline"), 1);
 		i++;

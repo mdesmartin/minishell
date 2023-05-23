@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/18 13:12:32 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:40:53 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_charsetd(char str, char *charset)
 	return (0);
 }
 
-static int	wordlend(char *str, char *charset)
+static int	word_lend(char *str, char *charset)
 {
 	int		i;
 	char	c;
@@ -43,7 +43,7 @@ static int	wordlend(char *str, char *charset)
 	return (i);
 }
 
-static int	wordcountd(char *str, char *charset)
+static int	word_countd(char *str, char *charset)
 {
 	int		a;
 	char	c;
@@ -90,7 +90,7 @@ static char	*strduppd(char *src, int j)
 	return (dst);
 }
 
-char	**split_tokens(t_data *data, char **pipe_tab, char *str, char *charset)
+char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 {
 	char		**dest;
 	int			size;
@@ -100,18 +100,18 @@ char	**split_tokens(t_data *data, char **pipe_tab, char *str, char *charset)
 	i = -1;
 	while (*str && is_charsetd(*str, charset))
 		str++;
-	size = wordcountd((char *)str, charset);
+	size = word_countd((char *)str, charset);
 	dest = calloc((size + 1), sizeof(char *));
 	if (!dest)
-		return (free_tab(pipe_tab), ft_quit(data, 12), NULL);
+		return (free_tab(pipes_tab), ft_quit(data, 12), NULL);
 	while (++i < size)
 	{
 		while (is_charsetd((char)*str, charset))
 			str++;
-		j = wordlend((char *)str, charset);
+		j = word_lend((char *)str, charset);
 		dest[i] = strduppd((char *)str, j);
 		if (!dest[i])
-			return (free_tab(dest), free_tab(pipe_tab), \
+			return (free_tab(dest), free_tab(pipes_tab), \
 			ft_quit(data, 12), NULL);
 		str += j;
 	}
