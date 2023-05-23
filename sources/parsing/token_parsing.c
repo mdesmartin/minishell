@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 13:44:01 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 15:20:26 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ static void	convert_redirection(char *token)
 void	flag_heredoc_quote(char **token_tab)
 {
 	int	i;
+	int j;
 
+	j = 0;
 	i = 0;
 	while (token_tab[i])
 		i++;
@@ -82,14 +84,18 @@ void	flag_heredoc_quote(char **token_tab)
 	i = 0;
 	while (token_tab[i])
 	{
-		if (ft_strncmp("<<", token_tab[i], 2))
+		if (!ft_strncmp("<<", token_tab[i], 2))
 		{
+			printf("ok\n");
 			i++;
-			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"", \
-				ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i], \
-				"\'", ft_strlen(token_tab[i]))))
+			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"",
+			ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i],
+			"\'", ft_strlen(token_tab[i]))))
 			{
-				token_tab[i][0] *= -1;
+				printf("cond\n");
+				while (token_tab[i][j] == '\"' || token_tab[i][j] == '\'')
+					j++;
+				token_tab[i][j] *= -1;
 				return ;
 			}
 			else
