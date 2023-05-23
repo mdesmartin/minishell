@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/16 15:30:53 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:38:08 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_whitespace_or_end(char c, char *str, int i)
 		return (0);
 }
 
-int	in_quotes(char *str, int index)
+int	is_in_quotes(char *str, int index)
 {
 	int		i;
 	int		start;

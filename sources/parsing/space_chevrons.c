@@ -6,13 +6,13 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/18 13:12:13 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:39:18 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_chevrons(char *pipe, char *new, int *i, int *j)
+static void	get_chevrons(char *pipe, char *new, int *i, int *j)
 {
 	new[(*j)++] = ' ';
 	new[(*j)++] = pipe[(*i)++];
@@ -24,7 +24,7 @@ void	get_chevrons(char *pipe, char *new, int *i, int *j)
 	return ;
 }
 
-void	get_quote(char *pipe, char *new, int *i, int *j)
+static void	get_quote(char *pipe, char *new, int *i, int *j)
 {
 	char	symbol;
 
@@ -38,7 +38,7 @@ void	get_quote(char *pipe, char *new, int *i, int *j)
 	return ;
 }
 
-char	*chevrons_handler(char *pipe)
+static char	*chevrons_handler(char *pipe)
 {
 	char	*new;
 	int		i;
@@ -65,16 +65,16 @@ char	*chevrons_handler(char *pipe)
 	return (new);
 }
 
-void	space_chevron(t_data *data, char **pipe_tab)
+void	space_chevron(t_data *data, char **pipes_tab)
 {
 	int	i;
 
 	i = 0;
-	while (pipe_tab[i])
+	while (pipes_tab[i])
 	{
-		pipe_tab[i] = chevrons_handler(pipe_tab[i]);
-		if (!pipe_tab[i])
-			return (free_tab(pipe_tab), ft_quit(data, 12));
+		pipes_tab[i] = chevrons_handler(pipes_tab[i]);
+		if (!pipes_tab[i])
+			return (free_tab(pipes_tab), ft_quit(data, 12));
 		i++;
 	}
 	return ;

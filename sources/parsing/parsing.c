@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/22 12:47:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:38:46 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@
 // 	return ;
 // }
 
-// void	print_tab(char **pipe_tab)
+// void	print_tab(char **pipes_tab)
 // {
 // 	int i = 0;
 
-// 	while (pipe_tab[i])
+// 	while (pipes_tab[i])
 // 	{
-// 		printf("tab[%d] : %s\n", i, pipe_tab[i]);
+// 		printf("tab[%d] : %s\n", i, pipes_tab[i]);
 // 		i++;
 // 	}
 // 	return ;
@@ -49,7 +49,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void	create_chain(t_list **cmd, void *content)
+static void	create_link(t_list **cmd, void *content)
 {
 	if (*cmd == NULL)
 		*cmd = ft_lstnew(content);
@@ -58,7 +58,7 @@ void	create_chain(t_list **cmd, void *content)
 	return ;
 }
 
-void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
+static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab)
 {
 	char	**token_tab;
 	char	**redirections;
@@ -66,37 +66,37 @@ void	split_tab(t_data *data, t_list **cmd, char **pipe_tab)
 	int		i;
 
 	i = 0;
-	while (pipe_tab[i])
+	while (pipes_tab[i])
 	{
-		token_tab = split_tokens(data, pipe_tab, pipe_tab[i], " \t");
+		token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
 		token_parsing(token_tab);
-		redirections = ft_extract_redirections(data, token_tab, pipe_tab);
+		redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 		adress = s_init(token_tab, redirections);
 		if (!adress)
-			return (free_tab(pipe_tab), free_tab(token_tab),
+			return (free_tab(pipes_tab), free_tab(token_tab),
 				free_tab(redirections), ft_quit(data, 12));
-		create_chain(cmd, adress);
+		create_link(cmd, adress);
 		i++;
 	}
-	free_tab(pipe_tab);
+	free_tab(pipes_tab);
 }
 
 int	parsing(t_data *data, char *input)
 {
-	char	**pipe_tab;
-	int		nb_p;
+	char	**pipes_tab;
+	int		nb_pipes;
 
-	nb_p = nb_pipes(input);
-	pipe_tab = NULL;
-	pipe_tab = create_tab(pipe_tab, input, nb_p);
-	if (!pipe_tab)
+	nb_pipes = count_pipes(input);
+	pipes_tab = NULL;
+	pipes_tab = split_pipes(pipes_tab, input, nb_pipes);
+	if (!pipes_tab)
 		return (ft_quit(data, 12), 1);
-	expands(data, pipe_tab);
-	// print_tab(pipe_tab);
-	if (pipe_tab[0][0] != '\0')
+	expands(data, pipes_tab);
+	// print_tab(pipes_tab);
+	if (pipes_tab[0][0] != '\0')
 	{
-		space_chevron(data, pipe_tab);
-		split_tab(data, &data->cmd, pipe_tab);
+		space_chevron(data, pipes_tab);
+		create_chain(data, &data->cmd, pipes_tab);
 		return (0);
 	}
 	// print_chain(data);

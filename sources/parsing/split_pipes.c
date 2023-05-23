@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_pipes.c                                      :+:      :+:    :+:   */
+/*   create_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 15:33:28 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/17 14:28:35 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:22:41 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	find_pipe(char *input, int *i)
 	return (0);
 }
 
-int	nb_pipes(char *input)
+int	count_pipes(char *input)
 {
 	int	nb_pipes;
 	int	j;
@@ -65,7 +65,7 @@ int	nb_pipes(char *input)
 	return (nb_pipes);
 }
 
-static char	**split_pipes(char **pipe_tab, int nb_p, char *input)
+static char	**create_tab(char **pipes_tab, int nb_pipes, char *input)
 {
 	int	start;
 	int	len_pipe;
@@ -76,30 +76,30 @@ static char	**split_pipes(char **pipe_tab, int nb_p, char *input)
 	len_pipe = 0;
 	i = 0;
 	j = 0;
-	while (nb_p)
+	while (nb_pipes)
 	{
 		find_pipe(input, &i);
 		len_pipe = i - start;
-		pipe_tab[j] = ft_substr(input, start, len_pipe);
-		if (!pipe_tab[j])
+		pipes_tab[j] = ft_substr(input, start, len_pipe);
+		if (!pipes_tab[j])
 			return (NULL);
 		j++;
 		i++;
 		start = i;
-		nb_p--;
+		nb_pipes--;
 	}
-	pipe_tab[j] = NULL;
-	return (pipe_tab);
+	pipes_tab[j] = NULL;
+	return (pipes_tab);
 }
 
-char	**create_tab(char **pipe_tab, char *input, int nb_pipe)
+char	**split_pipes(char **pipes_tab, char *input, int nb_pipes)
 {
-	pipe_tab = NULL;
-	pipe_tab = ft_calloc(sizeof(char *), (nb_pipe + 1));
-	if (!pipe_tab)
+	pipes_tab = NULL;
+	pipes_tab = ft_calloc(sizeof(char *), (nb_pipes + 1));
+	if (!pipes_tab)
 		return (NULL);
-	pipe_tab = split_pipes(pipe_tab, nb_pipe, input);
-	if (!pipe_tab)
-		return (free_tab(pipe_tab), NULL);
-	return (pipe_tab);
+	pipes_tab = create_tab(pipes_tab, nb_pipes, input);
+	if (!pipes_tab)
+		return (free_tab(pipes_tab), NULL);
+	return (pipes_tab);
 }
