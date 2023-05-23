@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/22 15:20:29 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:38:08 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	check_pipes_n_and(char *input)
 	i = 0;
 	while (is_whitespace(input[i]))
 		i++;
-	if ((input[i] == '|' || input[i] == '&') && !in_quotes(input, i))
+	if ((input[i] == '|' || input[i] == '&') && !is_in_quotes(input, i))
 		return (pipe_n_end_error(input, i), 1);
 	while (input[i])
 	{
 		if ((input[i] == '|' || input[i] == '&') \
-		&& !in_quotes(input, i) && nothing_after(input, i))
+		&& !is_in_quotes(input, i) && nothing_after(input, i))
 			return (pipe_n_end_error(input, i), 1);
-		else if (input[i] == '|' && !in_quotes(input, i) \
+		else if (input[i] == '|' && !is_in_quotes(input, i) \
 		&& (nothing_after(input, i) || double_pipe(input, i)))
 			return (pipe_n_end_error(input, i + 1), 1);
 		i++;

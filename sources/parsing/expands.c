@@ -6,13 +6,13 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/18 13:11:33 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:44:37 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
+static char	*find_variable(t_data *data, char *pipes_tab, int *start, int end)
 {
 	t_envp	*cp_envp;
 	int		old_size;
@@ -21,7 +21,7 @@ static char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 	old_size = end - *start;
 	while (cp_envp)
 	{
-		if ((ft_strncmp(cp_envp->variable, &pipe_tab[*start], old_size) == 0) \
+		if ((ft_strncmp(cp_envp->variable, &pipes_tab[*start], old_size) == 0) \
 		&& ((int)ft_strlen(cp_envp->variable) == old_size))
 			return (cp_envp->value);
 		cp_envp = cp_envp->next;
@@ -29,38 +29,38 @@ static char	*find_variable(t_data *data, char *pipe_tab, int *start, int end)
 	return (NULL);
 }
 
-char	*whitespace_handler(char *pipe_tab, int *start, int end)
+char	*whitespace_handler(char *pipes_tab, int *start, int end)
 {
-	if (ft_strncmp("echo", pipe_tab, 5))
-		return (pipe_tab);
+	if (ft_strncmp("echo", pipes_tab, 5))
+		return (pipes_tab);
 	else
-		return (trim_from_to(pipe_tab, start, end));
+		return (trim_from_to(pipes_tab, start, end));
 }
 
-char	*expand_handler(t_data *data, char *pipe_tab, int *start)
+char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 {
 	int	end;
 
 	(*start)++;
 	end = *start;
-	if (is_whitespace_or_end(pipe_tab[*start], pipe_tab, *start))
-		return (whitespace_handler(pipe_tab, start, end));
-	else if (pipe_tab[*start] == '?')
+	if (is_whitespace_or_end(pipes_tab[*start], pipes_tab, *start))
+		return (whitespace_handler(pipes_tab, start, end));
+	else if (pipes_tab[*start] == '?')
 		return (trim_by_exitcode(ft_itoa((int)data->exit_code), \
-		pipe_tab, start, end));
-	else if (ft_isdigit(pipe_tab[*start]))
-		return (trim_from_to(pipe_tab, start, end + 1));
+		pipes_tab, start, end));
+	else if (ft_isdigit(pipes_tab[*start]))
+		return (trim_from_to(pipes_tab, start, end + 1));
 	else
 	{
-		while (ft_isalnum(pipe_tab[end]) || pipe_tab[end] == '_')
+		while (ft_isalnum(pipes_tab[end]) || pipes_tab[end] == '_')
 			end++;
-		if (find_variable(data, pipe_tab, start, end))
-			return (trim_by(find_variable(data, pipe_tab, start, end), \
-			pipe_tab, start, end));
+		if (find_variable(data, pipes_tab, start, end))
+			return (trim_by(find_variable(data, pipes_tab, start, end), \
+			pipes_tab, start, end));
 		else
-			return (trim_from_to(pipe_tab, start, end));
+			return (trim_from_to(pipes_tab, start, end));
 	}
-	return (pipe_tab);
+	return (pipes_tab);
 }
 
 char	*expand_by_line(t_data *data, char *line)
@@ -70,7 +70,7 @@ char	*expand_by_line(t_data *data, char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '\'' && !in_quotes(line, i))
+		if (line[i] == '\'' && !is_in_quotes(line, i))
 		{
 			i++;
 			while (line[i] && line[i] != '\'')
@@ -88,16 +88,16 @@ char	*expand_by_line(t_data *data, char *line)
 	return (line);
 }
 
-void	expands(t_data *data, char **pipe_tab)
+void	expands(t_data *data, char **pipes_tab)
 {
 	int	j;
 
 	j = 0;
-	while (pipe_tab[j])
+	while (pipes_tab[j])
 	{
-		pipe_tab[j] = expand_by_line(data, pipe_tab[j]);
-		if (!pipe_tab)
-			return (free_tab(pipe_tab), ft_quit(data, 12));
+		pipes_tab[j] = expand_by_line(data, pipes_tab[j]);
+		if (!pipes_tab)
+			return (free_tab(pipes_tab), ft_quit(data, 12));
 		j++;
 	}
 	return ;

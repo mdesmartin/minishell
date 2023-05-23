@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 09:20:46 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 10:43:29 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ void		ft_check_envarg(t_data *data, char **command);
 
 //redirection
 char		**ft_extract_outputredir(t_data *data, char **cmd, \
-			char **pipe_tab, char **input);
-char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipe_tab);
+			char **pipes_tab, char **input);
+char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipes_tab);
 char		**ft_extract_redirections(t_data *data,
-				char **cmd, char **pipe_tab);
+				char **cmd, char **pipes_tab);
 void		ft_apply_redirection(t_data *data, char **redirections);
 void		ft_free_two_line(char **tab, int i);
 void		ft_del_redirections(char **cmd);
@@ -128,16 +128,16 @@ void		signal_heredoc(int signum);
 
 //parsing
 int			parsing(t_data *data, char *readed);
-void		expands(t_data *data, char **pipe_tab);
-int			nb_pipes(char *input);
-char		**create_tab(char **pipe_tab, char *input, int nb_pipe);
-char		**split_tokens(t_data *data, char **pipe_tab, char *str, \
+void		expands(t_data *data, char **pipes_tab);
+int			count_pipes(char *input);
+char		**split_pipes(char **pipes_tab, char *input, int nb_pipes);
+char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 			char *charset);
-void		space_chevron(t_data *data, char **pipe_tab);
+void		space_chevron(t_data *data, char **pipes_tab);
 void		token_parsing(char **token_tab);
 
 //check_input
-int			in_quotes(char *str, int index);
+int			is_in_quotes(char *str, int index);
 int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			is_whitespace(char c);
@@ -157,9 +157,10 @@ t_pipeline	*s_read_cnt(t_list *cmd);
 t_pipeline	*s_convert_content(void *content);
 
 //expands
-char		*expand_handler(t_data *data, char *pipe_tab, int *start);
-char		*trim_from_to(char *pipe_tab, int *start, int end);
-char		*trim_by_exitcode(char *value, char *pipe_tab, int *start, int end);
-char		*trim_by(char *value, char *pipe_tab, int *start, int end);
+char		*expand_handler(t_data *data, char *pipes_tab, int *start);
+char		*trim_from_to(char *pipes_tab, int *start, int end);
+char		*trim_by_exitcode(char *value, char *pipes_tab, int *start, \
+			int end);
+char		*trim_by(char *value, char *pipes_tab, int *start, int end);
 
 #endif
