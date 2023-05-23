@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expands.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/23 13:05:52 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 15:26:48 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*expand_by_line(t_data *data, char *line)
 	int	i;
 
 	i = 0;
-	printf("line:%s\n", line);
 	while (line[i])
 	{
 		if (line[i] == '\'' && !is_in_quotes(line, i))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 15:20:26 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 15:26:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,16 @@ void	flag_heredoc_quote(char **token_tab)
 	{
 		if (!ft_strncmp("<<", token_tab[i], 2))
 		{
-			printf("ok\n");
 			i++;
 			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"",
 			ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i],
 			"\'", ft_strlen(token_tab[i]))))
 			{
-				printf("cond\n");
 				while (token_tab[i][j] == '\"' || token_tab[i][j] == '\'')
 					j++;
 				token_tab[i][j] *= -1;
 				return ;
 			}
-			else
-				return ;
 		}
 		i++;
 	}
