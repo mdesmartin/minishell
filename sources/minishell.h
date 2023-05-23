@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 10:43:29 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 13:43:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data
 	char	**envp_tab;
 	int		**pipes;
 	int		here_doc_fd[2];
+	int		here_doc_expand;
 	int		nb_cmd;
 	int		exit_code;
 }				t_data;
@@ -91,10 +92,9 @@ char		**ft_lst_to_tabtab(t_data *data, t_envp *envp);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
-int			ft_inredic_count(char **tab);
-int			ft_outredic_count(char **tab);
 void		ft_input_heredoc(t_data *data, char *limiter, int *nb_input);
 char		**ft_redirection(t_data *data, int i);
+void		ft_check_hd_expand(t_data *data, char *limiter);
 
 void		ft_cmd(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);

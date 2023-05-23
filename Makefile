@@ -50,6 +50,7 @@ LST_SRC =	main.c							\
 			process/redirection.c			\
 			process/get_arg_path.c			\
 			process/process_utils.c			\
+			process/here_doc_utils.c		\
 			process/get_redirection.c		\
 			process/get_redirection_utils.c
 			
