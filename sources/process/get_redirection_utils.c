@@ -94,8 +94,8 @@ char	**ft_extract_redirections(t_data *data, char **cmd, char **pipes_tab)
 	if (!redirections || ft_get_redirections(cmd, redirections) != 0)
 	{
 		free_tab(cmd);
-		free_tab(pipes_tab);
-		ft_error(data, "Memory allocation failed: ft_extract_input_file", 12);
+		free_tab(pipe_tab);
+		ft_error(data, "Memory allocation failed: ft_extract_redirection", 12);
 	}
 	ft_del_redirections(cmd);
 	return (redirections);
