@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 15:20:26 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 15:39:50 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,36 +70,36 @@ static void	convert_redirection(char *token)
 	}
 }
 
+void	put_flag(char *line, int j)
+{
+	while (line[j] == '\"' || line[j] == '\'')
+		j++;
+	line[j] *= -1;
+}
+
 void	flag_heredoc_quote(char **token_tab)
 {
 	int	i;
-	int j;
 
-	j = 0;
 	i = 0;
 	while (token_tab[i])
 		i++;
 	if (i <= 1)
 		return ;
 	i = 0;
+
 	while (token_tab[i])
 	{
 		if (!ft_strncmp("<<", token_tab[i], 2))
 		{
-			printf("ok\n");
 			i++;
 			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"",
 			ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i],
 			"\'", ft_strlen(token_tab[i]))))
 			{
-				printf("cond\n");
-				while (token_tab[i][j] == '\"' || token_tab[i][j] == '\'')
-					j++;
-				token_tab[i][j] *= -1;
+				put_flag(token_tab[i], 0);
 				return ;
 			}
-			else
-				return ;
 		}
 		i++;
 	}
