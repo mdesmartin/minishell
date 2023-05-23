@@ -6,97 +6,86 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 12:20:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 13:12:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	ft_extract_input(char **cmd, char **redirections, int i, int j)
+char	**ft_redirection(t_data *data, int i)
 {
-	if (ft_strlen(cmd[i]) == 1)
-		redirections[j] = ft_strdup("0");
-	else
-		redirections[j] = ft_strdup("1");
-	if (!redirections[j])
-		return (ft_rfree_tab(redirections, j), -1);
-	redirections[j + 1] = ft_strdup(cmd[i + 1]);
-	if (!redirections[j + 1])
-		return (ft_rfree_tab(redirections, j + 1), -1);
-	return (0);
-}
-
-static int	ft_extract_output(char **cmd, char **redirections, int i, int j)
-{
-	if (ft_strlen(cmd[i]) == 1)
-		redirections[j] = ft_strdup("2");
-	else
-		redirections[j] = ft_strdup("3");
-	if (!redirections[j])
-		return (ft_rfree_tab(redirections, j), -1);
-	redirections[j + 1] = ft_strdup(cmd[i + 1]);
-	if (!redirections[j + 1])
-		return (ft_rfree_tab(redirections, j + 1), -1);
-	return (0);
-}
-
-static int	ft_get_redirections(char **cmd, char **redirections)
-{
-	int	i;
-	int	j;
-	int	return_val;
-
-	i = 0;
-	j = 0;
-	while (cmd[i])
-	{
-		return_val = 1;
-		if ((cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
-			|| (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2))
-			return_val = ft_extract_input(cmd, redirections, i, j);
-		else if ((cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
-			|| (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2))
-			return_val = ft_extract_output(cmd, redirections, i, j);
-		if (return_val == -1)
-			return (-1);
-		if (return_val == 0)
-			j += 2;
-		i++;
-	}
-	return (0);
-}
-
-static int	ft_redir_count(char **tab)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (tab[i])
-	{
-		if ((tab[i][0] == -60 && ft_strlen(tab[i]) == 1)
-			|| (tab[i][0] == -60 && tab[i][1] == -60 && ft_strlen(tab[i]) == 2))
-			count++;
-		else if ((tab[i][0] == -62 && ft_strlen(tab[i]) == 1)
-			|| (tab[i][0] == -62 && tab[i][1] == -62 && ft_strlen(tab[i]) == 2))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-char	**ft_extract_redirections(t_data *data, char **cmd, char **pipes_tab)
-{
+	t_list	*tmp;
 	char	**redirections;
 
-	redirections = ft_calloc(ft_redir_count(cmd) * 2 + 1, sizeof(char **));
-	if (!redirections || ft_get_redirections(cmd, redirections) != 0)
+	tmp = data->cmd;
+	while (i > 0)
 	{
-		free_tab(cmd);
-		free_tab(pipes_tab);
-		ft_error(data, "Memory allocation failed: ft_extract_redirection", 12);
+		tmp = tmp->next;
+		i--;
 	}
-	ft_del_redirections(cmd);
-	return (redirections);
+	redirections = (char **)s_read_cnt(tmp)->redirections;
+	ft_apply_redirection(data, redirections);
+	return ((char **)s_read_cnt(tmp)->command);
+}
+
+void	ft_free_two_line(char **tab, int i)
+{
+	free(tab[i]);
+	if (tab[i + 1])
+	{
+		free(tab[i + 1]);
+		while (tab[i + 2])
+		{
+			tab[i] = tab[i + 2];
+			if (tab[i + 3])
+				tab[i + 1] = tab[i + 3];
+			else
+			{
+				tab[i + 1] = NULL;
+				return ;
+			}
+			i += 2;
+		}
+		tab[i + 1] = NULL;
+	}
+	tab[i] = NULL;
+}
+
+static void	ft_del_input(char **cmd, int i)
+{
+	if (cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
+		ft_free_two_line(cmd, i);
+	else if (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2)
+		ft_free_two_line(cmd, i);
+}
+
+static void	ft_del_output(char **cmd, int i)
+{
+	if (cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
+		ft_free_two_line(cmd, i);
+	else if (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2)
+		ft_free_two_line(cmd, i);
+}
+
+void	ft_del_redirections(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if ((cmd[i][0] == -60 && ft_strlen(cmd[i]) == 1)
+			|| (cmd[i][0] == -60 && cmd[i][1] == -60 && ft_strlen(cmd[i]) == 2))
+		{
+			ft_del_input(cmd, i);
+			i = -1;
+		}
+		else if ((cmd[i][0] == -62 && ft_strlen(cmd[i]) == 1)
+			|| (cmd[i][0] == -62 && cmd[i][1] == -62 && ft_strlen(cmd[i]) == 2))
+		{
+			ft_del_output(cmd, i);
+			i = -1;
+		}
+		i++;
+	}
 }
