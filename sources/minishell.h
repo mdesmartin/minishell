@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/22 15:20:24 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 09:20:46 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int			check_chevrons(char *input);
 int			is_whitespace_or_end(char c, char *str, int i);
 int			check_pipes_n_and(char *input);
 int			check_quotes(char *input);
+int			chevron_error(char *input, int i, char chevron);
 
 //free
 void		free_lst(t_list **cmd);
