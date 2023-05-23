@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/18 14:15:39 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/22 15:20:29 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	pipe_n_end_error(char *input, int i)
 	}
 }
 
-int	nothing_after(char *input, int i)
+static int	nothing_after(char *input, int i)
 {
 	while (input[i])
 	{

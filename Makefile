@@ -31,17 +31,18 @@ LST_SRC =	main.c							\
 			env/env_creat.c					\
 			env/env_check.c					\
 			env/env_utils.c					\
+			input/check_input.c 			\
+			input/check_pipes.c				\
+			input/check_chevrons.c			\
+			input/check_chevrons_utils.c	\
 			parsing/expands.c				\
 			parsing/parsing.c				\
 			parsing/free_cmd.c 				\
-			parsing/check_input.c 			\
-			parsing/check_pipes.c			\
 			parsing/split_pipes.c			\
 			parsing/split_tokens.c			\
 			parsing/token_parsing.c			\
 			parsing/expands_utils.c			\
 			parsing/parsing_utils.c			\
-			parsing/check_chevrons.c		\
 			parsing/space_chevrons.c		\
 			process/child.c					\
 			process/process.c				\
@@ -96,6 +97,7 @@ $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)/env
 	@mkdir -p $(DIR_OBJ)/utils
 	@mkdir -p $(DIR_OBJ)/builtin
+	@mkdir -p $(DIR_OBJ)/input
 	@mkdir -p $(DIR_OBJ)/parsing
 	@mkdir -p $(DIR_OBJ)/process
 
