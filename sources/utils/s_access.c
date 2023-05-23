@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   s_access.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 16:12:33 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 15:41:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**calloc_tab(void)
 	return (tab);
 }
 
-void	*s_init(char **command, char **input, char **output)
+void	*s_init(char **command, char **redirections)
 {
 	t_pipeline	*pipeline;
 
@@ -48,13 +48,9 @@ void	*s_init(char **command, char **input, char **output)
 		pipeline->command = calloc_tab();
 	else
 		pipeline->command = command;
-	if (!input)
-		pipeline->input = calloc_tab();
+	if (!redirections)
+		pipeline->redirections = calloc_tab();
 	else
-		pipeline->input = input;
-	if (!output)
-		pipeline->output = calloc_tab();
-	else
-		pipeline->output = output;
+		pipeline->redirections = redirections;
 	return (pipeline);
 }

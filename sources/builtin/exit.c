@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 14:12:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 13:12:34 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static int	ft_check_exitarg(char *code)
 
 void	ft_builtin_exit(t_data *data, char **command)
 {
-	printf("exit\n");
 	if (!command[1])
 		ft_quit(data, 0);
 	else if (!command[2])

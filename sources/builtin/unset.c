@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 16:35:32 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 14:20:02 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_unset(t_data *data, char **command)
 	{
 		ft_dprintf(2, "minishell : unset: %c%c : invalid option\n",
 			command[1][0], command[1][1]);
-		data->exit_code = 1;
+		data->exit_code = 2;
 		return ;
 	}
 	while (command[i])

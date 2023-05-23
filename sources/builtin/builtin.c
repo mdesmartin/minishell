@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 16:34:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/18 15:11:45 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ static void	ft_builtin_pwd(t_data *data, char **command)
 	t_envp	*tmp;
 
 	data->exit_code = 0;
-	if (command[1] && ft_strncmp("-", command[1], 1) == 0)
+	if (command[1] && command[1][0] == '-')
 	{
-		ft_dprintf(2, "minishell : pwd: %c%c : invalid option\n",
-			command[1][0], command[1][1]);
-		data->exit_code = 2;
-		return ;
+		if ((command[1][1] && command[1][1] != '-')
+			|| (command[1][1] == '-' && command[1][2]))
+		{
+			ft_dprintf(2, "minishell : pwd: %c%c : invalid option\n",
+				command[1][0], command[1][1]);
+			data->exit_code = 2;
+			return ;
+		}
 	}
 	ft_check_pwd(data);
 	tmp = data->envp;

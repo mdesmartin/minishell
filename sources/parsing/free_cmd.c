@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehdidesmartin <mehdidesmartin@student.    +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 17:02:45 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/17 14:23:16 by mehdidesmar      ###   ########lyon.fr   */
+/*   Updated: 2023/05/19 15:45:33 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	*free_tab(char **tab)
 static void	free_del(void *content)
 {
 	free_tab(s_convert_content(content)->command);
-	if (s_convert_content(content)->input)
-		free_tab(s_convert_content(content)->input);
-	if (s_convert_content(content)->output)
-		free_tab(s_convert_content(content)->output);
+	if (s_convert_content(content)->redirections)
+		free_tab(s_convert_content(content)->redirections);
 	free(content);
 	content = NULL;
 }
