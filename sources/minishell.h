@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 10:42:17 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/24 16:41:12 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@
 
 typedef struct s_pipeline
 {
-	char			**command;
-	char			**redirections;
+	char	**command;
+	char	**redirections;
+	int		here_doc_fd[2];
+	int		here_doc_expand;
 }					t_pipeline;
 
 typedef struct s_envp
@@ -55,8 +57,6 @@ typedef struct s_data
 	t_envp	*envp;
 	char	**envp_tab;
 	int		**pipes;
-	int		here_doc_fd[2];
-	int		here_doc_expand;
 	int		nb_cmd;
 	int		exit_code;
 }				t_data;
@@ -64,6 +64,7 @@ typedef struct s_data
 // Utils
 void		ft_data_init(t_data *data);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
+void		ft_close_hd_fds(t_data *data);
 void		ft_error(t_data *data, char *s, int code);
 void		ft_perror(t_data *data, char *str, int code);
 void		ft_quit(t_data *data, int code);
@@ -91,11 +92,11 @@ char		**ft_lst_to_tabtab(t_data *data, t_envp *envp);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
-void		ft_input_heredoc(t_data *data, char *limiter, int *nb_input);
 char		**ft_redirection(t_data *data, int i);
-void		ft_check_hd_expand(t_data *data, char *limiter);
+void		ft_check_hd_expand(t_pipeline *pipe, char *limiter);
 
 void		ft_cmd(t_data *data);
+void		ft_process_here_doc(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
 char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
@@ -111,14 +112,15 @@ void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 
 //redirection
-char		**ft_extract_outputredir(t_data *data, char **cmd, \
-			char **pipes_tab, char **input);
-char		**ft_extract_inputredir(t_data *data, char **cmd, char **pipes_tab);
 char		**ft_extract_redirections(t_data *data,
 				char **cmd, char **pipes_tab);
-void		ft_apply_redirection(t_data *data, char **redirections);
+void		ft_apply_redirection(t_data *data, t_pipeline *pipe,
+				char **redirections);
 void		ft_free_two_line(char **tab, int i);
 void		ft_del_redirections(char **cmd);
+void		ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
+void		ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);
+char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
 
 //signal
 void		signal_init(void (*handler)(int signum));

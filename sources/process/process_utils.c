@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:55:39 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/11 16:59:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/24 16:34:25 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,19 @@ char	*ft_getenv(t_envp *envp, char *variable)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void	ft_close_hd_fds(t_data *data)
+{
+	t_list	*tmp;
+	int		*hd_fd;
+
+	tmp = data->cmd;
+	while (tmp)
+	{
+		hd_fd = (int *)s_read_cnt(tmp)->here_doc_fd;
+		close(hd_fd[0]);
+		close(hd_fd[1]);
+		tmp = tmp->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/22 14:02:25 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/24 16:30:45 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,19 @@ static void	ft_get_nb_redirec(char **tab, int *nb_input, int *nb_output)
 	}
 }
 
-void	ft_apply_redirection(t_data *data, char **redirections)
+static void	ft_dup2_here_doc(t_data *data, t_pipeline *pipe)
+{
+	if (dup2(pipe->here_doc_fd[0], STDIN_FILENO) == -1)
+	{
+		ft_close_fds(data, NULL);
+		ft_error(data, "Error while duplicating file descriptor", 1);
+	}
+	close(pipe->here_doc_fd[0]);
+	close(pipe->here_doc_fd[1]);
+}
+
+void	ft_apply_redirection(t_data *data, t_pipeline *pipe,
+		char **redirections)
 {
 	int	nb_input;
 	int	nb_output;
@@ -132,7 +144,11 @@ void	ft_apply_redirection(t_data *data, char **redirections)
 		if (redirections[i][0] == '0')
 			ft_input_file(data, redirections[i + 1], &nb_input);
 		else if (redirections[i][0] == '1')
-			ft_input_heredoc(data, redirections[i + 1], &nb_input);
+		{
+			if (nb_input == 1)
+				ft_dup2_here_doc(data, pipe);
+			nb_input--;
+		}
 		else if (redirections[i][0] == '2')
 			ft_output_file(data, redirections[i + 1], &nb_output);
 		else if (redirections[i][0] == '3')
