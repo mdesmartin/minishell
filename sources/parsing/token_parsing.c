@@ -70,12 +70,8 @@ static void	convert_redirection(char *token)
 	}
 }
 
-void	flag_heredoc_quote(char **token_tab)
+void	flag_heredoc_quote(char **token_tab, int i, int j)
 {
-	int	i;
-	int j;
-
-	j = 0;
 	i = 0;
 	while (token_tab[i])
 		i++;
@@ -87,10 +83,11 @@ void	flag_heredoc_quote(char **token_tab)
 		if (!ft_strncmp("<<", token_tab[i], 2))
 		{
 			i++;
-			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"",
-			ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i],
-			"\'", ft_strlen(token_tab[i]))))
+			if (token_tab[i] && (ft_strnstr(token_tab[i], "\"", \
+				ft_strlen(token_tab[i])) || ft_strnstr(token_tab[i], \
+				"\'", ft_strlen(token_tab[i]))))
 			{
+				j = 0;
 				while (token_tab[i][j] == '\"' || token_tab[i][j] == '\'')
 					j++;
 				token_tab[i][j] *= -1;
@@ -106,7 +103,7 @@ void	token_parsing(char **token_tab)
 	int	i;
 
 	i = 0;
-	flag_heredoc_quote(token_tab);
+	flag_heredoc_quote(token_tab, 0, 0);
 	while (token_tab[i])
 	{
 		convert_redirection(token_tab[i]);
