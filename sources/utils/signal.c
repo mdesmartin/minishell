@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:17:37 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/16 12:41:58 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/23 16:05:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	signal_handler(int signum)
 	{
 		if (g_exitcode == 0)
 			g_exitcode++;
-		printf("\n");
+		printf("^C\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -37,7 +37,7 @@ void	signal_heredoc(int signum)
 	{
 		if (g_exitcode == 0)
 			g_exitcode++;
-		printf("\n");
+		printf("^C\n");
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();

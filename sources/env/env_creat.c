@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:25:51 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 18:14:47 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/24 10:38:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@ static void	ft_creat_variable(t_data *data, char *variable, char *value)
 
 void	ft_creat_envp(t_data *data)
 {
-	data->envp = ft_calloc(1, sizeof(t_envp));
-	if (!data->envp)
+	char	*pwd;
+
+	data->envp = NULL;
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
 		ft_error(data, "Memory allocation failed: envp_creat", 12);
-	data->envp->variable = strdup("PWD");
-	if (!data->envp->variable)
-		ft_error(data, "Memory allocation failed: envp_creat", 12);
-	data->envp->value = getcwd(NULL, 0);
-	if (!data->envp->value)
-		ft_error(data, "Memory allocation failed: envp_creat", 12);
-	data->envp->next = NULL;
+	ft_creat_variable(data, "PWD", pwd);
 	ft_creat_variable(data, "OLDPWD", NULL);
 	ft_creat_variable(data, "SHLVL", "1");
 }
