@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:42:18 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 14:09:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/24 13:13:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static int	ft_varlen(char *var)
 	while (var[i])
 	{
 		if (var[i] == '=')
-			return (i);
+			break ;
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
 static t_envp	*ft_is_var_in_env(t_data *data, char **command, int i)
