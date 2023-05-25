@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:30:45 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 13:54:36 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_output_file(t_data *data, char *file, int *nb_output)
 	if (*nb_output != 1)
 	{
 		(*nb_output)--;
-		close(outfile);
+		ft_close(outfile);
 		return ;
 	}
 	if (dup2(outfile, STDOUT_FILENO) == -1)
@@ -63,7 +63,7 @@ static void	ft_output_appends(t_data *data, char *file, int *nb_output)
 	if (*nb_output != 1)
 	{
 		(*nb_output)--;
-		close(outfile);
+		ft_close(outfile);
 		return ;
 	}
 	if (dup2(outfile, STDOUT_FILENO) == -1)
@@ -91,13 +91,13 @@ static void	ft_input_file(t_data *data, char *file, int *nb_input)
 	if (*nb_input != 1)
 	{
 		(*nb_input)--;
-		close(infile);
+		ft_close(infile);
 		return ;
 	}
 	if (dup2(infile, STDIN_FILENO) == -1)
 	{
 		ft_close_fds(data, NULL);
-		close(infile);
+		ft_close(infile);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 }
@@ -121,11 +121,11 @@ static void	ft_dup2_here_doc(t_data *data, t_pipeline *pipe)
 {
 	if (dup2(pipe->here_doc_fd[0], STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, pipe->here_doc_fd);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
-	close(pipe->here_doc_fd[0]);
-	close(pipe->here_doc_fd[1]);
+	ft_close(pipe->here_doc_fd[0]);
+	ft_close(pipe->here_doc_fd[1]);
 }
 
 void	ft_apply_redirection(t_data *data, t_pipeline *pipe,

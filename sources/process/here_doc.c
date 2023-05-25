@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 10:28:23 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 13:54:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ static void	ft_input_heredoc(t_data *data, t_pipeline *pip,
 		ft_error(data, "Pipe failed for here_doc!", 1);
 	ft_check_hd_expand(pip, limiter);
 	ft_here_doc(data, pip, limiter);
+	ft_close(pip->here_doc_fd[1]);
 	if (nb_input != 1)
-	{
-		ft_close_fds(data, pip->here_doc_fd);
-		return ;
-	}
+		ft_close(pip->here_doc_fd[0]);
 }
 
 static int	ft_get_nb_input(char **tab)

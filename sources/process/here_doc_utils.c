@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:41:32 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 13:53:55 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter)
 	ft_putstr_fd("minishell: warning: here-document limiter wanted `", 2);
 	ft_putstr_fd(limiter, 2);
 	ft_putstr_fd("'\n", 2);
-	close(here_doc_fd[0]);
-	close(here_doc_fd[1]);
+	ft_close(here_doc_fd[0]);
+	ft_close(here_doc_fd[1]);
 	ft_quit(data, 1);
 }
 //message when ctrl+d in stead of ctrl+c
@@ -39,8 +39,8 @@ void	ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter)
 void	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 {
 	g_exitcode--;
-	close(here_doc_fd[0]);
-	close(here_doc_fd[1]);
+	ft_close(here_doc_fd[0]);
+	ft_close(here_doc_fd[1]);
 	if (input)
 		free(input);
 	ft_quit(data, 2);
