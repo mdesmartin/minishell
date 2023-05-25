@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 14:05:11 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 14:30:41 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 // > = 3
 // >> = 6
 
-// input[0] : 0 = < ; 1 = <<
-// input[1] : file or limiter
-// output[0] : 0 = > ; 1 = >>
-// output[1] : file if output[0] == 0
+// redirections[0] : 0 = < ; 1 = <<
+// redirections[1] : file or limiter
+// redirections[0] : 2 = > ; 3 = >>
+// redirections[1] : file if output[0] == 0
 
 typedef struct s_pipeline
 {
@@ -121,6 +121,7 @@ void		ft_del_redirections(char **cmd);
 void		ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
 void		ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);
 char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
+void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe);
 
 //signal
 void		signal_init(void (*handler)(int signum));
