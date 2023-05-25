@@ -1,7 +1,8 @@
 NAME = minishell
 DEBUG = no
 
-CFLAGS = -Wall -Wextra -Werror -I/usr/local/include -L/usr/local/lib -lreadline
+CFLAGS = -Wall -Wextra -Werror -I/usr/local/include
+CRFLAGS = -L/usr/local/lib -lreadline
 DFLAGS = -g3 -fsanitize=leak -fsanitize=address -fsanitize=pointer-subtract -fsanitize=pointer-compare -fsanitize=undefined
 
 ifeq ($(DEBUG), yes)
@@ -91,7 +92,7 @@ re: fclean
 #  ===========================  COMPILATION  ===========================  #
 
 $(NAME): $(DIR_OBJ) $(OBJECTS)
-	cc $(OBJECTS) $(CFLAGS) $(LIBRARY) -o $(NAME)
+	cc $(OBJECTS) $(CFLAGS) $(CRFLAGS) $(LIBRARY) -o $(NAME)
 
 $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)

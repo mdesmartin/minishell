@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 13:12:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 10:23:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**ft_redirection(t_data *data, int i)
 {
-	t_list	*tmp;
-	char	**redirections;
+	t_pipeline	*pipe;
+	t_list		*tmp;
 
 	tmp = data->cmd;
 	while (i > 0)
@@ -23,12 +23,12 @@ char	**ft_redirection(t_data *data, int i)
 		tmp = tmp->next;
 		i--;
 	}
-	redirections = (char **)s_read_cnt(tmp)->redirections;
-	ft_apply_redirection(data, redirections);
-	return ((char **)s_read_cnt(tmp)->command);
+	pipe = s_read_cnt(tmp);
+	ft_apply_redirection(data, pipe, pipe->redirections);
+	return (pipe->command);
 }
 
-void	ft_free_two_line(char **tab, int i)
+static void	ft_free_two_line(char **tab, int i)
 {
 	free(tab[i]);
 	if (tab[i + 1])
