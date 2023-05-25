@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:41:12 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 10:23:09 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ char		**ft_extract_redirections(t_data *data,
 				char **cmd, char **pipes_tab);
 void		ft_apply_redirection(t_data *data, t_pipeline *pipe,
 				char **redirections);
-void		ft_free_two_line(char **tab, int i);
 void		ft_del_redirections(char **cmd);
 void		ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
 void		ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);

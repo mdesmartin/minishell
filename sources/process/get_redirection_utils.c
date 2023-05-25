@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:29:19 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 10:23:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_redirection(t_data *data, int i)
 	return (pipe->command);
 }
 
-void	ft_free_two_line(char **tab, int i)
+static void	ft_free_two_line(char **tab, int i)
 {
 	free(tab[i]);
 	if (tab[i + 1])

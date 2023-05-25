@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:41:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 10:28:23 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,33 @@ static void	ft_here_doc(t_data *data, t_pipeline *pipe, char *limiter)
 }
 
 static void	ft_input_heredoc(t_data *data, t_pipeline *pip,
-		char *limiter, int *nb_input)
+		char *limiter, int nb_input)
 {
 	if (pipe(pip->here_doc_fd) == -1)
 		ft_error(data, "Pipe failed for here_doc!", 1);
 	ft_check_hd_expand(pip, limiter);
 	ft_here_doc(data, pip, limiter);
-	if (*nb_input != 1)
+	if (nb_input != 1)
 	{
-		(*nb_input)--;
 		ft_close_fds(data, pip->here_doc_fd);
 		return ;
 	}
 }
 
-static void	ft_get_nb_input(char **tab, int *nb_input)
+static int	ft_get_nb_input(char **tab)
 {
+	int	nb_input;
 	int	i;
 
 	i = 0;
+	nb_input = 0;
 	while (tab[i])
 	{
 		if (tab[i][0] == '0' || tab[i][0] == '1')
-			(*nb_input) += 1;
+			nb_input++;
 		i += 2;
 	}
+	return (nb_input);
 }
 
 static void	ft_get_here_doc(t_data *data, t_pipeline *pipe)
@@ -77,15 +79,17 @@ static void	ft_get_here_doc(t_data *data, t_pipeline *pipe)
 	int	i;
 
 	i = 0;
-	nb_input = 0;
-	ft_get_nb_input(pipe->redirections, &nb_input);
+	nb_input = ft_get_nb_input(pipe->redirections);
 	while (pipe->redirections[i] && pipe->redirections[i + 1])
 	{
 		if (pipe->redirections[i][0] == '0')
 			nb_input--;
 		else if (pipe->redirections[i][0] == '1')
+		{
 			ft_input_heredoc(data, pipe, pipe->redirections[i + 1],
-				&nb_input);
+				nb_input);
+			nb_input--;
+		}
 		i += 2;
 	}
 }
