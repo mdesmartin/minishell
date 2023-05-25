@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/19 15:41:01 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 13:42:15 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ void	*s_init(char **command, char **redirections)
 		pipeline->redirections = calloc_tab();
 	else
 		pipeline->redirections = redirections;
+	pipeline->here_doc_fd[0] = 0;
+	pipeline->here_doc_fd[1] = 0;
 	return (pipeline);
 }
