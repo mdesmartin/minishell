@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:10:04 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 16:20:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter)
 	ft_putstr_fd("'\n", 2);
 	ft_close(here_doc_fd[0]);
 	ft_close(here_doc_fd[1]);
-	data->exit_code = 1;
+	data->exit_code = 0;
 	return (1);
 }
 //message when ctrl+d in stead of ctrl+c
@@ -44,7 +44,7 @@ int	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 	ft_close(here_doc_fd[1]);
 	if (input)
 		free(input);
-	data->exit_code = 2;
+	data->exit_code = 130;
 	return (1);
 }
 
