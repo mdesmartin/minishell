@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 13:54:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 16:10:44 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 extern sig_atomic_t	g_exitcode;
 
-static void	ft_here_doc(t_data *data, t_pipeline *pipe, char *limiter)
+static int	ft_here_doc(t_data *data, t_pipeline *pipe, char *limiter)
 {
 	char	*input;
 	int		limiter_len;
 	int		intput_len;
 
-	signal_init(signal_heredoc);
 	limiter_len = ft_strlen(limiter);
 	while (1)
 	{
 		input = readline("here_doc> ");
 		if (!input)
-			ft_error_heredoc(data, pipe->here_doc_fd, limiter);
+			return (ft_error_heredoc(data, pipe->here_doc_fd, limiter));
 		if (g_exitcode == 1 || g_exitcode == 3)
-			ft_stop_heredoc(data, pipe->here_doc_fd, input);
+			return (ft_stop_heredoc(data, pipe->here_doc_fd, input));
 		intput_len = ft_strlen(input);
 		if (ft_strncmp(input, limiter, limiter_len) == 0
 			&& intput_len == limiter_len)
@@ -41,18 +40,23 @@ static void	ft_here_doc(t_data *data, t_pipeline *pipe, char *limiter)
 		free(input);
 	}
 	free(input);
+	return (0);
 }
 
-static void	ft_input_heredoc(t_data *data, t_pipeline *pip,
+static int	ft_input_heredoc(t_data *data, t_pipeline *pip,
 		char *limiter, int nb_input)
 {
 	if (pipe(pip->here_doc_fd) == -1)
 		ft_error(data, "Pipe failed for here_doc!", 1);
 	ft_check_hd_expand(pip, limiter);
-	ft_here_doc(data, pip, limiter);
+	signal_init(signal_heredoc);
+	if (ft_here_doc(data, pip, limiter) == 1)
+		return (1);
+	signal_init(signal_handler);
 	ft_close(pip->here_doc_fd[1]);
 	if (nb_input != 1)
 		ft_close(pip->here_doc_fd[0]);
+	return (0);
 }
 
 static int	ft_get_nb_input(char **tab)
@@ -71,7 +75,7 @@ static int	ft_get_nb_input(char **tab)
 	return (nb_input);
 }
 
-static void	ft_get_here_doc(t_data *data, t_pipeline *pipe)
+static int	ft_get_here_doc(t_data *data, t_pipeline *pipe)
 {
 	int	nb_input;
 	int	i;
@@ -84,15 +88,17 @@ static void	ft_get_here_doc(t_data *data, t_pipeline *pipe)
 			nb_input--;
 		else if (pipe->redirections[i][0] == '1')
 		{
-			ft_input_heredoc(data, pipe, pipe->redirections[i + 1],
-				nb_input);
+			if (ft_input_heredoc(data, pipe, pipe->redirections[i + 1],
+					nb_input) == 1)
+				return (1);
 			nb_input--;
 		}
 		i += 2;
 	}
+	return (0);
 }
 
-void	ft_process_here_doc(t_data *data)
+int	ft_process_here_doc(t_data *data)
 {
 	t_pipeline	*pipe;
 	t_list		*tmp;
@@ -101,7 +107,9 @@ void	ft_process_here_doc(t_data *data)
 	while (tmp)
 	{
 		pipe = s_read_cnt(tmp);
-		ft_get_here_doc(data, pipe);
+		if (ft_get_here_doc(data, pipe) == 1)
+			return (1);
 		tmp = tmp->next;
 	}
+	return (0);
 }

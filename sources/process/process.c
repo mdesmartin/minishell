@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 16:12:26 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 16:11:58 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,26 @@ static void	ft_process(t_data *data)
 {
 	int	i;
 	int	pids;
+	int	stop;
 
 	ft_pipe_init(data);
-	ft_process_here_doc(data);
-	i = -1;
-	while (++i < data->nb_cmd)
+	stop = ft_process_here_doc(data);
+	if (stop == 0)
 	{
-		pids = fork();
-		if (pids == -1)
-			ft_error(data, "Fork failed", 1);
-		if (pids == 0)
-			ft_child(data, data->pipes, i);
+		i = -1;
+		while (++i < data->nb_cmd)
+		{
+			pids = fork();
+			if (pids == -1)
+				ft_error(data, "Fork failed", 1);
+			if (pids == 0)
+				ft_child(data, data->pipes, i);
+		}
+		ft_close_hd_fds(data);
 	}
-	ft_close_hd_fds(data);
 	ft_close_fds(data, NULL);
-	ft_wait_child(data, pids, i);
+	if (stop == 0)
+		ft_wait_child(data, pids, i);
 	ft_pipe_free(data);
 }
 

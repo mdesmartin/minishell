@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 14:30:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/25 16:09:54 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char		**ft_redirection(t_data *data, int i);
 void		ft_check_hd_expand(t_pipeline *pipe, char *limiter);
 
 void		ft_cmd(t_data *data);
-void		ft_process_here_doc(t_data *data);
+int			ft_process_here_doc(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
 char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
@@ -118,8 +118,8 @@ char		**ft_extract_redirections(t_data *data,
 void		ft_apply_redirection(t_data *data, t_pipeline *pipe,
 				char **redirections);
 void		ft_del_redirections(char **cmd);
-void		ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
-void		ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);
+int			ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
+int			ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);
 char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
 void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe);
 
