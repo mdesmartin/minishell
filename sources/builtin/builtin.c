@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 15:11:45 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 14:27:55 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_builtin_unset(t_data *data, char **command)
 
 static void	ft_builtin_pwd(t_data *data, char **command)
 {
-	t_envp	*tmp;
+	char	*pwd;
 
 	data->exit_code = 0;
 	if (command[1] && command[1][0] == '-')
@@ -46,16 +46,11 @@ static void	ft_builtin_pwd(t_data *data, char **command)
 		}
 	}
 	ft_check_pwd(data);
-	tmp = data->envp;
-	while (tmp)
-	{
-		if (ft_strncmp("PWD", tmp->variable, 4) == 0)
-			break ;
-		tmp = tmp->next;
-	}
-	if (tmp->value)
-		printf("%s", tmp->value);
-	printf("\n");
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		ft_error(data, "Memory allocation failed: envp_creat", 12);
+	printf("%s\n", pwd);
+	free(pwd);
 }
 
 int	ft_builtin(t_data *data, char **command)
