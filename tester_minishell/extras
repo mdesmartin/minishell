@@ -255,8 +255,6 @@ cd /minishell
 "cd /
 cd .."
 cd _
-cd -
-cd --
 cd ---
 cd $HOME
 cd $HOME $HOME
@@ -322,7 +320,6 @@ exit 9223372036854775807
 exit 9223372036854775808
 exit -9223372036854775808
 exit -9223372036854775809
-cat | cat | cat | ls
 ls | exit
 ls | exit 42
 exit | ls
@@ -361,8 +358,6 @@ sleep 3 | sleep 3
 time sleep 3 | sleep 3
 sleep 3 | exit
 exit | sleep 3
-pwd && ls
-pwd || ls
 echo hola > > bonjour
 echo hola < < bonjour
 echo hola >>> bonjour

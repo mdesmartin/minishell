@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/26 10:45:37 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 13:34:45 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void		ft_check_oldpwd(t_data *data);
 int			ft_check_exportvar(char *variable);
 int			ft_check_exportopt(t_data *data, char *command1);
 int			ft_check_unsetvar(char *variable);
+int			ft_export_append(t_data *data, char *variable);
+int			ft_varlen(char *var);
+t_envp		*ft_is_var_in_env(t_data *data, char *command);
 void		ft_print_env(t_data *data);
 void		ft_export(t_data *data, char **command);
 void		ft_unset(t_data *data, char **command);
