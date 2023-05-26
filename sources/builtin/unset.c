@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 16:12:06 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 17:58:27 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 10:59:00 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	ft_unset(t_data *data, char **command)
 	}
 	while (command[i])
 	{
-		if (ft_strncmp("_", command[i], 2) != 0)
+		if (ft_check_unsetvar(command[i]) == 1)
+			data->exit_code = 1;
+		else if (ft_strncmp("_", command[i], 2) != 0)
 			ft_del_onelst(&data->envp, command[i]);
 		i++;
 	}
