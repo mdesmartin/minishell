@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/23 13:05:38 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 15:36:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ static int	ft_get_redirections(char **cmd, char **redirections)
 		if (return_val == -1)
 			return (-1);
 		if (return_val == 0)
+		{
 			j += 2;
+			i++;
+		}
 		i++;
 	}
 	return (0);

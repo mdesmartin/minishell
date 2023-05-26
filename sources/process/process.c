@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:36:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:11:58 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 15:24:46 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_cmd(t_data *data)
 	char	**redirections;
 
 	command = s_read_cnt(data->cmd)->command;
-	redirections = (char **)s_read_cnt(data->cmd)->redirections;
+	redirections = s_read_cnt(data->cmd)->redirections;
 	data->nb_cmd = ft_lstsize(data->cmd);
 	if (data->nb_cmd == 1 && !redirections[0] && ft_builtin(data, command) != 0)
 		return ;
