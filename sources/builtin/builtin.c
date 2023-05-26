@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/26 14:27:55 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 15:12:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_builtin_pwd(t_data *data, char **command)
 	ft_check_pwd(data);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		ft_error(data, "Memory allocation failed: envp_creat", 12);
+		ft_error(data, "Memory allocation failed: ft_builtin_pwd", 12);
 	printf("%s\n", pwd);
 	free(pwd);
 }
