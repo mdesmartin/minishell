@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expands.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/05/24 13:28:39 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:24:30 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 	end = *start;
 	if (pipes_tab[*start] == ':' || pipes_tab[*start] == '=')
 		return (pipes_tab);
-	else if (is_whitespace_or_end(pipes_tab[*start], pipes_tab, *start))
+	else if (is_whitespace_or_end(pipes_tab[*start])
+		|| lonely_expand_in_quote(pipes_tab, *start, pipes_tab[*start]))
 		return (whitespace_handler(pipes_tab, start, end));
 	else if (pipes_tab[*start] == '?')
 		return (trim_by_exitcode(ft_itoa((int)data->exit_code), \

@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:44:34 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:24:15 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,22 @@ char	*trim_by(char *value, char *pipes_tab, int *start, int end)
 		new_content[i++] = pipes_tab[end++];
 	free(pipes_tab);
 	return (new_content);
+}
+
+int	lonely_expand_in_quote(char *str, int i, char c)
+{
+	int	a;
+	int	start;
+
+	a = 2;
+	start = i - 1;
+	while (i != 0 && str[i] && a)
+	{
+		i--;
+		a--;
+	}
+	if (!a && (c == '\"' && str[i] == '\"') && is_in_quotes(str, start))
+		return (1);
+	else
+		return (0);
 }
