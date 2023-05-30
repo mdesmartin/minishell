@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:00:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 14:43:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:19:52 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_cd_back(t_data *data)
 	{
 		data->exit_code = 1;
 		ft_perror(data, "minishell: cd", 1);
+		return ;
 	}
 	printf("%s\n", data->oldpwd);
 }
