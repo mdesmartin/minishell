@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:15:37 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 16:08:26 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 13:29:12 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_creat_pwd(t_data *data)
 		ft_error(data, "Memory allocation failed: creat_pwd", 12);
 	tmp->value = getcwd(NULL, 0);
 	if (!tmp->value)
-		ft_error(data, "Memory allocation failed: creat_pwd", 12);
+		ft_perror(data, "creat_pwd: getcwd() failed", 1);
 	tmp->next = NULL;
 	ft_envadd_back(&data->envp, tmp);
 }

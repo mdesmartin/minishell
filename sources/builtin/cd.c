@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 12:47:41 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 18:19:05 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 12:45:23 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_builtin_cd(t_data *data, char **command)
 		data->exit_code = 1;
 		ft_dprintf(2, "minishell: cd: %s: ", command[1]);
 		perror(NULL);
+		return ;
 	}
 	ft_update_oldpwd(data);
 	ft_update_pwd(data);
