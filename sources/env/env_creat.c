@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:25:51 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 15:14:25 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 14:21:51 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_creat_envp(t_data *data)
 	data->envp = NULL;
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		ft_error(data, "Memory allocation failed: envp_creat", 12);
+		ft_error(data, "ft_creat_envp: getcwd() failed", 1);
 	ft_creat_variable(data, "PWD", pwd);
 	free(pwd);
 	ft_creat_variable(data, "OLDPWD", NULL);

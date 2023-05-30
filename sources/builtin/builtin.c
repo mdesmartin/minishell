@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 13:52:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/26 15:12:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 14:11:23 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static void	ft_builtin_unset(t_data *data, char **command)
 
 static void	ft_builtin_pwd(t_data *data, char **command)
 {
-	char	*pwd;
-
 	data->exit_code = 0;
 	if (command[1] && command[1][0] == '-')
 	{
@@ -45,12 +43,7 @@ static void	ft_builtin_pwd(t_data *data, char **command)
 			return ;
 		}
 	}
-	ft_check_pwd(data);
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		ft_error(data, "Memory allocation failed: ft_builtin_pwd", 12);
-	printf("%s\n", pwd);
-	free(pwd);
+	printf("%s\n", data->pwd);
 }
 
 int	ft_builtin(t_data *data, char **command)

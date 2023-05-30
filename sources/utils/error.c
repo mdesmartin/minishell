@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 15:16:28 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 14:53:34 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_quit(t_data *data, int code)
 	}
 	free_lst(&data->cmd);
 	free(data->cmd);
+	free(data->pwd);
+	free(data->oldpwd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
 	rl_clear_history();
