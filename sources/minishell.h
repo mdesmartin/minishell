@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:09:54 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 11:25:14 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void		ft_check_pwd(t_data *data);
 void		ft_check_oldpwd(t_data *data);
 int			ft_check_exportvar(char *variable);
 int			ft_check_exportopt(t_data *data, char *command1);
+int			ft_check_unsetvar(char *variable);
+int			ft_export_append(t_data *data, char *variable);
+int			ft_varlen(char *var);
+t_envp		*ft_is_var_in_env(t_data *data, char *command);
 void		ft_print_env(t_data *data);
 void		ft_export(t_data *data, char **command);
 void		ft_unset(t_data *data, char **command);
@@ -107,6 +111,7 @@ void		ft_cd_home(t_data *data);
 void		ft_cd_back(t_data *data);
 void		ft_cd_opt(t_data *data, char *command1);
 void		ft_builtin_exit(t_data *data, char **command);
+void		ft_exit_redir(t_data *data, char **command, char **redirections);
 void		ft_builtin_slash(t_data *data, char *directory);
 int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);

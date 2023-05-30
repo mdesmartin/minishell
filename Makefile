@@ -25,7 +25,9 @@ LST_SRC =	main.c							\
 			builtin/builtin.c				\
 			builtin/cd_utils.c				\
 			builtin/cd_check.c				\
+			builtin/exit_redir.c			\
 			builtin/builtin_utils.c			\
+			builtin/export_append.c			\
 			builtin/export_unset_utils.c	\
 			env/env_lst.c					\
 			env/env_init.c					\
