@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:01:03 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/25 13:42:15 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 17:22:24 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_pipeline	*s_convert_content(void *content)
 	return (content);
 }
 
-// EXEMPLE : data->cmd->content	-become->		s_read_cnt(data->cmd)->command
 t_pipeline	*s_read_cnt(t_list *cmd)
 {
 	if (!cmd->content)

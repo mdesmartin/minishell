@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 15:14:19 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 17:25:17 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@
 # include <signal.h>
 # include <termios.h>
 # include <sys/ioctl.h>
-
-// < = 1
-// << = 2
-// > = 3
-// >> = 6
-
-// redirections[0] : 0 = < ; 1 = <<
-// redirections[1] : file or limiter
-// redirections[0] : 2 = > ; 3 = >>
-// redirections[1] : file if output[0] == 0
 
 typedef struct s_pipeline
 {
@@ -63,7 +53,7 @@ typedef struct s_data
 	int		exit_code;
 }				t_data;
 
-// Utils
+//utils
 void		ft_data_init(t_data *data);
 void		ft_close(int fd);
 void		ft_close_fds(t_data *data, int *here_doc_fd);
@@ -77,33 +67,36 @@ int			ft_is_c_in(char *str, char c);
 void		ft_free_envptab(t_data *data);
 void		ft_free_envplst(t_data *data);
 void		ft_print_tabtab(char **tab, char *name);
+char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 
+//env
 void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
 int			ft_check_exportvar(char *variable);
 int			ft_check_exportopt(t_data *data, char *command1);
 int			ft_check_unsetvar(char *variable);
-int			ft_export_append(t_data *data, char *variable);
 int			ft_varlen(char *var);
 t_envp		*ft_is_var_in_env(t_data *data, char *command);
 void		ft_print_env(t_data *data);
-void		ft_export(t_data *data, char **command);
-void		ft_unset(t_data *data, char **command);
 void		ft_envadd_back(t_envp **lst, t_envp *new);
 t_envp		*ft_envlast(t_envp *lst);
-void		ft_print_export(t_data *data);
 char		**ft_lst_to_tabtab(t_data *data, t_envp *envp);
-char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
-char		**ft_redirection(t_data *data, int i);
 void		ft_check_hd_expand(t_pipeline *pipe, char *limiter);
 
+//exec
 void		ft_cmd(t_data *data);
 int			ft_process_here_doc(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
 char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
+
+//builtin
+void		ft_export(t_data *data, char **command);
+int			ft_export_append(t_data *data, char *variable);
+void		ft_print_export(t_data *data);
+void		ft_unset(t_data *data, char **command);
 int			ft_builtin(t_data *data, char **command);
 void		ft_builtin_cd(t_data *data, char **command);
 void		ft_cd_home(t_data *data);
@@ -117,6 +110,7 @@ void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 
 //redirection
+char		**ft_redirection(t_data *data, int i);
 char		**ft_extract_redirections(t_data *data,
 				char **cmd, char **pipes_tab);
 void		ft_apply_redirection(t_data *data, t_pipeline *pipe,

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:20:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 17:20:59 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter)
 	data->exit_code = 0;
 	return (1);
 }
-//message when ctrl+d in stead of ctrl+c
 
 int	ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input)
 {
