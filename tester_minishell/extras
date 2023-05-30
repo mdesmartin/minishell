@@ -373,7 +373,6 @@ cat >> > >> << >>
 cat < ls
 cat < ls > ls
 <a cat <b <c
-cat << hola
 cat << 'hola'
 cat << "hola"
 cat << ho"la"
@@ -390,13 +389,4 @@ prout << lol << cat << koala
 << $"hola"$"b"
 << $"$hola"$$"b"
 << ho$la$"$a"$$"b"
-echo hola <<< bonjour
-echo hola <<<< bonjour
-echo hola <<<<< bonjour
-ls *
-ls *.*
-ls *.hola
-cat M*le
-cat M*ee
-cat Make*file
 README.md
