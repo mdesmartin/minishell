@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 17:00:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/15 16:50:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 14:43:03 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,20 @@ void	ft_cd_home(t_data *data)
 	else if (tmp->value[0] == '\0')
 		return ;
 	if (chdir(tmp->value) == -1)
+	{
+		data->exit_code = 1;
 		ft_perror(data, "minishell: cd", 1);
+	}
 }
 
 void	ft_cd_back(t_data *data)
 {
-	char	*oldpwd;
-
-	oldpwd = ft_getenv(data->envp, "OLDPWD");
-	if (chdir(oldpwd) == -1)
+	if (chdir(data->oldpwd) == -1)
+	{
+		data->exit_code = 1;
 		ft_perror(data, "minishell: cd", 1);
+	}
+	printf("%s\n", data->oldpwd);
 }
 
 void	ft_cd_opt(t_data *data, char *command1)
