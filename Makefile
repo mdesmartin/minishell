@@ -24,13 +24,13 @@ LST_SRC =	main.c							\
 			builtin/export.c				\
 			builtin/builtin.c				\
 			builtin/cd_utils.c				\
-			builtin/cd_check.c				\
+			builtin/exit_redir.c			\
 			builtin/builtin_utils.c			\
+			builtin/export_append.c			\
 			builtin/export_unset_utils.c	\
 			env/env_lst.c					\
 			env/env_init.c					\
 			env/env_creat.c					\
-			env/env_check.c					\
 			env/env_utils.c					\
 			input/check_input.c 			\
 			input/check_pipes.c				\

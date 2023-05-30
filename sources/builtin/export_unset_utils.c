@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:33:27 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/24 10:44:33 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/26 13:39:02 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,35 @@ int	ft_check_exportvar(char *variable)
 	}
 	while (variable[i] && variable[i] != '=')
 	{
-		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
+		if (variable[i] == '+' && variable[i + 1] == '=')
+			break ;
+		else if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
 		{
 			ft_dprintf(2, "minishell : export: `%s': not a valid identifier\n",
+				variable);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_check_unsetvar(char *variable)
+{
+	int	i;
+
+	i = 1;
+	if (ft_isalpha(variable[0]) == 0 && variable[0] != '_')
+	{
+		ft_dprintf(2, "minishell : unset: `%s': not a valid identifier\n",
+			variable);
+		return (1);
+	}
+	while (variable[i])
+	{
+		if (ft_isalnum(variable[i]) == 0 && variable[i] != '_')
+		{
+			ft_dprintf(2, "minishell : unset: `%s': not a valid identifier\n",
 				variable);
 			return (1);
 		}
