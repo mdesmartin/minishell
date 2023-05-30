@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:38:08 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:12:43 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,9 @@ int	is_whitespace(char c)
 		return (0);
 }
 
-int	is_whitespace_or_end(char c, char *str, int i)
+int	is_whitespace_or_end(char c)
 {
-	int	a;
-
-	a = 2;
-	while (i != 0 && str[i] && a)
-	{
-		i--;
-		a--;
-	}
-	if (!a && (c == '\"' && str[i] == '\"'))
-		return (1);
-	else if (c == ' ' || c == '\t' || c == '\0')
+	if (c == ' ' || c == '\t' || c == '\0')
 		return (1);
 	else
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:09:54 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:14:19 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,15 @@ char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 void		space_chevron(t_data *data, char **pipes_tab);
 void		token_parsing(char **token_tab);
 
-//check_input
+//parsing_utils
+int			is_whitespace(char c);
+int			is_whitespace_or_end(char c);
 int			is_in_quotes(char *str, int index);
+
+//check_input
 int			check_input(char *input, t_data *data);
 void		print_error(char *error);
-int			is_whitespace(char c);
 int			check_chevrons(char *input);
-int			is_whitespace_or_end(char c, char *str, int i);
 int			check_pipes_n_and(char *input);
 int			check_quotes(char *input);
 int			chevron_error(char *input, int i, char chevron);
@@ -164,5 +166,6 @@ char		*trim_from_to(char *pipes_tab, int *start, int end);
 char		*trim_by_exitcode(char *value, char *pipes_tab, int *start, \
 			int end);
 char		*trim_by(char *value, char *pipes_tab, int *start, int end);
+int			lonely_expand_in_quote(char *str, int i, char c);
 
 #endif

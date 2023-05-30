@@ -6,48 +6,11 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:38:46 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/30 15:20:33 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void	print_chain(t_data *data)
-// {
-// 	t_list	*cp;
-// 	int		i;
-
-// 	i = 0;
-// 	cp = data->cmd;
-// 	while (cp)
-// 	{
-// 		i = 0;
-// 		while (s_read_cnt(cp)->command[i])
-// 		{
-// 			printf("%s ", s_read_cnt(cp)->command[i]);
-// 			i++;
-// 		}
-// 		if (i > 1)
-// 			printf("\n");
-// 		cp = cp->next;
-// 	}
-// 	printf("\n");
-// 	return ;
-// }
-
-// void	print_tab(char **pipes_tab)
-// {
-// 	int i = 0;
-
-// 	while (pipes_tab[i])
-// 	{
-// 		printf("tab[%d] : %s\n", i, pipes_tab[i]);
-// 		i++;
-// 	}
-// 	return ;
-// }
-
-////////////////////////////////////////////////////////////////////////////////
 
 static void	create_link(t_list **cmd, void *content)
 {
@@ -92,13 +55,11 @@ int	parsing(t_data *data, char *input)
 	if (!pipes_tab)
 		return (ft_quit(data, 12), 1);
 	expands(data, pipes_tab);
-	// print_tab(pipes_tab);
 	if (pipes_tab[0][0] != '\0')
 	{
 		space_chevron(data, pipes_tab);
 		create_chain(data, &data->cmd, pipes_tab);
 		return (0);
 	}
-	// print_chain(data);
 	return (1);
 }
