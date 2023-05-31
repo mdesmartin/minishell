@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/17 15:53:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 10:48:40 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static char	*ft_is_path_in_cmd(t_data *data, char **command)
 {
 	char	*tmp;
 
-	if (access(command[0], X_OK) == 0)
+	if (access(command[0], X_OK) == 0
+		|| (command[0][0] == '.' && command[0][1] == '/'))
 	{
 		tmp = ft_strdup(command[0]);
 		if (!tmp)
