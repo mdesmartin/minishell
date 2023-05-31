@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 14:30:44 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 12:23:53 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ static void	ft_output_file(t_data *data, char *file, int *nb_output)
 	}
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, outfile);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
+	ft_close(outfile);
 }
 
 static void	ft_output_appends(t_data *data, char *file, int *nb_output)
@@ -68,9 +69,10 @@ static void	ft_output_appends(t_data *data, char *file, int *nb_output)
 	}
 	if (dup2(outfile, STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, outfile);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
+	ft_close(outfile);
 }
 
 static void	ft_input_file(t_data *data, char *file, int *nb_input)
@@ -96,10 +98,10 @@ static void	ft_input_file(t_data *data, char *file, int *nb_input)
 	}
 	if (dup2(infile, STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
-		ft_close(infile);
+		ft_close_fds(data, infile);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
+	ft_close(infile);
 }
 
 static void	ft_get_nb_redirec(char **tab, int *nb_input, int *nb_output)
