@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 14:53:34 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 12:18:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_quit(t_data *data, int code)
 		free(data->pipes);
 		data->pipes = NULL;
 	}
+	ft_close_hd_fds(data);
 	free_lst(&data->cmd);
 	free(data->cmd);
 	free(data->pwd);

@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 10:34:06 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 12:23:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_dup2_here_doc(t_data *data, t_pipeline *pipe)
 {
 	if (dup2(pipe->here_doc_fd[0], STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data, pipe->here_doc_fd);
+		ft_close_fds(data, 0);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	ft_close(pipe->here_doc_fd[0]);

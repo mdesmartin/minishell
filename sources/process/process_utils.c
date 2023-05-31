@@ -6,13 +6,13 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:55:39 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 13:54:15 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 12:22:42 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_close_fds(t_data *data, int *here_doc_fd)
+void	ft_close_fds(t_data *data, int fd)
 {
 	int	i;
 
@@ -23,11 +23,8 @@ void	ft_close_fds(t_data *data, int *here_doc_fd)
 		ft_close(data->pipes[i][1]);
 		i++;
 	}
-	if (here_doc_fd)
-	{
-		ft_close(here_doc_fd[0]);
-		ft_close(here_doc_fd[1]);
-	}
+	if (fd > 2)
+		close(fd);
 }
 
 char	*ft_getenv(t_envp *envp, char *variable)

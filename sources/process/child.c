@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/18 17:21:10 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 12:23:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static char	*ft_only_child(t_data *data)
 	char	*path;
 
 	command = ft_redirection(data, 0);
-	ft_close_fds(data, NULL);
+	ft_close_fds(data, 0);
+	ft_close_hd_fds(data);
 	if (!command[0])
 		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
@@ -41,11 +42,12 @@ static char	*ft_first_child(t_data *data, int **pipes, int i)
 
 	if (dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, 0);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
-	ft_close_fds(data, NULL);
+	ft_close_fds(data, 0);
+	ft_close_hd_fds(data);
 	if (!command[0])
 		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
@@ -68,11 +70,12 @@ static char	*ft_last_child(t_data *data, int **pipes, int i)
 
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, 0);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
-	ft_close_fds(data, NULL);
+	ft_close_fds(data, 0);
+	ft_close_hd_fds(data);
 	if (!command[0])
 		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
@@ -96,11 +99,12 @@ static char	*ft_middle_child(t_data *data, int **pipes, int i)
 	if (dup2(pipes[i - 1][0], STDIN_FILENO) == -1
 		|| dup2(pipes[i][1], STDOUT_FILENO) == -1)
 	{
-		ft_close_fds(data, NULL);
+		ft_close_fds(data, 0);
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	}
 	command = ft_redirection(data, i);
-	ft_close_fds(data, NULL);
+	ft_close_fds(data, 0);
+	ft_close_hd_fds(data);
 	if (!command[0])
 		ft_quit(data, data->exit_code);
 	if (ft_builtin(data, command) != 0)
