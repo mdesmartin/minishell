@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 15:14:19 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 11:32:29 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,9 @@ char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 			char *charset);
 void		space_chevron(t_data *data, char **pipes_tab);
 void		token_parsing(char **token_tab);
+
+//input
+int			nothing_after_symbol(char *input, int i, char symbol);
 
 //parsing_utils
 int			is_whitespace(char c);

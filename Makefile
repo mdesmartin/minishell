@@ -32,6 +32,7 @@ LST_SRC =	main.c							\
 			env/env_init.c					\
 			env/env_creat.c					\
 			env/env_utils.c					\
+			input/input_utils.c				\
 			input/check_input.c 			\
 			input/check_pipes.c				\
 			input/check_chevrons.c			\

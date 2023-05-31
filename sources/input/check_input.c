@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:17:28 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 11:32:53 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	check_exclamation(char *input)
 	i = 0;
 	while (is_whitespace(input[i]))
 		i++;
-	if (input[i] == '!')
+	if (input[i] == '!' && nothing_after_symbol(input, i, '!'))
 		return (1);
 	return (0);
 }
