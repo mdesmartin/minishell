@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:39:18 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 16:46:18 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,19 @@ static char	*chevrons_handler(char *pipe)
 	return (new);
 }
 
-void	space_chevron(t_data *data, char **pipes_tab)
+void	space_chevron(t_data *data, char **pipes_tab, int nb_pipes)
 {
 	int	i;
 
 	i = 0;
-	while (pipes_tab[i])
+	while (nb_pipes)//pipes_tab[i])
 	{
-		pipes_tab[i] = chevrons_handler(pipes_tab[i]);
+		if (pipes_tab[i][0])
+			pipes_tab[i] = chevrons_handler(pipes_tab[i]);
 		if (!pipes_tab[i])
 			return (free_tab(pipes_tab), ft_quit(data, 12));
 		i++;
+		nb_pipes--;
 	}
 	return ;
 }

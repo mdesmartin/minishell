@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 11:32:29 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 16:05:53 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int			count_pipes(char *input);
 char		**split_pipes(char **pipes_tab, char *input, int nb_pipes);
 char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 			char *charset);
-void		space_chevron(t_data *data, char **pipes_tab);
+void		space_chevron(t_data *data, char **pipes_tab, int nb_pipes);
 void		token_parsing(char **token_tab);
 
 //input

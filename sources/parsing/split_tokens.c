@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:40:53 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 16:17:36 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 	int			i;
 
 	i = -1;
+	if (!str)
+		return (NULL);
 	while (*str && is_charsetd(*str, charset))
 		str++;
 	size = word_countd((char *)str, charset);
