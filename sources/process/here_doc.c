@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 16:10:44 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 10:34:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	ft_here_doc(t_data *data, t_pipeline *pipe, char *limiter)
 	{
 		input = readline("here_doc> ");
 		if (!input)
-			return (ft_error_heredoc(data, pipe->here_doc_fd, limiter));
+			return (ft_ctrld_heredoc(data, limiter));
 		if (g_exitcode == 1 || g_exitcode == 3)
-			return (ft_stop_heredoc(data, pipe->here_doc_fd, input));
+			return (ft_ctrlc_heredoc(data, pipe->here_doc_fd, input));
 		intput_len = ft_strlen(input);
 		if (ft_strncmp(input, limiter, limiter_len) == 0
 			&& intput_len == limiter_len)

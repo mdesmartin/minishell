@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 17:25:17 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 10:34:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ char		**ft_extract_redirections(t_data *data,
 void		ft_apply_redirection(t_data *data, t_pipeline *pipe,
 				char **redirections);
 void		ft_del_redirections(char **cmd);
-int			ft_error_heredoc(t_data *data, int *here_doc_fd, char *limiter);
-int			ft_stop_heredoc(t_data *data, int *here_doc_fd, char *input);
+int			ft_ctrld_heredoc(t_data *data, char *limiter);
+int			ft_ctrlc_heredoc(t_data *data, int *here_doc_fd, char *input);
 char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
 void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe);
 
