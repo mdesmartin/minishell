@@ -6,17 +6,12 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/31 16:49:35 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 17:06:46 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-//on a tente de mettre un \0 a la place de rien pour quil soitdetecte dans create chain en vain, protectre calloc ?
-// pas besoin de faire ca normalement ici, og revenir comme avnat, pb dans parsing ??
-
-//mettre au propre ci dessous, retester pour voir si rien de casse
 char	*trim_from_to(char *pipes_tab, int *start, int end)
 {
 	char	*new_content;
@@ -24,14 +19,8 @@ char	*trim_from_to(char *pipes_tab, int *start, int end)
 	int		i;
 
 	i = 0;
-	new_size = ft_strlen(pipes_tab) - (end - *start + 1);
-	if (!new_size)
-	{
-		*start = 0;
-		free(pipes_tab);
-		return (ft_calloc(sizeof(char), 1));
-	}
-	new_content = ft_calloc(sizeof(char), new_size);
+	new_size = ft_strlen(pipes_tab) - (end - *start);
+	new_content = ft_calloc(sizeof(char), new_size + 1);
 	if (!new_content)
 		return (NULL);
 	while (i < *start - 1)

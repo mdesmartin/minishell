@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/31 16:49:05 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 17:11:32 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 // }
 
 //////
+
+///// $s|""|ls qui marche pas ainsi que $s |$d
 
 static void	create_link(t_list **cmd, void *content)
 {
