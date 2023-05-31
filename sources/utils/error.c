@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:18:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 14:34:53 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	ft_quit(t_data *data, int code)
 	ft_close_hd_fds(data);
 	free_lst(&data->cmd);
 	free(data->cmd);
-	free(data->pwd);
-	free(data->oldpwd);
+	if (data->pwd)
+		free(data->pwd);
+	if (data->oldpwd)
+		free(data->oldpwd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
 	rl_clear_history();
