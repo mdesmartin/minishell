@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 14:21:33 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 14:39:06 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	token_parsing(char **token_tab)
 	{
 		convert_redirection(token_tab[i]);
 		trim_quote(token_tab[i]);
-		if (!token_tab[i][0])
+		if (!token_tab[i][0] && i == 0)
 			token_tab[i][0] = -42;
 		i++;
 	}
