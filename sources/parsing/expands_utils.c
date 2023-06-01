@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/31 17:06:46 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 18:05:10 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ char	*trim_from_to(char *pipes_tab, int *start, int end)
 	new_size = ft_strlen(pipes_tab) - (end - *start);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
 	if (!new_content)
+	{
+		free(pipes_tab);
 		return (NULL);
+	}
 	while (i < *start - 1)
 	{
 		new_content[i] = pipes_tab[i];
@@ -43,18 +46,17 @@ char	*trim_by_exitcode(char *value, char *pipes_tab, int *start, int end)
 	int		i;
 	int		j;
 
-	i = 0;
+	if (!value)
+		return (free(pipes_tab), NULL);
+	i = -1;
 	j = 0;
 	old_size = end - *start;
 	new_size = ft_strlen(pipes_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
 	if (!new_content)
-		return (NULL);
-	while (i < *start - 1)
-	{
+		return (free(value), free(pipes_tab), NULL);
+	while (++i < *start - 1)
 		new_content[i] = pipes_tab[i];
-		i++;
-	}
 	while (value[j])
 		new_content[i++] = value[j++];
 	end++;
@@ -72,18 +74,18 @@ char	*trim_by(char *value, char *pipes_tab, int *start, int end)
 	int		i;
 	int		j;
 
-	i = 0;
+	if (!value)
+		return (free(pipes_tab), NULL);
+	i = -1;
 	j = 0;
 	old_size = end - *start;
 	new_size = ft_strlen(pipes_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	(void) new_size;
 	if (!new_content)
-		return (NULL);
-	while (i < *start - 1)
-	{
+		return (free(pipes_tab), NULL);
+	while (++i < *start - 1)
 		new_content[i] = pipes_tab[i];
-		i++;
-	}
 	while (value[j])
 		new_content[i++] = value[j++];
 	*start = i - 1;

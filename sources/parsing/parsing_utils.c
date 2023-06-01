@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/30 15:12:43 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 15:31:01 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ int	is_in_quotes(char *str, int index)
 		i++;
 	}
 	return (0);
+}
+
+void	error_mem(t_data *data)
+{
+	perror("Memory allocation failed");
+	ft_quit(data, 12);
 }

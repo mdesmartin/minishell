@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 13:19:19 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 16:03:46 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 	size = word_countd((char *)str, charset);
 	dest = calloc((size + 1), sizeof(char *));
 	if (!dest)
-		return (free_tab(pipes_tab), \
-		ft_error(data, "Memory allocation failed: split_tokens", 12), NULL);
+		return (free_tab(pipes_tab), error_mem(data), NULL);
 	while (++i < size)
 	{
 		while (is_charsetd((char)*str, charset))
@@ -114,8 +113,7 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 		j = word_lend((char *)str, charset);
 		dest[i] = strduppd((char *)str, j);
 		if (!dest[i])
-			return (free_tab(dest), free_tab(pipes_tab), \
-			ft_error(data, "Memory allocation failed: split_tokens", 12), NULL);
+			return (free_tab(dest), free_tab(pipes_tab), error_mem(data), NULL);
 		str += j;
 	}
 	return (dest);

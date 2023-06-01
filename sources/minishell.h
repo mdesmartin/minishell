@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/01 14:43:57 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 16:23:51 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,9 @@ char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 			char *charset);
 void		space_chevron(t_data *data, char **pipes_tab, int nb_pipes);
 void		token_parsing(char **token_tab);
+void		error_mem(t_data *data);
+void		create_chain(t_data *data, t_list **cmd, \
+char **pipes_tab, int nb_pipes);
 
 //input
 int			nothing_after_symbol(char *input, int i, char symbol);

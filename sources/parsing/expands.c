@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/01 14:28:01 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 18:10:45 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 	end = *start;
 	if (pipes_tab[*start] == ':' || pipes_tab[*start] == '=')
 		return (pipes_tab);
-	else if (is_whitespace_or_end(pipes_tab[*start])
-		|| lonely_expand_in_quote(pipes_tab, *start, pipes_tab[*start]))
+	else if (is_whitespace_or_end(pipes_tab[*start]) \
+			|| lonely_expand_in_quote(pipes_tab, *start, pipes_tab[*start]))
 		return (whitespace_handler(pipes_tab, start, end));
 	else if (pipes_tab[*start] == '?')
 		return (trim_by_exitcode(ft_itoa((int)data->exit_code), \
-		pipes_tab, start, end)); // Norme !
+				pipes_tab, start, end));
 	else if (ft_isdigit(pipes_tab[*start]))
 		return (trim_from_to(pipes_tab, start, end + 1));
 	else
@@ -59,7 +59,7 @@ char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 			end++;
 		if (find_variable(data, pipes_tab, start, end))
 			return (trim_by(find_variable(data, pipes_tab, start, end), \
-			pipes_tab, start, end)); // Norme !
+				pipes_tab, start, end));
 		else
 			return (trim_from_to(pipes_tab, start, end));
 	}
@@ -99,7 +99,7 @@ void	expands(t_data *data, char **pipes_tab)
 	while (pipes_tab[j])
 	{
 		pipes_tab[j] = expand_by_line(data, pipes_tab[j]);
-		if (!pipes_tab)
+		if (!pipes_tab[j])
 		{
 			free_tab(pipes_tab);
 			ft_error(data, "Memory allocation failed: expand_by_line", 12);

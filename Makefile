@@ -38,6 +38,7 @@ LST_SRC =	main.c							\
 			input/check_chevrons.c			\
 			input/check_chevrons_utils.c	\
 			parsing/expands.c				\
+			parsing/create_chain.c			\
 			parsing/parsing.c				\
 			parsing/free_cmd.c 				\
 			parsing/split_pipes.c			\
