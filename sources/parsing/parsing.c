@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/30 15:20:33 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 10:20:35 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parsing(t_data *data, char *input)
 	pipes_tab = NULL;
 	pipes_tab = split_pipes(pipes_tab, input, nb_pipes);
 	if (!pipes_tab)
-		return (ft_quit(data, 12), 1);
+		ft_error(data, "Memory allocation failed: pipes_tab in parsing", 12);
 	expands(data, pipes_tab);
 	if (pipes_tab[0][0] != '\0')
 	{
