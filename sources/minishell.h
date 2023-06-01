@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/01 13:18:57 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 14:43:57 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define _GNU_SOURCE
 # include "libft/sources/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -23,7 +22,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include <termios.h>
 # include <sys/ioctl.h>
 
 typedef struct s_pipeline
