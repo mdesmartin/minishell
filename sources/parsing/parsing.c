@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 13:15:44 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 14:28:30 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@
 static int	something_in_token(char *input)
 {
 	int	i;
-	
+
 	i = 0;
-	while (input[i] == ' ' || input[i] == '\t')
-		i++;
 	if (input[i] == '\0')
 		return (0);
 	else
@@ -144,3 +142,5 @@ int	parsing(t_data *data, char *input)
 	}
 	return (1);
 }
+
+// '' "" $a|$b $a|""|echo lol

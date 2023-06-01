@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/01 13:13:23 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 14:28:01 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 			end++;
 		if (find_variable(data, pipes_tab, start, end))
 			return (trim_by(find_variable(data, pipes_tab, start, end), \
-			pipes_tab, start, end));  // Norme !
+			pipes_tab, start, end)); // Norme !
 		else
 			return (trim_from_to(pipes_tab, start, end));
 	}
