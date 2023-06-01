@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
+/*   Created: 2023/05/31 11:31:17 by mvogel            #+#    #+#             */
+/*   Updated: 2023/05/31 11:32:13 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "../minishell.h"
 
-int	main(int argc, char const *argv[])
+int	nothing_after_symbol(char *input, int i, char symbol)
 {
-	int	pid;
-
-	pid = fork();
-	open("infile", O_RDONLY);
-	while (1)
-	{
-		printf("Helloo miniHELL %i\n", pid);
-		sleep(1);
-	}
-	return (0);
+	i++;
+	while (input[i] == symbol)
+		i++;
+	while (input[i] == ' ' || input[i] == '\t')
+		i++;
+	if (!input[i])
+		return (1);
+	else
+		return (0);
 }

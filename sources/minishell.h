@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:22:20 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:18:57 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,11 @@ int			count_pipes(char *input);
 char		**split_pipes(char **pipes_tab, char *input, int nb_pipes);
 char		**split_tokens(t_data *data, char **pipes_tab, char *str, \
 			char *charset);
-void		space_chevron(t_data *data, char **pipes_tab);
+void		space_chevron(t_data *data, char **pipes_tab, int nb_pipes);
 void		token_parsing(char **token_tab);
+
+//input
+int			nothing_after_symbol(char *input, int i, char symbol);
 
 //parsing_utils
 int			is_whitespace(char c);
@@ -145,7 +148,7 @@ int			is_in_quotes(char *str, int index);
 int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			check_chevrons(char *input);
-int			check_pipes_n_and(char *input);
+int			check_pipes_n_ampersand(char *input);
 int			check_quotes(char *input);
 int			chevron_error(char *input, int i, char chevron);
 

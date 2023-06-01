@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 15:26:42 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:02:26 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

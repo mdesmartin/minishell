@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 11:33:22 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:19:19 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 	int			i;
 
 	i = -1;
+	if (!str)
+		return (NULL);
 	while (*str && is_charsetd(*str, charset))
 		str++;
 	size = word_countd((char *)str, charset);

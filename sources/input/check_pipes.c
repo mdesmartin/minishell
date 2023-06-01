@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:38:08 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:07:39 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	double_pipe(char *input, int i)
 		return (0);
 }
 
-int	check_pipes_n_and(char *input)
+int	check_pipes_n_ampersand(char *input)
 {
 	int	i;
 
