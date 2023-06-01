@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 13:16:04 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 16:40:25 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	space_chevron(t_data *data, char **pipes_tab, int nb_pipes)
 	int	i;
 
 	i = 0;
-	while (nb_pipes)//pipes_tab[i])
+	while (nb_pipes)// && pipes_tab[i])
 	{
 		if (pipes_tab[i][0])
 			pipes_tab[i] = chevrons_handler(pipes_tab[i]);
