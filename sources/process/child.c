@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:23:08 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 14:25:07 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,9 @@ void	ft_child(t_data *data, int **pipes, int i)
 		command = ft_middle_child(data, pipes, i);
 	if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
 		ft_error(data, "Error while duplicating file descriptor", 1);
-	printf("minishell: %s: command not found\n", command);
+	if (command[0] == -42)
+		printf("minishell: '': command not found\n");
+	else
+		printf("minishell: %s: command not found\n", command);
 	ft_quit(data, 127);
 }
