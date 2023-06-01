@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 10:20:35 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 10:58:08 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab)
 		redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 		adress = s_init(token_tab, redirections);
 		if (!adress)
-			return (free_tab(pipes_tab), free_tab(token_tab),
-				free_tab(redirections), ft_quit(data, 12));
+		{
+			free_tab(pipes_tab);
+			free_tab(token_tab);
+			free_tab(redirections);
+			ft_error(data, "Memory allocation failed: creat_chain", 12);
+		}
 		create_link(cmd, adress);
 		i++;
 	}
