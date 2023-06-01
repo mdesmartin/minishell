@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   space_chevrons.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:39:18 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 14:57:37 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	space_chevron(t_data *data, char **pipes_tab)
 	{
 		pipes_tab[i] = chevrons_handler(pipes_tab[i]);
 		if (!pipes_tab[i])
-			return (free_tab(pipes_tab), ft_quit(data, 12));
+		{
+			free_tab(pipes_tab);
+			ft_error(data, "Memory allocation failed: chevrons_handler", 12);
+		}
 		i++;
 	}
 	return ;

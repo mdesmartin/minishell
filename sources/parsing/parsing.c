@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/30 15:20:33 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 11:37:05 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 static void	create_link(t_list **cmd, void *content)
 {
+	t_list	*new;
+
+	new = NULL;
 	if (*cmd == NULL)
 		*cmd = ft_lstnew(content);
 	else
-		ft_lstadd_back(cmd, ft_lstnew(content));
-	return ;
+	{
+		new = ft_lstnew(content);
+		ft_lstadd_back(cmd, new);
+	}
 }
 
 static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab)
@@ -36,8 +41,12 @@ static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab)
 		redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 		adress = s_init(token_tab, redirections);
 		if (!adress)
-			return (free_tab(pipes_tab), free_tab(token_tab),
-				free_tab(redirections), ft_quit(data, 12));
+		{
+			free_tab(pipes_tab);
+			free_tab(token_tab);
+			free_tab(redirections);
+			ft_error(data, "Memory allocation failed: creat_chain", 12);
+		}
 		create_link(cmd, adress);
 		i++;
 	}
@@ -53,7 +62,7 @@ int	parsing(t_data *data, char *input)
 	pipes_tab = NULL;
 	pipes_tab = split_pipes(pipes_tab, input, nb_pipes);
 	if (!pipes_tab)
-		return (ft_quit(data, 12), 1);
+		ft_error(data, "Memory allocation failed: pipes_tab in parsing", 12);
 	expands(data, pipes_tab);
 	if (pipes_tab[0][0] != '\0')
 	{

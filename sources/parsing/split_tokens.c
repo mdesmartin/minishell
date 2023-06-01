@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 12:25:38 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/23 10:40:53 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 11:33:22 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 	size = word_countd((char *)str, charset);
 	dest = calloc((size + 1), sizeof(char *));
 	if (!dest)
-		return (free_tab(pipes_tab), ft_quit(data, 12), NULL);
+		return (free_tab(pipes_tab), \
+		ft_error(data, "Memory allocation failed: split_tokens", 12), NULL);
 	while (++i < size)
 	{
 		while (is_charsetd((char)*str, charset))
@@ -112,7 +113,7 @@ char	**split_tokens(t_data *data, char **pipes_tab, char *str, char *charset)
 		dest[i] = strduppd((char *)str, j);
 		if (!dest[i])
 			return (free_tab(dest), free_tab(pipes_tab), \
-			ft_quit(data, 12), NULL);
+			ft_error(data, "Memory allocation failed: split_tokens", 12), NULL);
 		str += j;
 	}
 	return (dest);

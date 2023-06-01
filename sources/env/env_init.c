@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 14:26:09 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 10:11:50 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_envp(t_data *data)
 	}
 	data->pwd = getcwd(NULL, 0);
 	if (!data->pwd)
-		ft_perror(data, "ft_envp: getcwd() failed", 1);
+		ft_error(data, "ft_envp: getcwd() failed", 1);
 	data->oldpwd = NULL;
 
 }

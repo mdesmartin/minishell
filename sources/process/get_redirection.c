@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/26 15:36:51 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 10:48:21 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@ static int	ft_extract_input(char **cmd, char **redirections, int i, int j)
 	else
 		redirections[j] = ft_strdup("1");
 	if (!redirections[j])
-		return (ft_rfree_tab(redirections, j), -1);
+	{
+		ft_rfree_tab(redirections, j);
+		return (-1);
+	}
 	redirections[j + 1] = ft_strdup(cmd[i + 1]);
 	if (!redirections[j + 1])
-		return (ft_rfree_tab(redirections, j + 1), -1);
+	{
+		ft_rfree_tab(redirections, j + 1);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -33,10 +39,16 @@ static int	ft_extract_output(char **cmd, char **redirections, int i, int j)
 	else
 		redirections[j] = ft_strdup("3");
 	if (!redirections[j])
-		return (ft_rfree_tab(redirections, j), -1);
+	{
+		ft_rfree_tab(redirections, j);
+		return (-1);
+	}
 	redirections[j + 1] = ft_strdup(cmd[i + 1]);
 	if (!redirections[j + 1])
-		return (ft_rfree_tab(redirections, j + 1), -1);
+	{
+		ft_rfree_tab(redirections, j + 1);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -92,8 +104,10 @@ static int	ft_redir_count(char **tab)
 char	**ft_extract_redirections(t_data *data, char **cmd, char **pipes_tab)
 {
 	char	**redirections;
+	int		nb_redir;
 
-	redirections = ft_calloc(ft_redir_count(cmd) * 2 + 1, sizeof(char **));
+	nb_redir = ft_redir_count(cmd);
+	redirections = ft_calloc(nb_redir * 2 + 1, sizeof(char **));
 	if (!redirections || ft_get_redirections(cmd, redirections) != 0)
 	{
 		free_tab(cmd);

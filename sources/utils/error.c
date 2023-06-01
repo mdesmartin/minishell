@@ -6,11 +6,20 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:55:30 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:18:43 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/05/31 14:44:59 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	ft_free(void *data)
+{
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
+}
 
 void	ft_quit(t_data *data, int code)
 {
@@ -26,9 +35,9 @@ void	ft_quit(t_data *data, int code)
 	}
 	ft_close_hd_fds(data);
 	free_lst(&data->cmd);
-	free(data->cmd);
-	free(data->pwd);
-	free(data->oldpwd);
+	ft_free(data->cmd);
+	ft_free(data->pwd);
+	ft_free(data->oldpwd);
 	ft_free_envplst(data);
 	ft_free_envptab(data);
 	rl_clear_history();
