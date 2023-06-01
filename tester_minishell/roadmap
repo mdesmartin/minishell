@@ -345,3 +345,14 @@ prout << lol << cat << koala
 << $"hola"$"b"
 << $"$hola"$$"b"
 << ho$la$"$a"$$"b"
+$a|$b
+$a |$b
+$a| $b
+$a | $b
+$a | $b 
+$a|""|''|$b
+''
+""
+"$HOMEbhdasdoiik"
+$a|$b|echo oui
+$a|''|echo uji

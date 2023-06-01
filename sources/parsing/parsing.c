@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 14:28:30 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 15:03:50 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,14 @@ static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab, int nb_pi
 	int		i;
 
 	i = 0;
-	while (pipes_tab[i])
+	while (nb_pipes)//pipes_tab[i])
 	{
+		if (!pipes_tab[i][0])
+			pipes_tab[i][0] = -43;
+			// printf(":%s:\n", pipes_tab[i]);
+		// }
+		// else
+		// {
 		token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
 		token_parsing(token_tab);
 		if (something_in_tab(token_tab))

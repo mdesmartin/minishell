@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 11:21:55 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/01 14:25:07 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 15:03:40 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ void	ft_child(t_data *data, int **pipes, int i)
 		ft_error(data, "Error while duplicating file descriptor", 1);
 	if (command[0] == -42)
 		printf("minishell: '': command not found\n");
+	else if (command[0] == -43)
+		ft_quit(data, 0);
 	else
 		printf("minishell: %s: command not found\n", command);
 	ft_quit(data, 127);
