@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 16:05:53 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:07:39 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int			is_in_quotes(char *str, int index);
 int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			check_chevrons(char *input);
-int			check_pipes_n_and(char *input);
+int			check_pipes_n_ampersand(char *input);
 int			check_quotes(char *input);
 int			chevron_error(char *input, int i, char chevron);
 

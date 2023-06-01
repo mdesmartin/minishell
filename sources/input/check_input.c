@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 17:12:07 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/31 11:32:53 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:07:39 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_input(char *input, t_data *data)
 		return (data->exit_code = 1, 1);
 	if (count_pipes(input) == -1)
 		return (data->exit_code = 2, quote_error(), 1);
-	if (check_chevrons(input) || check_pipes_n_and(input))
+	if (check_chevrons(input) || check_pipes_n_ampersand(input))
 		return (data->exit_code = 2, 1);
 	return (0);
 }

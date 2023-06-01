@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 13:00:44 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:09:02 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,11 @@
 
 //////
 
-///// $s|""|ls qui marche pas ainsi que $s |$d
-
-static void	create_link(t_list **cmd, void *content)
-{
-	if (*cmd == NULL)
-		*cmd = ft_lstnew(content);
-	else
-		ft_lstadd_back(cmd, ft_lstnew(content));
-	return ;
-}
-
 static int	something_in_token(char *input)
 {
-	int i = 0;
-
+	int	i;
+	
+	i = 0;
 	while (input[i] == ' ' || input[i] == '\t')
 		i++;
 	if (input[i] == '\0')
@@ -75,9 +65,11 @@ static int	something_in_token(char *input)
 
 static int something_in_tab(char **input)
 {
-	int i = 0;
-	int flag = 0;
+	int	i;
+	int	flag;
 
+	i = 0;
+	flag = 0;
 	while (input[i])
 	{
 		if (something_in_token(input[i]))
@@ -87,6 +79,14 @@ static int something_in_tab(char **input)
 	return (flag);
 }
 
+static void	create_link(t_list **cmd, void *content)
+{
+	if (*cmd == NULL)
+		*cmd = ft_lstnew(content);
+	else
+		ft_lstadd_back(cmd, ft_lstnew(content));
+	return ;
+}
 
 static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab, int nb_pipes)
 {
