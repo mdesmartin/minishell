@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 10:58:08 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 11:37:05 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 static void	create_link(t_list **cmd, void *content)
 {
+	t_list	*new;
+
+	new = NULL;
 	if (*cmd == NULL)
 		*cmd = ft_lstnew(content);
 	else
-		ft_lstadd_back(cmd, ft_lstnew(content));
-	return ;
+	{
+		new = ft_lstnew(content);
+		ft_lstadd_back(cmd, new);
+	}
 }
 
 static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab)
