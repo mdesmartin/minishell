@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:05:59 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/01 10:11:50 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:31:15 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	ft_envp(t_data *data)
 	if (!data->pwd)
 		ft_error(data, "ft_envp: getcwd() failed", 1);
 	data->oldpwd = NULL;
-
 }
 
 void	ft_check_envarg(t_data *data, char **command)

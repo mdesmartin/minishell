@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:11:51 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/30 11:15:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:30:27 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	ft_output_appends(t_data *data, char *file)
 	}
 	ft_close(outfile);
 }
-
 
 void	ft_exit_redir(t_data *data, char **command, char **redirections)
 {

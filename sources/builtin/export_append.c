@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:38:44 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/26 14:04:07 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:30:01 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,3 @@ int	ft_export_append(t_data *data, char *variable)
 	}
 	return (0);
 }
-
