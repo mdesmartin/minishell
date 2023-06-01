@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/05/31 17:11:32 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 13:00:44 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@
 // 			printf("\n");
 // 		cp = cp->next;
 // 	}
-// 	printf(":end");
-// 	printf("\n");
+// 	printf(":end\n");
 // 	return ;
 // }
 
@@ -62,6 +61,33 @@ static void	create_link(t_list **cmd, void *content)
 	return ;
 }
 
+static int	something_in_token(char *input)
+{
+	int i = 0;
+
+	while (input[i] == ' ' || input[i] == '\t')
+		i++;
+	if (input[i] == '\0')
+		return (0);
+	else
+		return (1);
+}
+
+static int something_in_tab(char **input)
+{
+	int i = 0;
+	int flag = 0;
+
+	while (input[i])
+	{
+		if (something_in_token(input[i]))
+			flag = 1;
+		i++;
+	}
+	return (flag);
+}
+
+
 static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab, int nb_pipes)
 {
 	char	**token_tab;
@@ -72,10 +98,10 @@ static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab, int nb_pi
 	i = 0;
 	while (pipes_tab[i])
 	{
-		if (pipes_tab[i][0] != '\0')
+		token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
+		token_parsing(token_tab);
+		if (something_in_tab(token_tab))
 		{
-			token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
-			token_parsing(token_tab);
 			redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 			adress = s_init(token_tab, redirections);
 			if (!adress)
@@ -83,6 +109,8 @@ static void	create_chain(t_data *data, t_list **cmd, char **pipes_tab, int nb_pi
 					free_tab(redirections), ft_quit(data, 12));
 			create_link(cmd, adress);
 		}
+		else
+			free_tab(token_tab);
 		nb_pipes--;
 		i++;
 	}
@@ -106,6 +134,7 @@ int	parsing(t_data *data, char *input)
 		create_chain(data, &data->cmd, pipes_tab, nb_pipes);
 		if (!data->cmd)
 			return (1);
+		// print_chain(data);
 		return (0);
 	}
 	return (1);
