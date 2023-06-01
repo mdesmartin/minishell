@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:52:58 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/01 16:40:12 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/01 18:11:01 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char **pipes_tab, int nb_pipes)
 
 	i = 0;
 	adress = NULL;
-	while (nb_pipes)//pipes_tab[]?
+	while (nb_pipes)
 	{
 		if (!pipes_tab[i][0])
 			pipes_tab[i][0] = -43;
