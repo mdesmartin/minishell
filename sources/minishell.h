@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/01 16:23:51 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 12:47:54 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ void		ft_del_redirections(char **cmd);
 int			ft_ctrld_heredoc(t_data *data, char *limiter);
 int			ft_ctrlc_heredoc(t_data *data, int *here_doc_fd, char *input);
 char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
-void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe);
+void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe, int *nb_input);
+void		ft_check_redir(t_data *data, char *redirection);
 
 //signal
 void		signal_init(void (*handler)(int signum));
@@ -135,7 +136,7 @@ void		space_chevron(t_data *data, char **pipes_tab, int nb_pipes);
 void		token_parsing(char **token_tab);
 void		error_mem(t_data *data);
 void		create_chain(t_data *data, t_list **cmd, \
-char **pipes_tab, int nb_pipes);
+			char **pipes_tab, int nb_pipes);
 
 //input
 int			nothing_after_symbol(char *input, int i, char symbol);
