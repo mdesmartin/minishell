@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:52:58 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/01 18:11:01 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 14:29:39 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int	creating_pipeline(void **adress, t_data *data, \
 char	**token_tab, char **pipes_tab)
 {
 	char	**redirections;
-
+	
+	ft_print_tabtab(token_tab, "token_tab");
 	redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 	*adress = s_init(token_tab, redirections);
 	if (!*adress)
