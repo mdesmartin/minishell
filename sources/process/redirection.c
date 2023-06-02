@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:56:56 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:23:53 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 12:45:43 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,14 +132,11 @@ void	ft_apply_redirection(t_data *data, t_pipeline *pipe,
 	ft_get_nb_redirec(redirections, &nb_input, &nb_output);
 	while (redirections[i] && redirections[i + 1])
 	{
+		ft_check_redir(data, redirections[i + 1]);
 		if (redirections[i][0] == '0')
 			ft_input_file(data, redirections[i + 1], &nb_input);
 		else if (redirections[i][0] == '1')
-		{
-			if (nb_input == 1)
-				ft_dup2_here_doc(data, pipe);
-			nb_input--;
-		}
+			ft_dup2_here_doc(data, pipe, &nb_input);
 		else if (redirections[i][0] == '2')
 			ft_output_file(data, redirections[i + 1], &nb_output);
 		else if (redirections[i][0] == '3')

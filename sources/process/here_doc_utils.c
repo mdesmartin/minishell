@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:26 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/31 12:23:21 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 12:39:17 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,17 @@ char	*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input)
 	return (input);
 }
 
-void	ft_dup2_here_doc(t_data *data, t_pipeline *pipe)
+void	ft_dup2_here_doc(t_data *data, t_pipeline *pipe, int *nb_input)
 {
-	if (dup2(pipe->here_doc_fd[0], STDIN_FILENO) == -1)
+	if (*nb_input == 1)
 	{
-		ft_close_fds(data, 0);
-		ft_error(data, "Error while duplicating file descriptor", 1);
+		if (dup2(pipe->here_doc_fd[0], STDIN_FILENO) == -1)
+		{
+			ft_close_fds(data, 0);
+			ft_error(data, "Error while duplicating file descriptor", 1);
+		}
+		ft_close(pipe->here_doc_fd[0]);
+		ft_close(pipe->here_doc_fd[1]);
 	}
-	ft_close(pipe->here_doc_fd[0]);
-	ft_close(pipe->here_doc_fd[1]);
+	(*nb_input)--;
 }

@@ -6,27 +6,11 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:42:33 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/05/25 10:23:03 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 12:58:31 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-char	**ft_redirection(t_data *data, int i)
-{
-	t_pipeline	*pipe;
-	t_list		*tmp;
-
-	tmp = data->cmd;
-	while (i > 0)
-	{
-		tmp = tmp->next;
-		i--;
-	}
-	pipe = s_read_cnt(tmp);
-	ft_apply_redirection(data, pipe, pipe->redirections);
-	return (pipe->command);
-}
 
 static void	ft_free_two_line(char **tab, int i)
 {
