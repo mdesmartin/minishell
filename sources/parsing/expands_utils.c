@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expands_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 11:36:14 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 13:32:35 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*trim_from_to(char *pipes_tab, int *start, int end)
 	}
 	while (pipes_tab[end])
 		new_content[i++] = pipes_tab[end++];
-	*start = 0;
+	*start = -1;
 	free(pipes_tab);
 	return (new_content);
 }

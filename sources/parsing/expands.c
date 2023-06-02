@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/01 18:10:45 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 13:33:19 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*expand_by_line(t_data *data, char *line)
 			if (!line)
 				return (NULL);
 		}
-		if (line[i])
+		if (line[i] || i == -1)
 			i++;
 	}
 	return (line);
