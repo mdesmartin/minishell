@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:52:58 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/02 16:12:56 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 17:22:16 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char **pipes_tab, int nb_pipes)
 	adress = NULL;
 	while (nb_pipes)
 	{
-		if (!pipes_tab[i][0])
+		if (!pipes_tab[i][0] || only_whitespace(pipes_tab[i]))
 			pipes_tab[i][0] = -43;
 		token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
 		token_parsing(token_tab);

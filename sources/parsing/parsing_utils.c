@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 15:31:01 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 17:22:10 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ int	is_whitespace_or_end(char c)
 		return (1);
 	else
 		return (0);
+}
+
+int	only_whitespace(char *line)
+{
+	int i;
+
+	i = 0;
+	while (is_whitespace(line[i]))
+		i++;
+	if (!line[i])
+		return (1);
+	return (0);
 }
 
 int	is_in_quotes(char *str, int index)

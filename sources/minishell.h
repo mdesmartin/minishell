@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/02 17:07:28 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 17:22:51 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		create_chain(t_data *data, t_list **cmd, \
 int			is_whitespace(char c);
 int			is_whitespace_or_end(char c);
 int			is_in_quotes(char *str, int index);
+int			only_whitespace(char *line);
 void		free_lst(t_list **cmd);
 void		*free_tab(char **tab);
 
@@ -174,7 +175,6 @@ int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			check_chevrons(char *input);
 int			check_pipes_n_ampersand(char *input);
-int			check_quotes(char *input);
 int			chevron_error(char *input, int i, char chevron);
 
 /**********************************  S_ACESS  *********************************/
