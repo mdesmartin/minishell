@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:48:52 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 17:24:50 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 15:08:10 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*chevrons_handler(char *pipe)
 	int		i;
 	int		j;
 
-	new = ft_calloc(ft_strlen(pipe) * 3, sizeof(char));
+	new = ft_calloc(ft_strlen(pipe) * 4, sizeof(char));
 	if (!new)
 		return (NULL);
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 12:42:13 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/02 12:58:29 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 16:25:19 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ char	**ft_redirection(t_data *data, int i)
 
 void	ft_check_redir(t_data *data, char *redirection)
 {
-	if (redirection[0] == 0)
+	if (redirection[0] == -44)
 	{
-		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
+		redirection[0] = '$';
+		if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
+			ft_error(data, "Error while duplicating file descriptor", 1);
+		printf("minishell: %s: ambiguous redirect\n", redirection);
 		ft_quit(data, 1);
 	}
 }
