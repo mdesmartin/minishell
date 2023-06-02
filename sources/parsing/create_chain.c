@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:52:58 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/02 14:29:39 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 15:25:30 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**token_tab, char **pipes_tab)
 {
 	char	**redirections;
 	
-	ft_print_tabtab(token_tab, "token_tab");
+	// ft_print_tabtab(token_tab, "token_tab");
 	redirections = ft_extract_redirections(data, token_tab, pipes_tab);
 	*adress = s_init(token_tab, redirections);
 	if (!*adress)
@@ -70,6 +70,18 @@ char	**token_tab, char **pipes_tab)
 		return (1);
 	}
 	return (0);
+}
+
+void	print_tab(char **pipe_tab)
+{
+	int i = 0;
+
+	while (pipe_tab[i])
+	{
+		printf("tab[%d] :%s:\n", i, pipe_tab[i]);
+		i++;
+	}
+	return ;
 }
 
 void	create_chain(t_data *data, t_list **cmd, \
@@ -87,6 +99,7 @@ char **pipes_tab, int nb_pipes)
 			pipes_tab[i][0] = -43;
 		token_tab = split_tokens(data, pipes_tab, pipes_tab[i], " \t");
 		token_parsing(token_tab);
+		// print_tab(token_tab);
 		if (something_in_tab(token_tab))
 		{
 			if (creating_pipeline(&adress, data, token_tab, pipes_tab))
