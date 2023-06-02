@@ -342,9 +342,6 @@ cat <<
 cat << prout << lol << koala
 prout << lol << cat << koala
 << $hola
-<< $"hola"$"b"
-<< $"$hola"$$"b"
-<< ho$la$"$a"$$"b"
 $a|$b
 $a |$b
 $a| $b

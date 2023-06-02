@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expands_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 18:05:10 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 11:36:14 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char	*trim_by(char *value, char *pipes_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipes_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
-	(void) new_size;
 	if (!new_content)
 		return (free(pipes_tab), NULL);
 	while (++i < *start - 1)
