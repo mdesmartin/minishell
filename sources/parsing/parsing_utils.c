@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:23:18 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 17:22:10 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 17:25:31 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_whitespace_or_end(char c)
 
 int	only_whitespace(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (is_whitespace(line[i]))
