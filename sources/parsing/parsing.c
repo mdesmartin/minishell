@@ -6,47 +6,11 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 13:15:10 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 15:24:30 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 16:57:25 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void	print_chain(t_data *data)
-// {
-// 	t_list *cp;
-// 	int i = 0;
-
-// 	cp = data->cmd;
-// 	ft_printf("the parsed input is :");
-// 	while (cp)
-// 	{
-// 		i = 0;
-// 		while (s_read_cnt(cp)->command[i])
-// 		{
-// 			printf("%s-", s_read_cnt(cp)->command[i]);
-// 			i++;
-// 		}
-// 		// if (i > 1)
-// 			// printf("");
-// 		cp = cp->next; 
-// 	}
-// 	printf(":\n");
-// 	return ;
-// }
-
-// void	print_tab(char **pipe_tab)
-// {
-// 	int i = 0;
-
-// 	while (pipe_tab[i])
-// 	{
-// 		printf("tab[%d] : %s\n", i, pipe_tab[i]);
-// 		i++;
-// 	}
-// 	return ;
-// }
-
 
 int	parsing(t_data *data, char *input)
 {
@@ -63,7 +27,6 @@ int	parsing(t_data *data, char *input)
 	{
 		space_chevron(data, pipes_tab, nb_pipes);
 		create_chain(data, &data->cmd, pipes_tab, nb_pipes);
-		// print_chain(data);
 		if (!data->cmd)
 			return (1);
 		return (0);

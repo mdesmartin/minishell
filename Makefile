@@ -37,14 +37,15 @@ LST_SRC =	main.c							\
 			input/check_pipes.c				\
 			input/check_chevrons.c			\
 			input/check_chevrons_utils.c	\
-			parsing/expands.c				\
+			expands/expands.c				\
+			expands/expands_trim.c			\
+			expands/expands_utils.c			\
 			parsing/create_chain.c			\
 			parsing/parsing.c				\
 			parsing/free_cmd.c 				\
 			parsing/split_pipes.c			\
 			parsing/split_tokens.c			\
 			parsing/token_parsing.c			\
-			parsing/expands_utils.c			\
 			parsing/parsing_utils.c			\
 			parsing/space_chevrons.c		\
 			process/child.c					\
@@ -104,6 +105,7 @@ $(DIR_OBJ)	:
 	@mkdir -p $(DIR_OBJ)/builtin
 	@mkdir -p $(DIR_OBJ)/input
 	@mkdir -p $(DIR_OBJ)/parsing
+	@mkdir -p $(DIR_OBJ)/expands
 	@mkdir -p $(DIR_OBJ)/process
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c $(HEADERS) $(LIBRARY)

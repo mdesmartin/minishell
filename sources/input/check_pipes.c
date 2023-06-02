@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/01 13:07:39 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 16:39:10 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	nothing_after(char *input, int i)
 {
 	while (input[i])
 	{
-		if (input[i] != ' ' && input[i] != '\n'
+		if (input[i] != ' ' && input[i] != '\t' && input[i] != '\n'
 			&& input[i] != '|' && input[i] != '&')
 			return (0);
 		i++;

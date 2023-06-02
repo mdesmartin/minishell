@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/02 12:47:54 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 17:07:28 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/ioctl.h>
+
+/********************************  STRUCTURES  ********************************/
 
 typedef struct s_pipeline
 {
@@ -51,7 +53,8 @@ typedef struct s_data
 	int		exit_code;
 }				t_data;
 
-//utils
+/**********************************  UTILS  ***********************************/
+
 void		ft_data_init(t_data *data);
 void		ft_close(int fd);
 void		ft_close_fds(t_data *data, int fd);
@@ -67,7 +70,8 @@ void		ft_free_envplst(t_data *data);
 void		ft_print_tabtab(char **tab, char *name);
 char		*ft_strjoin3(char const *s1, char const *s2, char const *s3);
 
-//env
+/***********************************  ENV  ************************************/
+
 void		ft_envp(t_data *data);
 void		ft_creat_envp(t_data *data);
 int			ft_check_exportvar(char *variable);
@@ -83,14 +87,16 @@ char		**ft_split_var(t_data *data, char *var);
 void		ft_update_envptab(t_data *data);
 void		ft_check_hd_expand(t_pipeline *pipe, char *limiter);
 
-//exec
+/***********************************  EXEC  ***********************************/
+
 void		ft_cmd(t_data *data);
 int			ft_process_here_doc(t_data *data);
 void		ft_child(t_data *data, int **pipes, int i);
 char		*ft_get_arg_path(t_data *data, char **command);
 char		*ft_getenv(t_envp *envp, char *variable);
 
-//builtin
+/**********************************  BUILTIN  *********************************/
+
 void		ft_export(t_data *data, char **command);
 int			ft_export_append(t_data *data, char *variable);
 void		ft_print_export(t_data *data);
@@ -107,7 +113,8 @@ int			ft_is_directory(char *directory);
 void		ft_builtin_echo(t_data *data, char **command);
 void		ft_check_envarg(t_data *data, char **command);
 
-//redirection
+/*******************************  REDIRECTIONS  *******************************/
+
 char		**ft_redirection(t_data *data, int i);
 char		**ft_extract_redirections(t_data *data,
 				char **cmd, char **pipes_tab);
@@ -120,12 +127,14 @@ char		*ft_here_doc_expand(t_data *data, t_pipeline *pipe, char *input);
 void		ft_dup2_here_doc(t_data *data, t_pipeline *pipe, int *nb_input);
 void		ft_check_redir(t_data *data, char *redirection);
 
-//signal
+/**********************************  SIGNAL  **********************************/
+
 void		signal_init(void (*handler)(int signum));
 void		signal_handler(int signum);
 void		signal_heredoc(int signum);
 
-//parsing
+/**********************************  PARSING  *********************************/
+
 int			parsing(t_data *data, char *readed);
 void		expands(t_data *data, char **pipes_tab);
 int			count_pipes(char *input);
@@ -138,15 +147,29 @@ void		error_mem(t_data *data);
 void		create_chain(t_data *data, t_list **cmd, \
 			char **pipes_tab, int nb_pipes);
 
-//input
-int			nothing_after_symbol(char *input, int i, char symbol);
+/*******************************  PARSING_UTILS  ******************************/
 
-//parsing_utils
 int			is_whitespace(char c);
 int			is_whitespace_or_end(char c);
 int			is_in_quotes(char *str, int index);
+void		free_lst(t_list **cmd);
+void		*free_tab(char **tab);
 
-//check_input
+/**********************************  EXPANDS  *********************************/
+
+int			heredoc_before(char *line, int i);
+char		*whitespace_handler(char *pipes_tab, int *start, int end);
+int			chevron_before(char *pipes_tab, int *start);
+char		*expand_handler(t_data *data, char *pipes_tab, int *start);
+char		*trim_from_to(char *pipes_tab, int *start, int end);
+char		*trim_by_exitcode(char *value, char *pipes_tab, int *start, \
+			int end);
+char		*trim_by(char *value, char *pipes_tab, int *start, int end);
+int			lonely_expand_in_quote(char *str, int i, char c);
+
+/***********************************  INPUT  **********************************/
+
+int			nothing_after_symbol(char *input, int i, char symbol);
 int			check_input(char *input, t_data *data);
 void		print_error(char *error);
 int			check_chevrons(char *input);
@@ -154,21 +177,10 @@ int			check_pipes_n_ampersand(char *input);
 int			check_quotes(char *input);
 int			chevron_error(char *input, int i, char chevron);
 
-//free
-void		free_lst(t_list **cmd);
-void		*free_tab(char **tab);
+/**********************************  S_ACESS  *********************************/
 
-//s_access
 void		*s_init(char **content, char **redirections);
 t_pipeline	*s_read_cnt(t_list *cmd);
 t_pipeline	*s_convert_content(void *content);
-
-//expands
-char		*expand_handler(t_data *data, char *pipes_tab, int *start);
-char		*trim_from_to(char *pipes_tab, int *start, int end);
-char		*trim_by_exitcode(char *value, char *pipes_tab, int *start, \
-			int end);
-char		*trim_by(char *value, char *pipes_tab, int *start, int end);
-int			lonely_expand_in_quote(char *str, int i, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 13:50:27 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/02 16:13:06 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/02 16:56:23 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ static char	*find_variable(t_data *data, char *pipes_tab, int *start, int end)
 		cp_envp = cp_envp->next;
 	}
 	return (NULL);
-}
-
-char	*whitespace_handler(char *pipes_tab, int *start, int end)
-{
-	if (ft_strncmp("echo", pipes_tab, 5))
-		return (pipes_tab);
-	else
-		return (trim_from_to(pipes_tab, start, end));
 }
 
 char	*expand_handler(t_data *data, char *pipes_tab, int *start)
@@ -66,22 +58,6 @@ char	*expand_handler(t_data *data, char *pipes_tab, int *start)
 	return (pipes_tab);
 }
 
-int	heredoc_before(char *line, int i)
-{
-	i--;
-	while (i >= 0 && line[i] && ft_isalnum(line[i]))
-		i--;
-	while (i >= 0 && line[i] && line[i] == ' ')
-		i--;
-	if (i >= 0 && line[i] == '<')
-	{
-		i--;
-		if (i >= 0 && line[i] && line[i] == '<')
-			return (1);
-	}
-	return (0);	
-}
-
 char	*expand_by_line(t_data *data, char *line)
 {
 	int	i;
@@ -95,7 +71,7 @@ char	*expand_by_line(t_data *data, char *line)
 			while (line[i] && line[i] != '\'')
 				i++;
 		}
-		else if (line[i] == '$' && !heredoc_before(line, i)) //!ft_strnstr(line, "<<", ft_strlen(line)))
+		else if (line[i] == '$' && !heredoc_before(line, i))
 		{
 			line = expand_handler(data, line, &i);
 			if (!line)
