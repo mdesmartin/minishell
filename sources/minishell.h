@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:23:19 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/02 17:22:51 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 13:47:44 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void		token_parsing(char **token_tab);
 void		error_mem(t_data *data);
 void		create_chain(t_data *data, t_list **cmd, \
 			char **pipes_tab, int nb_pipes);
+void		revert_quote(char *line);
 
 /*******************************  PARSING_UTILS  ******************************/
 
@@ -167,6 +168,7 @@ char		*trim_by_exitcode(char *value, char *pipes_tab, int *start, \
 			int end);
 char		*trim_by(char *value, char *pipes_tab, int *start, int end);
 int			lonely_expand_in_quote(char *str, int i, char c);
+int			convert_quote(char *value);
 
 /***********************************  INPUT  **********************************/
 

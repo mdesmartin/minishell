@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 16:47:50 by mvogel            #+#    #+#             */
-/*   Updated: 2023/06/02 16:48:50 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 13:40:38 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	*trim_by(char *value, char *pipes_tab, int *start, int end)
 	old_size = end - *start;
 	new_size = ft_strlen(pipes_tab) - old_size + ft_strlen(value);
 	new_content = ft_calloc(sizeof(char), new_size + 1);
+	convert_quote(value);
 	if (!new_content)
 		return (free(pipes_tab), NULL);
 	while (++i < *start - 1)

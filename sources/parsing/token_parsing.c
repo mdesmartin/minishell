@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:19:04 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 15:44:52 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 13:44:59 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	convert_redirection(char *token)
 	}
 }
 
-void	flag_heredoc_quote(char **token_tab, int i, int j)
+static void	flag_heredoc_quote(char **token_tab, int i, int j)
 {
 	i = 0;
 	while (token_tab[i])
@@ -108,6 +108,7 @@ void	token_parsing(char **token_tab)
 	{
 		convert_redirection(token_tab[i]);
 		trim_quote(token_tab[i]);
+		revert_quote(token_tab[i]);
 		if (!token_tab[i][0] && i == 0)
 			token_tab[i][0] = -42;
 		i++;
