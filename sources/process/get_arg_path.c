@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:37:20 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/05 11:06:47 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 14:02:54 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ char	*ft_get_arg_path(t_data *data, char **command)
 	tmp = ft_getenv(data->envp, "PATH");
 	if (!tmp)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		perror(command[0]);
+		if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
+			ft_error(data, "Error while duplicating file descriptor", 1);
+		printf("minishell: %s: command not found\n", command[0]);
 		ft_quit(data, 127);
 	}
 	paths = ft_split(tmp, ':');
