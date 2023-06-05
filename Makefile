@@ -17,6 +17,7 @@ LST_SRC =	main.c							\
 			utils/utils.c					\
 			utils/signal.c					\
 			utils/s_access.c 				\
+			utils/split_var.c 				\
 			builtin/cd.c					\
 			builtin/unset.c					\
 			builtin/echo.c					\
