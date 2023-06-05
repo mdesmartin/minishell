@@ -48,6 +48,7 @@ LST_SRC =	main.c							\
 			parsing/token_parsing.c			\
 			parsing/parsing_utils.c			\
 			parsing/space_chevrons.c		\
+			parsing/token_parsing_utils.c	\
 			process/child.c					\
 			process/process.c				\
 			process/here_doc.c				\

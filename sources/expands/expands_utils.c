@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:59:47 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 16:56:55 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 14:06:09 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,22 @@ int	chevron_before(char *pipes_tab, int *start)
 		return (1);
 	}
 	return (0);
+}
+
+int	convert_quote(char *value)
+{
+	int	i;
+
+	i = 0;
+	if (!value)
+		return (0);
+	while (value[i])
+	{
+		if (value[i] == '\'')
+			value[i] = -39;
+		else if (value[i] == '\"')
+			value[i] = -34;
+		i++;
+	}
+	return (1);
 }
