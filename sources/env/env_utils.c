@@ -6,7 +6,7 @@
 /*   By: jmoutous <jmoutous@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:06:47 by jmoutous          #+#    #+#             */
-/*   Updated: 2023/06/05 13:45:41 by jmoutous         ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 14:51:33 by jmoutous         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ static int	ft_envsize(t_envp *lst)
 	return (i);
 }
 
+static void	ft_strjoin3_error(t_data *data, char **tab, int i)
+{
+	ft_rfree_tab(tab, i);
+	ft_error(data, "Memory allocation failed: char **envp!", 12);
+}
+
 char	**ft_lst_to_tabtab(t_data *data, t_envp *envp)
 {
 	t_envp	*tmp;
@@ -78,14 +84,14 @@ char	**ft_lst_to_tabtab(t_data *data, t_envp *envp)
 		ft_error(data, "Memory allocation failed: char **envp!", 12);
 	while (tmp)
 	{
-		tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);
-		if (!tab[i])
+		if (tmp->value)
 		{
-			ft_rfree_tab(tab, i);
-			ft_error(data, "Memory allocation failed: char **envp!", 12);
+			tab[i] = ft_strjoin3(tmp->variable, "=", tmp->value);
+			if (!tab[i])
+				ft_strjoin3_error(data, tab, i);
+			i++;
 		}
 		tmp = tmp->next;
-		i++;
 	}
 	tab[lstlen] = NULL;
 	return (tab);
