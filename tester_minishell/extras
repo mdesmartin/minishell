@@ -131,9 +131,6 @@ $a|""|''|>$b |>$c
 >>$a | $b |>$c
 >>$a | $b |>$c 
 >>$a|""|''|$b |>$c
->>$a|$b |>>$c
->>$a |$b |>>$c
->>$a| $b |>>$c
 $a |$b |$c| echo LOL
 $a| $b |$c| echo LOL
 $a | $b |$c| echo LOL
@@ -183,3 +180,6 @@ $a|""|''|>>$b |$c| echo LOL
 >>$a|""|''|>>$b |$c| echo LOL
 $a|$b|echo oui
 $a|''|echo uji
+minishell
+/minishell
+./minishell
