@@ -6,7 +6,7 @@
 /*   By: mvogel <mvogel@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:10:14 by mehdidesmar       #+#    #+#             */
-/*   Updated: 2023/06/02 16:39:10 by mvogel           ###   ########lyon.fr   */
+/*   Updated: 2023/06/05 12:38:51 by mvogel           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	pipe_n_end_error(char *input, int i)
 
 static int	nothing_after(char *input, int i)
 {
-	while (input[i])
+	i++;
+	while (input[i] && input[i] != '|')
 	{
 		if (input[i] != ' ' && input[i] != '\t' && input[i] != '\n'
 			&& input[i] != '|' && input[i] != '&')
