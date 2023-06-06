@@ -1,5 +1,7 @@
 # minishell
 
+I have worked on this project with jmoutous :)
+
 minishell is a small-scale command-line interpreter, inspired by the Unix shell, created as part of the 42 school curriculum. It provides a basic set of features commonly found in popular shells such as Bash or Zsh, allowing users to execute various commands and manage processes in a Unix-like environment.
 
 The main goal of minishell is to provide a solid foundation for understanding and implementing fundamental shell functionalities. It offers a simplified shell experience, enabling users to navigate the file system, execute commands with arguments and options, handle environment variables, and perform input/output redirection.
